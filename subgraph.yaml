@@ -23,7 +23,7 @@ dataSources:
           handler: handleIssuerCreated
         - event: TokenCreated(indexed address,bytes32,bytes32)
           handler: handleTokenCreated
-      file: ./src/mapping.ts
+      file: ./src/factory.ts
   - kind: ethereum/contract
     name: Cash
     network: ropsten
@@ -53,7 +53,7 @@ dataSources:
           handler: handleCashDeposits
         - event: CashTransfer(indexed address,indexed address,uint256)
           handler: handleCashTransfer
-      file: ./src/mapping.ts  
+      file: ./src/cash.ts  
   - kind: ethereum/contract
     name: Bond
     network: ropsten
@@ -84,7 +84,7 @@ dataSources:
           handler: handleBondPurchased
         - event: BondLiquidated(indexed address,bytes32,address,uint256,bytes32)
           handler: handleBondLiquidated
-      file: ./src/mapping.ts
+      file: ./src/bond.ts
   - kind: ethereum/contract
     name: System
     network: ropsten
@@ -109,7 +109,7 @@ dataSources:
           handler: handleLedgerCreated
         - event: AccountCreated(indexed address,bytes32,address)
           handler: handleAccountCreated
-      file: ./src/mapping.ts
+      file: ./src/system.ts
   - kind: ethereum/contract
     name: Account
     network: ropsten
@@ -128,7 +128,7 @@ dataSources:
       eventHandlers:
         - event: postAccountEntry(address,bytes32,uint256,address,bytes32,bytes32,bytes32,int256,bytes32)
           handler: handlepostAccountEntry
-      file: ./src/mapping.ts
+      file: ./src/account.ts
   - kind: ethereum/contract
     name: SecuritiesRegistry
     network: ropsten
@@ -152,7 +152,7 @@ dataSources:
           handler: handleSecurityCreated
         - event: CorporateAction(indexed address,bytes32,bytes32,bytes32,string)
           handler: handleCorporateAction
-      file: ./src/mapping.ts
+      file: ./src/registry.ts
   - kind: ethereum/contract
     name: Security
     network: ropsten
@@ -173,7 +173,7 @@ dataSources:
           handler: handleTransfer
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
-      file: ./src/mapping.ts
+      file: ./src/security.ts
   - kind: ethereum/contract
     name: PoolFactory
     network: ropsten
@@ -192,7 +192,7 @@ dataSources:
       eventHandlers:
         - event: PoolCreated(indexed address,address,address)
           handler: handlePoolCreated
-      file: ./src/mapping.ts
+      file: ./src/pool.ts
   - kind: ethereum/contract
     name: Trade
     network: ropsten
@@ -216,7 +216,7 @@ dataSources:
           handler: handleorderCancel
         - event: tradeReport(bytes32,bytes32,bytes32,bytes32,uint256,uint256,bytes32,uint256,bytes32,uint256)
           handler: handletradeReport
-      file: ./src/mapping.ts
+      file: ./src/trade.ts
   - kind: ethereum/contract
     name: PostTrade
     network: ropsten
@@ -235,7 +235,7 @@ dataSources:
       eventHandlers:
         - event: tradeSettled(bytes32,bytes32)
           handler: handletradeSettled
-      file: ./src/mapping.ts
+      file: ./src/settlement.ts
   - kind: ethereum/contract
     name: Products
     network: ropsten
@@ -254,7 +254,7 @@ dataSources:
       eventHandlers:
         - event: ProductIssued(address,bytes32,bytes32,bytes32,string)
           handler: handleProductIssued
-      file: ./src/mapping.ts
+      file: ./src/products.ts
   - kind: ethereum/contract
     name: Issues
     network: ropsten
@@ -281,4 +281,4 @@ dataSources:
           handler: handleclosed
         - event: allotted(address,bytes32)
           handler: handleallotted
-      file: ./src/mapping.ts
+      file: ./src/issues.ts
