@@ -13,8 +13,8 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - IssuerCreated
-        - TokenCreated
+        - Issuer
+        - Token
       abis:
         - name: Factory
           file: ./abis/Factory.json
@@ -35,10 +35,12 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - CashIssued
-        - CashRedeemed
+        - User
+        - CashIssues
         - CashDeposits
-        - CashTransfer
+        - CashRedemptions
+        - CashTransfers
+        - Currency
       abis:
         - name: Cash
           file: ./abis/Cash.json
@@ -63,10 +65,13 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - BondIssued
-        - BondRedeemed
-        - BondPurchased
-        - BondLiquidated
+        - User
+        - BondIssues
+        - BondPurchases
+        - BondRedemptions
+        - BondLiquidations
+        - Currency
+        - Bond
       abis:
         - name: Bond
           file: ./abis/Bond.json
@@ -91,9 +96,9 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - HolderCreated
-        - LedgerCreated
-        - AccountCreated
+        - Holder
+        - Ledger
+        - Account
       abis:
         - name: System
           file: ./abis/System.json
@@ -116,7 +121,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - postAccountEntry
+        - Entry
       abis:
         - name: Account
           file: ./abis/Account.json
@@ -135,7 +140,9 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - SecurityCreated
+        - Security
+        - Company
+        - ISIN
         - CorporateAction
       abis:
         - name: SecuritiesRegistry
@@ -157,8 +164,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Transfer
-        - Approval
+        - SecurityTransfers
       abis:
         - name: Security
           file: ./abis/Security.json
@@ -179,7 +185,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - PoolCreated
+        - Pool
       abis:
         - name: PoolFactory
           file: ./abis/PoolFactory.json
@@ -198,9 +204,8 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - orderNew
-        - orderCancel
-        - tradeReport
+        - Order
+        - Trade
       abis:
         - name: Trade
           file: ./abis/Trade.json
@@ -223,7 +228,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - tradeSettled
+        - Settlement
       abis:
         - name: PostTrade
           file: ./abis/PostTrade.json
@@ -242,7 +247,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - ProductIssued
+        - Product
       abis:
         - name: Products
           file: ./abis/Products.json
@@ -261,11 +266,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - issued
-        - offered
-        - opened
-        - closed
-        - allotted
+        - Issue
       abis:
         - name: Issues
           file: ./abis/Issues.json
