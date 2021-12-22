@@ -1,4 +1,6 @@
 specVersion: 0.0.2
+description: Payments, Loans, Investments, Trades on the Verified Network
+repository: https://github.com/verified-network/verified-graph
 schema:
   file: ./schema.graphql
 dataSources:
