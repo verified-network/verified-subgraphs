@@ -1,8 +1,8 @@
 import { BigInt } from "@graphprotocol/graph-ts"
 import { Account, postAccountEntry } from "../generated/Account/Account"
-import { ExampleEntity } from "../generated/schema"
 
 export function handlepostAccountEntry(event: postAccountEntry): void {
+  /*
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
   let entity = ExampleEntity.load(event.transaction.from.toHex())
@@ -44,4 +44,5 @@ export function handlepostAccountEntry(event: postAccountEntry): void {
   // - contract.accountName(...)
   // - contract.getEntries(...)
   // - contract.getBalance(...)
+  */
 }

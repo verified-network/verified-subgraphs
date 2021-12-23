@@ -8,7 +8,7 @@ dataSources:
     name: Factory
     network: ropsten
     source:
-      address: "0x24041c70f06f5E46960D357fEEe070Ca0EDBb837"
+      address: "0x36f49e8e1D3d713B461D4Cd12f961bC9B784dF67"
       abi: Factory
     mapping:
       kind: ethereum/events
@@ -30,7 +30,7 @@ dataSources:
     name: Cash
     network: ropsten
     source:
-      address: "0xf3c8eDE0C8b49438FeAC3208DC958B292b75EA7c"
+      address: "0x93d5C6B832A9c4FEB1d9897D9b1088124c882eE3"
       abi: Cash
     mapping:
       kind: ethereum/events
@@ -49,18 +49,18 @@ dataSources:
       eventHandlers:
         - event: CashIssued(indexed address,bytes32,uint256)
           handler: handleCashIssued
-        - event: CashRedeemed(indexed address,bytes32,bytes16)
+        - event: CashRedeemed(indexed address,bytes32,uint256)
           handler: handleCashRedeemed
-        - event: CashDeposits(indexed address,bytes32,bytes16)
+        - event: CashDeposits(indexed address,bytes32,uint256)
           handler: handleCashDeposits
-        - event: CashTransfer(indexed address,indexed address,uint256)
+        - event: CashTransfer(indexed address,indexed address,bytes32,uint256)
           handler: handleCashTransfer
       file: ./src/cash.ts  
   - kind: ethereum/contract
     name: Bond
     network: ropsten
     source:
-      address: "0x31a6584097d73061F76D15572e3E3696CF4E0740"
+      address: "0x04dd0A9405B8DE91f92A0ee5F9972a1E898cFd79"
       abi: Bond
     mapping:
       kind: ethereum/events
@@ -91,7 +91,7 @@ dataSources:
     name: System
     network: ropsten
     source:
-      address: "0xd2D9F14bee4788Ff32c2878ab01Fd55d16293830"
+      address: "0x60504B00CaedC9d560cA3C2A36363D0045B93d8A"
       abi: System
     mapping:
       kind: ethereum/events
@@ -116,7 +116,7 @@ dataSources:
     name: Account
     network: ropsten
     source:
-      address: "0xA8D57fD37B62AaFaac89f8A5bC778e0150dE4b1A"
+      address: "0xE44626F48DA117a788b9E983889d958c53a7168c"
       abi: Account
     mapping:
       kind: ethereum/events
@@ -135,7 +135,7 @@ dataSources:
     name: SecuritiesRegistry
     network: ropsten
     source:
-      address: "0x40814A27685E9CEF474FFCe22523118669bc681d"
+      address: "0xc090C51D33F556306241e1B915285705C115B68D"
       abi: SecuritiesRegistry
     mapping:
       kind: ethereum/events
@@ -159,7 +159,7 @@ dataSources:
     name: Security
     network: ropsten
     source:
-      address: "0x7Ad3AB2EDc2700c942A33a4Fe4b20486D8c60C2b"
+      address: "0x85129845e650bF48B01A0CF76585A4CBEd28a295"
       abi: Security
     mapping:
       kind: ethereum/events
@@ -180,7 +180,7 @@ dataSources:
     name: PoolFactory
     network: ropsten
     source:
-      address: "0xdaaee82FA0b1f9baa18644082Df080293874eeBd"
+      address: "0xB8Da2b517dC50DE941F7c84bcdFfA9f9e18d628A"
       abi: PoolFactory
     mapping:
       kind: ethereum/events
@@ -199,7 +199,7 @@ dataSources:
     name: Trade
     network: ropsten
     source:
-      address: "0x02D7D0826181EF4d04cf51CE1d57C078A317dd31"
+      address: "0x8200Dec23cbb68824D7b13103E4d54909833622E"
       abi: Trade
     mapping:
       kind: ethereum/events
@@ -223,7 +223,7 @@ dataSources:
     name: PostTrade
     network: ropsten
     source:
-      address: "0xB566094dE82737DC9282FD61ba1Ac20ECead8397"
+      address: "0x8005253f6B0Cf2365BE58Fc628693F9E1cCb1E40"
       abi: PostTrade
     mapping:
       kind: ethereum/events
@@ -242,7 +242,7 @@ dataSources:
     name: Products
     network: ropsten
     source:
-      address: "0x635f8Ae684090585d2Fa654004DFA4D6dD7Fdd90"
+      address: "0x1C243DA5FcF7ad6E93B0360Ea4140ad296E13b57"
       abi: Products
     mapping:
       kind: ethereum/events
@@ -261,7 +261,7 @@ dataSources:
     name: Issues
     network: ropsten
     source:
-      address: "0x14730A7770203A6FD0BF2fAB56b79798f4C96DbF"
+      address: "0x591414688A96Fd75e5D8b7B4ED6D759E08b3b217"
       abi: Issues
     mapping:
       kind: ethereum/events

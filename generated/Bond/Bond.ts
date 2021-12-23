@@ -23,31 +23,31 @@ export class BondIssued__Params {
     this._event = event;
   }
 
-  get _token(): Address {
+  get token(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get _bondName(): Bytes {
+  get bondName(): Bytes {
     return this._event.parameters[1].value.toBytes();
   }
 
-  get issuer(): Address {
+  get party(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 
-  get issuedAmount(): BigInt {
+  get amount(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 
-  get collateralCurrency(): Bytes {
+  get currency(): Bytes {
     return this._event.parameters[4].value.toBytes();
   }
 
-  get collateralValue(): BigInt {
+  get collateralAmount(): BigInt {
     return this._event.parameters[5].value.toBigInt();
   }
 
-  get _issueTime(): BigInt {
+  get issueTime(): BigInt {
     return this._event.parameters[6].value.toBigInt();
   }
 }
@@ -65,23 +65,23 @@ export class BondRedeemed__Params {
     this._event = event;
   }
 
-  get _token(): Address {
+  get token(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get _bondName(): Bytes {
+  get bondName(): Bytes {
     return this._event.parameters[1].value.toBytes();
   }
 
-  get redeemedBy(): Address {
+  get party(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 
-  get redemptionAmount(): BigInt {
+  get amount(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 
-  get redemptionCurrency(): Bytes {
+  get currency(): Bytes {
     return this._event.parameters[4].value.toBytes();
   }
 }
@@ -99,23 +99,23 @@ export class BondPurchased__Params {
     this._event = event;
   }
 
-  get _token(): Address {
+  get token(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get _bondName(): Bytes {
+  get bondName(): Bytes {
     return this._event.parameters[1].value.toBytes();
   }
 
-  get purchaser(): Address {
+  get party(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 
-  get purchasedAmount(): BigInt {
+  get amount(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 
-  get paidInCurrency(): Bytes {
+  get currency(): Bytes {
     return this._event.parameters[4].value.toBytes();
   }
 
@@ -123,7 +123,7 @@ export class BondPurchased__Params {
     return this._event.parameters[5].value.toBigInt();
   }
 
-  get _purchaseTime(): BigInt {
+  get purchaseTime(): BigInt {
     return this._event.parameters[6].value.toBigInt();
   }
 }
@@ -141,23 +141,23 @@ export class BondLiquidated__Params {
     this._event = event;
   }
 
-  get _token(): Address {
+  get token(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get _bondName(): Bytes {
+  get bondName(): Bytes {
     return this._event.parameters[1].value.toBytes();
   }
 
-  get redeemedBy(): Address {
+  get party(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 
-  get redemptionAmount(): BigInt {
+  get amount(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 
-  get redemptionCurrency(): Bytes {
+  get currency(): Bytes {
     return this._event.parameters[4].value.toBytes();
   }
 }

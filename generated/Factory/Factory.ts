@@ -23,7 +23,7 @@ export class IssuerCreated__Params {
     this._event = event;
   }
 
-  get _address(): Address {
+  get issuer(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
@@ -49,7 +49,7 @@ export class TokenCreated__Params {
     this._event = event;
   }
 
-  get _address(): Address {
+  get token(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 

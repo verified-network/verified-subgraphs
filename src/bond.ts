@@ -9,11 +9,9 @@ import {
   Unpaused,
   OwnershipTransferred
 } from "../generated/Bond/Bond"
-import { ExampleEntity } from "../generated/schema"
 
 export function handleBondIssued(event: BondIssued): void {
-  // Entities can be loaded from the store using a string ID; this ID
-  // needs to be unique across all entities of the same type
+  /*
   let entity = ExampleEntity.load(event.transaction.from.toHex())
 
   // Entities only exist after they have been saved to the store;
@@ -71,6 +69,7 @@ export function handleBondIssued(event: BondIssued): void {
   // - contract.getBonds(...)
   // - contract.getBondIssues(...)
   // - contract.getBondPurchases(...)
+  */
 }
 
 export function handleBondRedeemed(event: BondRedeemed): void {}

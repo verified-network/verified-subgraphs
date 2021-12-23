@@ -23,7 +23,7 @@ export class CashIssued__Params {
     this._event = event;
   }
 
-  get _party(): Address {
+  get party(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
@@ -49,7 +49,7 @@ export class CashRedeemed__Params {
     this._event = event;
   }
 
-  get _party(): Address {
+  get party(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
@@ -57,8 +57,8 @@ export class CashRedeemed__Params {
     return this._event.parameters[1].value.toBytes();
   }
 
-  get amount(): Bytes {
-    return this._event.parameters[2].value.toBytes();
+  get amount(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -75,7 +75,7 @@ export class CashDeposits__Params {
     this._event = event;
   }
 
-  get depositor(): Address {
+  get party(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
@@ -83,8 +83,8 @@ export class CashDeposits__Params {
     return this._event.parameters[1].value.toBytes();
   }
 
-  get amount(): Bytes {
-    return this._event.parameters[2].value.toBytes();
+  get amount(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -101,16 +101,20 @@ export class CashTransfer__Params {
     this._event = event;
   }
 
-  get from(): Address {
+  get party(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get to(): Address {
+  get counterparty(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get tokens(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+  get currency(): Bytes {
+    return this._event.parameters[2].value.toBytes();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 

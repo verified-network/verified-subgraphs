@@ -23,15 +23,15 @@ export class PoolCreated__Params {
     this._event = event;
   }
 
-  get _pool(): Address {
+  get pool(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get _security(): Address {
+  get security(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get _cash(): Address {
+  get cash(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 }

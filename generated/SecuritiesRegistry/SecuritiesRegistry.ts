@@ -23,15 +23,15 @@ export class SecurityCreated__Params {
     this._event = event;
   }
 
-  get _securityToken(): Address {
+  get security(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get _company(): Bytes {
+  get company(): Bytes {
     return this._event.parameters[1].value.toBytes();
   }
 
-  get _isin(): Bytes {
+  get isin(): Bytes {
     return this._event.parameters[2].value.toBytes();
   }
 }
@@ -49,23 +49,23 @@ export class CorporateAction__Params {
     this._event = event;
   }
 
-  get _securityToken(): Address {
+  get security(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get _company(): Bytes {
+  get company(): Bytes {
     return this._event.parameters[1].value.toBytes();
   }
 
-  get _isin(): Bytes {
+  get isin(): Bytes {
     return this._event.parameters[2].value.toBytes();
   }
 
-  get _category(): Bytes {
+  get category(): Bytes {
     return this._event.parameters[3].value.toBytes();
   }
 
-  get _action(): string {
+  get action(): string {
     return this._event.parameters[4].value.toString();
   }
 }

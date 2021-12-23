@@ -23,11 +23,11 @@ export class tradeSettled__Params {
     this._event = event;
   }
 
-  get partyRef(): Bytes {
+  get partyReference(): Bytes {
     return this._event.parameters[0].value.toBytes();
   }
 
-  get counterpartyRef(): Bytes {
+  get counterpartyReference(): Bytes {
     return this._event.parameters[1].value.toBytes();
   }
 }

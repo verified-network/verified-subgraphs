@@ -7,11 +7,9 @@ import {
   OwnershipTransferred,
   ProxyCreated
 } from "../generated/System/System"
-import { ExampleEntity } from "../generated/schema"
 
 export function handleHolderCreated(event: HolderCreated): void {
-  // Entities can be loaded from the store using a string ID; this ID
-  // needs to be unique across all entities of the same type
+  /*
   let entity = ExampleEntity.load(event.transaction.from.toHex())
 
   // Entities only exist after they have been saved to the store;
@@ -68,6 +66,7 @@ export function handleHolderCreated(event: HolderCreated): void {
   // - contract.getLedgerDetails(...)
   // - contract.getAccountDetails(...)
   // - contract.confirmAccountHolder(...)
+  */
 }
 
 export function handleLedgerCreated(event: LedgerCreated): void {}

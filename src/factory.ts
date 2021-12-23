@@ -6,11 +6,9 @@ import {
   OwnershipTransferred,
   ProxyCreated
 } from "../generated/Factory/Factory"
-import { ExampleEntity } from "../generated/schema"
 
 export function handleIssuerCreated(event: IssuerCreated): void {
-  // Entities can be loaded from the store using a string ID; this ID
-  // needs to be unique across all entities of the same type
+  /*
   let entity = ExampleEntity.load(event.transaction.from.toHex())
 
   // Entities only exist after they have been saved to the store;
@@ -68,6 +66,7 @@ export function handleIssuerCreated(event: IssuerCreated): void {
   // - contract.getFiatPayoutUrl(...)
   // - contract.getClient(...)
   // - contract.createToken(...)
+  */
 }
 
 export function handleTokenCreated(event: TokenCreated): void {}

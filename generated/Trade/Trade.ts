@@ -23,7 +23,7 @@ export class orderNew__Params {
     this._event = event;
   }
 
-  get ref(): Bytes {
+  get orderReference(): Bytes {
     return this._event.parameters[0].value.toBytes();
   }
 
@@ -39,7 +39,7 @@ export class orderNew__Params {
     return this._event.parameters[3].value.toBigInt();
   }
 
-  get qty(): BigInt {
+  get amount(): BigInt {
     return this._event.parameters[4].value.toBigInt();
   }
 
@@ -47,11 +47,11 @@ export class orderNew__Params {
     return this._event.parameters[5].value.toBytes();
   }
 
-  get otype(): Bytes {
+  get orderType(): Bytes {
     return this._event.parameters[6].value.toBytes();
   }
 
-  get dt(): BigInt {
+  get date(): BigInt {
     return this._event.parameters[7].value.toBigInt();
   }
 
@@ -111,11 +111,11 @@ export class tradeReport__Params {
     this._event = event;
   }
 
-  get partyRef(): Bytes {
+  get partyReference(): Bytes {
     return this._event.parameters[0].value.toBytes();
   }
 
-  get counterpartyRef(): Bytes {
+  get counterpartyReference(): Bytes {
     return this._event.parameters[1].value.toBytes();
   }
 
@@ -139,7 +139,7 @@ export class tradeReport__Params {
     return this._event.parameters[6].value.toBytes();
   }
 
-  get qty(): BigInt {
+  get amount(): BigInt {
     return this._event.parameters[7].value.toBigInt();
   }
 
@@ -147,7 +147,7 @@ export class tradeReport__Params {
     return this._event.parameters[8].value.toBytes();
   }
 
-  get executionDt(): BigInt {
+  get executionDate(): BigInt {
     return this._event.parameters[9].value.toBigInt();
   }
 }

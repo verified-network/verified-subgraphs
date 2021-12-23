@@ -9,9 +9,9 @@ import {
   Unpaused,
   OwnershipTransferred
 } from "../generated/Cash/Cash"
-import { ExampleEntity } from "../generated/schema"
 
 export function handleCashIssued(event: CashIssued): void {
+  /*
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
   let entity = ExampleEntity.load(event.transaction.from.toHex())
@@ -68,6 +68,7 @@ export function handleCashIssued(event: CashIssued): void {
   // - contract.requestDeductFromBalance(...)
   // - contract.payIn(...)
   // - contract.requestIssue(...)
+  */
 }
 
 export function handleCashRedeemed(event: CashRedeemed): void {}

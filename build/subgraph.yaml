@@ -1,4 +1,6 @@
 specVersion: 0.0.2
+description: Payments, Loans, Investments, Trades on the Verified Network
+repository: https://github.com/verified-network/verified-graph
 schema:
   file: schema.graphql
 dataSources:
@@ -13,8 +15,8 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - IssuerCreated
-        - TokenCreated
+        - Issuer
+        - Token
       abis:
         - name: Factory
           file: Factory\abis\Factory.json
@@ -35,10 +37,12 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - CashIssued
-        - CashRedeemed
+        - User
+        - CashIssues
         - CashDeposits
-        - CashTransfer
+        - CashRedemptions
+        - CashTransfers
+        - Currency
       abis:
         - name: Cash
           file: Cash\abis\Cash.json
@@ -51,7 +55,7 @@ dataSources:
           handler: handleCashDeposits
         - event: CashTransfer(indexed address,indexed address,uint256)
           handler: handleCashTransfer
-      file: Factory\Factory.wasm
+      file: Cash\Cash.wasm
   - kind: ethereum/contract
     name: Bond
     network: ropsten
@@ -63,10 +67,13 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - BondIssued
-        - BondRedeemed
-        - BondPurchased
-        - BondLiquidated
+        - User
+        - BondIssues
+        - BondPurchases
+        - BondRedemptions
+        - BondLiquidations
+        - Currency
+        - Bond
       abis:
         - name: Bond
           file: Bond\abis\Bond.json
@@ -79,7 +86,7 @@ dataSources:
           handler: handleBondPurchased
         - event: BondLiquidated(indexed address,bytes32,address,uint256,bytes32)
           handler: handleBondLiquidated
-      file: Factory\Factory.wasm
+      file: Bond\Bond.wasm
   - kind: ethereum/contract
     name: System
     network: ropsten
@@ -91,9 +98,9 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - HolderCreated
-        - LedgerCreated
-        - AccountCreated
+        - Holder
+        - Ledger
+        - Account
       abis:
         - name: System
           file: System\abis\System.json
@@ -104,7 +111,7 @@ dataSources:
           handler: handleLedgerCreated
         - event: AccountCreated(indexed address,bytes32,address)
           handler: handleAccountCreated
-      file: Factory\Factory.wasm
+      file: System\System.wasm
   - kind: ethereum/contract
     name: Account
     network: ropsten
@@ -116,14 +123,14 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - postAccountEntry
+        - Entry
       abis:
         - name: Account
           file: Account\abis\Account.json
       eventHandlers:
         - event: postAccountEntry(address,bytes32,uint256,address,bytes32,bytes32,bytes32,int256,bytes32)
           handler: handlepostAccountEntry
-      file: Factory\Factory.wasm
+      file: Account\Account.wasm
   - kind: ethereum/contract
     name: SecuritiesRegistry
     network: ropsten
@@ -135,7 +142,9 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - SecurityCreated
+        - Security
+        - Company
+        - ISIN
         - CorporateAction
       abis:
         - name: SecuritiesRegistry
@@ -145,7 +154,7 @@ dataSources:
           handler: handleSecurityCreated
         - event: CorporateAction(indexed address,bytes32,bytes32,bytes32,string)
           handler: handleCorporateAction
-      file: Factory\Factory.wasm
+      file: SecuritiesRegistry\SecuritiesRegistry.wasm
   - kind: ethereum/contract
     name: Security
     network: ropsten
@@ -157,8 +166,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Transfer
-        - Approval
+        - SecurityTransfers
       abis:
         - name: Security
           file: Security\abis\Security.json
@@ -167,7 +175,7 @@ dataSources:
           handler: handleTransfer
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
-      file: Factory\Factory.wasm
+      file: Security\Security.wasm
   - kind: ethereum/contract
     name: PoolFactory
     network: ropsten
@@ -179,14 +187,14 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - PoolCreated
+        - Pool
       abis:
         - name: PoolFactory
           file: PoolFactory\abis\PoolFactory.json
       eventHandlers:
         - event: PoolCreated(indexed address,address,address)
           handler: handlePoolCreated
-      file: Factory\Factory.wasm
+      file: PoolFactory\PoolFactory.wasm
   - kind: ethereum/contract
     name: Trade
     network: ropsten
@@ -198,9 +206,8 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - orderNew
-        - orderCancel
-        - tradeReport
+        - Order
+        - Trade
       abis:
         - name: Trade
           file: Trade\abis\Trade.json
@@ -211,7 +218,7 @@ dataSources:
           handler: handleorderCancel
         - event: tradeReport(bytes32,bytes32,bytes32,bytes32,uint256,uint256,bytes32,uint256,bytes32,uint256)
           handler: handletradeReport
-      file: Factory\Factory.wasm
+      file: Trade\Trade.wasm
   - kind: ethereum/contract
     name: PostTrade
     network: ropsten
@@ -223,14 +230,14 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - tradeSettled
+        - Settlement
       abis:
         - name: PostTrade
           file: PostTrade\abis\PostTrade.json
       eventHandlers:
         - event: tradeSettled(bytes32,bytes32)
           handler: handletradeSettled
-      file: Factory\Factory.wasm
+      file: PostTrade\PostTrade.wasm
   - kind: ethereum/contract
     name: Products
     network: ropsten
@@ -242,14 +249,14 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - ProductIssued
+        - Product
       abis:
         - name: Products
           file: Products\abis\Products.json
       eventHandlers:
         - event: ProductIssued(address,bytes32,bytes32,bytes32,string)
           handler: handleProductIssued
-      file: Factory\Factory.wasm
+      file: Products\Products.wasm
   - kind: ethereum/contract
     name: Issues
     network: ropsten
@@ -261,11 +268,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - issued
-        - offered
-        - opened
-        - closed
-        - allotted
+        - Issue
       abis:
         - name: Issues
           file: Issues\abis\Issues.json
@@ -280,4 +283,4 @@ dataSources:
           handler: handleclosed
         - event: allotted(address,bytes32)
           handler: handleallotted
-      file: Factory\Factory.wasm
+      file: Issues\Issues.wasm
