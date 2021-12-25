@@ -1296,7 +1296,7 @@ export class Entry extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("accountAddress", Value.fromBytes(Bytes.empty()));
+    this.set("accountAddress", Value.fromString(""));
     this.set("accountName", Value.fromBytes(Bytes.empty()));
     this.set("txDate", Value.fromBigInt(BigInt.zero()));
     this.set("party", Value.fromString(""));
@@ -1333,13 +1333,13 @@ export class Entry extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get accountAddress(): Bytes {
+  get accountAddress(): string {
     let value = this.get("accountAddress");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set accountAddress(value: Bytes) {
-    this.set("accountAddress", Value.fromBytes(value));
+  set accountAddress(value: string) {
+    this.set("accountAddress", Value.fromString(value));
   }
 
   get accountName(): Bytes {
@@ -1421,8 +1421,8 @@ export class Security extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("security", Value.fromBytes(Bytes.empty()));
-    this.set("company", Value.fromBytes(Bytes.empty()));
-    this.set("ISIN", Value.fromBytes(Bytes.empty()));
+    this.set("company", Value.fromString(""));
+    this.set("ISIN", Value.fromString(""));
   }
 
   save(): void {
@@ -1460,22 +1460,22 @@ export class Security extends Entity {
     this.set("security", Value.fromBytes(value));
   }
 
-  get company(): Bytes {
+  get company(): string {
     let value = this.get("company");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set company(value: Bytes) {
-    this.set("company", Value.fromBytes(value));
+  set company(value: string) {
+    this.set("company", Value.fromString(value));
   }
 
-  get ISIN(): Bytes {
+  get ISIN(): string {
     let value = this.get("ISIN");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set ISIN(value: Bytes) {
-    this.set("ISIN", Value.fromBytes(value));
+  set ISIN(value: string) {
+    this.set("ISIN", Value.fromString(value));
   }
 }
 
@@ -1603,8 +1603,8 @@ export class CorporateAction extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("security", Value.fromString(""));
-    this.set("company", Value.fromBytes(Bytes.empty()));
-    this.set("ISIN", Value.fromBytes(Bytes.empty()));
+    this.set("company", Value.fromString(""));
+    this.set("ISIN", Value.fromString(""));
     this.set("category", Value.fromBytes(Bytes.empty()));
     this.set("action", Value.fromString(""));
   }
@@ -1644,22 +1644,22 @@ export class CorporateAction extends Entity {
     this.set("security", Value.fromString(value));
   }
 
-  get company(): Bytes {
+  get company(): string {
     let value = this.get("company");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set company(value: Bytes) {
-    this.set("company", Value.fromBytes(value));
+  set company(value: string) {
+    this.set("company", Value.fromString(value));
   }
 
-  get ISIN(): Bytes {
+  get ISIN(): string {
     let value = this.get("ISIN");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set ISIN(value: Bytes) {
-    this.set("ISIN", Value.fromBytes(value));
+  set ISIN(value: string) {
+    this.set("ISIN", Value.fromString(value));
   }
 
   get category(): Bytes {
@@ -1825,7 +1825,7 @@ export class Order extends Entity {
     this.set("orderType", Value.fromBytes(Bytes.empty()));
     this.set("date", Value.fromBigInt(BigInt.zero()));
     this.set("status", Value.fromBytes(Bytes.empty()));
-    this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("currency", Value.fromString(""));
     this.set("securityName", Value.fromBytes(Bytes.empty()));
     this.set("security", Value.fromString(""));
   }
@@ -1937,13 +1937,13 @@ export class Order extends Entity {
     this.set("status", Value.fromBytes(value));
   }
 
-  get currency(): Bytes {
+  get currency(): string {
     let value = this.get("currency");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set currency(value: Bytes) {
-    this.set("currency", Value.fromBytes(value));
+  set currency(value: string) {
+    this.set("currency", Value.fromString(value));
   }
 
   get securityName(): Bytes {
@@ -2016,11 +2016,11 @@ export class Trade extends Entity {
 
     this.set("partyReference", Value.fromString(""));
     this.set("counterpartyReference", Value.fromString(""));
-    this.set("isin", Value.fromBytes(Bytes.empty()));
-    this.set("company", Value.fromBytes(Bytes.empty()));
+    this.set("isin", Value.fromString(""));
+    this.set("company", Value.fromString(""));
     this.set("price", Value.fromBigInt(BigInt.zero()));
     this.set("askprice", Value.fromBigInt(BigInt.zero()));
-    this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("currency", Value.fromString(""));
     this.set("amount", Value.fromBigInt(BigInt.zero()));
     this.set("status", Value.fromBytes(Bytes.empty()));
     this.set("executionDate", Value.fromBigInt(BigInt.zero()));
@@ -2070,22 +2070,22 @@ export class Trade extends Entity {
     this.set("counterpartyReference", Value.fromString(value));
   }
 
-  get isin(): Bytes {
+  get isin(): string {
     let value = this.get("isin");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set isin(value: Bytes) {
-    this.set("isin", Value.fromBytes(value));
+  set isin(value: string) {
+    this.set("isin", Value.fromString(value));
   }
 
-  get company(): Bytes {
+  get company(): string {
     let value = this.get("company");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set company(value: Bytes) {
-    this.set("company", Value.fromBytes(value));
+  set company(value: string) {
+    this.set("company", Value.fromString(value));
   }
 
   get price(): BigInt {
@@ -2106,13 +2106,13 @@ export class Trade extends Entity {
     this.set("askprice", Value.fromBigInt(value));
   }
 
-  get currency(): Bytes {
+  get currency(): string {
     let value = this.get("currency");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set currency(value: Bytes) {
-    this.set("currency", Value.fromBytes(value));
+  set currency(value: string) {
+    this.set("currency", Value.fromString(value));
   }
 
   get amount(): BigInt {
@@ -2202,7 +2202,7 @@ export class Product extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("issue", Value.fromBytes(Bytes.empty()));
+    this.set("issue", Value.fromString(""));
     this.set("productReference", Value.fromBytes(Bytes.empty()));
     this.set("productCategory", Value.fromBytes(Bytes.empty()));
     this.set("issuerName", Value.fromBytes(Bytes.empty()));
@@ -2235,13 +2235,13 @@ export class Product extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get issue(): Bytes {
+  get issue(): string {
     let value = this.get("issue");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set issue(value: Bytes) {
-    this.set("issue", Value.fromBytes(value));
+  set issue(value: string) {
+    this.set("issue", Value.fromString(value));
   }
 
   get productReference(): Bytes {
@@ -2290,10 +2290,10 @@ export class Issue extends Entity {
     this.set("offerPrice", Value.fromBigInt(BigInt.zero()));
     this.set("minAskPrice", Value.fromBigInt(BigInt.zero()));
     this.set("minSubscription", Value.fromBigInt(BigInt.zero()));
-    this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("currency", Value.fromString(""));
     this.set("issue", Value.fromBytes(Bytes.empty()));
     this.set("offerType", Value.fromBytes(Bytes.empty()));
-    this.set("isin", Value.fromBytes(Bytes.empty()));
+    this.set("isin", Value.fromString(""));
     this.set("status", Value.fromBytes(Bytes.empty()));
     this.set("productCategory", Value.fromBytes(Bytes.empty()));
   }
@@ -2360,13 +2360,13 @@ export class Issue extends Entity {
     this.set("minSubscription", Value.fromBigInt(value));
   }
 
-  get currency(): Bytes {
+  get currency(): string {
     let value = this.get("currency");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set currency(value: Bytes) {
-    this.set("currency", Value.fromBytes(value));
+  set currency(value: string) {
+    this.set("currency", Value.fromString(value));
   }
 
   get issue(): Bytes {
@@ -2387,13 +2387,13 @@ export class Issue extends Entity {
     this.set("offerType", Value.fromBytes(value));
   }
 
-  get isin(): Bytes {
+  get isin(): string {
     let value = this.get("isin");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set isin(value: Bytes) {
-    this.set("isin", Value.fromBytes(value));
+  set isin(value: string) {
+    this.set("isin", Value.fromString(value));
   }
 
   get status(): Bytes {

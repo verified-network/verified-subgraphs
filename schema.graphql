@@ -124,7 +124,7 @@ type Account @entity {
 }
 type Entry @entity {
   id: ID!
-  accountAddress: Bytes!
+  accountAddress: Account!
   accountName: Bytes!
   txDate: BigInt!
   party: User!
@@ -137,8 +137,8 @@ type Entry @entity {
 type Security @entity {
   id: ID!
   security: Bytes!
-  company: Bytes!
-  ISIN: Bytes!
+  company: Company!
+  ISIN: ISIN!
 }
 type Company @entity {
   id: ID!
@@ -154,8 +154,8 @@ type ISIN @entity {
 type CorporateAction @entity {
   id: ID!
   security: Security!
-  company: Bytes!
-  ISIN: Bytes!
+  company: Company!
+  ISIN: ISIN!
   category: Bytes!
   action: String!  
 }
@@ -182,7 +182,7 @@ type Order @entity {
   orderType: Bytes!
   date: BigInt! 
   status: Bytes!
-  currency: Bytes!
+  currency: Currency!
   securityName: Bytes!
   security: Security!
 }
@@ -194,11 +194,11 @@ type Trade @entity {
   id: ID!
   partyReference: OrderReference! 
   counterpartyReference: OrderReference! 
-  isin: Bytes!
-  company: Bytes!
+  isin: ISIN!
+  company: Company!
   price: BigInt!
   askprice: BigInt! 
-  currency: Bytes! 
+  currency: Currency! 
   amount: BigInt! 
   status: Bytes!
   executionDate: BigInt!
@@ -210,7 +210,7 @@ type Settlement @entity {
 }
 type Product @entity {
   id: ID!
-  issue: Bytes! 
+  issue: Issue! 
   productReference: Bytes!
   productCategory: Bytes! 
   issuerName: Bytes! 
@@ -222,10 +222,10 @@ type Issue @entity {
   offerPrice: BigInt! 
   minAskPrice: BigInt!   
   minSubscription: BigInt!
-  currency: Bytes!
+  currency: Currency!
   issue: Bytes!
   offerType: Bytes!
-  isin: Bytes!
+  isin: ISIN!
   status: Bytes!
   productCategory: Bytes!
 }

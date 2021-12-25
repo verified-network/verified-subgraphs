@@ -4,7 +4,7 @@
     "inputs": [
       {
         "indexed": false,
-        "name": "ref",
+        "name": "orderReference",
         "type": "bytes32"
       },
       {
@@ -24,7 +24,7 @@
       },
       {
         "indexed": false,
-        "name": "qty",
+        "name": "amount",
         "type": "uint256"
       },
       {
@@ -34,12 +34,12 @@
       },
       {
         "indexed": false,
-        "name": "otype",
+        "name": "orderType",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "dt",
+        "name": "date",
         "type": "uint256"
       },
       {
@@ -93,12 +93,12 @@
     "inputs": [
       {
         "indexed": false,
-        "name": "partyRef",
+        "name": "partyReference",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "counterpartyRef",
+        "name": "counterpartyReference",
         "type": "bytes32"
       },
       {
@@ -128,7 +128,7 @@
       },
       {
         "indexed": false,
-        "name": "qty",
+        "name": "amount",
         "type": "uint256"
       },
       {
@@ -138,7 +138,7 @@
       },
       {
         "indexed": false,
-        "name": "executionDt",
+        "name": "executionDate",
         "type": "uint256"
       }
     ],

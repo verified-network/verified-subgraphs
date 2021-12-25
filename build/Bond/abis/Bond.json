@@ -302,37 +302,37 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_token",
+        "name": "token",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_bondName",
+        "name": "bondName",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "issuer",
+        "name": "party",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "issuedAmount",
+        "name": "amount",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "collateralCurrency",
+        "name": "currency",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "collateralValue",
+        "name": "collateralAmount",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "_issueTime",
+        "name": "issueTime",
         "type": "uint256"
       }
     ],
@@ -344,27 +344,27 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_token",
+        "name": "token",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_bondName",
+        "name": "bondName",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "redeemedBy",
+        "name": "party",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "redemptionAmount",
+        "name": "amount",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "redemptionCurrency",
+        "name": "currency",
         "type": "bytes32"
       }
     ],
@@ -376,27 +376,27 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_token",
+        "name": "token",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_bondName",
+        "name": "bondName",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "purchaser",
+        "name": "party",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "purchasedAmount",
+        "name": "amount",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "paidInCurrency",
+        "name": "currency",
         "type": "bytes32"
       },
       {
@@ -406,7 +406,7 @@
       },
       {
         "indexed": false,
-        "name": "_purchaseTime",
+        "name": "purchaseTime",
         "type": "uint256"
       }
     ],
@@ -418,27 +418,27 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_token",
+        "name": "token",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_bondName",
+        "name": "bondName",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "redeemedBy",
+        "name": "party",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "redemptionAmount",
+        "name": "amount",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "redemptionCurrency",
+        "name": "currency",
         "type": "bytes32"
       }
     ],

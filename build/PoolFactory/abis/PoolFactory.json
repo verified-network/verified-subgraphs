@@ -151,17 +151,17 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_pool",
+        "name": "pool",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_security",
+        "name": "security",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_cash",
+        "name": "cash",
         "type": "address"
       }
     ],

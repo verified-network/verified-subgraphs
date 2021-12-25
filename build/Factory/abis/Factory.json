@@ -244,7 +244,7 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_address",
+        "name": "issuer",
         "type": "address"
       },
       {
@@ -266,7 +266,7 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_address",
+        "name": "token",
         "type": "address"
       },
       {

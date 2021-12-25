@@ -255,7 +255,7 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_party",
+        "name": "party",
         "type": "address"
       },
       {
@@ -277,7 +277,7 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_party",
+        "name": "party",
         "type": "address"
       },
       {
@@ -288,7 +288,7 @@
       {
         "indexed": false,
         "name": "amount",
-        "type": "bytes16"
+        "type": "uint256"
       }
     ],
     "name": "CashRedeemed",
@@ -299,7 +299,7 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "depositor",
+        "name": "party",
         "type": "address"
       },
       {
@@ -310,7 +310,7 @@
       {
         "indexed": false,
         "name": "amount",
-        "type": "bytes16"
+        "type": "uint256"
       }
     ],
     "name": "CashDeposits",
@@ -321,17 +321,22 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "from",
+        "name": "party",
         "type": "address"
       },
       {
         "indexed": true,
-        "name": "to",
+        "name": "counterparty",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "tokens",
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
         "type": "uint256"
       }
     ],

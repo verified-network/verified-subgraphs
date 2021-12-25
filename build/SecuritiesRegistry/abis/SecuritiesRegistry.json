@@ -202,17 +202,17 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_securityToken",
+        "name": "security",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_company",
+        "name": "company",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "_isin",
+        "name": "isin",
         "type": "bytes32"
       }
     ],
@@ -224,27 +224,27 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "_securityToken",
+        "name": "security",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_company",
+        "name": "company",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "_isin",
+        "name": "isin",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "_category",
+        "name": "category",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "_action",
+        "name": "action",
         "type": "string"
       }
     ],
