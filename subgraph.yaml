@@ -39,7 +39,7 @@ dataSources:
       entities:
         - User
         - CashIssues
-        - CashDeposits
+        - CashDeposited
         - CashRedemptions
         - CashTransfers
         - Currency

@@ -13,7 +13,7 @@ type Token @entity {
 type User @entity {
   id: ID!
   AllCashIssues: [CashIssues!]! @derivedFrom(field: "party")
-  AllCashDeposits: [CashDeposits!]! @derivedFrom(field: "party")
+  AllCashDeposited: [CashDeposited!]! @derivedFrom(field: "party")
   AllCashRedemptions: [CashRedemptions!]! @derivedFrom(field: "party")
   AllCashTransfers: [CashTransfers!]! @derivedFrom(field: "party")
   AllCashReceipts: [CashTransfers!]! @derivedFrom(field: "counterparty")
@@ -30,7 +30,7 @@ type CashIssues @entity {
   currency: Currency!
   amount : BigInt!
 }
-type CashDeposits @entity {
+type CashDeposited @entity {
   id: ID!
   party: User!
   currency: Currency!
@@ -52,7 +52,7 @@ type CashTransfers @entity {
 type Currency @entity {
   id: ID!
   CashIssues: [CashIssues!]! @derivedFrom(field: "currency")
-  CashDeposits: [CashDeposits!]! @derivedFrom(field: "currency")
+  CashDeposited: [CashDeposited!]! @derivedFrom(field: "currency")
   CashRedemptions: [CashRedemptions!]! @derivedFrom(field: "currency")
   CashTransfers: [CashTransfers!]! @derivedFrom(field: "currency")  
   BondIssues: [BondIssues!]! @derivedFrom(field: "currency")

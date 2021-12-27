@@ -180,13 +180,13 @@ export class User extends Entity {
     this.set("AllCashIssues", Value.fromStringArray(value));
   }
 
-  get AllCashDeposits(): Array<string> {
-    let value = this.get("AllCashDeposits");
+  get AllCashDeposited(): Array<string> {
+    let value = this.get("AllCashDeposited");
     return value!.toStringArray();
   }
 
-  set AllCashDeposits(value: Array<string>) {
-    this.set("AllCashDeposits", Value.fromStringArray(value));
+  set AllCashDeposited(value: Array<string>) {
+    this.set("AllCashDeposited", Value.fromStringArray(value));
   }
 
   get AllCashRedemptions(): Array<string> {
@@ -335,7 +335,7 @@ export class CashIssues extends Entity {
   }
 }
 
-export class CashDeposits extends Entity {
+export class CashDeposited extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -347,19 +347,19 @@ export class CashDeposits extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save CashDeposits entity without an ID");
+    assert(id != null, "Cannot save CashDeposited entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save CashDeposits entity with non-string ID. " +
+        "Cannot save CashDeposited entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("CashDeposits", id.toString(), this);
+      store.set("CashDeposited", id.toString(), this);
     }
   }
 
-  static load(id: string): CashDeposits | null {
-    return changetype<CashDeposits | null>(store.get("CashDeposits", id));
+  static load(id: string): CashDeposited | null {
+    return changetype<CashDeposited | null>(store.get("CashDeposited", id));
   }
 
   get id(): string {
@@ -578,13 +578,13 @@ export class Currency extends Entity {
     this.set("CashIssues", Value.fromStringArray(value));
   }
 
-  get CashDeposits(): Array<string> {
-    let value = this.get("CashDeposits");
+  get CashDeposited(): Array<string> {
+    let value = this.get("CashDeposited");
     return value!.toStringArray();
   }
 
-  set CashDeposits(value: Array<string>) {
-    this.set("CashDeposits", Value.fromStringArray(value));
+  set CashDeposited(value: Array<string>) {
+    this.set("CashDeposited", Value.fromStringArray(value));
   }
 
   get CashRedemptions(): Array<string> {
