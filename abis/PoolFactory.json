@@ -6193,12 +6193,12 @@
         "3": {
             "events": {},
             "links": {},
-            "address": "0xB8Da2b517dC50DE941F7c84bcdFfA9f9e18d628A",
-            "transactionHash": "0x9e5f2212e5ecd641718f98eb1f19a1aa3726bc6b856926fc0fa555b7ffd3fac4"
+            "address": "0xFA1Aa3095124dEB60c05B8FAD190A8016aDB59c5",
+            "transactionHash": "0x9076d76c9479ab0c053b51f811c0d328bc0ce3655d312f4d8b66f27646b37414"
         }
     },
     "schemaVersion": "3.4.3",
-    "updatedAt": "2021-12-23T09:53:24.714Z",
+    "updatedAt": "2022-01-03T15:04:06.956Z",
     "networkType": "ethereum",
     "devdoc": {
         "methods": {}

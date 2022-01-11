@@ -31812,14 +31812,14 @@
         "3": {
             "events": {},
             "links": {
-                "stringutils": "0x5FA469901a3a9aE3447069080ef25DC5D033425F"
+                "stringutils": "0x50875e718426D0cA431A64c2b8e2DE8c59D07aeb"
             },
-            "address": "0x8200Dec23cbb68824D7b13103E4d54909833622E",
-            "transactionHash": "0xd236b9457c046d8019014d4e69e8a4a038a29c216cdbac77cf5abf05c95bc1c7"
+            "address": "0x8edF7840cB63D0735942548482Cf264904E74D16",
+            "transactionHash": "0x3dd8cd51cd524a79de1ea0bd0288f3db1b34560d6bcebe342c7cfa240c767f4e"
         }
     },
     "schemaVersion": "3.4.3",
-    "updatedAt": "2021-12-23T09:53:24.745Z",
+    "updatedAt": "2022-01-03T15:04:06.983Z",
     "networkType": "ethereum",
     "devdoc": {
         "methods": {}
