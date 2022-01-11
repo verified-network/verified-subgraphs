@@ -17,24 +17,28 @@ import {
 export function handleCashIssued(event: CashIssued): void {
   let issue = new CashIssues(event.params.party.toHex())
   issue.amount = event.params.amount
-  issue.currency = Currency.name
+  issue.currency = event.params.currency.toString()
+  issue.save();
 }
 
 export function handleCashRedeemed(event: CashRedeemed): void {
   let redemption = new CashRedemptions(event.params.party.toHex())
   redemption.amount = event.params.amount
-  redemption.currency = Currency.name
+  redemption.currency = event.params.currency.toString()
+  redemption.save()
 }
 
 export function handleCashDeposits(event: CashDeposits): void {
   let deposit = new CashDeposited(event.params.party.toHex())
   deposit.amount = event.params.amount
-  deposit.currency = Currency.name
+  deposit.currency = event.params.currency.toString()
+  deposit.save()
 }
 
 export function handleCashTransfer(event: CashTransfer): void {
   let transfer = new CashTransfers(event.params.party.toHex())
   transfer.amount = event.params.amount
-  transfer.currency = Currency.name
+  transfer.currency = event.params.currency.toString()
+  transfer.save()
 }
 

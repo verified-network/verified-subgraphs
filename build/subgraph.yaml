@@ -91,7 +91,7 @@ dataSources:
     name: System
     network: ropsten
     source:
-      address: "0x60504B00CaedC9d560cA3C2A36363D0045B93d8A"
+      address: "0xD816C6c666A6e927990d798a84ba23cFfbdb0B27"
       abi: System
     mapping:
       kind: ethereum/events
@@ -116,7 +116,7 @@ dataSources:
     name: Account
     network: ropsten
     source:
-      address: "0xE44626F48DA117a788b9E983889d958c53a7168c"
+      address: "0x3207B024385eAF1046E83363c6ae02e94F44D502"
       abi: Account
     mapping:
       kind: ethereum/events
@@ -135,7 +135,7 @@ dataSources:
     name: SecuritiesRegistry
     network: ropsten
     source:
-      address: "0xc090C51D33F556306241e1B915285705C115B68D"
+      address: "0xEDC423F653d90a54BC73DC936233521d23f5fAf4"
       abi: SecuritiesRegistry
     mapping:
       kind: ethereum/events
@@ -159,7 +159,7 @@ dataSources:
     name: Security
     network: ropsten
     source:
-      address: "0x85129845e650bF48B01A0CF76585A4CBEd28a295"
+      address: "0xFbf651893a9831539094837D36dB7a7Af7D26b4c"
       abi: Security
     mapping:
       kind: ethereum/events
@@ -180,7 +180,7 @@ dataSources:
     name: PoolFactory
     network: ropsten
     source:
-      address: "0xB8Da2b517dC50DE941F7c84bcdFfA9f9e18d628A"
+      address: "0xFA1Aa3095124dEB60c05B8FAD190A8016aDB59c5"
       abi: PoolFactory
     mapping:
       kind: ethereum/events
@@ -199,7 +199,7 @@ dataSources:
     name: Trade
     network: ropsten
     source:
-      address: "0x8200Dec23cbb68824D7b13103E4d54909833622E"
+      address: "0x8edF7840cB63D0735942548482Cf264904E74D16"
       abi: Trade
     mapping:
       kind: ethereum/events
@@ -223,7 +223,7 @@ dataSources:
     name: PostTrade
     network: ropsten
     source:
-      address: "0x8005253f6B0Cf2365BE58Fc628693F9E1cCb1E40"
+      address: "0x0AB99238CC43C23bae892075C84e5319a1441F65"
       abi: PostTrade
     mapping:
       kind: ethereum/events
@@ -242,7 +242,7 @@ dataSources:
     name: Products
     network: ropsten
     source:
-      address: "0x1C243DA5FcF7ad6E93B0360Ea4140ad296E13b57"
+      address: "0xF91691BDA104Ad1F236c934c6d25FbD2f99d220F"
       abi: Products
     mapping:
       kind: ethereum/events
@@ -261,7 +261,7 @@ dataSources:
     name: Issues
     network: ropsten
     source:
-      address: "0x591414688A96Fd75e5D8b7B4ED6D759E08b3b217"
+      address: "0x3b20aDc6f6B7c7B7379088c763CC1e65c3bF44Dc"
       abi: Issues
     mapping:
       kind: ethereum/events

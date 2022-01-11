@@ -9,11 +9,13 @@ export function handleIssuerCreated(event: IssuerCreated): void {
   let issuer = new Issuer(event.params.issuer.toHex())
   issuer.tokenName = event.params.tokenName
   issuer.tokenType = event.params.tokenType
+  issuer.save()
 }
 
 export function handleTokenCreated(event: TokenCreated): void {
   let token = new Token(event.params.token.toHex())
   token.tokenName = event.params.tokenName
   token.tokenType = event.params.tokenType
+  token.save()
 }
 

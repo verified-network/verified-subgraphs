@@ -1685,7 +1685,6 @@ export class SecurityTransfers extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
     this.set("from", Value.fromString(""));
     this.set("to", Value.fromString(""));
     this.set("value", Value.fromBigInt(BigInt.zero()));
