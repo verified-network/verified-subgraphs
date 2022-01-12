@@ -1,0 +1,57 @@
+query productsIssued($userAddress: String, $limit: Int, $skip: Int) {
+    user(id: $userAddress) {
+        issuedProducts(limit: $limit, skip: $skip) {
+            ref,
+            productCategory,
+            issuerName,
+            issuerAddress,
+            issuerCountry,
+            issuerSignatoryEmail,
+            arrangerName,
+            arrangerAddress,
+            arrangerCountry,
+            arrangerSignatoryEmail,
+            issue,
+            issuer,
+            status,
+            issuerRegistrationCertificate,
+            arrangerRegistrationCertificate,
+            registrationDocuments,
+        }
+    }
+}
+
+query securitiesInvested($userAddress: String, $limit: Int, $skip: Int) {
+    user(id: $userAddress) {
+        investedSecurities(limit: $limit, skip: $skip) {
+            address,
+            company,
+            currency,
+            isin,
+            creditScore,
+            price,
+            issuer,
+            balance,
+        }
+    }
+}
+
+query orders($userAddress: String, $limit: Int, $skip: Int) {
+    user(id: $userAddress) {
+        orders(limit: $limit, skip: $skip) {
+            id,
+            orderReference,
+            party,
+            price,
+            trigger,
+            amount,
+            order,
+            orderType,
+            date,
+            status,
+            currency,
+            securityName,
+            security
+        }
+    }
+}
