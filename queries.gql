@@ -1,47 +1,228 @@
-query productsIssued($userAddress: String, $limit: Int, $skip: Int) {
+# Notice that in most fetch about requests, the user refers to the investor responsable for approve
+# the request
+
+# Get issued bonds for a user
+query issuedBonds($userAddress: String, $limit: Int, $skip: Int){
     user(id: $userAddress) {
-        issuedProducts(limit: $limit, skip: $skip) {
-            ref,
-            productCategory,
-            issuerName,
-            issuerAddress,
-            issuerCountry,
-            issuerSignatoryEmail,
-            arrangerName,
-            arrangerAddress,
-            arrangerCountry,
-            arrangerSignatoryEmail,
-            issue,
-            issuer,
-            status,
-            issuerRegistrationCertificate,
-            arrangerRegistrationCertificate,
-            registrationDocuments,
+        AllBondIssued(limit: $limit, skip: $skip) {
+            id,
+            token {
+                id,
+                token,
+                tokenName,
+                tokenType,
+            }
+            bondName {
+                id
+            }
+            party {
+                id
+            }
+            currency {
+                id #Currency should have address, name...
+            }
+            amount,
+            collateralAmount,
+            issueTime,
         }
     }
 }
 
-query securitiesInvested($userAddress: String, $limit: Int, $skip: Int) {
+# Get issued bonds for a user
+query purchaseBonds($userAddress: String, $limit: Int, $skip: Int){
     user(id: $userAddress) {
-        investedSecurities(limit: $limit, skip: $skip) {
-            address,
-            company,
-            currency,
-            isin,
-            creditScore,
-            price,
-            issuer,
-            balance,
+        AllBondPurchases(limit: $limit, skip: $skip) {
+            id,
+            token {
+                id,
+                token,
+                tokenName,
+                tokenType,
+            }
+            bondName {
+                id
+            }
+            party {
+                id
+            }
+            currency {
+                id #Currency should have address, name...
+            }
+            amount,
+            paidInAmount,
+            purchaseTime,
         }
     }
 }
+
+# About a security I need:
+# address: MISSING
+# company: this is company name should it is MISSING
+# currency: MISSING
+# isin: It is ISIN.id the isin number? if not MISSING
+# creditScore: MISSING
+# price: MISSING
+# issuer: MISSING
+# balance: MISSING
+query issuedSecurities($userAddress: String, $limit: Int, $skip: Int){
+    user(id: $userAddress) {
+        AllIssuedSecurities(limit: $limit, skip: $skip) {
+            id,
+            security,
+            company {
+                id # What about company fields in entity(company name...)
+            }
+            ISIN {
+                id
+            }
+        }
+    }
+}
+
+# About a security I need:
+# address: MISSING
+# company: this is company name should it is MISSING
+# currency: MISSING
+# isin: It is ISIN.id the isin number? if not MISSING
+# creditScore: MISSING
+# price: MISSING
+# issuer: MISSING
+# balance: MISSING
+query investedSecurities($userAddress: String, $limit: Int, $skip: Int) {
+    user(id: $userAddress) {
+        AllInvestedSecurities(limit: $limit, skip: $skip) {
+            id,
+            security,
+            company {
+                id # What about company fields in entity(company name...)
+            }
+            ISIN {
+                id
+            }
+        }
+    }
+}
+
+# Get registrationRequests for an issuer to approve, nothing about this in Entities
+# Expected response:
+# ref,
+# userAddress,
+# countryCode,
+# dematAccountNo,
+# DPID,
+# registrationDate,
+query registrationRequests($userAddress: String, $limit: Int, $skip: Int) {
+    user(id: $userAddress) {
+        registrationRequests(limit: $limit, skip: $skip) {
+            ref,
+            userAddress,
+            countryCode,
+            dematAccountNo,
+            DPID,
+            registrationDate,
+        }
+    }
+}
+
+# Get securities requests for an issuer to approve
+# Expected response:
+# ref = ID
+# requestBy = MISSING
+# token = MISSING
+# currencyCode = MISSING
+# securityType = MISSING
+# isin = ISIN.id
+# company = company.id
+# instrumentType = MISSING
+# lockInReason = MISSING
+# approvalStatus = MISSING
+# noOfCertificates = MISSING
+# lockInReleaseDate = MISSING
+# registrationRequestDate = MISSING
+# faceValue = MISSING
+query securityRequests($userAddress: String, $limit: Int, $skip: Int) {
+    user(id: $userAddress) {
+        AllSecurityRequests(limit: $limit, skip: $skip) {
+            id,
+            security,
+            company {
+                id
+            }
+            ISIN {
+                id,
+            }
+        }
+    }
+}
+
+# Get issued products by client
+# ref = id
+# productCategory = productCategory
+# issuerName = issuerName,
+# issuerAddress = MISSING,
+# issuerCountry = MISSING,
+# issuerSignatoryEmail = MISSING,
+# arrangerName = MISSING,
+# arrangerAddress = MISSING,
+# arrangerCountry = MISSING,
+# arrangerSignatoryEmail = MISSING,
+# issue = MISSING,
+# issuer = MISSING,
+# status = MISSING || issue.status
+# issuerRegistrationCertificate = MISSING
+# arrangerRegistrationCertificate = MISSING,
+# registrationDocuments = registrationDocs,
+query issuedProducts($userAddress: String, $limit: Int, $skip: Int) {
+    user(id: $userAddress) {
+        AllProductIssued(limit: $limit, skip: $skip) {
+            id,
+            issue {
+                id,
+                issueSize,
+                offerPrice,
+                minAskPrice,
+                minSubscription,
+                currency {
+                    id
+                },
+                issue,
+                offerType,
+                isin {
+                    id,
+                }
+                status,
+                productCategory,
+            },
+            productReference,
+            productCategory,
+            issuerName,
+            registrationDocs,
+        }
+    }
+}
+
+# Get orders for a user
+# Expected response:
+# ref = id
+# party = party.id,
+# security = security.security
+# price = price,
+# trigger = trigger,
+# orderType = orderType,
+# order = order,
+# status = status,
+# currency = currency.id
+# securityName = securityName
+# quantity = amount
+# dt = date
+# bid = MISSING,
+# ask = MISSING,
 
 query orders($userAddress: String, $limit: Int, $skip: Int) {
     user(id: $userAddress) {
-        orders(limit: $limit, skip: $skip) {
+        AllOrders (limit: $limit, skip: $skip) {
             id,
             orderReference,
-            party,
             price,
             trigger,
             amount,
@@ -49,9 +230,245 @@ query orders($userAddress: String, $limit: Int, $skip: Int) {
             orderType,
             date,
             status,
-            currency,
-            securityName,
-            security
+            currency {
+                id  # Will be nice if currency can have name and type(Bond or Cash)
+            },
+            party{
+                id
+            }
+            securityName, # Suspect: Should security name be here? It is not already on security?
+            security {
+                id,
+                security,
+                company{
+                    id
+                }
+                ISIN {
+                    id
+                }
+            }
         }
     }
 }
+
+# Get clients for a specified manager
+query clients($userAddress: String, $limit: Int, $skip: Int) {
+    # How to do this? Add a kyc entity and assign one to each user or add this parameters to user entity
+    # Notice that we need to store the manager of a user also for filtering
+    user(id: $userAddress) {
+        users(manager: $userAddress, limit: $limit, skip: $skip) {
+            id,
+            status,
+            kyc,
+            photoId,
+            videoId,
+            addressProof,
+            country,
+            firstName,
+            lastName,
+            email,
+            role,
+        }
+    }
+}
+
+# Get managers by role and country
+query managers($role: String, $country: String) {
+    users(role: $role, country: $country) {
+        id,
+        role,
+        country
+    }
+}
+
+# Get settlementRequests for an issuer to approve
+# Expected response:
+# ref = id
+# transferor = partyReference.reference.id
+# transferee = partyReference.reference.id
+# security = partyReference.reference.security.id
+# securityName = partyReference.reference.securityName
+# status = partyReference.reference.status
+# transferorDPID = MISSING :: Add DpId to User entity?
+# transfereeDPID = MISSING :: Add DpId to User entity?
+# isin = partyReference.reference.security.isin.id
+# company = MISSING
+# currency = partyReference.reference.currency.id
+# price = partyReference.reference.price
+# consideration = MISSING
+# unitsToTransfer = partyReference.reference.amount
+# executionDate = MISSING
+
+query settlementRequests($userAddress: String, $limit: Int, $skip: Int) {
+    user(id: $userAddress) {
+        AllSettlementRequests(limit: $limit, skip: $skip) {
+            id,
+            partyReference {
+                reference {
+                    id,
+                    orderReference,
+                    party {
+                        id
+                    }
+                    price,
+                    trigger,
+                    amount,
+                    order,
+                    orderType,
+                    date,
+                    status,
+                    currency {
+                        id
+                    }
+                    securityName,
+                    security {
+                        id,
+                        isin {
+                            id
+                        }
+                    }
+                }
+            }
+            counterpartyReference {
+                reference {
+                    id,
+                    orderReference,
+                    party {
+                        id
+                    }
+                    price,
+                    trigger,
+                    amount,
+                    order,
+                    orderType,
+                    date,
+                    status,
+                    currency {
+                        id
+                    }
+                    securityName,
+                    security {
+                        id,
+                        isin {
+                            id
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Get entries for a user and currency
+# party: party.id,
+# amount: txAmount,
+# type: txType,
+# description: txDescription,
+# date: txDate,
+# voucher: voucherType,
+query getEntries($userAddress: String, $currency: Currency, $limit: Int, $skip: Int){
+    user(id: $userAddress) {
+        AllEntries(currency: $currency) {
+            id,
+            accountAddress {
+                id,
+                account,
+                accountName,
+            }
+            accountName,
+            txDate,
+            party {
+                id
+            }
+            txType,
+            txDescription,
+            currency,
+            txAmount,
+            voucherType,
+        }
+    }
+}
+
+# Get trades made by a user
+query getTrades($userAddress: String, $limit: Int, $skip: Int){
+    user(id: $userAddress) {
+        AllTrades(currency: $currency) {
+            id,
+            partyReference{
+                reference {
+                    id,
+                    orderReference,
+                    party {
+                        id
+                    }
+                    price,
+                    trigger,
+                    amount,
+                    order,
+                    orderType,
+                    date,
+                    status,
+                    currency {
+                        id
+                    }
+                    securityName,
+                    security {
+                        id,
+                        isin {
+                            id
+                        }
+                    }
+                }
+            }
+            counterpartyReference{
+                reference {
+                    id,
+                    orderReference,
+                    party {
+                        id
+                    }
+                    price,
+                    trigger,
+                    amount,
+                    order,
+                    orderType,
+                    date,
+                    status,
+                    currency {
+                        id
+                    }
+                    securityName,
+                    security {
+                        id,
+                        isin {
+                            id
+                        }
+                    }
+                }
+            }
+            isin {
+                id
+            }
+            company {
+                id
+            }
+            price,
+            askprice,
+            currency{
+                id
+            }
+            amount,
+            status,
+            executionDate,
+        }
+    }
+}
+
+# About Entry GQL Entity:
+#   - I think we can't filter by user
+
+# Todo
+#- Add createdBy paramater in the event SecurityCreated.
+#- Add createdBy paramater in the event ProductIssued.
+#- Add issuer_paramater (responsible of approve) in Settlement.
+#- Add issuer_paramater (responsible of approve) in Security.
