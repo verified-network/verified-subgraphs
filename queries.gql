@@ -394,7 +394,7 @@ query getTrades($userAddress: String, $limit: Int, $skip: Int){
     user(id: $userAddress) {
         AllTrades(currency: $currency) {
             id,
-            partyReference{
+            partyReference {
                 reference {
                     id,
                     orderReference,
@@ -420,7 +420,7 @@ query getTrades($userAddress: String, $limit: Int, $skip: Int){
                     }
                 }
             }
-            counterpartyReference{
+            counterpartyReference {
                 reference {
                     id,
                     orderReference,
@@ -451,21 +451,147 @@ query getTrades($userAddress: String, $limit: Int, $skip: Int){
             }
             company {
                 id
+                name
             }
-            price,
-            askprice,
+            price
+            askprice
             currency{
                 id
+                name
+                address
             }
-            amount,
-            status,
-            executionDate,
+            amount
+            status
+            executionDate
         }
     }
 }
 
-# About Entry GQL Entity:
-#   - I think we can't filter by user
+# --------------------------------------- Only for posting entries -----------------------------------------------------
+# We need userAddress in User entity, and currency address, name in Currency entity
+
+# We need the debited currency amount and type here!
+query cashIssues($userAddress: String, $fromDate: BigInt) {
+    user(id: $userAddress) {
+        AllCashIssues {
+            id
+            party {
+                id
+                address
+            }
+            currency {
+                id
+                address
+                name
+            }
+            amount
+        }
+    }
+}
+
+query cashDeposited($userAddress: String, $fromDate: BigInt) {
+    user(id: $userAddress) {
+        AllCashDeposited {
+            id
+            party {
+                id
+                address
+            }
+            currency {
+                id
+                address
+                name
+            }
+            amount
+        }
+    }
+}
+
+query cashTransfers($userAddress: String, $fromDate: BigInt) {
+    user(id: $userAddress) {
+        AllCashTransfers {
+            id
+            party {
+                id
+                address
+            }
+            counterparty {
+                id
+                address
+            }
+            currency {
+                id
+                address
+                name
+            }
+            amount
+        }
+    }
+}
+
+query cashReceipts($userAddress: String, $fromDate: BigInt) {
+    user(id: $userAddress) {
+        AllCashReceipts {
+            id
+            party {
+                id
+                address
+            }
+            counterparty {
+                id
+                address
+            }
+            currency {
+                id
+                address
+                name
+            }
+            amount
+        }
+    }
+}
+
+# Not in schema
+query exchangeTokens($userAddress: String, $fromDate: BigInt) {
+    user(id: $userAddress) {
+        AllCashExchanges {
+            id
+            party {
+                id
+                address
+            }
+            originCurrency {
+                id
+                address
+                name
+            }
+            currency {
+                id
+                address
+                name
+            }
+            amount
+        }
+    }
+}
+
+query cashRedemptions($userAddress: String, $fromDate: BigInt) {
+    user(id: $userAddress) {
+        AllCashRedemptions {
+            id
+            party {
+                id
+                address
+            }
+            currency {
+                id
+                address
+                name
+            }
+            amount
+        }
+    }
+}
 
 # Todo
 #- Add createdBy paramater in the event SecurityCreated.
