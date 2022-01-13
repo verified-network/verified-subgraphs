@@ -22,7 +22,12 @@ type User @entity {
   AllBondRedemptions: [BondRedemptions!]! @derivedFrom(field: "party")
   AllBondLiquidations: [BondLiquidations!]! @derivedFrom(field: "party")
   AllSecurityTransfers: [SecurityTransfers!]! @derivedFrom(field: "from")
-  AllSecurityReceipts: [SecurityTransfers!]! @derivedFrom(field: "to")
+  AllSecurityReceipts: [SecurityTransfers!]! @derivedFrom(field: "to"),
+  AllSecurityIssued: [Security!]! @derivedFrom(field: "issuedBy"),
+  AllProductIssued: [Product!]! @derivedFrom(field: "issuedBy"),
+  AllOrders: [Order!]! @derivedFrom(field: "party"),
+  AllSettlementRequests: [Settlement!]! @derivedFrom(field: "issuer")
+  AllSecurityRequests: [Security!]! @derivedFrom(field: "issuer")
 }
 type CashIssues @entity {
   id: ID!
@@ -138,6 +143,7 @@ type Security @entity {
   id: ID!
   security: Bytes!
   company: Company!
+  issuedBy: User!
   ISIN: ISIN!
 }
 type Company @entity {
@@ -214,7 +220,8 @@ type Product @entity {
   productReference: Bytes!
   productCategory: Bytes! 
   issuerName: Bytes! 
-  registrationDocs: String!
+  registrationDocs: String!,
+  issuedBy: User
 }
 type Issue @entity {
   id: ID!
