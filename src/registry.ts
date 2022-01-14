@@ -4,10 +4,12 @@ import {
   SecurityCreated,
   CorporateAction
 } from "../generated/SecuritiesRegistry/SecuritiesRegistry"
-import { Security, Company, ISIN } from "../generated/schema"
+import { TokenizedSecurity, Company, ISIN } from "../generated/schema"
+import { Security } from "../generated/templates"
 
-export function handleSecurityCreated(event: SecurityCreated): void {
-  let security = new Security(event.params.security.toHex())
+export function handleSecurityCreated(event: SecurityCreated): void {  
+  Security.create(event.params.security)
+  let security = new TokenizedSecurity(event.params.security.toHex())
   security.security = event.params.security
   security.company = event.params.company.toString()
   security.ISIN = event.params.isin.toString()

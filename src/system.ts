@@ -5,7 +5,8 @@ import {
   LedgerCreated,
   AccountCreated
 } from "../generated/System/System"
-import { Holder, Ledger, Account } from "../generated/schema"
+import { Holder, Ledger, LedgerAccount } from "../generated/schema"
+import { Account } from "../generated/templates"
 
 export function handleHolderCreated(event: HolderCreated): void {
   let holder = new Holder(event.params.holder.toHex())
@@ -23,7 +24,8 @@ export function handleLedgerCreated(event: LedgerCreated): void {
 }
 
 export function handleAccountCreated(event: AccountCreated): void {
-  let account = new Account(event.params.account.toHex())
+  Account.create(event.params.account)
+  let account = new LedgerAccount(event.params.account.toHex())
   account.accountName = event.params.accountName
   account.ledger = event.params.ledger.toString()
   account.save()

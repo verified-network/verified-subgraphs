@@ -12,6 +12,7 @@ type Token @entity {
 }
 type User @entity {
   id: ID!
+  client: Bytes!
   AllCashIssues: [CashIssues!]! @derivedFrom(field: "party")
   AllCashDeposited: [CashDeposited!]! @derivedFrom(field: "party")
   AllCashRedemptions: [CashRedemptions!]! @derivedFrom(field: "party")
@@ -116,7 +117,7 @@ type Ledger @entity {
   group: Bytes!
   holder: Holder!
 }
-type Account @entity {
+type LedgerAccount @entity {
   id: ID!
   account: Bytes!
   accountName: Bytes!
@@ -124,7 +125,7 @@ type Account @entity {
 }
 type Entry @entity {
   id: ID!
-  accountAddress: Account!
+  accountAddress: LedgerAccount!
   accountName: Bytes!
   txDate: BigInt!
   party: User!
@@ -134,7 +135,7 @@ type Entry @entity {
   txAmount: BigInt!
   voucherType: Bytes!
 }
-type Security @entity {
+type TokenizedSecurity @entity {
   id: ID!
   security: Bytes!
   company: Company!
@@ -142,18 +143,18 @@ type Security @entity {
 }
 type Company @entity {
   id: ID!
-  security: Security!
+  security: TokenizedSecurity!
   corporateAction: CorporateAction!
 }
 type ISIN @entity {
   id: ID!
   company: Company!
-  security: Security!
+  security: TokenizedSecurity!
   corporateAction: CorporateAction!
 }
 type CorporateAction @entity {
   id: ID!
-  security: Security!
+  security: TokenizedSecurity!
   company: Company!
   ISIN: ISIN!
   category: Bytes!
@@ -168,7 +169,7 @@ type SecurityTransfers @entity {
 type Pool @entity {
   id: ID!
   pool: Bytes!
-  security: Security!
+  security: TokenizedSecurity!
   cash: Currency!  
 }
 type Order @entity {
@@ -184,7 +185,7 @@ type Order @entity {
   status: Bytes!
   currency: Currency!
   securityName: Bytes!
-  security: Security!
+  security: TokenizedSecurity!
 }
 type OrderReference @entity {
   id: ID!

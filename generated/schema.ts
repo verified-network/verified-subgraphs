@@ -143,6 +143,8 @@ export class User extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("client", Value.fromBytes(Bytes.empty()));
   }
 
   save(): void {
@@ -169,6 +171,15 @@ export class User extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get client(): Bytes {
+    let value = this.get("client");
+    return value!.toBytes();
+  }
+
+  set client(value: Bytes) {
+    this.set("client", Value.fromBytes(value));
   }
 
   get AllCashIssues(): Array<string> {
@@ -1227,7 +1238,7 @@ export class Ledger extends Entity {
   }
 }
 
-export class Account extends Entity {
+export class LedgerAccount extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -1239,19 +1250,19 @@ export class Account extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save Account entity without an ID");
+    assert(id != null, "Cannot save LedgerAccount entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save Account entity with non-string ID. " +
+        "Cannot save LedgerAccount entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("Account", id.toString(), this);
+      store.set("LedgerAccount", id.toString(), this);
     }
   }
 
-  static load(id: string): Account | null {
-    return changetype<Account | null>(store.get("Account", id));
+  static load(id: string): LedgerAccount | null {
+    return changetype<LedgerAccount | null>(store.get("LedgerAccount", id));
   }
 
   get id(): string {
@@ -1415,7 +1426,7 @@ export class Entry extends Entity {
   }
 }
 
-export class Security extends Entity {
+export class TokenizedSecurity extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -1427,19 +1438,21 @@ export class Security extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save Security entity without an ID");
+    assert(id != null, "Cannot save TokenizedSecurity entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save Security entity with non-string ID. " +
+        "Cannot save TokenizedSecurity entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("Security", id.toString(), this);
+      store.set("TokenizedSecurity", id.toString(), this);
     }
   }
 
-  static load(id: string): Security | null {
-    return changetype<Security | null>(store.get("Security", id));
+  static load(id: string): TokenizedSecurity | null {
+    return changetype<TokenizedSecurity | null>(
+      store.get("TokenizedSecurity", id)
+    );
   }
 
   get id(): string {
@@ -1685,6 +1698,7 @@ export class SecurityTransfers extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
     this.set("from", Value.fromString(""));
     this.set("to", Value.fromString(""));
     this.set("value", Value.fromBigInt(BigInt.zero()));
