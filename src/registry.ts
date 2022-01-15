@@ -12,7 +12,7 @@ export function handleSecurityCreated(event: SecurityCreated): void {
   let security = new TokenizedSecurity(event.params.security.toHex())
   security.security = event.params.security
   security.company = event.params.company.toString()
-  security.ISIN = event.params.isin.toString()
+  security.isin = event.params.isin.toString()
   security.save()
 }
 

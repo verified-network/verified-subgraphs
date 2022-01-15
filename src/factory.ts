@@ -7,10 +7,10 @@ import {Issuer, Token} from "../generated/schema"
 import { Cash, Bond } from "../generated/templates"
 
 export function handleIssuerCreated(event: IssuerCreated): void {
-  /*if(event.params.tokenType.equals("ViaBond"))
+  if(event.params.tokenType.toString()=="ViaCash")
     Cash.create(event.params.issuer)
-  else
-    Bond.create(event.params.issuer)*/
+  else if(event.params.tokenType.toString()=="ViaBond")
+    Bond.create(event.params.issuer)
   let issuer = new Issuer(event.params.issuer.toHex())
   issuer.tokenName = event.params.tokenName
   issuer.tokenType = event.params.tokenType
