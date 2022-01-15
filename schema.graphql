@@ -17,6 +17,9 @@ type Token @entity {
 type User @entity {
   id: ID!
   client: Bytes!
+  name: Bytes!
+  surname: Bytes!
+  status: Int!
   Holder: Holder! @derivedFrom(field:"accountCreator")
   CashIssues: CashIssues! @derivedFrom(field:"party")
   CashDeposited: CashDeposited! @derivedFrom(field: "party")
@@ -30,6 +33,8 @@ type User @entity {
   SecurityTransfers: SecurityTransfers! @derivedFrom(field: "from")
   SecurityReceipts: SecurityTransfers! @derivedFrom(field: "to")
   Orders: Order! @derivedFrom(field:"party")
+  AccountRegistrations: AccountRegistration! @derivedFrom(field:"user")
+  SecuritiesRegistrations: SecuritiesRegistration! @derived(field:"user")
   AllCashIssues: [CashIssues!]! @derivedFrom(field: "party")
   AllCashDeposited: [CashDeposited!]! @derivedFrom(field: "party")
   AllCashRedemptions: [CashRedemptions!]! @derivedFrom(field: "party")
@@ -41,6 +46,11 @@ type User @entity {
   AllBondLiquidations: [BondLiquidations!]! @derivedFrom(field: "party")
   AllSecurityTransfers: [SecurityTransfers!]! @derivedFrom(field: "from")
   AllSecurityReceipts: [SecurityTransfers!]! @derivedFrom(field: "to")
+}
+type Manager @entity {
+  id: ID!
+  role: Bytes!
+  country: Bytes!
 }
 type CashIssues @entity {
   id: ID!
@@ -81,6 +91,8 @@ type Currency @entity {
   Orders: Order! @derivedFrom(field:"currency")
   Trades: Trade! @derivedFrom(field:"currency")
   Issues : Issue! @derived(field:"currency")
+  TokenizedSecurities: TokenizedSecurity! @derivedFrom(field:"currency")
+  SecuritiesRegistrations: SecuritiesRegistration! @derivedFrom(field:"currencyCode")
   AllCashIssues: [CashIssues!]! @derivedFrom(field: "currency")
   AllCashDeposited: [CashDeposited!]! @derivedFrom(field: "currency")
   AllCashRedemptions: [CashRedemptions!]! @derivedFrom(field: "currency")
@@ -171,11 +183,36 @@ type Entry @entity {
   txAmount: BigInt!
   voucherType: Bytes!
 }
+type AccountRegistration @entity {
+  id: ID!
+  registrationRef: Bytes!
+  user: User!
+  country: Bytes!
+  registrationDate: Int!
+}
+type SecuritiesRegistration @entity {
+  id: ID!
+  registrationRef: Bytes!
+  user: User! 
+  currencyCode: Currency! 
+  stype: Bytes! 
+  isin: ISIN! 
+  company: Company! 
+  itype: Bytes!
+  noOfCertificates: Int!
+  faceValue: Int!
+  lockInReason: Bytes!
+  lockInReleaseDate: Int!
+  registrationDate: Int! 
+  status: Bytes!
+}
 type TokenizedSecurity @entity {
   id: ID!
   security: Bytes!
   company: Company!
   isin: ISIN!
+  currency: Currency!
+  issuer: Bytes!
   CorporateActions: CorporateAction! @derivedFrom(field:"security")
   Pools: Pool! @derivedFrom(field:"security")
   Orders: Order! @derivedFrom(field:"security")
@@ -186,7 +223,9 @@ type Company @entity {
   corporateAction: [CorporateAction!]
   TokenizedSecurities : TokenizedSecurity! @derivedFrom(field:"company") 
   CorporateActions: CorporateAction! @derivedFrom(field:"company")
+  CreditScores: CreditScore! @derivedFrom(field:"company")
   Trades : Trade! @derivedFrom(field:"company")
+  SecuritiesRegistrations: SecuritiesRegistration! @derivedFrom(field:"company")
 }
 type ISIN @entity {
   id: ID!
@@ -195,16 +234,24 @@ type ISIN @entity {
   corporateAction: [CorporateAction!]
   TokenizedSecurities : TokenizedSecurity! @derivedFrom(field:"isin")
   CorporateActions: CorporateAction! @derivedFrom(field:"isin")
+  CreditScores: CreditScore! @derivedFrom(field:"isin")
   Trades : Trade! @derivedFrom(field:"isin")
   Issues : Issue! @derived(field:"isin")
+  SecuritiesRegistrations: SecuritiesRegistration! @derivedFrom(field:"isin")
 }
 type CorporateAction @entity {
   id: ID!
   security: TokenizedSecurity!
   company: Company!
   isin: ISIN!
-  category: Bytes!
+  category: String!
   action: String!  
+}
+type CreditScore @entity {
+  id: ID!
+  company: Company!
+  isin: ISIN!
+  score: Bytes!
 }
 type SecurityTransfers @entity {
   id: ID!

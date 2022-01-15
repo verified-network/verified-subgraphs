@@ -34,18 +34,26 @@ export class SecurityCreated__Params {
   get isin(): Bytes {
     return this._event.parameters[2].value.toBytes();
   }
-}
 
-export class CorporateAction extends ethereum.Event {
-  get params(): CorporateAction__Params {
-    return new CorporateAction__Params(this);
+  get currency(): Bytes {
+    return this._event.parameters[3].value.toBytes();
+  }
+
+  get issuer(): Address {
+    return this._event.parameters[4].value.toAddress();
   }
 }
 
-export class CorporateAction__Params {
-  _event: CorporateAction;
+export class CorporateActionCreated extends ethereum.Event {
+  get params(): CorporateActionCreated__Params {
+    return new CorporateActionCreated__Params(this);
+  }
+}
 
-  constructor(event: CorporateAction) {
+export class CorporateActionCreated__Params {
+  _event: CorporateActionCreated;
+
+  constructor(event: CorporateActionCreated) {
     this._event = event;
   }
 
@@ -61,12 +69,38 @@ export class CorporateAction__Params {
     return this._event.parameters[2].value.toBytes();
   }
 
-  get category(): Bytes {
-    return this._event.parameters[3].value.toBytes();
+  get category(): string {
+    return this._event.parameters[3].value.toString();
   }
 
   get action(): string {
     return this._event.parameters[4].value.toString();
+  }
+}
+
+export class ReportCreditScore extends ethereum.Event {
+  get params(): ReportCreditScore__Params {
+    return new ReportCreditScore__Params(this);
+  }
+}
+
+export class ReportCreditScore__Params {
+  _event: ReportCreditScore;
+
+  constructor(event: ReportCreditScore) {
+    this._event = event;
+  }
+
+  get company(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+
+  get isin(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+
+  get score(): Bytes {
+    return this._event.parameters[2].value.toBytes();
   }
 }
 
@@ -503,13 +537,13 @@ export class SecuritiesRegistry extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  getCorporateActions(_isin: Bytes, _category: Bytes): Array<string> {
+  getCorporateActions(_isin: Bytes, _category: string): Array<string> {
     let result = super.call(
       "getCorporateActions",
-      "getCorporateActions(bytes32,bytes32):(string[])",
+      "getCorporateActions(bytes32,string):(string[])",
       [
         ethereum.Value.fromFixedBytes(_isin),
-        ethereum.Value.fromFixedBytes(_category)
+        ethereum.Value.fromString(_category)
       ]
     );
 
@@ -518,14 +552,14 @@ export class SecuritiesRegistry extends ethereum.SmartContract {
 
   try_getCorporateActions(
     _isin: Bytes,
-    _category: Bytes
+    _category: string
   ): ethereum.CallResult<Array<string>> {
     let result = super.tryCall(
       "getCorporateActions",
-      "getCorporateActions(bytes32,bytes32):(string[])",
+      "getCorporateActions(bytes32,string):(string[])",
       [
         ethereum.Value.fromFixedBytes(_isin),
-        ethereum.Value.fromFixedBytes(_category)
+        ethereum.Value.fromString(_category)
       ]
     );
     if (result.reverted) {
@@ -958,8 +992,8 @@ export class RegisterCorporateActionCall__Inputs {
     this._call = call;
   }
 
-  get _category(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
+  get _category(): string {
+    return this._call.inputValues[0].value.toString();
   }
 
   get _action(): string {

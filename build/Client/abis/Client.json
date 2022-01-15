@@ -4,33 +4,33 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "client",
+        "name": "manager",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "name",
+        "name": "role",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "surname",
+        "name": "country",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "name": "status",
-        "type": "uint256"
+        "name": "id",
+        "type": "bytes32"
       }
     ],
-    "name": "KycUpdate",
+    "name": "ManagerAdded",
     "type": "event"
   },
   {
     "constant": false,
     "inputs": [
       {
-        "name": "_client",
+        "name": "_kyc",
         "type": "address"
       }
     ],
@@ -41,36 +41,203 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "getAMLManager",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
         "name": "_client",
+        "type": "address"
+      },
+      {
+        "name": "_account",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setCustody",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_client",
+        "type": "address"
+      }
+    ],
+    "name": "getCustody",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "login",
+        "type": "bool"
+      }
+    ],
+    "name": "setAccess",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_client",
+        "type": "address"
+      }
+    ],
+    "name": "getAccess",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_client",
+        "type": "address"
+      },
+      {
+        "name": "_manager",
+        "type": "address"
+      }
+    ],
+    "name": "setManager",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_client",
+        "type": "address"
+      }
+    ],
+    "name": "getManager",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_client",
+        "type": "address"
+      }
+    ],
+    "name": "isRegistered",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_client",
+        "type": "address"
+      },
+      {
+        "name": "status",
+        "type": "bool"
+      }
+    ],
+    "name": "setAMLStatus",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_client",
+        "type": "address"
+      }
+    ],
+    "name": "getAMLStatus",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_manager",
         "type": "address"
       },
       {
         "name": "_status",
-        "type": "uint256"
+        "type": "bool"
       }
     ],
-    "name": "setStatus",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getStatus",
+    "name": "getClients",
     "outputs": [
       {
         "name": "",
-        "type": "uint256"
+        "type": "address[]"
       }
     ],
     "payable": false,
@@ -81,15 +248,23 @@
     "constant": false,
     "inputs": [
       {
-        "name": "_client",
+        "name": "_submanager",
         "type": "address"
       },
       {
-        "name": "_file",
-        "type": "string"
+        "name": "_country",
+        "type": "bytes32"
+      },
+      {
+        "name": "_role",
+        "type": "bytes32"
+      },
+      {
+        "name": "_id",
+        "type": "bytes32"
       }
     ],
-    "name": "setFile",
+    "name": "addRole",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -99,15 +274,19 @@
     "constant": true,
     "inputs": [
       {
-        "name": "_client",
+        "name": "_user",
         "type": "address"
       }
     ],
-    "name": "getFile",
+    "name": "getRole",
     "outputs": [
       {
         "name": "",
-        "type": "string"
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
       }
     ],
     "payable": false,
@@ -118,52 +297,19 @@
     "constant": false,
     "inputs": [
       {
-        "name": "_client",
+        "name": "_submanager",
         "type": "address"
       },
       {
-        "name": "_file",
-        "type": "string"
-      }
-    ],
-    "name": "setFATCA",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getFATCA",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
+        "name": "_country",
+        "type": "bytes32"
       },
       {
-        "name": "_file",
-        "type": "string"
+        "name": "_role",
+        "type": "bytes32"
       }
     ],
-    "name": "setCRS",
+    "name": "removeRole",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -173,319 +319,19 @@
     "constant": true,
     "inputs": [
       {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getCRS",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      },
-      {
-        "name": "_file",
-        "type": "string"
-      }
-    ],
-    "name": "setPhotoID",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getPhotoID",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      },
-      {
-        "name": "_file",
-        "type": "string"
-      }
-    ],
-    "name": "setVideoID",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getVideoID",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      },
-      {
-        "name": "_file",
-        "type": "string"
-      }
-    ],
-    "name": "setAddress",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
+        "name": "_role",
+        "type": "bytes32"
       },
       {
         "name": "_country",
         "type": "bytes32"
       }
     ],
-    "name": "setCountry",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getCountry",
+    "name": "getManagers",
     "outputs": [
       {
         "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      },
-      {
-        "name": "_name",
-        "type": "bytes32"
-      },
-      {
-        "name": "_surname",
-        "type": "bytes32"
-      }
-    ],
-    "name": "setName",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getName",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      },
-      {
-        "name": "_phone",
-        "type": "bytes32"
-      }
-    ],
-    "name": "setPhone",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getPhone",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      },
-      {
-        "name": "_email",
-        "type": "bytes32"
-      }
-    ],
-    "name": "setEmail",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getEmail",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      },
-      {
-        "name": "_paid",
-        "type": "bytes32"
-      }
-    ],
-    "name": "setKYCPaid",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_client",
-        "type": "address"
-      }
-    ],
-    "name": "getKYCPaid",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
+        "type": "address[]"
       }
     ],
     "payable": false,

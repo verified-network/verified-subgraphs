@@ -1,0 +1,432 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "registrationRef",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "country",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "registrationDate",
+        "type": "uint256"
+      }
+    ],
+    "name": "DematAccountRegistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "registrationRef",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "currencyCode",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "stype",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "isin",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "company",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "itype",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "noOfCertificates",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "faceValue",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "lockInReason",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "lockInReleaseDate",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "registrationDate",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "status",
+        "type": "bytes32"
+      }
+    ],
+    "name": "SecurityRegistered",
+    "type": "event"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_viaFactory",
+        "type": "address"
+      },
+      {
+        "name": "_securitiesRegistry",
+        "type": "address"
+      },
+      {
+        "name": "_securityToken",
+        "type": "address"
+      },
+      {
+        "name": "_kyc",
+        "type": "address"
+      },
+      {
+        "name": "_client",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_currencyCode",
+        "type": "bytes32"
+      }
+    ],
+    "name": "registerDematAccount",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_countryCode",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getRegistrationRequests",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_ref",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getRegistrationRequest",
+    "outputs": [
+      {
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "name": "countryCode",
+        "type": "bytes32"
+      },
+      {
+        "name": "dematAccountNo",
+        "type": "bytes32"
+      },
+      {
+        "name": "DPID",
+        "type": "bytes32"
+      },
+      {
+        "name": "registrationDate",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_ref",
+        "type": "bytes32"
+      },
+      {
+        "name": "_DPID",
+        "type": "bytes32"
+      },
+      {
+        "name": "_dematAccountNo",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setRegistrationStatus",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_currencyCode",
+        "type": "bytes32"
+      },
+      {
+        "name": "_stype",
+        "type": "bytes32"
+      },
+      {
+        "name": "_isin",
+        "type": "bytes32"
+      },
+      {
+        "name": "_company",
+        "type": "bytes32"
+      },
+      {
+        "name": "_itype",
+        "type": "bytes32"
+      },
+      {
+        "name": "_noOfCertificates",
+        "type": "uint256"
+      },
+      {
+        "name": "_faceValue",
+        "type": "uint256"
+      },
+      {
+        "name": "_lockInReason",
+        "type": "bytes32"
+      },
+      {
+        "name": "_lockInReleaseDate",
+        "type": "uint256"
+      }
+    ],
+    "name": "registerSecurities",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_countryCode",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getConfirmationRequests",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_ref",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getConfirmationRequest",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "requestor",
+            "type": "address"
+          },
+          {
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "name": "currencyCode",
+            "type": "bytes32"
+          },
+          {
+            "name": "stype",
+            "type": "bytes32"
+          },
+          {
+            "name": "isin",
+            "type": "bytes32"
+          },
+          {
+            "name": "company",
+            "type": "bytes32"
+          },
+          {
+            "name": "itype",
+            "type": "bytes32"
+          },
+          {
+            "name": "lockInReason",
+            "type": "bytes32"
+          },
+          {
+            "name": "approvalStatus",
+            "type": "bytes32"
+          },
+          {
+            "name": "noOfCertificates",
+            "type": "uint256"
+          },
+          {
+            "name": "lockInReleaseDate",
+            "type": "uint256"
+          },
+          {
+            "name": "registrationRequestDate",
+            "type": "uint256"
+          },
+          {
+            "name": "faceValue",
+            "type": "uint256"
+          }
+        ],
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "name": "_ref",
+        "type": "bytes32"
+      },
+      {
+        "name": "_status",
+        "type": "bytes32"
+      }
+    ],
+    "name": "confirmSecurities",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_token",
+        "type": "address"
+      }
+    ],
+    "name": "getSecurity",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_party",
+        "type": "address"
+      }
+    ],
+    "name": "getDP",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

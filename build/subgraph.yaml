@@ -30,7 +30,7 @@ dataSources:
     name: Kyc
     network: ropsten
     source:
-      address: "0x7adeDf6D041B8A7f1A3e51e028c42Ef540EC5f26"
+      address: "0x4d219Bde2787C57A54749AD88C8448f5ddD453b5"
       abi: Kyc
     mapping:
       kind: ethereum/events
@@ -42,14 +42,33 @@ dataSources:
         - name: Kyc
           file: Kyc\abis\Kyc.json
       eventHandlers:
-        - event: KycUpdate(indexed address,uint256)
+        - event: KycUpdate(indexed address,bytes32,bytes32,uint256)
           handler: handleKycUpdate
       file: Kyc\Kyc.wasm
+  - kind: ethereum/contract
+    name: Client
+    network: ropsten
+    source:
+      address: "0x4c0cB1cfB353f5387Bce7D2a9D3d8f9710E93dd7"
+      abi: Client
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Manager
+      abis:
+        - name: Client
+          file: Client\abis\Client.json
+      eventHandlers:
+        - event: ManagerAdded(indexed address,bytes32,bytes32,bytes32)
+          handler: handleManagerAdded
+      file: Client\Client.wasm
   - kind: ethereum/contract
     name: System
     network: ropsten
     source:
-      address: "0xD816C6c666A6e927990d798a84ba23cFfbdb0B27"
+      address: "0x00393538a3FD1872dE705aAD242B666630c89BF6"
       abi: System
     mapping:
       kind: ethereum/events
@@ -74,7 +93,7 @@ dataSources:
     name: SecuritiesRegistry
     network: ropsten
     source:
-      address: "0xEDC423F653d90a54BC73DC936233521d23f5fAf4"
+      address: "0x745C78f4c84CA03d851342E594377079Bd235f5D"
       abi: SecuritiesRegistry
     mapping:
       kind: ethereum/events
@@ -85,20 +104,23 @@ dataSources:
         - Company
         - ISIN
         - CorporateAction
+        - CreditScore
       abis:
         - name: SecuritiesRegistry
           file: SecuritiesRegistry\abis\SecuritiesRegistry.json
       eventHandlers:
-        - event: SecurityCreated(indexed address,bytes32,bytes32)
+        - event: SecurityCreated(indexed address,bytes32,bytes32,bytes32,address)
           handler: handleSecurityCreated
-        - event: CorporateAction(indexed address,bytes32,bytes32,bytes32,string)
-          handler: handleCorporateAction
+        - event: CorporateActionCreated(indexed address,bytes32,bytes32,string,string)
+          handler: handleCorporateActionCreated
+        - event: ReportCreditScore(bytes32,bytes32,bytes32)
+          handler: handleReportCreditScore
       file: SecuritiesRegistry\SecuritiesRegistry.wasm
   - kind: ethereum/contract
     name: PoolFactory
     network: ropsten
     source:
-      address: "0xFA1Aa3095124dEB60c05B8FAD190A8016aDB59c5"
+      address: "0x1a124dAF4bD0C8bC482b8Cb34511B672E16cdcDc"
       abi: PoolFactory
     mapping:
       kind: ethereum/events
@@ -114,10 +136,33 @@ dataSources:
           handler: handlePoolCreated
       file: PoolFactory\PoolFactory.wasm
   - kind: ethereum/contract
+    name: PreTrade
+    network: ropsten
+    source:
+      address: "0xc2239361eA58d6d3d2BA71cF519A66E47Bb852E5"
+      abi: PreTrade
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AccountRegistration
+        - SecuritiesRegistration
+      abis:
+        - name: PreTrade
+          file: PreTrade\abis\PreTrade.json
+      eventHandlers:
+        - event: DematAccountRegistered(indexed bytes32,address,bytes32,uint256)
+          handler: handleDematAccountRegistered
+        - event: SecurityRegistered(indexed
+            bytes32,address,bytes32,bytes32,bytes32,bytes32,bytes32,uint256,uint256,bytes32,uint256,uint256,bytes32)
+          handler: handleSecurityRegistered
+      file: PreTrade\PreTrade.wasm
+  - kind: ethereum/contract
     name: Trade
     network: ropsten
     source:
-      address: "0x8edF7840cB63D0735942548482Cf264904E74D16"
+      address: "0x7463E81B06a7B49F89f5D2293aCE7E17EB9E70D9"
       abi: Trade
     mapping:
       kind: ethereum/events
@@ -141,7 +186,7 @@ dataSources:
     name: PostTrade
     network: ropsten
     source:
-      address: "0x0AB99238CC43C23bae892075C84e5319a1441F65"
+      address: "0x50D54Fca76ABDb7d8883cb6D5d6d6cD64aE7ab9F"
       abi: PostTrade
     mapping:
       kind: ethereum/events
@@ -160,7 +205,7 @@ dataSources:
     name: Products
     network: ropsten
     source:
-      address: "0xF91691BDA104Ad1F236c934c6d25FbD2f99d220F"
+      address: "0x454FAFBA1430bADaaE6f8894aA459145Ae19F479"
       abi: Products
     mapping:
       kind: ethereum/events
@@ -179,7 +224,7 @@ dataSources:
     name: Issues
     network: ropsten
     source:
-      address: "0x3b20aDc6f6B7c7B7379088c763CC1e65c3bF44Dc"
+      address: "0xb1f3891D8BC3195716D3D551eB5BABDD4d070352"
       abi: Issues
     mapping:
       kind: ethereum/events

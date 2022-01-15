@@ -181,6 +181,10 @@ export class User extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("client", Value.fromBytes(Bytes.empty()));
+    this.set("name", Value.fromBytes(Bytes.empty()));
+    this.set("surname", Value.fromBytes(Bytes.empty()));
+    this.set("status", Value.fromI32(0));
+    this.set("SecuritiesRegistrations", Value.fromString(""));
   }
 
   save(): void {
@@ -216,6 +220,33 @@ export class User extends Entity {
 
   set client(value: Bytes) {
     this.set("client", Value.fromBytes(value));
+  }
+
+  get name(): Bytes {
+    let value = this.get("name");
+    return value!.toBytes();
+  }
+
+  set name(value: Bytes) {
+    this.set("name", Value.fromBytes(value));
+  }
+
+  get surname(): Bytes {
+    let value = this.get("surname");
+    return value!.toBytes();
+  }
+
+  set surname(value: Bytes) {
+    this.set("surname", Value.fromBytes(value));
+  }
+
+  get status(): i32 {
+    let value = this.get("status");
+    return value!.toI32();
+  }
+
+  set status(value: i32) {
+    this.set("status", Value.fromI32(value));
   }
 
   get Holder(): string {
@@ -335,6 +366,24 @@ export class User extends Entity {
     this.set("Orders", Value.fromString(value));
   }
 
+  get AccountRegistrations(): string {
+    let value = this.get("AccountRegistrations");
+    return value!.toString();
+  }
+
+  set AccountRegistrations(value: string) {
+    this.set("AccountRegistrations", Value.fromString(value));
+  }
+
+  get SecuritiesRegistrations(): string {
+    let value = this.get("SecuritiesRegistrations");
+    return value!.toString();
+  }
+
+  set SecuritiesRegistrations(value: string) {
+    this.set("SecuritiesRegistrations", Value.fromString(value));
+  }
+
   get AllCashIssues(): Array<string> {
     let value = this.get("AllCashIssues");
     return value!.toStringArray();
@@ -432,6 +481,60 @@ export class User extends Entity {
 
   set AllSecurityReceipts(value: Array<string>) {
     this.set("AllSecurityReceipts", Value.fromStringArray(value));
+  }
+}
+
+export class Manager extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("role", Value.fromBytes(Bytes.empty()));
+    this.set("country", Value.fromBytes(Bytes.empty()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Manager entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Manager entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Manager", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Manager | null {
+    return changetype<Manager | null>(store.get("Manager", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get role(): Bytes {
+    let value = this.get("role");
+    return value!.toBytes();
+  }
+
+  set role(value: Bytes) {
+    this.set("role", Value.fromBytes(value));
+  }
+
+  get country(): Bytes {
+    let value = this.get("country");
+    return value!.toBytes();
+  }
+
+  set country(value: Bytes) {
+    this.set("country", Value.fromBytes(value));
   }
 }
 
@@ -841,6 +944,24 @@ export class Currency extends Entity {
 
   set Issues(value: string) {
     this.set("Issues", Value.fromString(value));
+  }
+
+  get TokenizedSecurities(): string {
+    let value = this.get("TokenizedSecurities");
+    return value!.toString();
+  }
+
+  set TokenizedSecurities(value: string) {
+    this.set("TokenizedSecurities", Value.fromString(value));
+  }
+
+  get SecuritiesRegistrations(): string {
+    let value = this.get("SecuritiesRegistrations");
+    return value!.toString();
+  }
+
+  set SecuritiesRegistrations(value: string) {
+    this.set("SecuritiesRegistrations", Value.fromString(value));
   }
 
   get AllCashIssues(): Array<string> {
@@ -1752,6 +1873,251 @@ export class Entry extends Entity {
   }
 }
 
+export class AccountRegistration extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("registrationRef", Value.fromBytes(Bytes.empty()));
+    this.set("user", Value.fromString(""));
+    this.set("country", Value.fromBytes(Bytes.empty()));
+    this.set("registrationDate", Value.fromI32(0));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save AccountRegistration entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save AccountRegistration entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("AccountRegistration", id.toString(), this);
+    }
+  }
+
+  static load(id: string): AccountRegistration | null {
+    return changetype<AccountRegistration | null>(
+      store.get("AccountRegistration", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get registrationRef(): Bytes {
+    let value = this.get("registrationRef");
+    return value!.toBytes();
+  }
+
+  set registrationRef(value: Bytes) {
+    this.set("registrationRef", Value.fromBytes(value));
+  }
+
+  get user(): string {
+    let value = this.get("user");
+    return value!.toString();
+  }
+
+  set user(value: string) {
+    this.set("user", Value.fromString(value));
+  }
+
+  get country(): Bytes {
+    let value = this.get("country");
+    return value!.toBytes();
+  }
+
+  set country(value: Bytes) {
+    this.set("country", Value.fromBytes(value));
+  }
+
+  get registrationDate(): i32 {
+    let value = this.get("registrationDate");
+    return value!.toI32();
+  }
+
+  set registrationDate(value: i32) {
+    this.set("registrationDate", Value.fromI32(value));
+  }
+}
+
+export class SecuritiesRegistration extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("registrationRef", Value.fromBytes(Bytes.empty()));
+    this.set("user", Value.fromString(""));
+    this.set("currencyCode", Value.fromString(""));
+    this.set("stype", Value.fromBytes(Bytes.empty()));
+    this.set("isin", Value.fromString(""));
+    this.set("company", Value.fromString(""));
+    this.set("itype", Value.fromBytes(Bytes.empty()));
+    this.set("noOfCertificates", Value.fromI32(0));
+    this.set("faceValue", Value.fromI32(0));
+    this.set("lockInReason", Value.fromBytes(Bytes.empty()));
+    this.set("lockInReleaseDate", Value.fromI32(0));
+    this.set("registrationDate", Value.fromI32(0));
+    this.set("status", Value.fromBytes(Bytes.empty()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save SecuritiesRegistration entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save SecuritiesRegistration entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("SecuritiesRegistration", id.toString(), this);
+    }
+  }
+
+  static load(id: string): SecuritiesRegistration | null {
+    return changetype<SecuritiesRegistration | null>(
+      store.get("SecuritiesRegistration", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get registrationRef(): Bytes {
+    let value = this.get("registrationRef");
+    return value!.toBytes();
+  }
+
+  set registrationRef(value: Bytes) {
+    this.set("registrationRef", Value.fromBytes(value));
+  }
+
+  get user(): string {
+    let value = this.get("user");
+    return value!.toString();
+  }
+
+  set user(value: string) {
+    this.set("user", Value.fromString(value));
+  }
+
+  get currencyCode(): string {
+    let value = this.get("currencyCode");
+    return value!.toString();
+  }
+
+  set currencyCode(value: string) {
+    this.set("currencyCode", Value.fromString(value));
+  }
+
+  get stype(): Bytes {
+    let value = this.get("stype");
+    return value!.toBytes();
+  }
+
+  set stype(value: Bytes) {
+    this.set("stype", Value.fromBytes(value));
+  }
+
+  get isin(): string {
+    let value = this.get("isin");
+    return value!.toString();
+  }
+
+  set isin(value: string) {
+    this.set("isin", Value.fromString(value));
+  }
+
+  get company(): string {
+    let value = this.get("company");
+    return value!.toString();
+  }
+
+  set company(value: string) {
+    this.set("company", Value.fromString(value));
+  }
+
+  get itype(): Bytes {
+    let value = this.get("itype");
+    return value!.toBytes();
+  }
+
+  set itype(value: Bytes) {
+    this.set("itype", Value.fromBytes(value));
+  }
+
+  get noOfCertificates(): i32 {
+    let value = this.get("noOfCertificates");
+    return value!.toI32();
+  }
+
+  set noOfCertificates(value: i32) {
+    this.set("noOfCertificates", Value.fromI32(value));
+  }
+
+  get faceValue(): i32 {
+    let value = this.get("faceValue");
+    return value!.toI32();
+  }
+
+  set faceValue(value: i32) {
+    this.set("faceValue", Value.fromI32(value));
+  }
+
+  get lockInReason(): Bytes {
+    let value = this.get("lockInReason");
+    return value!.toBytes();
+  }
+
+  set lockInReason(value: Bytes) {
+    this.set("lockInReason", Value.fromBytes(value));
+  }
+
+  get lockInReleaseDate(): i32 {
+    let value = this.get("lockInReleaseDate");
+    return value!.toI32();
+  }
+
+  set lockInReleaseDate(value: i32) {
+    this.set("lockInReleaseDate", Value.fromI32(value));
+  }
+
+  get registrationDate(): i32 {
+    let value = this.get("registrationDate");
+    return value!.toI32();
+  }
+
+  set registrationDate(value: i32) {
+    this.set("registrationDate", Value.fromI32(value));
+  }
+
+  get status(): Bytes {
+    let value = this.get("status");
+    return value!.toBytes();
+  }
+
+  set status(value: Bytes) {
+    this.set("status", Value.fromBytes(value));
+  }
+}
+
 export class TokenizedSecurity extends Entity {
   constructor(id: string) {
     super();
@@ -1760,6 +2126,8 @@ export class TokenizedSecurity extends Entity {
     this.set("security", Value.fromBytes(Bytes.empty()));
     this.set("company", Value.fromString(""));
     this.set("isin", Value.fromString(""));
+    this.set("currency", Value.fromString(""));
+    this.set("issuer", Value.fromBytes(Bytes.empty()));
   }
 
   save(): void {
@@ -1815,6 +2183,24 @@ export class TokenizedSecurity extends Entity {
 
   set isin(value: string) {
     this.set("isin", Value.fromString(value));
+  }
+
+  get currency(): string {
+    let value = this.get("currency");
+    return value!.toString();
+  }
+
+  set currency(value: string) {
+    this.set("currency", Value.fromString(value));
+  }
+
+  get issuer(): Bytes {
+    let value = this.get("issuer");
+    return value!.toBytes();
+  }
+
+  set issuer(value: Bytes) {
+    this.set("issuer", Value.fromBytes(value));
   }
 
   get CorporateActions(): string {
@@ -1929,6 +2315,15 @@ export class Company extends Entity {
     this.set("CorporateActions", Value.fromString(value));
   }
 
+  get CreditScores(): string {
+    let value = this.get("CreditScores");
+    return value!.toString();
+  }
+
+  set CreditScores(value: string) {
+    this.set("CreditScores", Value.fromString(value));
+  }
+
   get Trades(): string {
     let value = this.get("Trades");
     return value!.toString();
@@ -1936,6 +2331,15 @@ export class Company extends Entity {
 
   set Trades(value: string) {
     this.set("Trades", Value.fromString(value));
+  }
+
+  get SecuritiesRegistrations(): string {
+    let value = this.get("SecuritiesRegistrations");
+    return value!.toString();
+  }
+
+  set SecuritiesRegistrations(value: string) {
+    this.set("SecuritiesRegistrations", Value.fromString(value));
   }
 }
 
@@ -2028,6 +2432,15 @@ export class ISIN extends Entity {
     this.set("CorporateActions", Value.fromString(value));
   }
 
+  get CreditScores(): string {
+    let value = this.get("CreditScores");
+    return value!.toString();
+  }
+
+  set CreditScores(value: string) {
+    this.set("CreditScores", Value.fromString(value));
+  }
+
   get Trades(): string {
     let value = this.get("Trades");
     return value!.toString();
@@ -2045,6 +2458,15 @@ export class ISIN extends Entity {
   set Issues(value: string) {
     this.set("Issues", Value.fromString(value));
   }
+
+  get SecuritiesRegistrations(): string {
+    let value = this.get("SecuritiesRegistrations");
+    return value!.toString();
+  }
+
+  set SecuritiesRegistrations(value: string) {
+    this.set("SecuritiesRegistrations", Value.fromString(value));
+  }
 }
 
 export class CorporateAction extends Entity {
@@ -2055,7 +2477,7 @@ export class CorporateAction extends Entity {
     this.set("security", Value.fromString(""));
     this.set("company", Value.fromString(""));
     this.set("isin", Value.fromString(""));
-    this.set("category", Value.fromBytes(Bytes.empty()));
+    this.set("category", Value.fromString(""));
     this.set("action", Value.fromString(""));
   }
 
@@ -2112,13 +2534,13 @@ export class CorporateAction extends Entity {
     this.set("isin", Value.fromString(value));
   }
 
-  get category(): Bytes {
+  get category(): string {
     let value = this.get("category");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set category(value: Bytes) {
-    this.set("category", Value.fromBytes(value));
+  set category(value: string) {
+    this.set("category", Value.fromString(value));
   }
 
   get action(): string {
@@ -2128,6 +2550,70 @@ export class CorporateAction extends Entity {
 
   set action(value: string) {
     this.set("action", Value.fromString(value));
+  }
+}
+
+export class CreditScore extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("company", Value.fromString(""));
+    this.set("isin", Value.fromString(""));
+    this.set("score", Value.fromBytes(Bytes.empty()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save CreditScore entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save CreditScore entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("CreditScore", id.toString(), this);
+    }
+  }
+
+  static load(id: string): CreditScore | null {
+    return changetype<CreditScore | null>(store.get("CreditScore", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get company(): string {
+    let value = this.get("company");
+    return value!.toString();
+  }
+
+  set company(value: string) {
+    this.set("company", Value.fromString(value));
+  }
+
+  get isin(): string {
+    let value = this.get("isin");
+    return value!.toString();
+  }
+
+  set isin(value: string) {
+    this.set("isin", Value.fromString(value));
+  }
+
+  get score(): Bytes {
+    let value = this.get("score");
+    return value!.toBytes();
+  }
+
+  set score(value: Bytes) {
+    this.set("score", Value.fromBytes(value));
   }
 }
 

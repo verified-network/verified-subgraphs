@@ -214,6 +214,16 @@
         "indexed": false,
         "name": "isin",
         "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "issuer",
+        "type": "address"
       }
     ],
     "name": "SecurityCreated",
@@ -240,7 +250,7 @@
       {
         "indexed": false,
         "name": "category",
-        "type": "bytes32"
+        "type": "string"
       },
       {
         "indexed": false,
@@ -248,7 +258,29 @@
         "type": "string"
       }
     ],
-    "name": "CorporateAction",
+    "name": "CorporateActionCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "company",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "isin",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "score",
+        "type": "bytes32"
+      }
+    ],
+    "name": "ReportCreditScore",
     "type": "event"
   },
   {
@@ -486,7 +518,7 @@
     "inputs": [
       {
         "name": "_category",
-        "type": "bytes32"
+        "type": "string"
       },
       {
         "name": "_action",
@@ -552,7 +584,7 @@
       },
       {
         "name": "_category",
-        "type": "bytes32"
+        "type": "string"
       }
     ],
     "name": "getCorporateActions",
