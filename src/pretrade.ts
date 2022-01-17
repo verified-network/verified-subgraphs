@@ -18,7 +18,7 @@ export function handleSecurityRegistered(event: SecurityRegistered): void {
     security.user = event.params.user.toString()
     security.company = event.params.company.toString()
     security.currencyCode = event.params.currencyCode.toString()
-    security.faceValue = event.params.faceValue.toI32()
+    security.faceValue = event.params.faceValue
     security.isin = event.params.isin.toString()
     security.itype = event.params.itype
     security.lockInReason = event.params.lockInReason

@@ -138,40 +138,40 @@ export class Token extends Entity {
     this.set("tokenType", Value.fromBytes(value));
   }
 
-  get BondIssues(): string {
+  get BondIssues(): Array<string> {
     let value = this.get("BondIssues");
-    return value!.toString();
+    return value!.toStringArray();
   }
 
-  set BondIssues(value: string) {
-    this.set("BondIssues", Value.fromString(value));
+  set BondIssues(value: Array<string>) {
+    this.set("BondIssues", Value.fromStringArray(value));
   }
 
-  get BondPurchases(): string {
+  get BondPurchases(): Array<string> {
     let value = this.get("BondPurchases");
-    return value!.toString();
+    return value!.toStringArray();
   }
 
-  set BondPurchases(value: string) {
-    this.set("BondPurchases", Value.fromString(value));
+  set BondPurchases(value: Array<string>) {
+    this.set("BondPurchases", Value.fromStringArray(value));
   }
 
-  get BondRedemptions(): string {
+  get BondRedemptions(): Array<string> {
     let value = this.get("BondRedemptions");
-    return value!.toString();
+    return value!.toStringArray();
   }
 
-  set BondRedemptions(value: string) {
-    this.set("BondRedemptions", Value.fromString(value));
+  set BondRedemptions(value: Array<string>) {
+    this.set("BondRedemptions", Value.fromStringArray(value));
   }
 
-  get BondLiquidations(): string {
+  get BondLiquidations(): Array<string> {
     let value = this.get("BondLiquidations");
-    return value!.toString();
+    return value!.toStringArray();
   }
 
-  set BondLiquidations(value: string) {
-    this.set("BondLiquidations", Value.fromString(value));
+  set BondLiquidations(value: Array<string>) {
+    this.set("BondLiquidations", Value.fromStringArray(value));
   }
 }
 
@@ -184,7 +184,6 @@ export class User extends Entity {
     this.set("name", Value.fromBytes(Bytes.empty()));
     this.set("surname", Value.fromBytes(Bytes.empty()));
     this.set("status", Value.fromI32(0));
-    this.set("SecuritiesRegistrations", Value.fromString(""));
   }
 
   save(): void {
@@ -249,139 +248,268 @@ export class User extends Entity {
     this.set("status", Value.fromI32(value));
   }
 
-  get Holder(): string {
+  get Holder(): Array<string> | null {
     let value = this.get("Holder");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Holder(value: string) {
-    this.set("Holder", Value.fromString(value));
+  set Holder(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Holder");
+    } else {
+      this.set("Holder", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CashIssues(): string {
+  get CashIssues(): Array<string> | null {
     let value = this.get("CashIssues");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CashIssues(value: string) {
-    this.set("CashIssues", Value.fromString(value));
+  set CashIssues(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CashIssues");
+    } else {
+      this.set("CashIssues", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CashDeposited(): string {
+  get CashDeposited(): Array<string> | null {
     let value = this.get("CashDeposited");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CashDeposited(value: string) {
-    this.set("CashDeposited", Value.fromString(value));
+  set CashDeposited(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CashDeposited");
+    } else {
+      this.set("CashDeposited", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CashRedemptions(): string {
+  get CashRedemptions(): Array<string> | null {
     let value = this.get("CashRedemptions");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CashRedemptions(value: string) {
-    this.set("CashRedemptions", Value.fromString(value));
+  set CashRedemptions(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CashRedemptions");
+    } else {
+      this.set("CashRedemptions", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CashTransfers(): string {
+  get CashTransfers(): Array<string> | null {
     let value = this.get("CashTransfers");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CashTransfers(value: string) {
-    this.set("CashTransfers", Value.fromString(value));
+  set CashTransfers(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CashTransfers");
+    } else {
+      this.set("CashTransfers", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CashReceipts(): string {
+  get CashReceipts(): Array<string> | null {
     let value = this.get("CashReceipts");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CashReceipts(value: string) {
-    this.set("CashReceipts", Value.fromString(value));
+  set CashReceipts(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CashReceipts");
+    } else {
+      this.set("CashReceipts", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondIssues(): string {
+  get BondIssues(): Array<string> | null {
     let value = this.get("BondIssues");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondIssues(value: string) {
-    this.set("BondIssues", Value.fromString(value));
+  set BondIssues(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondIssues");
+    } else {
+      this.set("BondIssues", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondPurchases(): string {
+  get BondPurchases(): Array<string> | null {
     let value = this.get("BondPurchases");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondPurchases(value: string) {
-    this.set("BondPurchases", Value.fromString(value));
+  set BondPurchases(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondPurchases");
+    } else {
+      this.set("BondPurchases", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondRedemptions(): string {
+  get BondRedemptions(): Array<string> | null {
     let value = this.get("BondRedemptions");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondRedemptions(value: string) {
-    this.set("BondRedemptions", Value.fromString(value));
+  set BondRedemptions(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondRedemptions");
+    } else {
+      this.set("BondRedemptions", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondLiquidations(): string {
+  get BondLiquidations(): Array<string> | null {
     let value = this.get("BondLiquidations");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondLiquidations(value: string) {
-    this.set("BondLiquidations", Value.fromString(value));
+  set BondLiquidations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondLiquidations");
+    } else {
+      this.set("BondLiquidations", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get SecurityTransfers(): string {
+  get SecurityTransfers(): Array<string> | null {
     let value = this.get("SecurityTransfers");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set SecurityTransfers(value: string) {
-    this.set("SecurityTransfers", Value.fromString(value));
+  set SecurityTransfers(value: Array<string> | null) {
+    if (!value) {
+      this.unset("SecurityTransfers");
+    } else {
+      this.set(
+        "SecurityTransfers",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 
-  get SecurityReceipts(): string {
+  get SecurityReceipts(): Array<string> | null {
     let value = this.get("SecurityReceipts");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set SecurityReceipts(value: string) {
-    this.set("SecurityReceipts", Value.fromString(value));
+  set SecurityReceipts(value: Array<string> | null) {
+    if (!value) {
+      this.unset("SecurityReceipts");
+    } else {
+      this.set("SecurityReceipts", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Orders(): string {
+  get Orders(): Array<string> | null {
     let value = this.get("Orders");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Orders(value: string) {
-    this.set("Orders", Value.fromString(value));
+  set Orders(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Orders");
+    } else {
+      this.set("Orders", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get AccountRegistrations(): string {
+  get AccountRegistrations(): Array<string> | null {
     let value = this.get("AccountRegistrations");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set AccountRegistrations(value: string) {
-    this.set("AccountRegistrations", Value.fromString(value));
+  set AccountRegistrations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("AccountRegistrations");
+    } else {
+      this.set(
+        "AccountRegistrations",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 
-  get SecuritiesRegistrations(): string {
+  get SecuritiesRegistrations(): Array<string> | null {
     let value = this.get("SecuritiesRegistrations");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set SecuritiesRegistrations(value: string) {
-    this.set("SecuritiesRegistrations", Value.fromString(value));
+  set SecuritiesRegistrations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("SecuritiesRegistrations");
+    } else {
+      this.set(
+        "SecuritiesRegistrations",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 
   get AllCashIssues(): Array<string> {
@@ -808,8 +936,6 @@ export class Currency extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("Issues", Value.fromString(""));
   }
 
   save(): void {
@@ -838,130 +964,248 @@ export class Currency extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get CashIssues(): string {
+  get CashIssues(): Array<string> | null {
     let value = this.get("CashIssues");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CashIssues(value: string) {
-    this.set("CashIssues", Value.fromString(value));
+  set CashIssues(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CashIssues");
+    } else {
+      this.set("CashIssues", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CashDeposited(): string {
+  get CashDeposited(): Array<string> | null {
     let value = this.get("CashDeposited");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CashDeposited(value: string) {
-    this.set("CashDeposited", Value.fromString(value));
+  set CashDeposited(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CashDeposited");
+    } else {
+      this.set("CashDeposited", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CashRedemptions(): string {
+  get CashRedemptions(): Array<string> | null {
     let value = this.get("CashRedemptions");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CashRedemptions(value: string) {
-    this.set("CashRedemptions", Value.fromString(value));
+  set CashRedemptions(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CashRedemptions");
+    } else {
+      this.set("CashRedemptions", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CashTransfers(): string {
+  get CashTransfers(): Array<string> | null {
     let value = this.get("CashTransfers");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CashTransfers(value: string) {
-    this.set("CashTransfers", Value.fromString(value));
+  set CashTransfers(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CashTransfers");
+    } else {
+      this.set("CashTransfers", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondIssues(): string {
+  get BondIssues(): Array<string> | null {
     let value = this.get("BondIssues");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondIssues(value: string) {
-    this.set("BondIssues", Value.fromString(value));
+  set BondIssues(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondIssues");
+    } else {
+      this.set("BondIssues", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondPurchases(): string {
+  get BondPurchases(): Array<string> | null {
     let value = this.get("BondPurchases");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondPurchases(value: string) {
-    this.set("BondPurchases", Value.fromString(value));
+  set BondPurchases(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondPurchases");
+    } else {
+      this.set("BondPurchases", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondRedemptions(): string {
+  get BondRedemptions(): Array<string> | null {
     let value = this.get("BondRedemptions");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondRedemptions(value: string) {
-    this.set("BondRedemptions", Value.fromString(value));
+  set BondRedemptions(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondRedemptions");
+    } else {
+      this.set("BondRedemptions", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondLiquidations(): string {
+  get BondLiquidations(): Array<string> | null {
     let value = this.get("BondLiquidations");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondLiquidations(value: string) {
-    this.set("BondLiquidations", Value.fromString(value));
+  set BondLiquidations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondLiquidations");
+    } else {
+      this.set("BondLiquidations", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Pools(): string {
+  get Pools(): Array<string> | null {
     let value = this.get("Pools");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Pools(value: string) {
-    this.set("Pools", Value.fromString(value));
+  set Pools(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Pools");
+    } else {
+      this.set("Pools", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Orders(): string {
+  get Orders(): Array<string> | null {
     let value = this.get("Orders");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Orders(value: string) {
-    this.set("Orders", Value.fromString(value));
+  set Orders(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Orders");
+    } else {
+      this.set("Orders", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Trades(): string {
+  get Trades(): Array<string> | null {
     let value = this.get("Trades");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Trades(value: string) {
-    this.set("Trades", Value.fromString(value));
+  set Trades(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Trades");
+    } else {
+      this.set("Trades", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Issues(): string {
+  get Issues(): Array<string> | null {
     let value = this.get("Issues");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Issues(value: string) {
-    this.set("Issues", Value.fromString(value));
+  set Issues(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Issues");
+    } else {
+      this.set("Issues", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get TokenizedSecurities(): string {
+  get TokenizedSecurities(): Array<string> | null {
     let value = this.get("TokenizedSecurities");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set TokenizedSecurities(value: string) {
-    this.set("TokenizedSecurities", Value.fromString(value));
+  set TokenizedSecurities(value: Array<string> | null) {
+    if (!value) {
+      this.unset("TokenizedSecurities");
+    } else {
+      this.set(
+        "TokenizedSecurities",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 
-  get SecuritiesRegistrations(): string {
+  get SecuritiesRegistrations(): Array<string> | null {
     let value = this.get("SecuritiesRegistrations");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set SecuritiesRegistrations(value: string) {
-    this.set("SecuritiesRegistrations", Value.fromString(value));
+  set SecuritiesRegistrations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("SecuritiesRegistrations");
+    } else {
+      this.set(
+        "SecuritiesRegistrations",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 
   get AllCashIssues(): Array<string> {
@@ -1447,40 +1691,72 @@ export class Bond extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get BondIssues(): string {
+  get BondIssues(): Array<string> | null {
     let value = this.get("BondIssues");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondIssues(value: string) {
-    this.set("BondIssues", Value.fromString(value));
+  set BondIssues(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondIssues");
+    } else {
+      this.set("BondIssues", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondPurchases(): string {
+  get BondPurchases(): Array<string> | null {
     let value = this.get("BondPurchases");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondPurchases(value: string) {
-    this.set("BondPurchases", Value.fromString(value));
+  set BondPurchases(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondPurchases");
+    } else {
+      this.set("BondPurchases", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondRedemptions(): string {
+  get BondRedemptions(): Array<string> | null {
     let value = this.get("BondRedemptions");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondRedemptions(value: string) {
-    this.set("BondRedemptions", Value.fromString(value));
+  set BondRedemptions(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondRedemptions");
+    } else {
+      this.set("BondRedemptions", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get BondLiquidations(): string {
+  get BondLiquidations(): Array<string> | null {
     let value = this.get("BondLiquidations");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set BondLiquidations(value: string) {
-    this.set("BondLiquidations", Value.fromString(value));
+  set BondLiquidations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("BondLiquidations");
+    } else {
+      this.set("BondLiquidations", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
   get AllBondIssues(): Array<string> {
@@ -1583,13 +1859,21 @@ export class Holder extends Entity {
     this.set("accountCreator", Value.fromString(value));
   }
 
-  get Ledgers(): string {
+  get Ledgers(): Array<string> | null {
     let value = this.get("Ledgers");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Ledgers(value: string) {
-    this.set("Ledgers", Value.fromString(value));
+  set Ledgers(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Ledgers");
+    } else {
+      this.set("Ledgers", Value.fromStringArray(<Array<string>>value));
+    }
   }
 }
 
@@ -1666,13 +1950,21 @@ export class Ledger extends Entity {
     this.set("holder", Value.fromString(value));
   }
 
-  get LedgerAccounts(): string {
+  get LedgerAccounts(): Array<string> | null {
     let value = this.get("LedgerAccounts");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set LedgerAccounts(value: string) {
-    this.set("LedgerAccounts", Value.fromString(value));
+  set LedgerAccounts(value: Array<string> | null) {
+    if (!value) {
+      this.unset("LedgerAccounts");
+    } else {
+      this.set("LedgerAccounts", Value.fromStringArray(<Array<string>>value));
+    }
   }
 }
 
@@ -1739,13 +2031,21 @@ export class LedgerAccount extends Entity {
     this.set("ledger", Value.fromString(value));
   }
 
-  get Entries(): string {
+  get Entries(): Array<string> | null {
     let value = this.get("Entries");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Entries(value: string) {
-    this.set("Entries", Value.fromString(value));
+  set Entries(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Entries");
+    } else {
+      this.set("Entries", Value.fromStringArray(<Array<string>>value));
+    }
   }
 }
 
@@ -1962,7 +2262,7 @@ export class SecuritiesRegistration extends Entity {
     this.set("company", Value.fromString(""));
     this.set("itype", Value.fromBytes(Bytes.empty()));
     this.set("noOfCertificates", Value.fromI32(0));
-    this.set("faceValue", Value.fromI32(0));
+    this.set("faceValue", Value.fromBigInt(BigInt.zero()));
     this.set("lockInReason", Value.fromBytes(Bytes.empty()));
     this.set("lockInReleaseDate", Value.fromI32(0));
     this.set("registrationDate", Value.fromI32(0));
@@ -2072,13 +2372,13 @@ export class SecuritiesRegistration extends Entity {
     this.set("noOfCertificates", Value.fromI32(value));
   }
 
-  get faceValue(): i32 {
+  get faceValue(): BigInt {
     let value = this.get("faceValue");
-    return value!.toI32();
+    return value!.toBigInt();
   }
 
-  set faceValue(value: i32) {
-    this.set("faceValue", Value.fromI32(value));
+  set faceValue(value: BigInt) {
+    this.set("faceValue", Value.fromBigInt(value));
   }
 
   get lockInReason(): Bytes {
@@ -2203,31 +2503,55 @@ export class TokenizedSecurity extends Entity {
     this.set("issuer", Value.fromBytes(value));
   }
 
-  get CorporateActions(): string {
+  get CorporateActions(): Array<string> | null {
     let value = this.get("CorporateActions");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CorporateActions(value: string) {
-    this.set("CorporateActions", Value.fromString(value));
+  set CorporateActions(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CorporateActions");
+    } else {
+      this.set("CorporateActions", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Pools(): string {
+  get Pools(): Array<string> | null {
     let value = this.get("Pools");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Pools(value: string) {
-    this.set("Pools", Value.fromString(value));
+  set Pools(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Pools");
+    } else {
+      this.set("Pools", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Orders(): string {
+  get Orders(): Array<string> | null {
     let value = this.get("Orders");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Orders(value: string) {
-    this.set("Orders", Value.fromString(value));
+  set Orders(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Orders");
+    } else {
+      this.set("Orders", Value.fromStringArray(<Array<string>>value));
+    }
   }
 }
 
@@ -2297,49 +2621,95 @@ export class Company extends Entity {
     }
   }
 
-  get TokenizedSecurities(): string {
+  get TokenizedSecurities(): Array<string> | null {
     let value = this.get("TokenizedSecurities");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set TokenizedSecurities(value: string) {
-    this.set("TokenizedSecurities", Value.fromString(value));
+  set TokenizedSecurities(value: Array<string> | null) {
+    if (!value) {
+      this.unset("TokenizedSecurities");
+    } else {
+      this.set(
+        "TokenizedSecurities",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 
-  get CorporateActions(): string {
+  get CorporateActions(): Array<string> | null {
     let value = this.get("CorporateActions");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CorporateActions(value: string) {
-    this.set("CorporateActions", Value.fromString(value));
+  set CorporateActions(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CorporateActions");
+    } else {
+      this.set("CorporateActions", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CreditScores(): string {
+  get CreditScores(): Array<string> | null {
     let value = this.get("CreditScores");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CreditScores(value: string) {
-    this.set("CreditScores", Value.fromString(value));
+  set CreditScores(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CreditScores");
+    } else {
+      this.set("CreditScores", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Trades(): string {
+  get Trades(): Array<string> | null {
     let value = this.get("Trades");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Trades(value: string) {
-    this.set("Trades", Value.fromString(value));
+  set Trades(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Trades");
+    } else {
+      this.set("Trades", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get SecuritiesRegistrations(): string {
+  get SecuritiesRegistrations(): Array<string> | null {
     let value = this.get("SecuritiesRegistrations");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set SecuritiesRegistrations(value: string) {
-    this.set("SecuritiesRegistrations", Value.fromString(value));
+  set SecuritiesRegistrations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("SecuritiesRegistrations");
+    } else {
+      this.set(
+        "SecuritiesRegistrations",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 }
 
@@ -2350,7 +2720,6 @@ export class ISIN extends Entity {
 
     this.set("company", Value.fromString(""));
     this.set("security", Value.fromString(""));
-    this.set("Issues", Value.fromString(""));
   }
 
   save(): void {
@@ -2414,58 +2783,112 @@ export class ISIN extends Entity {
     }
   }
 
-  get TokenizedSecurities(): string {
+  get TokenizedSecurities(): Array<string> | null {
     let value = this.get("TokenizedSecurities");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set TokenizedSecurities(value: string) {
-    this.set("TokenizedSecurities", Value.fromString(value));
+  set TokenizedSecurities(value: Array<string> | null) {
+    if (!value) {
+      this.unset("TokenizedSecurities");
+    } else {
+      this.set(
+        "TokenizedSecurities",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 
-  get CorporateActions(): string {
+  get CorporateActions(): Array<string> | null {
     let value = this.get("CorporateActions");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CorporateActions(value: string) {
-    this.set("CorporateActions", Value.fromString(value));
+  set CorporateActions(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CorporateActions");
+    } else {
+      this.set("CorporateActions", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get CreditScores(): string {
+  get CreditScores(): Array<string> | null {
     let value = this.get("CreditScores");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set CreditScores(value: string) {
-    this.set("CreditScores", Value.fromString(value));
+  set CreditScores(value: Array<string> | null) {
+    if (!value) {
+      this.unset("CreditScores");
+    } else {
+      this.set("CreditScores", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Trades(): string {
+  get Trades(): Array<string> | null {
     let value = this.get("Trades");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Trades(value: string) {
-    this.set("Trades", Value.fromString(value));
+  set Trades(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Trades");
+    } else {
+      this.set("Trades", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Issues(): string {
+  get Issues(): Array<string> | null {
     let value = this.get("Issues");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Issues(value: string) {
-    this.set("Issues", Value.fromString(value));
+  set Issues(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Issues");
+    } else {
+      this.set("Issues", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get SecuritiesRegistrations(): string {
+  get SecuritiesRegistrations(): Array<string> | null {
     let value = this.get("SecuritiesRegistrations");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set SecuritiesRegistrations(value: string) {
-    this.set("SecuritiesRegistrations", Value.fromString(value));
+  set SecuritiesRegistrations(value: Array<string> | null) {
+    if (!value) {
+      this.unset("SecuritiesRegistrations");
+    } else {
+      this.set(
+        "SecuritiesRegistrations",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 }
 
@@ -2933,49 +3356,89 @@ export class OrderReference extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get OrderReference(): string {
-    let value = this.get("OrderReference");
-    return value!.toString();
+  get OrderReferences(): Array<string> | null {
+    let value = this.get("OrderReferences");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set OrderReference(value: string) {
-    this.set("OrderReference", Value.fromString(value));
+  set OrderReferences(value: Array<string> | null) {
+    if (!value) {
+      this.unset("OrderReferences");
+    } else {
+      this.set("OrderReferences", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Party(): string {
-    let value = this.get("Party");
-    return value!.toString();
+  get Parties(): Array<string> | null {
+    let value = this.get("Parties");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Party(value: string) {
-    this.set("Party", Value.fromString(value));
+  set Parties(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Parties");
+    } else {
+      this.set("Parties", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Counterparty(): string {
-    let value = this.get("Counterparty");
-    return value!.toString();
+  get Counterparties(): Array<string> | null {
+    let value = this.get("Counterparties");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Counterparty(value: string) {
-    this.set("Counterparty", Value.fromString(value));
+  set Counterparties(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Counterparties");
+    } else {
+      this.set("Counterparties", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Transferor(): string {
-    let value = this.get("Transferor");
-    return value!.toString();
+  get Transferors(): Array<string> | null {
+    let value = this.get("Transferors");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Transferor(value: string) {
-    this.set("Transferor", Value.fromString(value));
+  set Transferors(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Transferors");
+    } else {
+      this.set("Transferors", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
-  get Transferee(): string {
-    let value = this.get("Transferee");
-    return value!.toString();
+  get Transferees(): Array<string> | null {
+    let value = this.get("Transferees");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set Transferee(value: string) {
-    this.set("Transferee", Value.fromString(value));
+  set Transferees(value: Array<string> | null) {
+    if (!value) {
+      this.unset("Transferees");
+    } else {
+      this.set("Transferees", Value.fromStringArray(<Array<string>>value));
+    }
   }
 }
 
@@ -3204,13 +3667,21 @@ export class Product extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get issues(): string {
+  get issues(): Array<string> | null {
     let value = this.get("issues");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set issues(value: string) {
-    this.set("issues", Value.fromString(value));
+  set issues(value: Array<string> | null) {
+    if (!value) {
+      this.unset("issues");
+    } else {
+      this.set("issues", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
   get productReference(): Bytes {
@@ -3265,7 +3736,7 @@ export class Issue extends Entity {
     this.set("isin", Value.fromString(""));
     this.set("status", Value.fromBytes(Bytes.empty()));
     this.set("productCategory", Value.fromBytes(Bytes.empty()));
-    this.set("product", Value.fromStringArray(new Array(0)));
+    this.set("product", Value.fromString(""));
   }
 
   save(): void {
@@ -3384,12 +3855,12 @@ export class Issue extends Entity {
     this.set("productCategory", Value.fromBytes(value));
   }
 
-  get product(): Array<string> {
+  get product(): string {
     let value = this.get("product");
-    return value!.toStringArray();
+    return value!.toString();
   }
 
-  set product(value: Array<string>) {
-    this.set("product", Value.fromStringArray(value));
+  set product(value: string) {
+    this.set("product", Value.fromString(value));
   }
 }
