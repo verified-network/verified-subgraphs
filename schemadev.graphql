@@ -1,0 +1,219 @@
+type Issuer @entity {
+    id: ID!
+    issuer: Bytes!
+    tokenName: Bytes!
+    tokenType: Bytes!
+}
+
+type deposit @entity {
+    id: ID!
+    party: User!
+    currency: Bytes!
+    amount: BigInt!
+}
+
+type Token @entity {
+  id: ID!
+  token: Bytes!
+  tokenName: Bytes! 
+  tokenType: Bytes!
+  BondIssues: [BondIssues!]! @derivedFrom(field: "token")
+  BondPurchases: [BondPurchases!]! @derivedFrom(field: "token")
+  BondRedemptions: [BondRedemptions!]! @derivedFrom(field: "token")
+  BondLiquidations: [BondLiquidations!]! @derivedFrom(field: "token") 
+}
+
+type BondIssued @entity {
+    id: ID!
+    party: user!
+    token: Bytes!   
+    bondName: Bytes!
+    party: User!
+    amount: BigInt!
+    currency: Bytes!
+    collateralAmount: BigInt!
+    issueTime: BigInt!
+}
+
+
+
+type BondPurchased @entity {
+  id: ID!
+  token: Token!
+  bondName: Bond!
+  party: User!
+  currency: Currency!
+  amount: BigInt!
+  paidInAmount: BigInt!
+  purchaseTime: BigInt!
+}
+
+type BondRedeemed @entity {
+    id: ID!
+    party: User!
+    token: Token!
+    tokenAmount: BigInt!
+    currency: Bytes!
+}
+
+type BondLiquadated @entity {
+    id: ID!
+    party: User!
+    token: Token!
+    tokenAmount: BigInt!
+    tokenName: Bytes!
+    amount: BigInt
+    currency: Bytes!
+}
+
+type TokenizedSecurity @entity {
+  id: ID!
+  security: Bytes!
+  company: Company!
+  isin: ISIN!
+  currency: Currency!
+  issuer: Bytes!
+  CorporateActions: [CorporateAction!] @derivedFrom(field:"security")
+  Pools: [Pool!] @derivedFrom(field:"security")
+  Orders: [Order!] @derivedFrom(field:"security")
+}
+
+
+type SecuritiesRegistration @entity {
+  id: ID!
+  registrationRef: Bytes!
+  user: User! 
+  currencyCode: Bytes! 
+  stype: Bytes! 
+  isin: Bytes! 
+  company: Bytes! 
+  itype: Bytes!
+  noOfCertificates: BigInt!
+  faceValue: BigInt!
+  lockInReason: Bytes!
+  lockInReleaseDate: BigInt!
+  registrationDate: BigInt! 
+  status: Bytes!
+}
+
+type Issue @entity {
+  id: ID!
+  issueSize: BigInt!
+  offerPrice: BigInt! 
+  minAskPrice: BigInt!   
+  minSubscription: BigInt!
+  currency: Currency!
+  security: TokenizedSecurity
+  offerType: Bytes!
+  isin: ISIN!
+  status: Bytes!
+  productCategory: Bytes!
+}
+
+type Product @entity {
+  id: ID!
+  issues: [Issue!] @derivedFrom(field:"product") 
+  productReference: Bytes!
+  productCategory: Bytes! 
+  issuerName: Bytes! 
+  registrationDocs: String!
+}
+
+type CorporateAction @entity {
+  id: ID!
+  security: TokenizedSecurity!
+  company: Bytes!
+  isin: Bytes!
+  category: String!
+  action: String!  
+}
+
+type Order @entity {
+  id: ID!
+  orderReference: Bytes!
+  party: User!
+  price: BigInt!
+  trigger: BigInt!
+  amount: BigInt!
+  order: Bytes! 
+  orderType: Bytes!
+  date: BigInt! 
+  status: Bytes!
+  currency: Currency!
+  securityName: Bytes!
+  security: TokenizedSecurity!
+}
+
+type Holder @entity {
+  id: ID!
+  holder: Bytes!
+  holderName: Bytes!
+  accountCreator: User!  
+  Ledgers: [Ledger!] @derivedFrom(field:"holder")
+}
+type Ledger @entity {
+  id: ID!
+  ledger: Bytes!
+  ledgerName: Bytes!
+  group: Bytes!
+  holder: Holder!
+  LedgerAccounts: [LedgerAccount!] @derivedFrom(field:"ledger")
+}
+type LedgerAccount @entity {
+  id: ID!
+  account: Bytes!
+  accountName: Bytes!
+  ledger: Ledger!
+  Entries : [Entry!] @derivedFrom(field:"accountAddress") 
+}
+
+type Entry @entity {
+  id: ID!
+  accountAddress: LedgerAccount!
+  accountName: Bytes!
+  txDate: BigInt!
+  party: User!
+  txType: Bytes!
+  txDescription: Bytes!
+  currency: Bytes!
+  txAmount: BigInt!
+  voucherType: Bytes!
+}   
+
+
+type Pool @entity {
+  id: ID!
+  pool: Bytes!
+  security: TokenizedSecurity!
+  cash: Currency!  
+}
+
+type Platform @entity {
+    id: ID!
+    pool: Pool!
+}
+
+type Closures @entity {
+    id: ID!
+    security: TokenizedSecurity!
+    pools: Bytes!
+    close: Boolean!
+    address: platform!
+}
+
+type Subscribers @entity {
+    id: ID!
+    security: TokenizedSecurity!
+    platform: Platform!
+    poolID: Bytes!
+    subscriptions: Subscriptions
+}
+
+type Subscriptions @entity {
+    id: ID!
+    platform: Platform!
+    pool: Bytes!
+    issuer: Issuer
+}
+
+
