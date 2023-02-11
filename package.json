@@ -1,10 +1,10 @@
 {
-  "name": "wallet",
+  "name": "verified-wallet",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ verified-network/wallet",
+    "deploy": "graph deploy --product hosted-service verified-network/wallet --network goerli --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
     "create-local": "graph create --node http://localhost:8020/ verified-network/wallet",
     "remove-local": "graph remove --node http://localhost:8020/ verified-network/wallet",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 verified-network/wallet"

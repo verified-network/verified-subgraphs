@@ -1,0 +1,29 @@
+#mainnet:
+#  network: mainnet
+#  Factory:
+#    address: "0xBA12222222228d8Ba445958a75a0704d566BF2C8"
+#    startBlock: 12272146
+#  Client:
+#    address: "0x8E9aa87E45e92bad84D5F8DD1bff34Fb92637dE9"
+#    startBlock: 12272146
+#  PrimaryIssueManager:
+#    address: "0xcC508a455F5b0073973107Db6a878DdBDab957bC"
+#    startBlock: 15497271
+#  SecondaryIssueManager:
+#    address: "0xA5bf2ddF098bb0Ef6d120C98217dD6B141c74EE0"
+#    startBlock: 12272146
+goerli:
+  network: goerli
+  Factory:
+    address: "0x6405ddCD72841f0827D51A65a6AB89B7486d4A48"
+    startBlock: 8427662
+  Client:
+    address: "0x998C76f8d82bbEDe5BFcD43e9D9d2E38533AfCF8"
+    startBlock: 8436524
+  PrimaryIssueManager: 
+    address: "0xc5860DAEaF23eddf71F7D546d96f8246Da7959FF"
+    startBlock: 8436525
+  SecondaryIssueManager:
+    address: "0xe7E23Ff8344B615737ae014969f01D0C5874F5b8"
+    startBlock: 8436529
+  

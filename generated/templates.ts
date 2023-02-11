@@ -25,27 +25,3 @@ export class Bond extends DataSourceTemplate {
     DataSourceTemplate.createWithContext("Bond", [address.toHex()], context);
   }
 }
-
-export class Account extends DataSourceTemplate {
-  static create(address: Address): void {
-    DataSourceTemplate.create("Account", [address.toHex()]);
-  }
-
-  static createWithContext(address: Address, context: DataSourceContext): void {
-    DataSourceTemplate.createWithContext("Account", [address.toHex()], context);
-  }
-}
-
-export class Security extends DataSourceTemplate {
-  static create(address: Address): void {
-    DataSourceTemplate.create("Security", [address.toHex()]);
-  }
-
-  static createWithContext(address: Address, context: DataSourceContext): void {
-    DataSourceTemplate.createWithContext(
-      "Security",
-      [address.toHex()],
-      context
-    );
-  }
-}

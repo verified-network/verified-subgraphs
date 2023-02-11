@@ -3,6 +3,25 @@
     "constant": true,
     "inputs": [
       {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "issues",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
         "name": "_salt",
         "type": "uint256"
       },
@@ -244,6 +263,33 @@
     "inputs": [
       {
         "indexed": true,
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "issuer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "isin",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "currency",
+        "type": "bytes32"
+      }
+    ],
+    "name": "securitiesAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
         "name": "issuer",
         "type": "address"
       },
@@ -259,28 +305,6 @@
       }
     ],
     "name": "IssuerCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "tokenName",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "tokenType",
-        "type": "bytes32"
-      }
-    ],
-    "name": "TokenCreated",
     "type": "event"
   },
   {
@@ -314,7 +338,16 @@
   },
   {
     "constant": false,
-    "inputs": [],
+    "inputs": [
+      {
+        "name": "_security",
+        "type": "address"
+      },
+      {
+        "name": "_bridge",
+        "type": "address"
+      }
+    ],
     "name": "initialize",
     "outputs": [],
     "payable": false,
@@ -330,6 +363,20 @@
       }
     ],
     "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_signer",
+        "type": "address"
+      }
+    ],
+    "name": "setSigner",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -477,63 +524,12 @@
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "tokenName",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getAddressAndType",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
     "inputs": [],
-    "name": "getViaOracleUrl",
+    "name": "getIssues",
     "outputs": [
       {
         "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getFiatPayoutUrl",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getClient",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
+        "type": "address[]"
       }
     ],
     "payable": false,
@@ -560,15 +556,7 @@
         "type": "bytes32"
       },
       {
-        "name": "_oracle",
-        "type": "address"
-      },
-      {
-        "name": "_token",
-        "type": "address"
-      },
-      {
-        "name": "_fee",
+        "name": "feeRate",
         "type": "address"
       }
     ],
@@ -582,23 +570,57 @@
     "constant": false,
     "inputs": [
       {
-        "name": "_target",
+        "name": "security",
         "type": "address"
+      },
+      {
+        "name": "company",
+        "type": "bytes32"
+      },
+      {
+        "name": "isin",
+        "type": "bytes32"
+      },
+      {
+        "name": "currency",
+        "type": "bytes32"
       },
       {
         "name": "issuer",
         "type": "address"
       },
       {
-        "name": "tokenName",
+        "name": "_hashedMessage",
         "type": "bytes32"
       },
       {
-        "name": "tokenSymbol",
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "name": "_s",
         "type": "bytes32"
       }
     ],
-    "name": "createToken",
+    "name": "issueSecurity",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_securityToken",
+        "type": "address"
+      }
+    ],
+    "name": "getHolder",
     "outputs": [
       {
         "name": "",
@@ -606,49 +628,122 @@
       }
     ],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
+    "constant": true,
     "inputs": [
       {
-        "name": "_url",
-        "type": "string"
-      }
-    ],
-    "name": "setViaOracleUrl",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_url",
-        "type": "string"
-      }
-    ],
-    "name": "setFiatPayoutUrl",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_client",
+        "name": "_securityToken",
         "type": "address"
       }
     ],
-    "name": "setClientAddress",
+    "name": "getSecurity",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_securityToken",
+        "type": "address"
+      },
+      {
+        "name": "_issuer",
+        "type": "address"
+      }
+    ],
+    "name": "getSecurityToken",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "name": "transferor",
+        "type": "address"
+      },
+      {
+        "name": "transferee",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "_hashedMessage",
+        "type": "bytes32"
+      },
+      {
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "name": "_s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "addBalance",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "issue",
+        "type": "address"
+      }
+    ],
+    "name": "checkProduct",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   }
 ]

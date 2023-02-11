@@ -27,49 +27,157 @@ export class ManagerAdded__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get role(): Bytes {
-    return this._event.parameters[1].value.toBytes();
+  get submanager(): Address {
+    return this._event.parameters[1].value.toAddress();
   }
 
-  get country(): Bytes {
+  get role(): Bytes {
     return this._event.parameters[2].value.toBytes();
   }
 
-  get id(): Bytes {
+  get country(): Bytes {
+    return this._event.parameters[3].value.toBytes();
+  }
+
+  get managerId(): Bytes {
+    return this._event.parameters[4].value.toBytes();
+  }
+}
+
+export class ManagerRemoved extends ethereum.Event {
+  get params(): ManagerRemoved__Params {
+    return new ManagerRemoved__Params(this);
+  }
+}
+
+export class ManagerRemoved__Params {
+  _event: ManagerRemoved;
+
+  constructor(event: ManagerRemoved) {
+    this._event = event;
+  }
+
+  get manager(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get submanager(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get role(): Bytes {
+    return this._event.parameters[2].value.toBytes();
+  }
+
+  get country(): Bytes {
     return this._event.parameters[3].value.toBytes();
   }
 }
 
-export class Client__getAccessResult {
-  value0: BigInt;
-  value1: BigInt;
+export class OwnershipTransferred extends ethereum.Event {
+  get params(): OwnershipTransferred__Params {
+    return new OwnershipTransferred__Params(this);
+  }
+}
 
-  constructor(value0: BigInt, value1: BigInt) {
-    this.value0 = value0;
-    this.value1 = value1;
+export class OwnershipTransferred__Params {
+  _event: OwnershipTransferred;
+
+  constructor(event: OwnershipTransferred) {
+    this._event = event;
   }
 
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
-    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
-    return map;
+  get previousOwner(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get newOwner(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+}
+
+export class UserAdded extends ethereum.Event {
+  get params(): UserAdded__Params {
+    return new UserAdded__Params(this);
+  }
+}
+
+export class UserAdded__Params {
+  _event: UserAdded;
+
+  constructor(event: UserAdded) {
+    this._event = event;
+  }
+
+  get client(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get name(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+
+  get surname(): Bytes {
+    return this._event.parameters[2].value.toBytes();
+  }
+
+  get country(): Bytes {
+    return this._event.parameters[3].value.toBytes();
+  }
+
+  get status(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
   }
 }
 
 export class Client__getRoleResult {
   value0: Bytes;
   value1: Bytes;
+  value2: Bytes;
 
-  constructor(value0: Bytes, value1: Bytes) {
+  constructor(value0: Bytes, value1: Bytes, value2: Bytes) {
     this.value0 = value0;
     this.value1 = value1;
+    this.value2 = value2;
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
     let map = new TypedMap<string, ethereum.Value>();
     map.set("value0", ethereum.Value.fromFixedBytes(this.value0));
     map.set("value1", ethereum.Value.fromFixedBytes(this.value1));
+    map.set("value2", ethereum.Value.fromFixedBytes(this.value2));
+    return map;
+  }
+}
+
+export class Client__getClientKYCResult {
+  value0: Bytes;
+  value1: Bytes;
+  value2: Bytes;
+  value3: BigInt;
+  value4: BigInt;
+
+  constructor(
+    value0: Bytes,
+    value1: Bytes,
+    value2: Bytes,
+    value3: BigInt,
+    value4: BigInt
+  ) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+    this.value4 = value4;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromFixedBytes(this.value0));
+    map.set("value1", ethereum.Value.fromFixedBytes(this.value1));
+    map.set("value2", ethereum.Value.fromFixedBytes(this.value2));
+    map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
+    map.set("value4", ethereum.Value.fromUnsignedBigInt(this.value4));
     return map;
   }
 }
@@ -79,175 +187,39 @@ export class Client extends ethereum.SmartContract {
     return new Client("Client", address);
   }
 
-  getAMLManager(): Address {
-    let result = super.call("getAMLManager", "getAMLManager():(address)", []);
+  owner(): Address {
+    let result = super.call("owner", "owner():(address)", []);
 
     return result[0].toAddress();
   }
 
-  try_getAMLManager(): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "getAMLManager",
-      "getAMLManager():(address)",
-      []
-    );
+  try_owner(): ethereum.CallResult<Address> {
+    let result = super.tryCall("owner", "owner():(address)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  getCustody(_client: Address): Bytes {
-    let result = super.call("getCustody", "getCustody(address):(bytes32)", [
-      ethereum.Value.fromAddress(_client)
-    ]);
-
-    return result[0].toBytes();
-  }
-
-  try_getCustody(_client: Address): ethereum.CallResult<Bytes> {
-    let result = super.tryCall("getCustody", "getCustody(address):(bytes32)", [
-      ethereum.Value.fromAddress(_client)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
-  }
-
-  getAccess(_client: Address): Client__getAccessResult {
-    let result = super.call(
-      "getAccess",
-      "getAccess(address):(uint256,uint256)",
-      [ethereum.Value.fromAddress(_client)]
-    );
-
-    return new Client__getAccessResult(
-      result[0].toBigInt(),
-      result[1].toBigInt()
-    );
-  }
-
-  try_getAccess(
-    _client: Address
-  ): ethereum.CallResult<Client__getAccessResult> {
-    let result = super.tryCall(
-      "getAccess",
-      "getAccess(address):(uint256,uint256)",
-      [ethereum.Value.fromAddress(_client)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      new Client__getAccessResult(value[0].toBigInt(), value[1].toBigInt())
-    );
-  }
-
-  getManager(_client: Address): Address {
-    let result = super.call("getManager", "getManager(address):(address)", [
-      ethereum.Value.fromAddress(_client)
-    ]);
-
-    return result[0].toAddress();
-  }
-
-  try_getManager(_client: Address): ethereum.CallResult<Address> {
-    let result = super.tryCall("getManager", "getManager(address):(address)", [
-      ethereum.Value.fromAddress(_client)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  isRegistered(_client: Address): boolean {
-    let result = super.call("isRegistered", "isRegistered(address):(bool)", [
-      ethereum.Value.fromAddress(_client)
-    ]);
-
-    return result[0].toBoolean();
-  }
-
-  try_isRegistered(_client: Address): ethereum.CallResult<boolean> {
-    let result = super.tryCall("isRegistered", "isRegistered(address):(bool)", [
-      ethereum.Value.fromAddress(_client)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  getAMLStatus(_client: Address): boolean {
-    let result = super.call("getAMLStatus", "getAMLStatus(address):(bool)", [
-      ethereum.Value.fromAddress(_client)
-    ]);
-
-    return result[0].toBoolean();
-  }
-
-  try_getAMLStatus(_client: Address): ethereum.CallResult<boolean> {
-    let result = super.tryCall("getAMLStatus", "getAMLStatus(address):(bool)", [
-      ethereum.Value.fromAddress(_client)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  getClients(_manager: Address, _status: boolean): Array<Address> {
-    let result = super.call(
-      "getClients",
-      "getClients(address,bool):(address[])",
-      [
-        ethereum.Value.fromAddress(_manager),
-        ethereum.Value.fromBoolean(_status)
-      ]
-    );
-
-    return result[0].toAddressArray();
-  }
-
-  try_getClients(
-    _manager: Address,
-    _status: boolean
-  ): ethereum.CallResult<Array<Address>> {
-    let result = super.tryCall(
-      "getClients",
-      "getClients(address,bool):(address[])",
-      [
-        ethereum.Value.fromAddress(_manager),
-        ethereum.Value.fromBoolean(_status)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddressArray());
   }
 
   getRole(_user: Address): Client__getRoleResult {
-    let result = super.call("getRole", "getRole(address):(bytes32,bytes32)", [
-      ethereum.Value.fromAddress(_user)
-    ]);
+    let result = super.call(
+      "getRole",
+      "getRole(address):(bytes32,bytes32,bytes32)",
+      [ethereum.Value.fromAddress(_user)]
+    );
 
-    return new Client__getRoleResult(result[0].toBytes(), result[1].toBytes());
+    return new Client__getRoleResult(
+      result[0].toBytes(),
+      result[1].toBytes(),
+      result[2].toBytes()
+    );
   }
 
   try_getRole(_user: Address): ethereum.CallResult<Client__getRoleResult> {
     let result = super.tryCall(
       "getRole",
-      "getRole(address):(bytes32,bytes32)",
+      "getRole(address):(bytes32,bytes32,bytes32)",
       [ethereum.Value.fromAddress(_user)]
     );
     if (result.reverted) {
@@ -255,40 +227,130 @@ export class Client extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Client__getRoleResult(value[0].toBytes(), value[1].toBytes())
+      new Client__getRoleResult(
+        value[0].toBytes(),
+        value[1].toBytes(),
+        value[2].toBytes()
+      )
     );
   }
 
-  getManagers(_role: Bytes, _country: Bytes): Array<Address> {
+  getClientKYC(client: Address): Client__getClientKYCResult {
     let result = super.call(
-      "getManagers",
-      "getManagers(bytes32,bytes32):(address[])",
-      [
-        ethereum.Value.fromFixedBytes(_role),
-        ethereum.Value.fromFixedBytes(_country)
-      ]
+      "getClientKYC",
+      "getClientKYC(address):(bytes32,bytes32,bytes32,uint256,uint256)",
+      [ethereum.Value.fromAddress(client)]
     );
 
-    return result[0].toAddressArray();
+    return new Client__getClientKYCResult(
+      result[0].toBytes(),
+      result[1].toBytes(),
+      result[2].toBytes(),
+      result[3].toBigInt(),
+      result[4].toBigInt()
+    );
   }
 
-  try_getManagers(
-    _role: Bytes,
-    _country: Bytes
-  ): ethereum.CallResult<Array<Address>> {
+  try_getClientKYC(
+    client: Address
+  ): ethereum.CallResult<Client__getClientKYCResult> {
     let result = super.tryCall(
-      "getManagers",
-      "getManagers(bytes32,bytes32):(address[])",
-      [
-        ethereum.Value.fromFixedBytes(_role),
-        ethereum.Value.fromFixedBytes(_country)
-      ]
+      "getClientKYC",
+      "getClientKYC(address):(bytes32,bytes32,bytes32,uint256,uint256)",
+      [ethereum.Value.fromAddress(client)]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddressArray());
+    return ethereum.CallResult.fromValue(
+      new Client__getClientKYCResult(
+        value[0].toBytes(),
+        value[1].toBytes(),
+        value[2].toBytes(),
+        value[3].toBigInt(),
+        value[4].toBigInt()
+      )
+    );
+  }
+
+  getTransferAgent(party: Address): Bytes {
+    let result = super.call(
+      "getTransferAgent",
+      "getTransferAgent(address):(bytes32)",
+      [ethereum.Value.fromAddress(party)]
+    );
+
+    return result[0].toBytes();
+  }
+
+  try_getTransferAgent(party: Address): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      "getTransferAgent",
+      "getTransferAgent(address):(bytes32)",
+      [ethereum.Value.fromAddress(party)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+}
+
+export class RenounceOwnershipCall extends ethereum.Call {
+  get inputs(): RenounceOwnershipCall__Inputs {
+    return new RenounceOwnershipCall__Inputs(this);
+  }
+
+  get outputs(): RenounceOwnershipCall__Outputs {
+    return new RenounceOwnershipCall__Outputs(this);
+  }
+}
+
+export class RenounceOwnershipCall__Inputs {
+  _call: RenounceOwnershipCall;
+
+  constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class RenounceOwnershipCall__Outputs {
+  _call: RenounceOwnershipCall;
+
+  constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class TransferOwnershipCall extends ethereum.Call {
+  get inputs(): TransferOwnershipCall__Inputs {
+    return new TransferOwnershipCall__Inputs(this);
+  }
+
+  get outputs(): TransferOwnershipCall__Outputs {
+    return new TransferOwnershipCall__Outputs(this);
+  }
+}
+
+export class TransferOwnershipCall__Inputs {
+  _call: TransferOwnershipCall;
+
+  constructor(call: TransferOwnershipCall) {
+    this._call = call;
+  }
+
+  get newOwner(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class TransferOwnershipCall__Outputs {
+  _call: TransferOwnershipCall;
+
+  constructor(call: TransferOwnershipCall) {
+    this._call = call;
   }
 }
 
@@ -309,7 +371,7 @@ export class InitializeCall__Inputs {
     this._call = call;
   }
 
-  get _kyc(): Address {
+  get _signer(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 }
@@ -322,134 +384,32 @@ export class InitializeCall__Outputs {
   }
 }
 
-export class SetCustodyCall extends ethereum.Call {
-  get inputs(): SetCustodyCall__Inputs {
-    return new SetCustodyCall__Inputs(this);
+export class SetSignerCall extends ethereum.Call {
+  get inputs(): SetSignerCall__Inputs {
+    return new SetSignerCall__Inputs(this);
   }
 
-  get outputs(): SetCustodyCall__Outputs {
-    return new SetCustodyCall__Outputs(this);
+  get outputs(): SetSignerCall__Outputs {
+    return new SetSignerCall__Outputs(this);
   }
 }
 
-export class SetCustodyCall__Inputs {
-  _call: SetCustodyCall;
+export class SetSignerCall__Inputs {
+  _call: SetSignerCall;
 
-  constructor(call: SetCustodyCall) {
+  constructor(call: SetSignerCall) {
     this._call = call;
   }
 
-  get _client(): Address {
+  get _signer(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
-
-  get _account(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
-  }
 }
 
-export class SetCustodyCall__Outputs {
-  _call: SetCustodyCall;
+export class SetSignerCall__Outputs {
+  _call: SetSignerCall;
 
-  constructor(call: SetCustodyCall) {
-    this._call = call;
-  }
-}
-
-export class SetAccessCall extends ethereum.Call {
-  get inputs(): SetAccessCall__Inputs {
-    return new SetAccessCall__Inputs(this);
-  }
-
-  get outputs(): SetAccessCall__Outputs {
-    return new SetAccessCall__Outputs(this);
-  }
-}
-
-export class SetAccessCall__Inputs {
-  _call: SetAccessCall;
-
-  constructor(call: SetAccessCall) {
-    this._call = call;
-  }
-
-  get login(): boolean {
-    return this._call.inputValues[0].value.toBoolean();
-  }
-}
-
-export class SetAccessCall__Outputs {
-  _call: SetAccessCall;
-
-  constructor(call: SetAccessCall) {
-    this._call = call;
-  }
-}
-
-export class SetManagerCall extends ethereum.Call {
-  get inputs(): SetManagerCall__Inputs {
-    return new SetManagerCall__Inputs(this);
-  }
-
-  get outputs(): SetManagerCall__Outputs {
-    return new SetManagerCall__Outputs(this);
-  }
-}
-
-export class SetManagerCall__Inputs {
-  _call: SetManagerCall;
-
-  constructor(call: SetManagerCall) {
-    this._call = call;
-  }
-
-  get _client(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get _manager(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-}
-
-export class SetManagerCall__Outputs {
-  _call: SetManagerCall;
-
-  constructor(call: SetManagerCall) {
-    this._call = call;
-  }
-}
-
-export class SetAMLStatusCall extends ethereum.Call {
-  get inputs(): SetAMLStatusCall__Inputs {
-    return new SetAMLStatusCall__Inputs(this);
-  }
-
-  get outputs(): SetAMLStatusCall__Outputs {
-    return new SetAMLStatusCall__Outputs(this);
-  }
-}
-
-export class SetAMLStatusCall__Inputs {
-  _call: SetAMLStatusCall;
-
-  constructor(call: SetAMLStatusCall) {
-    this._call = call;
-  }
-
-  get _client(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get status(): boolean {
-    return this._call.inputValues[1].value.toBoolean();
-  }
-}
-
-export class SetAMLStatusCall__Outputs {
-  _call: SetAMLStatusCall;
-
-  constructor(call: SetAMLStatusCall) {
+  constructor(call: SetSignerCall) {
     this._call = call;
   }
 }
@@ -471,20 +431,40 @@ export class AddRoleCall__Inputs {
     this._call = call;
   }
 
-  get _submanager(): Address {
+  get _manager(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get _country(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
+  get _submanager(): Address {
+    return this._call.inputValues[1].value.toAddress();
   }
 
-  get _role(): Bytes {
+  get _country(): Bytes {
     return this._call.inputValues[2].value.toBytes();
   }
 
-  get _id(): Bytes {
+  get _role(): Bytes {
     return this._call.inputValues[3].value.toBytes();
+  }
+
+  get _id(): Bytes {
+    return this._call.inputValues[4].value.toBytes();
+  }
+
+  get _hashedMessage(): Bytes {
+    return this._call.inputValues[5].value.toBytes();
+  }
+
+  get _v(): i32 {
+    return this._call.inputValues[6].value.toI32();
+  }
+
+  get _r(): Bytes {
+    return this._call.inputValues[7].value.toBytes();
+  }
+
+  get _s(): Bytes {
+    return this._call.inputValues[8].value.toBytes();
   }
 }
 
@@ -513,16 +493,36 @@ export class RemoveRoleCall__Inputs {
     this._call = call;
   }
 
-  get _submanager(): Address {
+  get _manager(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
+  get _submanager(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
   get _country(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
+    return this._call.inputValues[2].value.toBytes();
   }
 
   get _role(): Bytes {
-    return this._call.inputValues[2].value.toBytes();
+    return this._call.inputValues[3].value.toBytes();
+  }
+
+  get _hashedMessage(): Bytes {
+    return this._call.inputValues[4].value.toBytes();
+  }
+
+  get _v(): i32 {
+    return this._call.inputValues[5].value.toI32();
+  }
+
+  get _r(): Bytes {
+    return this._call.inputValues[6].value.toBytes();
+  }
+
+  get _s(): Bytes {
+    return this._call.inputValues[7].value.toBytes();
   }
 }
 
@@ -530,6 +530,102 @@ export class RemoveRoleCall__Outputs {
   _call: RemoveRoleCall;
 
   constructor(call: RemoveRoleCall) {
+    this._call = call;
+  }
+}
+
+export class KycUpdateCall extends ethereum.Call {
+  get inputs(): KycUpdateCall__Inputs {
+    return new KycUpdateCall__Inputs(this);
+  }
+
+  get outputs(): KycUpdateCall__Outputs {
+    return new KycUpdateCall__Outputs(this);
+  }
+}
+
+export class KycUpdateCall__Inputs {
+  _call: KycUpdateCall;
+
+  constructor(call: KycUpdateCall) {
+    this._call = call;
+  }
+
+  get client(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get name(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+  }
+
+  get surname(): Bytes {
+    return this._call.inputValues[2].value.toBytes();
+  }
+
+  get country(): Bytes {
+    return this._call.inputValues[3].value.toBytes();
+  }
+
+  get status(): BigInt {
+    return this._call.inputValues[4].value.toBigInt();
+  }
+
+  get _hashedMessage(): Bytes {
+    return this._call.inputValues[5].value.toBytes();
+  }
+
+  get _v(): i32 {
+    return this._call.inputValues[6].value.toI32();
+  }
+
+  get _r(): Bytes {
+    return this._call.inputValues[7].value.toBytes();
+  }
+
+  get _s(): Bytes {
+    return this._call.inputValues[8].value.toBytes();
+  }
+}
+
+export class KycUpdateCall__Outputs {
+  _call: KycUpdateCall;
+
+  constructor(call: KycUpdateCall) {
+    this._call = call;
+  }
+}
+
+export class SetAmlScoreCall extends ethereum.Call {
+  get inputs(): SetAmlScoreCall__Inputs {
+    return new SetAmlScoreCall__Inputs(this);
+  }
+
+  get outputs(): SetAmlScoreCall__Outputs {
+    return new SetAmlScoreCall__Outputs(this);
+  }
+}
+
+export class SetAmlScoreCall__Inputs {
+  _call: SetAmlScoreCall;
+
+  constructor(call: SetAmlScoreCall) {
+    this._call = call;
+  }
+
+  get client(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get score(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class SetAmlScoreCall__Outputs {
+  _call: SetAmlScoreCall;
+
+  constructor(call: SetAmlScoreCall) {
     this._call = call;
   }
 }

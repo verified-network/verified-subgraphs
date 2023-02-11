@@ -10,6 +10,36 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
+export class securitiesAdded extends ethereum.Event {
+  get params(): securitiesAdded__Params {
+    return new securitiesAdded__Params(this);
+  }
+}
+
+export class securitiesAdded__Params {
+  _event: securitiesAdded;
+
+  constructor(event: securitiesAdded) {
+    this._event = event;
+  }
+
+  get security(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get issuer(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get isin(): Bytes {
+    return this._event.parameters[2].value.toBytes();
+  }
+
+  get currency(): Bytes {
+    return this._event.parameters[3].value.toBytes();
+  }
+}
+
 export class IssuerCreated extends ethereum.Event {
   get params(): IssuerCreated__Params {
     return new IssuerCreated__Params(this);
@@ -24,32 +54,6 @@ export class IssuerCreated__Params {
   }
 
   get issuer(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get tokenName(): Bytes {
-    return this._event.parameters[1].value.toBytes();
-  }
-
-  get tokenType(): Bytes {
-    return this._event.parameters[2].value.toBytes();
-  }
-}
-
-export class TokenCreated extends ethereum.Event {
-  get params(): TokenCreated__Params {
-    return new TokenCreated__Params(this);
-  }
-}
-
-export class TokenCreated__Params {
-  _event: TokenCreated;
-
-  constructor(event: TokenCreated) {
-    this._event = event;
-  }
-
-  get token(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
@@ -136,19 +140,25 @@ export class Factory__getNameAndTypeResult {
   }
 }
 
-export class Factory__getAddressAndTypeResult {
+export class Factory__getSecurityTokenResult {
   value0: Address;
   value1: Bytes;
+  value2: Bytes;
+  value3: Bytes;
 
-  constructor(value0: Address, value1: Bytes) {
+  constructor(value0: Address, value1: Bytes, value2: Bytes, value3: Bytes) {
     this.value0 = value0;
     this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
     let map = new TypedMap<string, ethereum.Value>();
     map.set("value0", ethereum.Value.fromAddress(this.value0));
     map.set("value1", ethereum.Value.fromFixedBytes(this.value1));
+    map.set("value2", ethereum.Value.fromFixedBytes(this.value2));
+    map.set("value3", ethereum.Value.fromFixedBytes(this.value3));
     return map;
   }
 }
@@ -156,6 +166,25 @@ export class Factory__getAddressAndTypeResult {
 export class Factory extends ethereum.SmartContract {
   static bind(address: Address): Factory {
     return new Factory("Factory", address);
+  }
+
+  issues(param0: BigInt): Address {
+    let result = super.call("issues", "issues(uint256):(address)", [
+      ethereum.Value.fromUnsignedBigInt(param0)
+    ]);
+
+    return result[0].toAddress();
+  }
+
+  try_issues(param0: BigInt): ethereum.CallResult<Address> {
+    let result = super.tryCall("issues", "issues(uint256):(address)", [
+      ethereum.Value.fromUnsignedBigInt(param0)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   getSigner(
@@ -593,141 +622,125 @@ export class Factory extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
-  getAddressAndType(tokenName: Bytes): Factory__getAddressAndTypeResult {
+  getIssues(): Array<Address> {
+    let result = super.call("getIssues", "getIssues():(address[])", []);
+
+    return result[0].toAddressArray();
+  }
+
+  try_getIssues(): ethereum.CallResult<Array<Address>> {
+    let result = super.tryCall("getIssues", "getIssues():(address[])", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddressArray());
+  }
+
+  getHolder(_securityToken: Address): Address {
+    let result = super.call("getHolder", "getHolder(address):(address)", [
+      ethereum.Value.fromAddress(_securityToken)
+    ]);
+
+    return result[0].toAddress();
+  }
+
+  try_getHolder(_securityToken: Address): ethereum.CallResult<Address> {
+    let result = super.tryCall("getHolder", "getHolder(address):(address)", [
+      ethereum.Value.fromAddress(_securityToken)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  getSecurity(_securityToken: Address): Address {
+    let result = super.call("getSecurity", "getSecurity(address):(address)", [
+      ethereum.Value.fromAddress(_securityToken)
+    ]);
+
+    return result[0].toAddress();
+  }
+
+  try_getSecurity(_securityToken: Address): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "getSecurity",
+      "getSecurity(address):(address)",
+      [ethereum.Value.fromAddress(_securityToken)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  getSecurityToken(
+    _securityToken: Address,
+    _issuer: Address
+  ): Factory__getSecurityTokenResult {
     let result = super.call(
-      "getAddressAndType",
-      "getAddressAndType(bytes32):(address,bytes32)",
-      [ethereum.Value.fromFixedBytes(tokenName)]
+      "getSecurityToken",
+      "getSecurityToken(address,address):(address,bytes32,bytes32,bytes32)",
+      [
+        ethereum.Value.fromAddress(_securityToken),
+        ethereum.Value.fromAddress(_issuer)
+      ]
     );
 
-    return new Factory__getAddressAndTypeResult(
+    return new Factory__getSecurityTokenResult(
       result[0].toAddress(),
-      result[1].toBytes()
+      result[1].toBytes(),
+      result[2].toBytes(),
+      result[3].toBytes()
     );
   }
 
-  try_getAddressAndType(
-    tokenName: Bytes
-  ): ethereum.CallResult<Factory__getAddressAndTypeResult> {
+  try_getSecurityToken(
+    _securityToken: Address,
+    _issuer: Address
+  ): ethereum.CallResult<Factory__getSecurityTokenResult> {
     let result = super.tryCall(
-      "getAddressAndType",
-      "getAddressAndType(bytes32):(address,bytes32)",
-      [ethereum.Value.fromFixedBytes(tokenName)]
+      "getSecurityToken",
+      "getSecurityToken(address,address):(address,bytes32,bytes32,bytes32)",
+      [
+        ethereum.Value.fromAddress(_securityToken),
+        ethereum.Value.fromAddress(_issuer)
+      ]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Factory__getAddressAndTypeResult(
+      new Factory__getSecurityTokenResult(
         value[0].toAddress(),
-        value[1].toBytes()
+        value[1].toBytes(),
+        value[2].toBytes(),
+        value[3].toBytes()
       )
     );
   }
 
-  getViaOracleUrl(): string {
-    let result = super.call(
-      "getViaOracleUrl",
-      "getViaOracleUrl():(string)",
-      []
-    );
+  checkProduct(issue: Address): boolean {
+    let result = super.call("checkProduct", "checkProduct(address):(bool)", [
+      ethereum.Value.fromAddress(issue)
+    ]);
 
-    return result[0].toString();
+    return result[0].toBoolean();
   }
 
-  try_getViaOracleUrl(): ethereum.CallResult<string> {
-    let result = super.tryCall(
-      "getViaOracleUrl",
-      "getViaOracleUrl():(string)",
-      []
-    );
+  try_checkProduct(issue: Address): ethereum.CallResult<boolean> {
+    let result = super.tryCall("checkProduct", "checkProduct(address):(bool)", [
+      ethereum.Value.fromAddress(issue)
+    ]);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toString());
-  }
-
-  getFiatPayoutUrl(): string {
-    let result = super.call(
-      "getFiatPayoutUrl",
-      "getFiatPayoutUrl():(string)",
-      []
-    );
-
-    return result[0].toString();
-  }
-
-  try_getFiatPayoutUrl(): ethereum.CallResult<string> {
-    let result = super.tryCall(
-      "getFiatPayoutUrl",
-      "getFiatPayoutUrl():(string)",
-      []
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toString());
-  }
-
-  getClient(): Address {
-    let result = super.call("getClient", "getClient():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_getClient(): ethereum.CallResult<Address> {
-    let result = super.tryCall("getClient", "getClient():(address)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  createToken(
-    _target: Address,
-    issuer: Address,
-    tokenName: Bytes,
-    tokenSymbol: Bytes
-  ): Address {
-    let result = super.call(
-      "createToken",
-      "createToken(address,address,bytes32,bytes32):(address)",
-      [
-        ethereum.Value.fromAddress(_target),
-        ethereum.Value.fromAddress(issuer),
-        ethereum.Value.fromFixedBytes(tokenName),
-        ethereum.Value.fromFixedBytes(tokenSymbol)
-      ]
-    );
-
-    return result[0].toAddress();
-  }
-
-  try_createToken(
-    _target: Address,
-    issuer: Address,
-    tokenName: Bytes,
-    tokenSymbol: Bytes
-  ): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "createToken",
-      "createToken(address,address,bytes32,bytes32):(address)",
-      [
-        ethereum.Value.fromAddress(_target),
-        ethereum.Value.fromAddress(issuer),
-        ethereum.Value.fromFixedBytes(tokenName),
-        ethereum.Value.fromFixedBytes(tokenSymbol)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 }
 
@@ -937,6 +950,14 @@ export class InitializeCall__Inputs {
   constructor(call: InitializeCall) {
     this._call = call;
   }
+
+  get _security(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get _bridge(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
 }
 
 export class InitializeCall__Outputs {
@@ -977,6 +998,36 @@ export class Initialize1Call__Outputs {
   }
 }
 
+export class SetSignerCall extends ethereum.Call {
+  get inputs(): SetSignerCall__Inputs {
+    return new SetSignerCall__Inputs(this);
+  }
+
+  get outputs(): SetSignerCall__Outputs {
+    return new SetSignerCall__Outputs(this);
+  }
+}
+
+export class SetSignerCall__Inputs {
+  _call: SetSignerCall;
+
+  constructor(call: SetSignerCall) {
+    this._call = call;
+  }
+
+  get _signer(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class SetSignerCall__Outputs {
+  _call: SetSignerCall;
+
+  constructor(call: SetSignerCall) {
+    this._call = call;
+  }
+}
+
 export class CreateIssuerCall extends ethereum.Call {
   get inputs(): CreateIssuerCall__Inputs {
     return new CreateIssuerCall__Inputs(this);
@@ -1010,16 +1061,8 @@ export class CreateIssuerCall__Inputs {
     return this._call.inputValues[3].value.toBytes();
   }
 
-  get _oracle(): Address {
+  get feeRate(): Address {
     return this._call.inputValues[4].value.toAddress();
-  }
-
-  get _token(): Address {
-    return this._call.inputValues[5].value.toAddress();
-  }
-
-  get _fee(): Address {
-    return this._call.inputValues[6].value.toAddress();
   }
 }
 
@@ -1031,138 +1074,122 @@ export class CreateIssuerCall__Outputs {
   }
 }
 
-export class CreateTokenCall extends ethereum.Call {
-  get inputs(): CreateTokenCall__Inputs {
-    return new CreateTokenCall__Inputs(this);
+export class IssueSecurityCall extends ethereum.Call {
+  get inputs(): IssueSecurityCall__Inputs {
+    return new IssueSecurityCall__Inputs(this);
   }
 
-  get outputs(): CreateTokenCall__Outputs {
-    return new CreateTokenCall__Outputs(this);
+  get outputs(): IssueSecurityCall__Outputs {
+    return new IssueSecurityCall__Outputs(this);
   }
 }
 
-export class CreateTokenCall__Inputs {
-  _call: CreateTokenCall;
+export class IssueSecurityCall__Inputs {
+  _call: IssueSecurityCall;
 
-  constructor(call: CreateTokenCall) {
+  constructor(call: IssueSecurityCall) {
     this._call = call;
   }
 
-  get _target(): Address {
+  get security(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get issuer(): Address {
-    return this._call.inputValues[1].value.toAddress();
+  get company(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
   }
 
-  get tokenName(): Bytes {
+  get isin(): Bytes {
     return this._call.inputValues[2].value.toBytes();
   }
 
-  get tokenSymbol(): Bytes {
+  get currency(): Bytes {
     return this._call.inputValues[3].value.toBytes();
   }
-}
 
-export class CreateTokenCall__Outputs {
-  _call: CreateTokenCall;
-
-  constructor(call: CreateTokenCall) {
-    this._call = call;
+  get issuer(): Address {
+    return this._call.inputValues[4].value.toAddress();
   }
 
-  get value0(): Address {
-    return this._call.outputValues[0].value.toAddress();
-  }
-}
-
-export class SetViaOracleUrlCall extends ethereum.Call {
-  get inputs(): SetViaOracleUrlCall__Inputs {
-    return new SetViaOracleUrlCall__Inputs(this);
+  get _hashedMessage(): Bytes {
+    return this._call.inputValues[5].value.toBytes();
   }
 
-  get outputs(): SetViaOracleUrlCall__Outputs {
-    return new SetViaOracleUrlCall__Outputs(this);
+  get _v(): i32 {
+    return this._call.inputValues[6].value.toI32();
+  }
+
+  get _r(): Bytes {
+    return this._call.inputValues[7].value.toBytes();
+  }
+
+  get _s(): Bytes {
+    return this._call.inputValues[8].value.toBytes();
   }
 }
 
-export class SetViaOracleUrlCall__Inputs {
-  _call: SetViaOracleUrlCall;
+export class IssueSecurityCall__Outputs {
+  _call: IssueSecurityCall;
 
-  constructor(call: SetViaOracleUrlCall) {
-    this._call = call;
-  }
-
-  get _url(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-}
-
-export class SetViaOracleUrlCall__Outputs {
-  _call: SetViaOracleUrlCall;
-
-  constructor(call: SetViaOracleUrlCall) {
+  constructor(call: IssueSecurityCall) {
     this._call = call;
   }
 }
 
-export class SetFiatPayoutUrlCall extends ethereum.Call {
-  get inputs(): SetFiatPayoutUrlCall__Inputs {
-    return new SetFiatPayoutUrlCall__Inputs(this);
+export class AddBalanceCall extends ethereum.Call {
+  get inputs(): AddBalanceCall__Inputs {
+    return new AddBalanceCall__Inputs(this);
   }
 
-  get outputs(): SetFiatPayoutUrlCall__Outputs {
-    return new SetFiatPayoutUrlCall__Outputs(this);
+  get outputs(): AddBalanceCall__Outputs {
+    return new AddBalanceCall__Outputs(this);
   }
 }
 
-export class SetFiatPayoutUrlCall__Inputs {
-  _call: SetFiatPayoutUrlCall;
+export class AddBalanceCall__Inputs {
+  _call: AddBalanceCall;
 
-  constructor(call: SetFiatPayoutUrlCall) {
+  constructor(call: AddBalanceCall) {
     this._call = call;
   }
 
-  get _url(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-}
-
-export class SetFiatPayoutUrlCall__Outputs {
-  _call: SetFiatPayoutUrlCall;
-
-  constructor(call: SetFiatPayoutUrlCall) {
-    this._call = call;
-  }
-}
-
-export class SetClientAddressCall extends ethereum.Call {
-  get inputs(): SetClientAddressCall__Inputs {
-    return new SetClientAddressCall__Inputs(this);
-  }
-
-  get outputs(): SetClientAddressCall__Outputs {
-    return new SetClientAddressCall__Outputs(this);
-  }
-}
-
-export class SetClientAddressCall__Inputs {
-  _call: SetClientAddressCall;
-
-  constructor(call: SetClientAddressCall) {
-    this._call = call;
-  }
-
-  get _client(): Address {
+  get security(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
+
+  get transferor(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get transferee(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+
+  get _hashedMessage(): Bytes {
+    return this._call.inputValues[4].value.toBytes();
+  }
+
+  get _v(): i32 {
+    return this._call.inputValues[5].value.toI32();
+  }
+
+  get _r(): Bytes {
+    return this._call.inputValues[6].value.toBytes();
+  }
+
+  get _s(): Bytes {
+    return this._call.inputValues[7].value.toBytes();
+  }
 }
 
-export class SetClientAddressCall__Outputs {
-  _call: SetClientAddressCall;
+export class AddBalanceCall__Outputs {
+  _call: AddBalanceCall;
 
-  constructor(call: SetClientAddressCall) {
+  constructor(call: AddBalanceCall) {
     this._call = call;
   }
 }

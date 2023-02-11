@@ -14,6 +14,29 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "approve",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "cashtokenName",
@@ -42,74 +65,33 @@
     "type": "function"
   },
   {
-    "constant": true,
+    "constant": false,
     "inputs": [
       {
-        "name": "",
+        "name": "spender",
         "type": "address"
       },
       {
-        "name": "",
-        "type": "bytes32"
+        "name": "addedValue",
+        "type": "uint256"
       }
     ],
-    "name": "deposits",
+    "name": "increaseAllowance",
     "outputs": [
       {
-        "name": "depositAmount",
-        "type": "bytes16"
-      },
-      {
-        "name": "issuedAmount",
-        "type": "bytes16"
-      },
-      {
-        "name": "depositor",
-        "type": "address"
+        "name": "",
+        "type": "bool"
       }
     ],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": true,
     "inputs": [
       {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "balances",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes16"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "decimals",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "tokenOwner",
+        "name": "account",
         "type": "address"
       }
     ],
@@ -179,11 +161,34 @@
     "constant": false,
     "inputs": [
       {
-        "name": "receiver",
+        "name": "spender",
         "type": "address"
       },
       {
-        "name": "tokens",
+        "name": "subtractedValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "decreaseAllowance",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "name": "amount",
         "type": "uint256"
       }
     ],
@@ -213,6 +218,29 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "name": "spender",
+        "type": "address"
+      }
+    ],
+    "name": "allowance",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -227,28 +255,80 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "currencies",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "payable": true,
     "stateMutability": "payable",
     "type": "fallback"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "party",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "CashIssueRequest",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "redeemer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "CashRedeemed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "transferor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "transferee",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "CashTransfer",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -291,7 +371,7 @@
         "type": "uint256"
       }
     ],
-    "name": "CashRedeemed",
+    "name": "addedL2Balance",
     "type": "event"
   },
   {
@@ -299,7 +379,12 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "party",
+        "name": "transferor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "transferee",
         "type": "address"
       },
       {
@@ -313,34 +398,7 @@
         "type": "uint256"
       }
     ],
-    "name": "CashDeposits",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "party",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "counterparty",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "currency",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "CashTransfer",
+    "name": "transferredL2Balance",
     "type": "event"
   },
   {
@@ -373,6 +431,50 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "Transfer",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "spender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "Approval",
+    "type": "event"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -388,15 +490,11 @@
         "type": "address"
       },
       {
-        "name": "_oracle",
-        "type": "address"
-      },
-      {
-        "name": "_token",
-        "type": "address"
-      },
-      {
         "name": "_fee",
+        "type": "address"
+      },
+      {
+        "name": "_bridge",
         "type": "address"
       }
     ],
@@ -415,6 +513,267 @@
       }
     ],
     "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_signer",
+        "type": "address"
+      }
+    ],
+    "name": "setSigner",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "name": "_name",
+        "type": "bytes32"
+      }
+    ],
+    "name": "supportTokens",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_token",
+        "type": "address"
+      }
+    ],
+    "name": "checkSupportForToken",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getSupportedTokens",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "tokenName",
+            "type": "bytes32"
+          },
+          {
+            "name": "tokenAddress",
+            "type": "address"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "name": "_buyer",
+        "type": "address"
+      }
+    ],
+    "name": "requestIssue",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "balance",
+        "type": "uint256"
+      },
+      {
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "name": "_hashedMessage",
+        "type": "bytes32"
+      },
+      {
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "name": "_s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "addIssuedBalance",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "transferor",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "transferee",
+        "type": "address"
+      },
+      {
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "name": "_hashedMessage",
+        "type": "bytes32"
+      },
+      {
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "name": "_s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "transferDeposit",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "redeemer",
+        "type": "address"
+      },
+      {
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "name": "balance",
+        "type": "uint256"
+      },
+      {
+        "name": "_hashedMessage",
+        "type": "bytes32"
+      },
+      {
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "name": "_s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "redeemDeposits",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "transferor",
+        "type": "address"
+      },
+      {
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "deposited",
+        "type": "uint256"
+      },
+      {
+        "name": "_hashedMessage",
+        "type": "bytes32"
+      },
+      {
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "name": "_s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "transferIssuedBalance",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -432,7 +791,7 @@
         "type": "address"
       },
       {
-        "name": "tokens",
+        "name": "token",
         "type": "uint256"
       }
     ],
@@ -443,128 +802,6 @@
         "type": "bool"
       }
     ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "tokens",
-        "type": "bytes16"
-      },
-      {
-        "name": "sender",
-        "type": "address"
-      }
-    ],
-    "name": "requestAddToBalance",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "tokens",
-        "type": "bytes16"
-      },
-      {
-        "name": "receiver",
-        "type": "address"
-      }
-    ],
-    "name": "requestDeductFromBalance",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes16"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "tokens",
-        "type": "uint256"
-      },
-      {
-        "name": "payer",
-        "type": "address"
-      },
-      {
-        "name": "currency",
-        "type": "bytes32"
-      }
-    ],
-    "name": "payIn",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "amount",
-        "type": "bytes16"
-      },
-      {
-        "name": "buyer",
-        "type": "address"
-      },
-      {
-        "name": "currency",
-        "type": "bytes32"
-      }
-    ],
-    "name": "requestIssue",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "txId",
-        "type": "bytes32"
-      },
-      {
-        "name": "result",
-        "type": "bytes16"
-      },
-      {
-        "name": "rtype",
-        "type": "bytes32"
-      }
-    ],
-    "name": "convert",
-    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"

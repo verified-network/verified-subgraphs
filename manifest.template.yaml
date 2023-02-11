@@ -1,0 +1,174 @@
+specVersion: 0.0.2
+description: Verified is a decentralized financial services network for payments, investments and financing.
+{{#if graft}}
+graft:
+  base: {{graft.base}}
+  block: {{graft.block}}
+{{/if}}
+repository: https://github.com/verified-network/verified-graph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Factory
+    network: {{network}}
+    source:
+      address: '{{Factory.address}}'
+      abi: Factory
+      startBlock: {{Factory.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/factory.ts
+      entities:
+        - Issuer
+        - Token
+        - Security
+      abis:
+        - name: Factory
+          file: ./abis/Factory.json
+        - name: Security
+          file: ./abis/Security.json
+      eventHandlers:
+        - event: IssuerCreated(indexed address,bytes32,bytes32)
+          handler: handleIssuerCreated
+        - event: securitiesAdded(indexed address,address,bytes32,bytes32)
+          handler: handleTokenCreated
+  - kind: ethereum/contract
+    name: Client
+    network: {{network}}
+    source:
+      address: '{{Client.address}}'
+      abi: Client
+      startBlock: {{Client.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/client.ts
+      entities:
+        - Manager
+        - Client
+      abis:
+        - name: Client
+          file: ./abis/Client.json
+      eventHandlers:
+        - event: ManagerAdded(address,indexed address,bytes32,bytes32,bytes32)
+          handler: handleManagerCreated
+        - event: ManagerRemoved(address,indexed address,bytes32,bytes32)
+          handler: handleManagerRemoved
+        - event: UserAdded(address,bytes32,bytes32,bytes32,uint256)
+          handler: handleUserCreated
+  - kind: ethereum/contract
+    name: PrimaryIssueManager
+    network: {{network}}
+    source:
+      address: '{{PrimaryIssueManager.address}}'
+      abi: PrimaryIssueManager
+      startBlock: {{PrimaryIssueManager.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/client.ts
+      entities:
+        - Subscribers
+        - LiquidityProviders
+        - Pools
+      abis:
+        - name: PrimaryIssueManager
+          file: ./abis/PrimaryIssueManager.json
+      eventHandlers:
+        - event: marketmakers(address,address,address);
+          handler: handleMarketmakers
+        - event: subscribers(address,address,bytes32,address);
+          handler: handlePrimaryInvestors
+        - event: platforms(address);
+          handler: handlePools
+  - kind: ethereum/contract
+    name: SecondaryIssueManager
+    network: {{network}}
+    source:
+      address: '{{SecondaryIssueManager.address}}'
+      abi: SecondaryIssueManager
+      startBlock: {{SecondaryIssueManager.startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/client.ts
+      entities:
+        - Trades
+        - Subscribers
+        - Pools
+      abis:
+        - name: SecondaryIssueManager
+          file: ./abis/SecondaryIssueManager.json
+      eventHandlers:
+        - event: tradeSettled(address,address,uint256,address,uint256,address);
+          handler: handleTradeSettled
+        - event: subscribers(address,address,bytes32,tuple);
+          handler: handleSecondaryInvestors
+  templates:
+  - kind: ethereum/contract
+    name: Cash
+    network: {{network}}
+    source:
+      abi: Cash
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - CashIssues
+        - CashDeposited
+        - CashRedemptions
+        - CashTransfers
+        - Currency
+      abis:
+        - name: Cash
+          file: ./abis/Cash.json
+      eventHandlers:
+        - event: CashIssued(indexed address,bytes32,uint256)
+          handler: handleCashIssued
+        - event: CashRedeemed(indexed address,bytes32,uint256)
+          handler: handleCashRedeemed
+        - event: CashIssueRequest(indexed address,bytes32,uint256)
+          handler: handleCashDeposits
+        - event: CashTransfer(indexed address,indexed address,bytes32,uint256)
+          handler: handleCashTransfer
+      file: ./src/cash.ts  
+  - kind: ethereum/contract
+    name: Bond
+    network: {{network}}
+    source:
+      abi: Bond
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - BondIssues
+        - BondPurchases
+        - BondRedemptions
+        - BondIssueRequests
+        - Currency
+      abis:
+        - name: Bond
+          file: ./abis/Bond.json
+      eventHandlers:
+        - event: BondIssued(indexed address,bytes32,uint256,address)
+          handler: handleBondIssued
+        - event: BondRedeemed(indexed address,bytes32,uint256,address)
+          handler: handleBondRedeemed
+        - event: BondPurchased(indexed address,bytes32,uint256,address)
+          handler: handleBondPurchased
+        - event: BondIssueRequest(indexed address,bytes32,uint256)
+          handler: handleBondIssueRequest
+      file: ./src/bond.ts
+  
+
+
