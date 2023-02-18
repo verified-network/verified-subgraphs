@@ -11,7 +11,7 @@ type Currency @entity {
   bondIssueRequests: [BondIssueRequests!] @derivedFrom(field: "currency")
   trades: [Trades!] @derivedFrom(field: "currency")
   primarySubscribers: [Subscribers!] @derivedFrom(field: "currency")
-  secondaryInvestor: [Investors!] @derivedFrom(field: "currency")
+  secondaryInvestors: [Investors!] @derivedFrom(field: "currency")
 }
 type User @entity {
   id: ID!
@@ -34,15 +34,7 @@ type User @entity {
   liquidityProviders: [LiquidityProviders!] @derivedFrom(field: "owner")
   manager: [Manager!] @derived(field: "manager")
   submanager: [Manager!] @derivedFrom(field: "submanager")
-  issuer: [Issuer!] @derivedFrom(field: "issuer")
-}
-type Manager @entity {
-  id: ID!
-  manager: User!
-  submanager: User!
-  role: Bytes!
-  country: Bytes!
-  managerId: Bytes!
+  securityissuer: [Issuer!] @derivedFrom(field: "issuer")
 }
 type Token @entity {
   id: ID!
@@ -55,9 +47,17 @@ type Token @entity {
   primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
   secondaryInvestors: [Investors!] @derivedFrom(field: "security")
   trades: [Trades!] @derivedFrom(field: "security")
-  liquidityProviders: [LiquidityProviders!] @derivedFrom(field: "tokenOffered")
-  offers: [Offers!] @derivedFrom(field: "offered")
+  liquidityoffered: [LiquidityProviders!] @derivedFrom(field: "tokenOffered")
+  securityissued: [Offers!] @derivedFrom(field: "offered")
   security: [Security!] @derivedFrom(field: "security")
+}
+type Manager @entity {
+  id: ID!
+  manager: User
+  submanager: User
+  role: Bytes
+  country: Bytes
+  managerId: Bytes
 }
 type CashDeposited @entity {
   id: ID!
@@ -149,8 +149,8 @@ type Subscribers @entity {
   security: Token!
   investor: User!
   currency: Currency!
-  amount: BigDecimal!   
-  price: BigDecimal! 
+  cashSwapped: BigDecimal!   
+  securitySwapped: BigDecimal! 
 }
 type Investors @entity {
   id: ID!
@@ -170,6 +170,6 @@ type LiquidityProviders @entity {
   owner: User!
   tokenOffered: Token!
   underwritten: BigDecimal!
-  subscribed: BigDecimal!
-  earned: BigDecimal!
+  subscribed: BigDecimal
+  earned: BigDecimal
 }

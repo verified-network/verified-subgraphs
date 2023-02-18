@@ -74,6 +74,10 @@ export class distributeFees__Params {
   get underwritingFee(): BigInt {
     return this._event.parameters[1].value.toBigInt();
   }
+
+  get prorataLiquidityProvided(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
 }
 
 export class marketmakers extends ethereum.Event {
@@ -211,11 +215,11 @@ export class subscribers__Params {
     return this._event.parameters[4].value.toAddress();
   }
 
-  get amount(): BigInt {
+  get cashSwapped(): BigInt {
     return this._event.parameters[5].value.toBigInt();
   }
 
-  get price(): BigInt {
+  get securitySwapped(): BigInt {
     return this._event.parameters[6].value.toBigInt();
   }
 }
@@ -327,7 +331,7 @@ export class PrimaryIssueManager__getSubscribersResultValue0Struct extends ether
     return this[3].toBigInt();
   }
 
-  get price(): BigInt {
+  get traded(): BigInt {
     return this[4].toBigInt();
   }
 }
@@ -953,7 +957,7 @@ export class SubscribeCall__Inputs {
     return this._call.inputValues[2].value.toAddress();
   }
 
-  get amnt(): BigInt {
+  get cAmount(): BigInt {
     return this._call.inputValues[3].value.toBigInt();
   }
 
@@ -961,7 +965,7 @@ export class SubscribeCall__Inputs {
     return this._call.inputValues[4].value.toAddress();
   }
 
-  get price(): BigInt {
+  get sAmount(): BigInt {
     return this._call.inputValues[5].value.toBigInt();
   }
 

@@ -136,7 +136,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -264,7 +265,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -422,7 +424,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -441,7 +444,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.7.1+commit.f4a555be\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"manager\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submanager\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"country\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"managerId\",\"type\":\"bytes32\"}],\"name\":\"ManagerAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"manager\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submanager\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"country\",\"type\":\"bytes32\"}],\"name\":\"ManagerRemoved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"client\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"surname\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"country\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"status\",\"type\":\"uint256\"}],\"name\":\"UserAdded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"client\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"name\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"surname\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"country\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"status\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"_hashedMessage\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"_v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"_r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_s\",\"type\":\"bytes32\"}],\"name\":\"KycUpdate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_manager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_submanager\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_country\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_role\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_id\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_hashedMessage\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"_v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"_r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_s\",\"type\":\"bytes32\"}],\"name\":\"addRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"client\",\"type\":\"address\"}],\"name\":\"getClientKYC\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"}],\"name\":\"getRole\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"party\",\"type\":\"address\"}],\"name\":\"getTransferAgent\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_signer\",\"type\":\"address\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_manager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_submanager\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_country\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_role\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_hashedMessage\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"_v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"_r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_s\",\"type\":\"bytes32\"}],\"name\":\"removeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"client\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"}],\"name\":\"setAmlScore\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_signer\",\"type\":\"address\"}],\"name\":\"setSigner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"getTransferAgent(address)\":{\"params\":{\"party\":\"reference to the party or counterparty in a trade\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getTransferAgent(address)\":{\"notice\":\"Gets transfer agent for any of the parties in the trade\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Client.sol\":\"Client\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@balancer-labs/v2-solidity-utils/contracts/helpers/BalancerErrors.sol\":{\"keccak256\":\"0x14f18d0c0051d5412a250536a9850f2698fe1ede9e4760d94142762a039f053b\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://21535a4a50a1f1acf80c543b1e44fc80671787a0364c1e3f0437e7c499f15258\",\"dweb:/ipfs/QmR9EMgjmdQRJHFrmD2Tjb9BqN2rNgvi6je5yh71oxebav\"]},\"@balancer-labs/v2-solidity-utils/contracts/openzeppelin/Ownable.sol\":{\"keccak256\":\"0x53e476d8641ec8d7502efcfaa666981c22fced87c553cf8bb206790af68798c1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3eb7bbe7b8706130bd7c646766bec6d8ffb5792c20aac3b127f2a09aee9d8bc4\",\"dweb:/ipfs/QmcQdUBz6AozKU4rvBYLbZqcKy85fXPkKnhCbnthQi9k61\"]},\"project:/contracts/Client.sol\":{\"keccak256\":\"0x6d62b11446dc41bea14926606b549e0af1c718972d5a97629b8d19371172d331\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://9a0469f46fcb6c6ac5c41504f095d5d279721f295b6eb9255ade79887f96b2e5\",\"dweb:/ipfs/QmaBvcYFgMdgNPtGx7aWYTt7LnqpspvamCQqNbNAQphob9\"]},\"project:/contracts/interfaces/VerifiedClient.sol\":{\"keccak256\":\"0x9652c9a5a88c339ee36f3bb85c35b73f63a776750ebd7e187e835fecc39d799d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://08c5b4cbee4a9da2a44233422bf18d498ee0f5db3d288f15897b67aec9ab7a0a\",\"dweb:/ipfs/QmdE5iCe44p6teCY2qzniDYhXmmnqYvecGeNnmJeinn6qA\"]}},\"version\":1}",
@@ -480,7 +484,7 @@
         "id": 3691,
         "nodeType": "ImportDirective",
         "scope": 4661,
-        "sourceUnit": 9912,
+        "sourceUnit": 9963,
         "src": "139:41:16",
         "symbolAliases": [],
         "unitAlias": ""
@@ -504,10 +508,10 @@
               "id": 3693,
               "name": "VerifiedClient",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 9911,
+              "referencedDeclaration": 9962,
               "src": "282:14:16",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_VerifiedClient_$9911",
+                "typeIdentifier": "t_contract$_VerifiedClient_$9962",
                 "typeString": "contract VerifiedClient"
               }
             },
@@ -534,7 +538,7 @@
         ],
         "contractDependencies": [
           3045,
-          9911
+          9962
         ],
         "contractKind": "contract",
         "fullyImplemented": true,
@@ -542,7 +546,7 @@
         "linearizedBaseContracts": [
           4660,
           3045,
-          9911
+          9962
         ],
         "name": "Client",
         "nodeType": "ContractDefinition",
@@ -1654,7 +1658,7 @@
           },
           {
             "baseFunctions": [
-              9860
+              9911
             ],
             "body": {
               "id": 3800,
@@ -1785,7 +1789,7 @@
           },
           {
             "baseFunctions": [
-              9825
+              9876
             ],
             "body": {
               "id": 3980,
@@ -4206,7 +4210,7 @@
           },
           {
             "baseFunctions": [
-              9836
+              9887
             ],
             "body": {
               "id": 4054,
@@ -5159,7 +5163,7 @@
           },
           {
             "baseFunctions": [
-              9855
+              9906
             ],
             "body": {
               "id": 4259,
@@ -8027,7 +8031,7 @@
           },
           {
             "baseFunctions": [
-              9881
+              9932
             ],
             "body": {
               "id": 4378,
@@ -9641,7 +9645,7 @@
           },
           {
             "baseFunctions": [
-              9888
+              9939
             ],
             "body": {
               "id": 4402,
@@ -9940,7 +9944,7 @@
           },
           {
             "baseFunctions": [
-              9910
+              9961
             ],
             "body": {
               "id": 4462,
@@ -12416,7 +12420,7 @@
           },
           {
             "baseFunctions": [
-              9895
+              9946
             ],
             "body": {
               "id": 4658,
@@ -13107,7 +13111,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 9912,
+          "SourceUnit": 9963,
           "absolutePath": "project:/contracts/interfaces/VerifiedClient.sol",
           "file": "./interfaces/VerifiedClient.sol",
           "scope": 4661,
@@ -13140,14 +13144,14 @@
           "abstract": false,
           "contractDependencies": [
             3045,
-            9911
+            9962
           ],
           "contractKind": "contract",
           "fullyImplemented": true,
           "linearizedBaseContracts": [
             4660,
             3045,
-            9911
+            9962
           ],
           "name": "Client",
           "scope": 4661
@@ -13159,7 +13163,7 @@
               {
                 "attributes": {
                   "name": "VerifiedClient",
-                  "referencedDeclaration": 9911,
+                  "referencedDeclaration": 9962,
                   "type": "contract VerifiedClient"
                 },
                 "id": 3693,
@@ -14332,7 +14336,7 @@
           {
             "attributes": {
               "baseFunctions": [
-                9860
+                9911
               ],
               "functionSelector": "6c19e783",
               "implemented": true,
@@ -14484,7 +14488,7 @@
           {
             "attributes": {
               "baseFunctions": [
-                9825
+                9876
               ],
               "functionSelector": "48566e1d",
               "implemented": true,
@@ -17075,7 +17079,7 @@
           {
             "attributes": {
               "baseFunctions": [
-                9836
+                9887
               ],
               "functionSelector": "44276733",
               "implemented": true,
@@ -18090,7 +18094,7 @@
           {
             "attributes": {
               "baseFunctions": [
-                9855
+                9906
               ],
               "functionSelector": "8d0cbe91",
               "implemented": true,
@@ -21124,7 +21128,7 @@
           {
             "attributes": {
               "baseFunctions": [
-                9881
+                9932
               ],
               "functionSelector": "e639e9a2",
               "implemented": true,
@@ -22857,7 +22861,7 @@
           {
             "attributes": {
               "baseFunctions": [
-                9888
+                9939
               ],
               "functionSelector": "2838c9d5",
               "implemented": true,
@@ -23186,7 +23190,7 @@
           {
             "attributes": {
               "baseFunctions": [
-                9910
+                9961
               ],
               "functionSelector": "a0f7d420",
               "implemented": true,
@@ -25863,7 +25867,7 @@
           {
             "attributes": {
               "baseFunctions": [
-                9895
+                9946
               ],
               "functionSelector": "055f5540",
               "implemented": true,
@@ -26599,12 +26603,13 @@
     "5": {
       "events": {},
       "links": {},
-      "address": "0x63D7b61aF33167F14e511D8687DD50Fe9CA556b9",
-      "transactionHash": "0x85153a30a327b8de0e368767953d3f18f7c2d47c34d0fc9972910773d9229375"
+      "address": "0xbC80EDA46361576411b1d3037eb132666966282A",
+      "transactionHash": "0x2984ceb00a8e8903ce422d20e8a11b18fd3fca038664e2a514cc52fa420757ab"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2023-02-11T14:31:40.606Z",
+  "updatedAt": "2023-02-18T03:08:14.490Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {

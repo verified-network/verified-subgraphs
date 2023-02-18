@@ -51,6 +51,12 @@
         "internalType": "uint256",
         "name": "underwritingFee",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "prorataLiquidityProvided",
+        "type": "uint256"
       }
     ],
     "name": "distributeFees",
@@ -203,13 +209,13 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "amount",
+        "name": "cashSwapped",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "price",
+        "name": "securitySwapped",
         "type": "uint256"
       }
     ],
@@ -227,7 +233,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -445,7 +452,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -511,7 +519,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -557,7 +566,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -599,7 +609,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -643,7 +654,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "amnt",
+        "name": "cAmount",
         "type": "uint256"
       },
       {
@@ -653,7 +664,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "price",
+        "name": "sAmount",
         "type": "uint256"
       },
       {
@@ -701,7 +712,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "price",
+            "name": "traded",
             "type": "uint256"
           }
         ],
@@ -711,7 +722,8 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -831,6 +843,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   }
 ]
