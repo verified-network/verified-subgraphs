@@ -51,14 +51,6 @@ type Token @entity {
   securityissued: [Offers!] @derivedFrom(field: "offered")
   security: [Security!] @derivedFrom(field: "security")
 }
-type Manager @entity {
-  id: ID!
-  manager: User
-  submanager: User
-  role: Bytes
-  country: Bytes
-  managerId: Bytes
-}
 type CashDeposited @entity {
   id: ID!
   party: User!
@@ -111,6 +103,14 @@ type BondRedemptions @entity {
   redemptionCurrency: Currency!
   redemptionAmount : BigDecimal!
 }
+type Manager @entity {
+  id: ID!
+  manager: User
+  submanager: User!
+  role: Bytes!
+  country: Bytes
+  managerId: Bytes
+}
 type Issuer @entity {
   id: ID!
   issuer: User!
@@ -147,6 +147,7 @@ type Subscribers @entity {
   id: ID!
   platform: Bytes!
   security: Token!
+  pool: Bytes!
   investor: User!
   currency: Currency!
   cashSwapped: BigDecimal!   
@@ -155,6 +156,7 @@ type Subscribers @entity {
 type Investors @entity {
   id: ID!
   platform: Bytes!
+  pool: Bytes!
   security: Token!
   issuer: User!
   investor: User!
@@ -167,6 +169,7 @@ type Investors @entity {
 }
 type LiquidityProviders @entity {
   id: ID!
+  platform: Bytes!
   owner: User!
   tokenOffered: Token!
   underwritten: BigDecimal!

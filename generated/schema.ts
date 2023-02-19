@@ -855,124 +855,6 @@ export class Token extends Entity {
   }
 }
 
-export class Manager extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id != null, "Cannot save Manager entity without an ID");
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        "Cannot save Manager entity with non-string ID. " +
-          'Considering using .toHex() to convert the "id" to a string.'
-      );
-      store.set("Manager", id.toString(), this);
-    }
-  }
-
-  static load(id: string): Manager | null {
-    return changetype<Manager | null>(store.get("Manager", id));
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    return value!.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get manager(): string | null {
-    let value = this.get("manager");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set manager(value: string | null) {
-    if (!value) {
-      this.unset("manager");
-    } else {
-      this.set("manager", Value.fromString(<string>value));
-    }
-  }
-
-  get submanager(): string | null {
-    let value = this.get("submanager");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set submanager(value: string | null) {
-    if (!value) {
-      this.unset("submanager");
-    } else {
-      this.set("submanager", Value.fromString(<string>value));
-    }
-  }
-
-  get role(): Bytes | null {
-    let value = this.get("role");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set role(value: Bytes | null) {
-    if (!value) {
-      this.unset("role");
-    } else {
-      this.set("role", Value.fromBytes(<Bytes>value));
-    }
-  }
-
-  get country(): Bytes | null {
-    let value = this.get("country");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set country(value: Bytes | null) {
-    if (!value) {
-      this.unset("country");
-    } else {
-      this.set("country", Value.fromBytes(<Bytes>value));
-    }
-  }
-
-  get managerId(): Bytes | null {
-    let value = this.get("managerId");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBytes();
-    }
-  }
-
-  set managerId(value: Bytes | null) {
-    if (!value) {
-      this.unset("managerId");
-    } else {
-      this.set("managerId", Value.fromBytes(<Bytes>value));
-    }
-  }
-}
-
 export class CashDeposited extends Entity {
   constructor(id: string) {
     super();
@@ -1527,6 +1409,111 @@ export class BondRedemptions extends Entity {
   }
 }
 
+export class Manager extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("submanager", Value.fromString(""));
+    this.set("role", Value.fromBytes(Bytes.empty()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Manager entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Manager entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Manager", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Manager | null {
+    return changetype<Manager | null>(store.get("Manager", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get manager(): string | null {
+    let value = this.get("manager");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set manager(value: string | null) {
+    if (!value) {
+      this.unset("manager");
+    } else {
+      this.set("manager", Value.fromString(<string>value));
+    }
+  }
+
+  get submanager(): string {
+    let value = this.get("submanager");
+    return value!.toString();
+  }
+
+  set submanager(value: string) {
+    this.set("submanager", Value.fromString(value));
+  }
+
+  get role(): Bytes {
+    let value = this.get("role");
+    return value!.toBytes();
+  }
+
+  set role(value: Bytes) {
+    this.set("role", Value.fromBytes(value));
+  }
+
+  get country(): Bytes | null {
+    let value = this.get("country");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set country(value: Bytes | null) {
+    if (!value) {
+      this.unset("country");
+    } else {
+      this.set("country", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get managerId(): Bytes | null {
+    let value = this.get("managerId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set managerId(value: Bytes | null) {
+    if (!value) {
+      this.unset("managerId");
+    } else {
+      this.set("managerId", Value.fromBytes(<Bytes>value));
+    }
+  }
+}
+
 export class Issuer extends Entity {
   constructor(id: string) {
     super();
@@ -1870,6 +1857,7 @@ export class Subscribers extends Entity {
 
     this.set("platform", Value.fromBytes(Bytes.empty()));
     this.set("security", Value.fromString(""));
+    this.set("pool", Value.fromBytes(Bytes.empty()));
     this.set("investor", Value.fromString(""));
     this.set("currency", Value.fromString(""));
     this.set("cashSwapped", Value.fromBigDecimal(BigDecimal.zero()));
@@ -1920,6 +1908,15 @@ export class Subscribers extends Entity {
     this.set("security", Value.fromString(value));
   }
 
+  get pool(): Bytes {
+    let value = this.get("pool");
+    return value!.toBytes();
+  }
+
+  set pool(value: Bytes) {
+    this.set("pool", Value.fromBytes(value));
+  }
+
   get investor(): string {
     let value = this.get("investor");
     return value!.toString();
@@ -1963,6 +1960,7 @@ export class Investors extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("platform", Value.fromBytes(Bytes.empty()));
+    this.set("pool", Value.fromBytes(Bytes.empty()));
     this.set("security", Value.fromString(""));
     this.set("issuer", Value.fromString(""));
     this.set("investor", Value.fromString(""));
@@ -2007,6 +2005,15 @@ export class Investors extends Entity {
 
   set platform(value: Bytes) {
     this.set("platform", Value.fromBytes(value));
+  }
+
+  get pool(): Bytes {
+    let value = this.get("pool");
+    return value!.toBytes();
+  }
+
+  set pool(value: Bytes) {
+    this.set("pool", Value.fromBytes(value));
   }
 
   get security(): string {
@@ -2096,11 +2103,10 @@ export class LiquidityProviders extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
+    this.set("platform", Value.fromBytes(Bytes.empty()));
     this.set("owner", Value.fromString(""));
     this.set("tokenOffered", Value.fromString(""));
     this.set("underwritten", Value.fromBigDecimal(BigDecimal.zero()));
-    this.set("subscribed", Value.fromBigDecimal(BigDecimal.zero()));
-    this.set("earned", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
   save(): void {
@@ -2131,6 +2137,15 @@ export class LiquidityProviders extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get platform(): Bytes {
+    let value = this.get("platform");
+    return value!.toBytes();
+  }
+
+  set platform(value: Bytes) {
+    this.set("platform", Value.fromBytes(value));
+  }
+
   get owner(): string {
     let value = this.get("owner");
     return value!.toString();
@@ -2158,21 +2173,37 @@ export class LiquidityProviders extends Entity {
     this.set("underwritten", Value.fromBigDecimal(value));
   }
 
-  get subscribed(): BigDecimal {
+  get subscribed(): BigDecimal | null {
     let value = this.get("subscribed");
-    return value!.toBigDecimal();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigDecimal();
+    }
   }
 
-  set subscribed(value: BigDecimal) {
-    this.set("subscribed", Value.fromBigDecimal(value));
+  set subscribed(value: BigDecimal | null) {
+    if (!value) {
+      this.unset("subscribed");
+    } else {
+      this.set("subscribed", Value.fromBigDecimal(<BigDecimal>value));
+    }
   }
 
-  get earned(): BigDecimal {
+  get earned(): BigDecimal | null {
     let value = this.get("earned");
-    return value!.toBigDecimal();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigDecimal();
+    }
   }
 
-  set earned(value: BigDecimal) {
-    this.set("earned", Value.fromBigDecimal(value));
+  set earned(value: BigDecimal | null) {
+    if (!value) {
+      this.unset("earned");
+    } else {
+      this.set("earned", Value.fromBigDecimal(<BigDecimal>value));
+    }
   }
 }
