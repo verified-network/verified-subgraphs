@@ -393,6 +393,26 @@
         "type": "address"
       }
     ],
+    "name": "getAMLStatus",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "client",
+        "type": "address"
+      }
+    ],
     "name": "getClientKYC",
     "outputs": [
       {

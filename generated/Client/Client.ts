@@ -235,6 +235,25 @@ export class Client extends ethereum.SmartContract {
     );
   }
 
+  getAMLStatus(client: Address): boolean {
+    let result = super.call("getAMLStatus", "getAMLStatus(address):(bool)", [
+      ethereum.Value.fromAddress(client)
+    ]);
+
+    return result[0].toBoolean();
+  }
+
+  try_getAMLStatus(client: Address): ethereum.CallResult<boolean> {
+    let result = super.tryCall("getAMLStatus", "getAMLStatus(address):(bool)", [
+      ethereum.Value.fromAddress(client)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
   getClientKYC(client: Address): Client__getClientKYCResult {
     let result = super.call(
       "getClientKYC",

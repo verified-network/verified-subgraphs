@@ -32,28 +32,6 @@ export class OwnershipTransferred__Params {
   }
 }
 
-export class acceptInvestor extends ethereum.Event {
-  get params(): acceptInvestor__Params {
-    return new acceptInvestor__Params(this);
-  }
-}
-
-export class acceptInvestor__Params {
-  _event: acceptInvestor;
-
-  constructor(event: acceptInvestor) {
-    this._event = event;
-  }
-
-  get subscription(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
-  get allotment(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-}
-
 export class distributeFees extends ethereum.Event {
   get params(): distributeFees__Params {
     return new distributeFees__Params(this);
@@ -179,6 +157,28 @@ export class offers__Params {
 
   get offeringDocs(): string {
     return this._event.parameters[6].value.toString();
+  }
+}
+
+export class rejectInvestor extends ethereum.Event {
+  get params(): rejectInvestor__Params {
+    return new rejectInvestor__Params(this);
+  }
+}
+
+export class rejectInvestor__Params {
+  _event: rejectInvestor;
+
+  constructor(event: rejectInvestor) {
+    this._event = event;
+  }
+
+  get security(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get cash(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
   }
 }
 

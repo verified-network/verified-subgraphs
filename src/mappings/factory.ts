@@ -19,10 +19,10 @@ export function handleIssuerCreated(event: IssuerCreated): void {
     let issuerId = event.transaction.hash.toHexString().concat('-').concat(factoryAddress.toHexString());
     let issuers = new Issuer(issuerId);
     issuers.id = event.params.issuer.toHexString();
-    if (event.params.tokenType.toString() == "ViaCash")
-      Cash.create(event.params.issuer);
-    else if (event.params.tokenType.toString() == "ViaBond")
-      Bond.create(event.params.issuer);
+    //if (event.params.tokenType.toString() == "ViaCash")
+    //  Cash.create(event.params.issuer);
+    //else if (event.params.tokenType.toString() == "ViaBond")
+    //  Bond.create(event.params.issuer);
     issuers.tokenName = event.params.tokenName;
     issuers.tokenType = event.params.tokenType;
     issuers.save();
