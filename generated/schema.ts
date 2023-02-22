@@ -198,63 +198,6 @@ export class Currency extends Entity {
       );
     }
   }
-
-  get trades(): Array<string> | null {
-    let value = this.get("trades");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set trades(value: Array<string> | null) {
-    if (!value) {
-      this.unset("trades");
-    } else {
-      this.set("trades", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get primarySubscribers(): Array<string> | null {
-    let value = this.get("primarySubscribers");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set primarySubscribers(value: Array<string> | null) {
-    if (!value) {
-      this.unset("primarySubscribers");
-    } else {
-      this.set(
-        "primarySubscribers",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get secondaryInvestors(): Array<string> | null {
-    let value = this.get("secondaryInvestors");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set secondaryInvestors(value: Array<string> | null) {
-    if (!value) {
-      this.unset("secondaryInvestors");
-    } else {
-      this.set(
-        "secondaryInvestors",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
 }
 
 export class User extends Entity {
@@ -506,134 +449,6 @@ export class User extends Entity {
       );
     }
   }
-
-  get offers(): Array<string> | null {
-    let value = this.get("offers");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set offers(value: Array<string> | null) {
-    if (!value) {
-      this.unset("offers");
-    } else {
-      this.set("offers", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get primarySubscribers(): Array<string> | null {
-    let value = this.get("primarySubscribers");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set primarySubscribers(value: Array<string> | null) {
-    if (!value) {
-      this.unset("primarySubscribers");
-    } else {
-      this.set(
-        "primarySubscribers",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get secondaryInvestors(): Array<string> | null {
-    let value = this.get("secondaryInvestors");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set secondaryInvestors(value: Array<string> | null) {
-    if (!value) {
-      this.unset("secondaryInvestors");
-    } else {
-      this.set(
-        "secondaryInvestors",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get liquidityProviders(): Array<string> | null {
-    let value = this.get("liquidityProviders");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set liquidityProviders(value: Array<string> | null) {
-    if (!value) {
-      this.unset("liquidityProviders");
-    } else {
-      this.set(
-        "liquidityProviders",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get manager(): Array<string> | null {
-    let value = this.get("manager");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set manager(value: Array<string> | null) {
-    if (!value) {
-      this.unset("manager");
-    } else {
-      this.set("manager", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get submanager(): Array<string> | null {
-    let value = this.get("submanager");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set submanager(value: Array<string> | null) {
-    if (!value) {
-      this.unset("submanager");
-    } else {
-      this.set("submanager", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get securityissuer(): Array<string> | null {
-    let value = this.get("securityissuer");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set securityissuer(value: Array<string> | null) {
-    if (!value) {
-      this.unset("securityissuer");
-    } else {
-      this.set("securityissuer", Value.fromStringArray(<Array<string>>value));
-    }
-  }
 }
 
 export class Token extends Entity {
@@ -744,114 +559,6 @@ export class Token extends Entity {
 
   set bondRedemptions(value: Array<string>) {
     this.set("bondRedemptions", Value.fromStringArray(value));
-  }
-
-  get primarySubscribers(): Array<string> | null {
-    let value = this.get("primarySubscribers");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set primarySubscribers(value: Array<string> | null) {
-    if (!value) {
-      this.unset("primarySubscribers");
-    } else {
-      this.set(
-        "primarySubscribers",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get secondaryInvestors(): Array<string> | null {
-    let value = this.get("secondaryInvestors");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set secondaryInvestors(value: Array<string> | null) {
-    if (!value) {
-      this.unset("secondaryInvestors");
-    } else {
-      this.set(
-        "secondaryInvestors",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get trades(): Array<string> | null {
-    let value = this.get("trades");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set trades(value: Array<string> | null) {
-    if (!value) {
-      this.unset("trades");
-    } else {
-      this.set("trades", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get liquidityoffered(): Array<string> | null {
-    let value = this.get("liquidityoffered");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set liquidityoffered(value: Array<string> | null) {
-    if (!value) {
-      this.unset("liquidityoffered");
-    } else {
-      this.set("liquidityoffered", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get securityissued(): Array<string> | null {
-    let value = this.get("securityissued");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set securityissued(value: Array<string> | null) {
-    if (!value) {
-      this.unset("securityissued");
-    } else {
-      this.set("securityissued", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get security(): Array<string> | null {
-    let value = this.get("security");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set security(value: Array<string> | null) {
-    if (!value) {
-      this.unset("security");
-    } else {
-      this.set("security", Value.fromStringArray(<Array<string>>value));
-    }
   }
 }
 
@@ -1414,7 +1121,7 @@ export class Manager extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("submanager", Value.fromString(""));
+    this.set("submanager", Value.fromBytes(Bytes.empty()));
     this.set("role", Value.fromBytes(Bytes.empty()));
   }
 
@@ -1444,30 +1151,30 @@ export class Manager extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get manager(): string | null {
+  get manager(): Bytes | null {
     let value = this.get("manager");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toString();
+      return value.toBytes();
     }
   }
 
-  set manager(value: string | null) {
+  set manager(value: Bytes | null) {
     if (!value) {
       this.unset("manager");
     } else {
-      this.set("manager", Value.fromString(<string>value));
+      this.set("manager", Value.fromBytes(<Bytes>value));
     }
   }
 
-  get submanager(): string {
+  get submanager(): Bytes {
     let value = this.get("submanager");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set submanager(value: string) {
-    this.set("submanager", Value.fromString(value));
+  set submanager(value: Bytes) {
+    this.set("submanager", Value.fromBytes(value));
   }
 
   get role(): Bytes {
@@ -1514,79 +1221,15 @@ export class Manager extends Entity {
   }
 }
 
-export class Issuer extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-
-    this.set("issuer", Value.fromString(""));
-    this.set("tokenName", Value.fromBytes(Bytes.empty()));
-    this.set("tokenType", Value.fromBytes(Bytes.empty()));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id != null, "Cannot save Issuer entity without an ID");
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        "Cannot save Issuer entity with non-string ID. " +
-          'Considering using .toHex() to convert the "id" to a string.'
-      );
-      store.set("Issuer", id.toString(), this);
-    }
-  }
-
-  static load(id: string): Issuer | null {
-    return changetype<Issuer | null>(store.get("Issuer", id));
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    return value!.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get issuer(): string {
-    let value = this.get("issuer");
-    return value!.toString();
-  }
-
-  set issuer(value: string) {
-    this.set("issuer", Value.fromString(value));
-  }
-
-  get tokenName(): Bytes {
-    let value = this.get("tokenName");
-    return value!.toBytes();
-  }
-
-  set tokenName(value: Bytes) {
-    this.set("tokenName", Value.fromBytes(value));
-  }
-
-  get tokenType(): Bytes {
-    let value = this.get("tokenType");
-    return value!.toBytes();
-  }
-
-  set tokenType(value: Bytes) {
-    this.set("tokenType", Value.fromBytes(value));
-  }
-}
-
 export class Security extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("security", Value.fromString(""));
-    this.set("issuer", Value.fromString(""));
+    this.set("security", Value.fromBytes(Bytes.empty()));
+    this.set("issuer", Value.fromBytes(Bytes.empty()));
     this.set("isin", Value.fromBytes(Bytes.empty()));
-    this.set("currency", Value.fromString(""));
+    this.set("currency", Value.fromBytes(Bytes.empty()));
   }
 
   save(): void {
@@ -1615,22 +1258,22 @@ export class Security extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get security(): string {
+  get security(): Bytes {
     let value = this.get("security");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set security(value: string) {
-    this.set("security", Value.fromString(value));
+  set security(value: Bytes) {
+    this.set("security", Value.fromBytes(value));
   }
 
-  get issuer(): string {
+  get issuer(): Bytes {
     let value = this.get("issuer");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set issuer(value: string) {
-    this.set("issuer", Value.fromString(value));
+  set issuer(value: Bytes) {
+    this.set("issuer", Value.fromBytes(value));
   }
 
   get isin(): Bytes {
@@ -1642,13 +1285,104 @@ export class Security extends Entity {
     this.set("isin", Value.fromBytes(value));
   }
 
-  get currency(): string {
+  get currency(): Bytes {
     let value = this.get("currency");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set currency(value: string) {
-    this.set("currency", Value.fromString(value));
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
+  }
+
+  get primarySubscribers(): Array<string> | null {
+    let value = this.get("primarySubscribers");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set primarySubscribers(value: Array<string> | null) {
+    if (!value) {
+      this.unset("primarySubscribers");
+    } else {
+      this.set(
+        "primarySubscribers",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get secondaryInvestors(): Array<string> | null {
+    let value = this.get("secondaryInvestors");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set secondaryInvestors(value: Array<string> | null) {
+    if (!value) {
+      this.unset("secondaryInvestors");
+    } else {
+      this.set(
+        "secondaryInvestors",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get trades(): Array<string> | null {
+    let value = this.get("trades");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set trades(value: Array<string> | null) {
+    if (!value) {
+      this.unset("trades");
+    } else {
+      this.set("trades", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get liquidityoffered(): Array<string> | null {
+    let value = this.get("liquidityoffered");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set liquidityoffered(value: Array<string> | null) {
+    if (!value) {
+      this.unset("liquidityoffered");
+    } else {
+      this.set("liquidityoffered", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get securityissued(): Array<string> | null {
+    let value = this.get("securityissued");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set securityissued(value: Array<string> | null) {
+    if (!value) {
+      this.unset("securityissued");
+    } else {
+      this.set("securityissued", Value.fromStringArray(<Array<string>>value));
+    }
   }
 }
 
@@ -1658,7 +1392,7 @@ export class Offers extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("platform", Value.fromBytes(Bytes.empty()));
-    this.set("offeredBy", Value.fromString(""));
+    this.set("offeredBy", Value.fromBytes(Bytes.empty()));
     this.set("offered", Value.fromString(""));
     this.set("isin", Value.fromBytes(Bytes.empty()));
     this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
@@ -1701,13 +1435,13 @@ export class Offers extends Entity {
     this.set("platform", Value.fromBytes(value));
   }
 
-  get offeredBy(): string {
+  get offeredBy(): Bytes {
     let value = this.get("offeredBy");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set offeredBy(value: string) {
-    this.set("offeredBy", Value.fromString(value));
+  set offeredBy(value: Bytes) {
+    this.set("offeredBy", Value.fromBytes(value));
   }
 
   get offered(): string {
@@ -1761,12 +1495,12 @@ export class Trades extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("transferor", Value.fromString(""));
-    this.set("transferee", Value.fromString(""));
+    this.set("transferor", Value.fromBytes(Bytes.empty()));
+    this.set("transferee", Value.fromBytes(Bytes.empty()));
     this.set("unitsToTransfer", Value.fromBigInt(BigInt.zero()));
     this.set("security", Value.fromString(""));
     this.set("price", Value.fromBigDecimal(BigDecimal.zero()));
-    this.set("currency", Value.fromString(""));
+    this.set("currency", Value.fromBytes(Bytes.empty()));
   }
 
   save(): void {
@@ -1795,22 +1529,22 @@ export class Trades extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get transferor(): string {
+  get transferor(): Bytes {
     let value = this.get("transferor");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set transferor(value: string) {
-    this.set("transferor", Value.fromString(value));
+  set transferor(value: Bytes) {
+    this.set("transferor", Value.fromBytes(value));
   }
 
-  get transferee(): string {
+  get transferee(): Bytes {
     let value = this.get("transferee");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set transferee(value: string) {
-    this.set("transferee", Value.fromString(value));
+  set transferee(value: Bytes) {
+    this.set("transferee", Value.fromBytes(value));
   }
 
   get unitsToTransfer(): BigInt {
@@ -1840,13 +1574,13 @@ export class Trades extends Entity {
     this.set("price", Value.fromBigDecimal(value));
   }
 
-  get currency(): string {
+  get currency(): Bytes {
     let value = this.get("currency");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set currency(value: string) {
-    this.set("currency", Value.fromString(value));
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
   }
 }
 
@@ -1858,8 +1592,8 @@ export class Subscribers extends Entity {
     this.set("platform", Value.fromBytes(Bytes.empty()));
     this.set("security", Value.fromString(""));
     this.set("pool", Value.fromBytes(Bytes.empty()));
-    this.set("investor", Value.fromString(""));
-    this.set("currency", Value.fromString(""));
+    this.set("investor", Value.fromBytes(Bytes.empty()));
+    this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("cashSwapped", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("securitySwapped", Value.fromBigDecimal(BigDecimal.zero()));
   }
@@ -1917,22 +1651,22 @@ export class Subscribers extends Entity {
     this.set("pool", Value.fromBytes(value));
   }
 
-  get investor(): string {
+  get investor(): Bytes {
     let value = this.get("investor");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set investor(value: string) {
-    this.set("investor", Value.fromString(value));
+  set investor(value: Bytes) {
+    this.set("investor", Value.fromBytes(value));
   }
 
-  get currency(): string {
+  get currency(): Bytes {
     let value = this.get("currency");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set currency(value: string) {
-    this.set("currency", Value.fromString(value));
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
   }
 
   get cashSwapped(): BigDecimal {
@@ -1962,9 +1696,9 @@ export class Investors extends Entity {
     this.set("platform", Value.fromBytes(Bytes.empty()));
     this.set("pool", Value.fromBytes(Bytes.empty()));
     this.set("security", Value.fromString(""));
-    this.set("issuer", Value.fromString(""));
-    this.set("investor", Value.fromString(""));
-    this.set("currency", Value.fromString(""));
+    this.set("issuer", Value.fromBytes(Bytes.empty()));
+    this.set("investor", Value.fromBytes(Bytes.empty()));
+    this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("price", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("tradeRef", Value.fromBytes(Bytes.empty()));
@@ -2025,31 +1759,31 @@ export class Investors extends Entity {
     this.set("security", Value.fromString(value));
   }
 
-  get issuer(): string {
+  get issuer(): Bytes {
     let value = this.get("issuer");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set issuer(value: string) {
-    this.set("issuer", Value.fromString(value));
+  set issuer(value: Bytes) {
+    this.set("issuer", Value.fromBytes(value));
   }
 
-  get investor(): string {
+  get investor(): Bytes {
     let value = this.get("investor");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set investor(value: string) {
-    this.set("investor", Value.fromString(value));
+  set investor(value: Bytes) {
+    this.set("investor", Value.fromBytes(value));
   }
 
-  get currency(): string {
+  get currency(): Bytes {
     let value = this.get("currency");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set currency(value: string) {
-    this.set("currency", Value.fromString(value));
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
   }
 
   get amount(): BigDecimal {
@@ -2104,7 +1838,7 @@ export class LiquidityProviders extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("platform", Value.fromBytes(Bytes.empty()));
-    this.set("owner", Value.fromString(""));
+    this.set("owner", Value.fromBytes(Bytes.empty()));
     this.set("tokenOffered", Value.fromString(""));
     this.set("underwritten", Value.fromBigDecimal(BigDecimal.zero()));
   }
@@ -2146,13 +1880,13 @@ export class LiquidityProviders extends Entity {
     this.set("platform", Value.fromBytes(value));
   }
 
-  get owner(): string {
+  get owner(): Bytes {
     let value = this.get("owner");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set owner(value: string) {
-    this.set("owner", Value.fromString(value));
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
   }
 
   get tokenOffered(): string {

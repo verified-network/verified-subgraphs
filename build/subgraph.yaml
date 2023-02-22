@@ -28,9 +28,9 @@ dataSources:
           file: Factory\abis\Security.json
       eventHandlers:
         - event: IssuerCreated(indexed address,bytes32,bytes32)
-          handler: handleIssuerCreated
-        - event: securitiesAdded(indexed address,address,bytes32,bytes32)
           handler: handleTokenCreated
+        - event: securitiesAdded(indexed address,address,bytes32,bytes32)
+          handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
     network: goerli
