@@ -32,6 +32,28 @@ export class OwnershipTransferred__Params {
   }
 }
 
+export class acceptInvestor extends ethereum.Event {
+  get params(): acceptInvestor__Params {
+    return new acceptInvestor__Params(this);
+  }
+}
+
+export class acceptInvestor__Params {
+  _event: acceptInvestor;
+
+  constructor(event: acceptInvestor) {
+    this._event = event;
+  }
+
+  get allotment(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
 export class distributeFees extends ethereum.Event {
   get params(): distributeFees__Params {
     return new distributeFees__Params(this);

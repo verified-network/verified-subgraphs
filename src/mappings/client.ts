@@ -8,7 +8,7 @@ import {
         User 
       } from "../../generated/schema";
 
-export function handleManagerAdded(event: ManagerAdded): void {
+export function handleManagerCreated(event: ManagerAdded): void {
   let clientAddress = event.address;
 
   let managers = Manager.load(event.transaction.hash.toHexString().concat('-').concat(clientAddress.toHexString()));

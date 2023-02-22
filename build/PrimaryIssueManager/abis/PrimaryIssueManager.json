@@ -24,6 +24,25 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "allotment",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "acceptInvestor",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "issuingFee",
         "type": "uint256"
       },
