@@ -44,7 +44,7 @@ dataSources:
       file: ./src/mappings/client.ts
       entities:
         - Manager
-        - Client
+        - User
       abis:
         - name: Client
           file: ./abis/Client.json
@@ -66,11 +66,11 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
-      file: ./src/mappings/client.ts
+      file: ./src/mappings/primaries.ts
       entities:
         - Subscribers
         - LiquidityProviders
-        - Pools
+        - Offers
       abis:
         - name: PrimaryIssueManager
           file: ./abis/PrimaryIssueManager.json
@@ -92,11 +92,10 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
-      file: ./src/mappings/client.ts
+      file: ./src/mappings/secondaries.ts
       entities:
         - Trades
-        - Subscribers
-        - Pools
+        - Investors
       abis:
         - name: SecondaryIssueManager
           file: ./abis/SecondaryIssueManager.json

@@ -19,7 +19,7 @@ export function handleMarketmakers(event: marketmakers): void {
         let lpId = event.transaction.hash.toHexString().concat('-').concat(primaryIssueManagerAddress.toHexString());
         let lps = new LiquidityProviders(lpId);
         lps.id = event.params.security.toHexString();
-        lps.platform = event.params.platform.toHexString();
+        lps.platform = event.params.platform;
         lps.owner = event.params.provider.toHexString();
         lps.tokenOffered = event.params.currency.toHexString();
         lps.subscribed = event.params.tokenOffered.toBigDecimal();
@@ -28,7 +28,7 @@ export function handleMarketmakers(event: marketmakers): void {
         lps.save();
     }
     else{
-        lps.platform = event.params.platform.toHexString();
+        lps.platform = event.params.platform;
         lps.owner = event.params.provider.toHexString();
         lps.tokenOffered = event.params.currency.toHexString();
         lps.subscribed = event.params.tokenOffered.toBigDecimal();
@@ -68,7 +68,7 @@ export function handlePrimaryInvestors(event: subscribers): void {
 
 export function handleOffers(event: offers): void {
     let primaryIssueManagerAddress = event.address;
-
+    
     let offers = Offers.load(event.transaction.hash.toHexString().concat('-').concat(primaryIssueManagerAddress.toHexString()));
     if(offers==null){
         let offerId = event.transaction.hash.toHexString().concat('-').concat(primaryIssueManagerAddress.toHexString());

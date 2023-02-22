@@ -45,7 +45,7 @@ dataSources:
       file: Client\Client.wasm
       entities:
         - Manager
-        - Client
+        - User
       abis:
         - name: Client
           file: Client\abis\Client.json
@@ -67,11 +67,11 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
-      file: Client\Client.wasm
+      file: PrimaryIssueManager\PrimaryIssueManager.wasm
       entities:
         - Subscribers
         - LiquidityProviders
-        - Pools
+        - Offers
       abis:
         - name: PrimaryIssueManager
           file: PrimaryIssueManager\abis\PrimaryIssueManager.json
@@ -93,11 +93,10 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
-      file: Client\Client.wasm
+      file: SecondaryIssueManager\SecondaryIssueManager.wasm
       entities:
         - Trades
-        - Subscribers
-        - Pools
+        - Investors
       abis:
         - name: SecondaryIssueManager
           file: SecondaryIssueManager\abis\SecondaryIssueManager.json
