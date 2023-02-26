@@ -1,34 +1,80 @@
 [
   {
+    "constant": false,
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "isOwner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
         "indexed": false,
-        "internalType": "address",
         "name": "manager",
         "type": "address"
       },
       {
         "indexed": true,
-        "internalType": "address",
         "name": "submanager",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
         "name": "role",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
         "name": "country",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
         "name": "managerId",
         "type": "bytes32"
       }
@@ -41,25 +87,21 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "address",
         "name": "manager",
         "type": "address"
       },
       {
         "indexed": true,
-        "internalType": "address",
         "name": "submanager",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
         "name": "role",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
         "name": "country",
         "type": "bytes32"
       }
@@ -71,51 +113,27 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "previousOwner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "OwnershipTransferred",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": false,
-        "internalType": "address",
         "name": "client",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
         "name": "name",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
         "name": "surname",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
         "name": "country",
         "type": "bytes32"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
         "name": "status",
         "type": "uint256"
       }
@@ -124,122 +142,100 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
+    "anonymous": false,
     "inputs": [
       {
-        "internalType": "address",
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
         "name": "newOwner",
         "type": "address"
       }
     ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "name": "OwnershipTransferred",
+    "type": "event"
   },
   {
+    "constant": false,
     "inputs": [
       {
-        "internalType": "address",
         "name": "_signer",
         "type": "address"
       }
     ],
     "name": "initialize",
     "outputs": [],
+    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
+    "constant": false,
     "inputs": [
       {
-        "internalType": "address",
         "name": "_signer",
         "type": "address"
       }
     ],
     "name": "setSigner",
     "outputs": [],
+    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
+    "constant": false,
     "inputs": [
       {
-        "internalType": "address",
         "name": "_manager",
         "type": "address"
       },
       {
-        "internalType": "address",
         "name": "_submanager",
         "type": "address"
       },
       {
-        "internalType": "bytes32",
         "name": "_country",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "_role",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "_id",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "_hashedMessage",
         "type": "bytes32"
       },
       {
-        "internalType": "uint8",
         "name": "_v",
         "type": "uint8"
       },
       {
-        "internalType": "bytes32",
         "name": "_r",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "_s",
         "type": "bytes32"
       }
     ],
     "name": "addRole",
     "outputs": [],
+    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
+    "constant": true,
     "inputs": [
       {
-        "internalType": "address",
         "name": "_user",
         "type": "address"
       }
@@ -247,148 +243,146 @@
     "name": "getRole",
     "outputs": [
       {
-        "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
       }
     ],
+    "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
+    "constant": false,
     "inputs": [
       {
-        "internalType": "address",
         "name": "_manager",
         "type": "address"
       },
       {
-        "internalType": "address",
         "name": "_submanager",
         "type": "address"
       },
       {
-        "internalType": "bytes32",
         "name": "_country",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "_role",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "_hashedMessage",
         "type": "bytes32"
       },
       {
-        "internalType": "uint8",
         "name": "_v",
         "type": "uint8"
       },
       {
-        "internalType": "bytes32",
         "name": "_r",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "_s",
         "type": "bytes32"
       }
     ],
     "name": "removeRole",
     "outputs": [],
+    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
+    "constant": false,
     "inputs": [
       {
-        "internalType": "address",
         "name": "client",
         "type": "address"
       },
       {
-        "internalType": "bytes32",
         "name": "name",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "surname",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "country",
         "type": "bytes32"
       },
       {
-        "internalType": "uint256",
         "name": "status",
         "type": "uint256"
       },
       {
-        "internalType": "bytes32",
         "name": "_hashedMessage",
         "type": "bytes32"
       },
       {
-        "internalType": "uint8",
         "name": "_v",
         "type": "uint8"
       },
       {
-        "internalType": "bytes32",
         "name": "_r",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "_s",
         "type": "bytes32"
       }
     ],
     "name": "KycUpdate",
     "outputs": [],
+    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
+    "constant": false,
     "inputs": [
       {
-        "internalType": "address",
         "name": "client",
         "type": "address"
       },
       {
-        "internalType": "uint256",
         "name": "score",
         "type": "uint256"
       }
     ],
     "name": "setAmlScore",
     "outputs": [],
+    "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
+    "constant": false,
     "inputs": [
       {
-        "internalType": "address",
+        "name": "_score",
+        "type": "uint256"
+      }
+    ],
+    "name": "setAmlPassScore",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
         "name": "client",
         "type": "address"
       }
@@ -396,19 +390,18 @@
     "name": "getAMLStatus",
     "outputs": [
       {
-        "internalType": "bool",
         "name": "",
         "type": "bool"
       }
     ],
+    "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
+    "constant": true,
     "inputs": [
       {
-        "internalType": "address",
         "name": "client",
         "type": "address"
       }
@@ -416,39 +409,34 @@
     "name": "getClientKYC",
     "outputs": [
       {
-        "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
       },
       {
-        "internalType": "uint256",
         "name": "",
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
         "name": "",
         "type": "uint256"
       }
     ],
+    "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
+    "constant": true,
     "inputs": [
       {
-        "internalType": "address",
         "name": "party",
         "type": "address"
       }
@@ -456,13 +444,63 @@
     "name": "getTransferAgent",
     "outputs": [
       {
-        "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
       }
     ],
+    "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_submanager",
+        "type": "address"
+      },
+      {
+        "name": "_currency",
+        "type": "bytes32"
+      },
+      {
+        "name": "_accountId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setCustodyAccount",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_submanager",
+        "type": "address"
+      }
+    ],
+    "name": "getCustodyAccount",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "currency",
+            "type": "bytes32"
+          },
+          {
+            "name": "account",
+            "type": "bytes32"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   }
 ]

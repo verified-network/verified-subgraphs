@@ -1230,6 +1230,7 @@ export class Security extends Entity {
     this.set("issuer", Value.fromBytes(Bytes.empty()));
     this.set("isin", Value.fromBytes(Bytes.empty()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("restricted", Value.fromBoolean(false));
   }
 
   save(): void {
@@ -1292,6 +1293,15 @@ export class Security extends Entity {
 
   set currency(value: Bytes) {
     this.set("currency", Value.fromBytes(value));
+  }
+
+  get restricted(): boolean {
+    let value = this.get("restricted");
+    return value!.toBoolean();
+  }
+
+  set restricted(value: boolean) {
+    this.set("restricted", Value.fromBoolean(value));
   }
 
   get primarySubscribers(): Array<string> | null {

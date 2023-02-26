@@ -74,28 +74,6 @@ export class ManagerRemoved__Params {
   }
 }
 
-export class OwnershipTransferred extends ethereum.Event {
-  get params(): OwnershipTransferred__Params {
-    return new OwnershipTransferred__Params(this);
-  }
-}
-
-export class OwnershipTransferred__Params {
-  _event: OwnershipTransferred;
-
-  constructor(event: OwnershipTransferred) {
-    this._event = event;
-  }
-
-  get previousOwner(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get newOwner(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-}
-
 export class UserAdded extends ethereum.Event {
   get params(): UserAdded__Params {
     return new UserAdded__Params(this);
@@ -127,6 +105,28 @@ export class UserAdded__Params {
 
   get status(): BigInt {
     return this._event.parameters[4].value.toBigInt();
+  }
+}
+
+export class OwnershipTransferred extends ethereum.Event {
+  get params(): OwnershipTransferred__Params {
+    return new OwnershipTransferred__Params(this);
+  }
+}
+
+export class OwnershipTransferred__Params {
+  _event: OwnershipTransferred;
+
+  constructor(event: OwnershipTransferred) {
+    this._event = event;
+  }
+
+  get previousOwner(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get newOwner(): Address {
+    return this._event.parameters[1].value.toAddress();
   }
 }
 
@@ -182,6 +182,16 @@ export class Client__getClientKYCResult {
   }
 }
 
+export class Client__getCustodyAccountResultValue0Struct extends ethereum.Tuple {
+  get currency(): Bytes {
+    return this[0].toBytes();
+  }
+
+  get account(): Bytes {
+    return this[1].toBytes();
+  }
+}
+
 export class Client extends ethereum.SmartContract {
   static bind(address: Address): Client {
     return new Client("Client", address);
@@ -200,6 +210,21 @@ export class Client extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  isOwner(): boolean {
+    let result = super.call("isOwner", "isOwner():(bool)", []);
+
+    return result[0].toBoolean();
+  }
+
+  try_isOwner(): ethereum.CallResult<boolean> {
+    let result = super.tryCall("isOwner", "isOwner():(bool)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
   getRole(_user: Address): Client__getRoleResult {
@@ -314,6 +339,37 @@ export class Client extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
+  getCustodyAccount(
+    _submanager: Address
+  ): Array<Client__getCustodyAccountResultValue0Struct> {
+    let result = super.call(
+      "getCustodyAccount",
+      "getCustodyAccount(address):((bytes32,bytes32)[])",
+      [ethereum.Value.fromAddress(_submanager)]
+    );
+
+    return result[0].toTupleArray<
+      Client__getCustodyAccountResultValue0Struct
+    >();
+  }
+
+  try_getCustodyAccount(
+    _submanager: Address
+  ): ethereum.CallResult<Array<Client__getCustodyAccountResultValue0Struct>> {
+    let result = super.tryCall(
+      "getCustodyAccount",
+      "getCustodyAccount(address):((bytes32,bytes32)[])",
+      [ethereum.Value.fromAddress(_submanager)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      value[0].toTupleArray<Client__getCustodyAccountResultValue0Struct>()
+    );
   }
 }
 
@@ -645,6 +701,74 @@ export class SetAmlScoreCall__Outputs {
   _call: SetAmlScoreCall;
 
   constructor(call: SetAmlScoreCall) {
+    this._call = call;
+  }
+}
+
+export class SetAmlPassScoreCall extends ethereum.Call {
+  get inputs(): SetAmlPassScoreCall__Inputs {
+    return new SetAmlPassScoreCall__Inputs(this);
+  }
+
+  get outputs(): SetAmlPassScoreCall__Outputs {
+    return new SetAmlPassScoreCall__Outputs(this);
+  }
+}
+
+export class SetAmlPassScoreCall__Inputs {
+  _call: SetAmlPassScoreCall;
+
+  constructor(call: SetAmlPassScoreCall) {
+    this._call = call;
+  }
+
+  get _score(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetAmlPassScoreCall__Outputs {
+  _call: SetAmlPassScoreCall;
+
+  constructor(call: SetAmlPassScoreCall) {
+    this._call = call;
+  }
+}
+
+export class SetCustodyAccountCall extends ethereum.Call {
+  get inputs(): SetCustodyAccountCall__Inputs {
+    return new SetCustodyAccountCall__Inputs(this);
+  }
+
+  get outputs(): SetCustodyAccountCall__Outputs {
+    return new SetCustodyAccountCall__Outputs(this);
+  }
+}
+
+export class SetCustodyAccountCall__Inputs {
+  _call: SetCustodyAccountCall;
+
+  constructor(call: SetCustodyAccountCall) {
+    this._call = call;
+  }
+
+  get _submanager(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get _currency(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+  }
+
+  get _accountId(): Bytes {
+    return this._call.inputValues[2].value.toBytes();
+  }
+}
+
+export class SetCustodyAccountCall__Outputs {
+  _call: SetCustodyAccountCall;
+
+  constructor(call: SetCustodyAccountCall) {
     this._call = call;
   }
 }

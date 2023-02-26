@@ -5,12 +5,12 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Factory
+    name: SecuritiesFactory
     network: goerli
     source:
-      address: '0x6405ddCD72841f0827D51A65a6AB89B7486d4A48'
-      abi: Factory
-      startBlock: 8427662
+      address: '0x9191997e7fd5e62908F912597FB27F5F358188B5'
+      abi: SecuritiesFactory
+      startBlock: 8557014
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -21,22 +21,20 @@ dataSources:
         - Token
         - Security
       abis:
-        - name: Factory
-          file: ./abis/Factory.json
+        - name: SecuritiesFactory
+          file: ./abis/SecuritiesFactory.json
         - name: Security
           file: ./abis/Security.json
       eventHandlers:
-        - event: IssuerCreated(indexed address,bytes32,bytes32)
-          handler: handleTokenCreated
-        - event: securitiesAdded(indexed address,address,bytes32,bytes32)
+        - event: securitiesAdded(indexed address,address,bytes32,bytes32,bool)
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
     network: goerli
     source:
-      address: '0x18c3aD8A80Ba30aB68aB412676E579261b4A7887'
+      address: '0x5d891583b79A00d6Ff7e93a68079942Be28fCA27'
       abi: Client
-      startBlock: 8534082
+      startBlock: 8557013
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -59,9 +57,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: '0x662932A015B10146E7235f126903bC49cFb840D0'
+      address: '0xfD16D1787ff710366cB78A29D741741c88Cccaa6'
       abi: PrimaryIssueManager
-      startBlock: 8534083
+      startBlock: 8557135
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -85,9 +83,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: '0xb0a7729D8F74b978925980c34bFf5f89A93099Ff'
+      address: '0xE5FAF6f791c8b4e26BFf508994cE00e8045D85C0'
       abi: SecondaryIssueManager
-      startBlock: 8534088
+      startBlock: 8557140
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

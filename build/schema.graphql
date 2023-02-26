@@ -121,6 +121,7 @@ type Security @entity {
   isin: Bytes!
   #currency: Currency! 
   currency: Bytes!
+  restricted: Boolean!
   primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
   secondaryInvestors: [Investors!] @derivedFrom(field: "security")
   trades: [Trades!] @derivedFrom(field: "security")
