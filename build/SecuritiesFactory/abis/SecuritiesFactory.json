@@ -243,6 +243,11 @@
         "indexed": false,
         "name": "restricted",
         "type": "bool"
+      },
+      {
+        "indexed": false,
+        "name": "issueManager",
+        "type": "address"
       }
     ],
     "name": "securitiesAdded",
@@ -365,24 +370,12 @@
         "type": "address"
       },
       {
+        "name": "intermediary",
+        "type": "address"
+      },
+      {
         "name": "qualified",
         "type": "bool"
-      },
-      {
-        "name": "_hashedMessage",
-        "type": "bytes32"
-      },
-      {
-        "name": "_v",
-        "type": "uint8"
-      },
-      {
-        "name": "_r",
-        "type": "bytes32"
-      },
-      {
-        "name": "_s",
-        "type": "bytes32"
       }
     ],
     "name": "issueSecurity",
@@ -486,22 +479,6 @@
       {
         "name": "amount",
         "type": "uint256"
-      },
-      {
-        "name": "_hashedMessage",
-        "type": "bytes32"
-      },
-      {
-        "name": "_v",
-        "type": "uint8"
-      },
-      {
-        "name": "_r",
-        "type": "bytes32"
-      },
-      {
-        "name": "_s",
-        "type": "bytes32"
       }
     ],
     "name": "addBalance",
@@ -564,6 +541,62 @@
       }
     ],
     "name": "getCustodian",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_security",
+        "type": "address"
+      },
+      {
+        "name": "_countries",
+        "type": "bytes32[]"
+      }
+    ],
+    "name": "restrictCountry",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_security",
+        "type": "address"
+      }
+    ],
+    "name": "getRestrictedCountries",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_securityToken",
+        "type": "address"
+      }
+    ],
+    "name": "getDP",
     "outputs": [
       {
         "name": "",

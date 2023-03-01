@@ -22,6 +22,7 @@ export function handleSecurityCreated(event: securitiesAdded): void {
     securities.security = event.params.security;
     securities.issuer = event.params.issuer;
     securities.restricted = event.params.restricted;
+    securities.issueManager = event.params.issueManager;
     securities.save();
   }
   else{
@@ -30,6 +31,7 @@ export function handleSecurityCreated(event: securitiesAdded): void {
     securities.security = event.params.security;
     securities.issuer = event.params.issuer;
     securities.restricted = event.params.restricted;
+    securities.issueManager = event.params.issueManager;
     securities.save();
   }
 }

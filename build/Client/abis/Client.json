@@ -453,6 +453,29 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_country",
+        "type": "bytes32"
+      },
+      {
+        "name": "_role",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getManagers",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {

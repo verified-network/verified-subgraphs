@@ -42,6 +42,10 @@ export class securitiesAdded__Params {
   get restricted(): boolean {
     return this._event.parameters[4].value.toBoolean();
   }
+
+  get issueManager(): Address {
+    return this._event.parameters[5].value.toAddress();
+  }
 }
 
 export class OwnershipTransferred extends ethereum.Event {
@@ -519,6 +523,50 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
+
+  getRestrictedCountries(_security: Address): Array<Bytes> {
+    let result = super.call(
+      "getRestrictedCountries",
+      "getRestrictedCountries(address):(bytes32[])",
+      [ethereum.Value.fromAddress(_security)]
+    );
+
+    return result[0].toBytesArray();
+  }
+
+  try_getRestrictedCountries(
+    _security: Address
+  ): ethereum.CallResult<Array<Bytes>> {
+    let result = super.tryCall(
+      "getRestrictedCountries",
+      "getRestrictedCountries(address):(bytes32[])",
+      [ethereum.Value.fromAddress(_security)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytesArray());
+  }
+
+  getDP(_securityToken: Address): Address {
+    let result = super.call("getDP", "getDP(address):(address)", [
+      ethereum.Value.fromAddress(_securityToken)
+    ]);
+
+    return result[0].toAddress();
+  }
+
+  try_getDP(_securityToken: Address): ethereum.CallResult<Address> {
+    let result = super.tryCall("getDP", "getDP(address):(address)", [
+      ethereum.Value.fromAddress(_securityToken)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
 }
 
 export class DeploySignedCall extends ethereum.Call {
@@ -846,24 +894,12 @@ export class IssueSecurityCall__Inputs {
     return this._call.inputValues[4].value.toAddress();
   }
 
+  get intermediary(): Address {
+    return this._call.inputValues[5].value.toAddress();
+  }
+
   get qualified(): boolean {
-    return this._call.inputValues[5].value.toBoolean();
-  }
-
-  get _hashedMessage(): Bytes {
-    return this._call.inputValues[6].value.toBytes();
-  }
-
-  get _v(): i32 {
-    return this._call.inputValues[7].value.toI32();
-  }
-
-  get _r(): Bytes {
-    return this._call.inputValues[8].value.toBytes();
-  }
-
-  get _s(): Bytes {
-    return this._call.inputValues[9].value.toBytes();
+    return this._call.inputValues[6].value.toBoolean();
   }
 }
 
@@ -906,22 +942,6 @@ export class AddBalanceCall__Inputs {
 
   get amount(): BigInt {
     return this._call.inputValues[3].value.toBigInt();
-  }
-
-  get _hashedMessage(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-
-  get _v(): i32 {
-    return this._call.inputValues[5].value.toI32();
-  }
-
-  get _r(): Bytes {
-    return this._call.inputValues[6].value.toBytes();
-  }
-
-  get _s(): Bytes {
-    return this._call.inputValues[7].value.toBytes();
   }
 }
 
@@ -967,6 +987,40 @@ export class SetCustodianCall__Outputs {
   _call: SetCustodianCall;
 
   constructor(call: SetCustodianCall) {
+    this._call = call;
+  }
+}
+
+export class RestrictCountryCall extends ethereum.Call {
+  get inputs(): RestrictCountryCall__Inputs {
+    return new RestrictCountryCall__Inputs(this);
+  }
+
+  get outputs(): RestrictCountryCall__Outputs {
+    return new RestrictCountryCall__Outputs(this);
+  }
+}
+
+export class RestrictCountryCall__Inputs {
+  _call: RestrictCountryCall;
+
+  constructor(call: RestrictCountryCall) {
+    this._call = call;
+  }
+
+  get _security(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get _countries(): Array<Bytes> {
+    return this._call.inputValues[1].value.toBytesArray();
+  }
+}
+
+export class RestrictCountryCall__Outputs {
+  _call: RestrictCountryCall;
+
+  constructor(call: RestrictCountryCall) {
     this._call = call;
   }
 }

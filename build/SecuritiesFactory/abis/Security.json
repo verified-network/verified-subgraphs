@@ -90,6 +90,48 @@
     "constant": true,
     "inputs": [
       {
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "snapshotTotalSupply",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      },
+      {
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "snapshotBalanceOf",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
         "name": "account",
         "type": "address"
       }
@@ -190,6 +232,20 @@
   },
   {
     "constant": true,
+    "inputs": [],
+    "name": "isPaused",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [
       {
         "name": "owner",
@@ -226,20 +282,114 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "getNextSnapshots",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
         "indexed": true,
-        "name": "previousOwner",
+        "name": "enforcer",
         "type": "address"
       },
       {
         "indexed": true,
-        "name": "newOwner",
+        "name": "owner",
         "type": "address"
       }
     ],
-    "name": "OwnershipTransferred",
+    "name": "Freeze",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "enforcer",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "Unfreeze",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Burn",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "beneficiary",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Mint",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "oldTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "newTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "SnapshotSchedule",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "SnapshotUnschedule",
     "type": "event"
   },
   {
@@ -287,6 +437,35 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [],
+    "name": "Paused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -299,6 +478,10 @@
       },
       {
         "name": "_owner",
+        "type": "address"
+      },
+      {
+        "name": "issueManager",
         "type": "address"
       }
     ],
@@ -368,6 +551,24 @@
     "constant": false,
     "inputs": [
       {
+        "name": "issuer",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "mintToken",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "name": "transferor",
         "type": "address"
       },
@@ -390,7 +591,7 @@
     "constant": false,
     "inputs": [
       {
-        "name": "issuer",
+        "name": "spender",
         "type": "address"
       },
       {
@@ -398,7 +599,7 @@
         "type": "uint256"
       }
     ],
-    "name": "mintToken",
+    "name": "whiteList",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -408,11 +609,7 @@
     "constant": false,
     "inputs": [
       {
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "name": "spender",
+        "name": "holder",
         "type": "address"
       },
       {
@@ -420,7 +617,131 @@
         "type": "uint256"
       }
     ],
-    "name": "approveToken",
+    "name": "freeze",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "holder",
+        "type": "address"
+      }
+    ],
+    "name": "unfreeze",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "frozen",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "holder",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "burn",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "burnAll",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "scheduleSnapshot",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "oldTime",
+        "type": "uint256"
+      },
+      {
+        "name": "newTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "rescheduleSnapshot",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "unscheduleSnapshot",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "pause",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "unpause",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",

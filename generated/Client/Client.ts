@@ -341,6 +341,38 @@ export class Client extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
+  getManagers(_country: Bytes, _role: Bytes): Array<Address> {
+    let result = super.call(
+      "getManagers",
+      "getManagers(bytes32,bytes32):(address[])",
+      [
+        ethereum.Value.fromFixedBytes(_country),
+        ethereum.Value.fromFixedBytes(_role)
+      ]
+    );
+
+    return result[0].toAddressArray();
+  }
+
+  try_getManagers(
+    _country: Bytes,
+    _role: Bytes
+  ): ethereum.CallResult<Array<Address>> {
+    let result = super.tryCall(
+      "getManagers",
+      "getManagers(bytes32,bytes32):(address[])",
+      [
+        ethereum.Value.fromFixedBytes(_country),
+        ethereum.Value.fromFixedBytes(_role)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddressArray());
+  }
+
   getCustodyAccount(
     _submanager: Address
   ): Array<Client__getCustodyAccountResultValue0Struct> {

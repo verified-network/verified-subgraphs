@@ -122,6 +122,7 @@ type Security @entity {
   #currency: Currency! 
   currency: Bytes!
   restricted: Boolean!
+  issueManager: Bytes!
   primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
   secondaryInvestors: [Investors!] @derivedFrom(field: "security")
   trades: [Trades!] @derivedFrom(field: "security")
@@ -180,8 +181,7 @@ type Investors @entity {
   amount: BigDecimal!   
   price: BigDecimal! 
   tradeRef : Bytes!
-  transferorDPID : Bytes!
-  transfereeDPID : Bytes!
+  DPID : Bytes!
 }
 type LiquidityProviders @entity {
   id: ID!

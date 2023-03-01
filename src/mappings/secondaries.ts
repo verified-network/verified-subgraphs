@@ -51,8 +51,7 @@ export function handleSecondaryInvestors(event: subscribers): void {
         investors.amount = event.params.amount.toBigDecimal();
         investors.price = event.params.price.toBigDecimal();
         investors.tradeRef = event.params.tradeRef;
-        investors.transferorDPID = event.params.transferorDPID;
-        investors.transfereeDPID = event.params.transfereeDPID;
+        investors.DPID = event.params.DPID;
         investors.save();
     }
     else{
@@ -65,8 +64,7 @@ export function handleSecondaryInvestors(event: subscribers): void {
         investors.amount = event.params.amount.toBigDecimal();
         investors.price = event.params.price.toBigDecimal();
         investors.tradeRef = event.params.tradeRef;
-        investors.transferorDPID = event.params.transferorDPID;
-        investors.transfereeDPID = event.params.transfereeDPID;
+        investors.DPID = event.params.DPID;
         investors.save();
     }
 }

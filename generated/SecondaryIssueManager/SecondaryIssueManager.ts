@@ -107,12 +107,8 @@ export class subscribers__Params {
     return this._event.parameters[8].value.toBytes();
   }
 
-  get transferorDPID(): Bytes {
+  get DPID(): Bytes {
     return this._event.parameters[9].value.toBytes();
-  }
-
-  get transfereeDPID(): Bytes {
-    return this._event.parameters[10].value.toBytes();
   }
 }
 
@@ -171,48 +167,44 @@ export class SecondaryIssueManager__getSettlementRequestResultValue0Struct exten
     return this[3].toBytes();
   }
 
-  get transferorDPID(): Bytes {
+  get DPID(): Bytes {
     return this[4].toBytes();
   }
 
-  get transfereeDPID(): Bytes {
-    return this[5].toBytes();
-  }
-
   get currency(): Address {
-    return this[6].toAddress();
+    return this[5].toAddress();
   }
 
   get price(): BigInt {
-    return this[7].toBigInt();
+    return this[6].toBigInt();
   }
 
   get askprice(): BigInt {
-    return this[8].toBigInt();
+    return this[7].toBigInt();
   }
 
   get unitsToTransfer(): BigInt {
-    return this[9].toBigInt();
+    return this[8].toBigInt();
   }
 
   get consideration(): BigInt {
-    return this[10].toBigInt();
+    return this[9].toBigInt();
   }
 
   get executionDate(): BigInt {
-    return this[11].toBigInt();
+    return this[10].toBigInt();
   }
 
   get orderPool(): Address {
-    return this[12].toAddress();
+    return this[11].toAddress();
   }
 
   get partyRef(): Bytes {
-    return this[13].toBytes();
+    return this[12].toBytes();
   }
 
   get counterpartyRef(): Bytes {
-    return this[14].toBytes();
+    return this[13].toBytes();
   }
 }
 
@@ -312,7 +304,7 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
   ): SecondaryIssueManager__getSettlementRequestResultValue0Struct {
     let result = super.call(
       "getSettlementRequest",
-      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,bytes32,address,uint256,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
+      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,address,uint256,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
       [ethereum.Value.fromFixedBytes(ref)]
     );
 
@@ -328,7 +320,7 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
   > {
     let result = super.tryCall(
       "getSettlementRequest",
-      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,bytes32,address,uint256,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
+      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,address,uint256,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
       [ethereum.Value.fromFixedBytes(ref)]
     );
     if (result.reverted) {

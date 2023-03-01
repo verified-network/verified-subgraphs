@@ -15,15 +15,15 @@
 goerli:
   network: goerli
   Factory:
-    address: "0x6405ddCD72841f0827D51A65a6AB89B7486d4A48"
-    startBlock: 8427662
+    address: "0x390AD112c3aA16a410DEeee515FAb16273ad73e9"
+    startBlock: 8575379
   Client:
-    address: "0x998C76f8d82bbEDe5BFcD43e9D9d2E38533AfCF8"
-    startBlock: 8436524
+    address: "0x2429A1C412314027E562877fAd3388Dd74AD70Bd"
+    startBlock: 8575376
   PrimaryIssueManager: 
-    address: "0xc5860DAEaF23eddf71F7D546d96f8246Da7959FF"
-    startBlock: 8436525
+    address: "0x7911Fc52EC69576491923d639243faAC7F4140C3"
+    startBlock: 8575402
   SecondaryIssueManager:
-    address: "0xe7E23Ff8344B615737ae014969f01D0C5874F5b8"
-    startBlock: 8436529
+    address: "0x78775be84781E903372f5210C38DB49B854FFAad"
+    startBlock: 8575406
   

@@ -1231,6 +1231,7 @@ export class Security extends Entity {
     this.set("isin", Value.fromBytes(Bytes.empty()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("restricted", Value.fromBoolean(false));
+    this.set("issueManager", Value.fromBytes(Bytes.empty()));
   }
 
   save(): void {
@@ -1302,6 +1303,15 @@ export class Security extends Entity {
 
   set restricted(value: boolean) {
     this.set("restricted", Value.fromBoolean(value));
+  }
+
+  get issueManager(): Bytes {
+    let value = this.get("issueManager");
+    return value!.toBytes();
+  }
+
+  set issueManager(value: Bytes) {
+    this.set("issueManager", Value.fromBytes(value));
   }
 
   get primarySubscribers(): Array<string> | null {
@@ -1712,8 +1722,7 @@ export class Investors extends Entity {
     this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("price", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("tradeRef", Value.fromBytes(Bytes.empty()));
-    this.set("transferorDPID", Value.fromBytes(Bytes.empty()));
-    this.set("transfereeDPID", Value.fromBytes(Bytes.empty()));
+    this.set("DPID", Value.fromBytes(Bytes.empty()));
   }
 
   save(): void {
@@ -1823,22 +1832,13 @@ export class Investors extends Entity {
     this.set("tradeRef", Value.fromBytes(value));
   }
 
-  get transferorDPID(): Bytes {
-    let value = this.get("transferorDPID");
+  get DPID(): Bytes {
+    let value = this.get("DPID");
     return value!.toBytes();
   }
 
-  set transferorDPID(value: Bytes) {
-    this.set("transferorDPID", Value.fromBytes(value));
-  }
-
-  get transfereeDPID(): Bytes {
-    let value = this.get("transfereeDPID");
-    return value!.toBytes();
-  }
-
-  set transfereeDPID(value: Bytes) {
-    this.set("transfereeDPID", Value.fromBytes(value));
+  set DPID(value: Bytes) {
+    this.set("DPID", Value.fromBytes(value));
   }
 }
 

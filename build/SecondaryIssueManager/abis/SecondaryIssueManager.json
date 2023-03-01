@@ -103,13 +103,7 @@
       {
         "indexed": false,
         "internalType": "bytes32",
-        "name": "transferorDPID",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "transfereeDPID",
+        "name": "DPID",
         "type": "bytes32"
       }
     ],
@@ -391,12 +385,7 @@
           },
           {
             "internalType": "bytes32",
-            "name": "transferorDPID",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "transfereeDPID",
+            "name": "DPID",
             "type": "bytes32"
           },
           {

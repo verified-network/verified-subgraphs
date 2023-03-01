@@ -27,7 +27,7 @@ dataSources:
         - name: Security
           file: SecuritiesFactory\abis\Security.json
       eventHandlers:
-        - event: securitiesAdded(indexed address,address,bytes32,bytes32,bool)
+        - event: securitiesAdded(indexed address,address,bytes32,bytes32,bool,address)
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
@@ -102,7 +102,7 @@ dataSources:
         - event: tradeSettled(address,address,uint256,indexed address,uint256,address)
           handler: handleTradeSettled
         - event: subscribers(address,bytes32,address,address,indexed
-            address,address,uint256,uint256,bytes32,bytes32,bytes32)
+            address,address,uint256,uint256,bytes32,bytes32)
           handler: handleSecondaryInvestors
 templates:
   - kind: ethereum/contract
