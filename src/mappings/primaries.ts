@@ -12,13 +12,10 @@ import{
 } from "../../generated/schema";
 
 export function handleMarketmakers(event: marketmakers): void {
-    let primaryIssueManagerAddress = event.address;
-
-    let lps = LiquidityProviders.load(primaryIssueManagerAddress.toHexString());
+    let lps = LiquidityProviders.load(event.params.provider.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(lps==null){
-        let lpId = primaryIssueManagerAddress.toHexString();
+        let lpId = event.params.provider.toHexString();
         let lps = new LiquidityProviders(lpId);
-        lps.id = event.params.security.toHexString();
         lps.platform = event.params.platform;
         lps.owner = event.params.provider;
         lps.tokenOffered = event.params.currency.toHexString();
@@ -39,13 +36,10 @@ export function handleMarketmakers(event: marketmakers): void {
 }
 
 export function handlePrimaryInvestors(event: subscribers): void {
-    let primaryIssueManagerAddress = event.address;
-
-    let investors = Subscribers.load(primaryIssueManagerAddress.toHexString());
+    let investors = Subscribers.load(event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(investors==null){
-        let subscriberId = primaryIssueManagerAddress.toHexString();
+        let subscriberId = event.params.investor.toHexString();
         let investors = new Subscribers(subscriberId);
-        investors.id = event.params.security.toHexString();
         investors.platform = event.params.platform;
         investors.pool = event.params.poolId;
         investors.security = event.params.security.toHexString();
@@ -58,6 +52,7 @@ export function handlePrimaryInvestors(event: subscribers): void {
     else{
         investors.platform = event.params.platform;
         investors.pool = event.params.poolId;
+        investors.security = event.params.security.toHexString();
         investors.investor = event.params.investor;
         investors.currency = event.params.currency;
         investors.cashSwapped = event.params.cashSwapped.toBigDecimal();
@@ -67,13 +62,10 @@ export function handlePrimaryInvestors(event: subscribers): void {
 }
 
 export function handleOffers(event: offers): void {
-    let primaryIssueManagerAddress = event.address;
-    
-    let offers = Offers.load(primaryIssueManagerAddress.toHexString());
+    let offers = Offers.load(event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(offers==null){
-        let offerId = primaryIssueManagerAddress.toHexString();
+        let offerId = event.params.party.toHexString();
         let offers = new Offers(offerId);
-        offers.id = event.params.offered.toHexString();
         offers.platform = event.params.platform;
         offers.offeredBy = event.params.party;
         offers.offered = event.params.offered.toHexString();

@@ -32,8 +32,8 @@ type User @entity {
   #primarySubscribers: [Subscribers!] @derivedFrom(field: "investor")
   #secondaryInvestors: [Investors!] @derivedFrom(field: "investor")
   #liquidityProviders: [LiquidityProviders!] @derivedFrom(field: "owner")
-  #manager: [Manager!] @derived(field: "manager")
-  #submanager: [Manager!] @derivedFrom(field: "submanager")
+  manager: [Manager!] @derived(field: "manager")
+  submanager: [Manager!] @derivedFrom(field: "submanager")
   #securityissuer: [Issuer!] @derivedFrom(field: "issuer")
 }
 type Token @entity {
@@ -105,10 +105,10 @@ type BondRedemptions @entity {
 }
 type Manager @entity {
   id: ID!
-  #manager: User
-  manager: Bytes
-  #submanager: User!
-  submanager: Bytes!
+  manager: User
+  #manager: Bytes
+  submanager: User!
+  #submanager: Bytes!
   role: Bytes!
   country: Bytes
   managerId: Bytes
@@ -143,6 +143,7 @@ type Offers @entity {
 }
 type Trades @entity {
   id: ID!
+  poolid: Bytes!
   #transferor: User!
   transferor: Bytes!
   #transferee: User!
@@ -152,6 +153,7 @@ type Trades @entity {
   security: Security!
   price: BigDecimal!
   currency: Bytes!
+  settlementStatus: Bytes!
 }
 type Subscribers @entity {
   id: ID!

@@ -10,13 +10,10 @@ import {
       } from "../../generated/templates";
 
 export function handleSecurityCreated(event: securitiesAdded): void {
-  let factoryAddress = event.address;
-
-  let securities = Security.load(factoryAddress.toHexString());
+  let securities = Security.load(event.params.security.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
   if(securities==null){
-    let securityId = factoryAddress.toHexString();
+    let securityId = event.params.security.toHexString();
     let securities = new Security(securityId);
-    securities.id = event.params.security.toHexString();
     securities.isin = event.params.isin;
     securities.currency = event.params.currency;
     securities.security = event.params.security;

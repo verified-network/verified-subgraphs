@@ -125,28 +125,36 @@ export class tradeSettled__Params {
     this._event = event;
   }
 
-  get transferor(): Address {
-    return this._event.parameters[0].value.toAddress();
+  get poolid(): Bytes {
+    return this._event.parameters[0].value.toBytes();
   }
 
-  get transferee(): Address {
+  get transferor(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
+  get transferee(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
   get unitsToTransfer(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+    return this._event.parameters[3].value.toBigInt();
   }
 
   get security(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[4].value.toAddress();
   }
 
   get price(): BigInt {
-    return this._event.parameters[4].value.toBigInt();
+    return this._event.parameters[5].value.toBigInt();
   }
 
   get currency(): Address {
-    return this._event.parameters[5].value.toAddress();
+    return this._event.parameters[6].value.toAddress();
+  }
+
+  get settlementStatus(): Bytes {
+    return this._event.parameters[7].value.toBytes();
   }
 }
 

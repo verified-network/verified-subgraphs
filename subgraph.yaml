@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: goerli
     source:
-      address: '0x9191997e7fd5e62908F912597FB27F5F358188B5'
+      address: '0x2Eb01628737adb496905D7288829341356ed7B79'
       abi: SecuritiesFactory
-      startBlock: 8557014
+      startBlock: 8586968
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -32,9 +32,9 @@ dataSources:
     name: Client
     network: goerli
     source:
-      address: '0x5d891583b79A00d6Ff7e93a68079942Be28fCA27'
+      address: '0xbB05bDc551c7e6dD7cF32FB119367b6440715646'
       abi: Client
-      startBlock: 8557013
+      startBlock: 8586965
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -57,9 +57,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: '0xfD16D1787ff710366cB78A29D741741c88Cccaa6'
+      address: '0xc8Cc23D39fA6A32D4d76844ebaD80d09fA519cB6'
       abi: PrimaryIssueManager
-      startBlock: 8557135
+      startBlock: 8586987
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -79,13 +79,19 @@ dataSources:
           handler: handlePrimaryInvestors
         - event: offers(address,address,indexed address,uint256,bytes32,uint256,string)
           handler: handleOffers
+        - event: closures(indexed bytes32,uint256)
+          handler: handleClosures
+        - event: allotments(indexed bytes32,address,address,address,uint256)
+          handler: handleAllotments
+        - event: refunds(indexed bytes32,address,address,address,uint256)
+          handler: handleRefunds
   - kind: ethereum/contract
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: '0xE5FAF6f791c8b4e26BFf508994cE00e8045D85C0'
+      address: '0x84176eED2492e6e13D0eb4C61E7996c2A2d88638'
       abi: SecondaryIssueManager
-      startBlock: 8557140
+      startBlock: 8586992
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -98,7 +104,7 @@ dataSources:
         - name: SecondaryIssueManager
           file: ./abis/SecondaryIssueManager.json
       eventHandlers:
-        - event: tradeSettled(address,address,uint256,indexed address,uint256,address)
+        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,bytes32)
           handler: handleTradeSettled
         - event: subscribers(address,bytes32,address,address,indexed address,address,uint256,uint256,bytes32,bytes32)
           handler: handleSecondaryInvestors

@@ -449,6 +449,40 @@ export class User extends Entity {
       );
     }
   }
+
+  get manager(): Array<string> | null {
+    let value = this.get("manager");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set manager(value: Array<string> | null) {
+    if (!value) {
+      this.unset("manager");
+    } else {
+      this.set("manager", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get submanager(): Array<string> | null {
+    let value = this.get("submanager");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set submanager(value: Array<string> | null) {
+    if (!value) {
+      this.unset("submanager");
+    } else {
+      this.set("submanager", Value.fromStringArray(<Array<string>>value));
+    }
+  }
 }
 
 export class Token extends Entity {
@@ -1121,7 +1155,7 @@ export class Manager extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("submanager", Value.fromBytes(Bytes.empty()));
+    this.set("submanager", Value.fromString(""));
     this.set("role", Value.fromBytes(Bytes.empty()));
   }
 
@@ -1151,30 +1185,30 @@ export class Manager extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get manager(): Bytes | null {
+  get manager(): string | null {
     let value = this.get("manager");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toBytes();
+      return value.toString();
     }
   }
 
-  set manager(value: Bytes | null) {
+  set manager(value: string | null) {
     if (!value) {
       this.unset("manager");
     } else {
-      this.set("manager", Value.fromBytes(<Bytes>value));
+      this.set("manager", Value.fromString(<string>value));
     }
   }
 
-  get submanager(): Bytes {
+  get submanager(): string {
     let value = this.get("submanager");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set submanager(value: Bytes) {
-    this.set("submanager", Value.fromBytes(value));
+  set submanager(value: string) {
+    this.set("submanager", Value.fromString(value));
   }
 
   get role(): Bytes {
@@ -1515,12 +1549,14 @@ export class Trades extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
+    this.set("poolid", Value.fromBytes(Bytes.empty()));
     this.set("transferor", Value.fromBytes(Bytes.empty()));
     this.set("transferee", Value.fromBytes(Bytes.empty()));
     this.set("unitsToTransfer", Value.fromBigInt(BigInt.zero()));
     this.set("security", Value.fromString(""));
     this.set("price", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("settlementStatus", Value.fromBytes(Bytes.empty()));
   }
 
   save(): void {
@@ -1547,6 +1583,15 @@ export class Trades extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get poolid(): Bytes {
+    let value = this.get("poolid");
+    return value!.toBytes();
+  }
+
+  set poolid(value: Bytes) {
+    this.set("poolid", Value.fromBytes(value));
   }
 
   get transferor(): Bytes {
@@ -1601,6 +1646,15 @@ export class Trades extends Entity {
 
   set currency(value: Bytes) {
     this.set("currency", Value.fromBytes(value));
+  }
+
+  get settlementStatus(): Bytes {
+    let value = this.get("settlementStatus");
+    return value!.toBytes();
+  }
+
+  set settlementStatus(value: Bytes) {
+    this.set("settlementStatus", Value.fromBytes(value));
   }
 }
 

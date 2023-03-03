@@ -32,51 +32,59 @@ export class OwnershipTransferred__Params {
   }
 }
 
-export class acceptInvestor extends ethereum.Event {
-  get params(): acceptInvestor__Params {
-    return new acceptInvestor__Params(this);
+export class allotments extends ethereum.Event {
+  get params(): allotments__Params {
+    return new allotments__Params(this);
   }
 }
 
-export class acceptInvestor__Params {
-  _event: acceptInvestor;
+export class allotments__Params {
+  _event: allotments;
 
-  constructor(event: acceptInvestor) {
+  constructor(event: allotments) {
     this._event = event;
   }
 
-  get allotment(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
+  get poolId(): Bytes {
+    return this._event.parameters[0].value.toBytes();
   }
 
-  get amount(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+  get investor(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get security(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get currency(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get allotedAmount(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
   }
 }
 
-export class distributeFees extends ethereum.Event {
-  get params(): distributeFees__Params {
-    return new distributeFees__Params(this);
+export class closures extends ethereum.Event {
+  get params(): closures__Params {
+    return new closures__Params(this);
   }
 }
 
-export class distributeFees__Params {
-  _event: distributeFees;
+export class closures__Params {
+  _event: closures;
 
-  constructor(event: distributeFees) {
+  constructor(event: closures) {
     this._event = event;
   }
 
-  get issuingFee(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
+  get poolId(): Bytes {
+    return this._event.parameters[0].value.toBytes();
   }
 
-  get underwritingFee(): BigInt {
+  get timestamp(): BigInt {
     return this._event.parameters[1].value.toBigInt();
-  }
-
-  get prorataLiquidityProvided(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -179,6 +187,40 @@ export class offers__Params {
 
   get offeringDocs(): string {
     return this._event.parameters[6].value.toString();
+  }
+}
+
+export class refunds extends ethereum.Event {
+  get params(): refunds__Params {
+    return new refunds__Params(this);
+  }
+}
+
+export class refunds__Params {
+  _event: refunds;
+
+  constructor(event: refunds) {
+    this._event = event;
+  }
+
+  get poolId(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+
+  get investor(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get security(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get currency(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get refundAmount(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
   }
 }
 
