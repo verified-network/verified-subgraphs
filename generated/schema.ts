@@ -1405,8 +1405,8 @@ export class Security extends Entity {
     }
   }
 
-  get liquidityoffered(): Array<string> | null {
-    let value = this.get("liquidityoffered");
+  get liquidityOffered(): Array<string> | null {
+    let value = this.get("liquidityOffered");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -1414,16 +1414,16 @@ export class Security extends Entity {
     }
   }
 
-  set liquidityoffered(value: Array<string> | null) {
+  set liquidityOffered(value: Array<string> | null) {
     if (!value) {
-      this.unset("liquidityoffered");
+      this.unset("liquidityOffered");
     } else {
-      this.set("liquidityoffered", Value.fromStringArray(<Array<string>>value));
+      this.set("liquidityOffered", Value.fromStringArray(<Array<string>>value));
     }
   }
 
-  get securityissued(): Array<string> | null {
-    let value = this.get("securityissued");
+  get securityIssued(): Array<string> | null {
+    let value = this.get("securityIssued");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -1431,11 +1431,68 @@ export class Security extends Entity {
     }
   }
 
-  set securityissued(value: Array<string> | null) {
+  set securityIssued(value: Array<string> | null) {
     if (!value) {
-      this.unset("securityissued");
+      this.unset("securityIssued");
     } else {
-      this.set("securityissued", Value.fromStringArray(<Array<string>>value));
+      this.set("securityIssued", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get subscriptionsClosed(): Array<string> | null {
+    let value = this.get("subscriptionsClosed");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set subscriptionsClosed(value: Array<string> | null) {
+    if (!value) {
+      this.unset("subscriptionsClosed");
+    } else {
+      this.set(
+        "subscriptionsClosed",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get primaryAllotments(): Array<string> | null {
+    let value = this.get("primaryAllotments");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set primaryAllotments(value: Array<string> | null) {
+    if (!value) {
+      this.unset("primaryAllotments");
+    } else {
+      this.set(
+        "primaryAllotments",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get primaryRefunds(): Array<string> | null {
+    let value = this.get("primaryRefunds");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set primaryRefunds(value: Array<string> | null) {
+    if (!value) {
+      this.unset("primaryRefunds");
+    } else {
+      this.set("primaryRefunds", Value.fromStringArray(<Array<string>>value));
     }
   }
 }
@@ -2003,5 +2060,257 @@ export class LiquidityProviders extends Entity {
     } else {
       this.set("earned", Value.fromBigDecimal(<BigDecimal>value));
     }
+  }
+}
+
+export class Closures extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("poolid", Value.fromBytes(Bytes.empty()));
+    this.set("security", Value.fromString(""));
+    this.set("timestamp", Value.fromI32(0));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Closures entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Closures entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Closures", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Closures | null {
+    return changetype<Closures | null>(store.get("Closures", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get poolid(): Bytes {
+    let value = this.get("poolid");
+    return value!.toBytes();
+  }
+
+  set poolid(value: Bytes) {
+    this.set("poolid", Value.fromBytes(value));
+  }
+
+  get security(): string {
+    let value = this.get("security");
+    return value!.toString();
+  }
+
+  set security(value: string) {
+    this.set("security", Value.fromString(value));
+  }
+
+  get timestamp(): i32 {
+    let value = this.get("timestamp");
+    return value!.toI32();
+  }
+
+  set timestamp(value: i32) {
+    this.set("timestamp", Value.fromI32(value));
+  }
+}
+
+export class Allotments extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("poolid", Value.fromBytes(Bytes.empty()));
+    this.set("investor", Value.fromBytes(Bytes.empty()));
+    this.set("security", Value.fromString(""));
+    this.set("securitySubscribed", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("allotedAmount", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Allotments entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Allotments entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Allotments", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Allotments | null {
+    return changetype<Allotments | null>(store.get("Allotments", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get poolid(): Bytes {
+    let value = this.get("poolid");
+    return value!.toBytes();
+  }
+
+  set poolid(value: Bytes) {
+    this.set("poolid", Value.fromBytes(value));
+  }
+
+  get investor(): Bytes {
+    let value = this.get("investor");
+    return value!.toBytes();
+  }
+
+  set investor(value: Bytes) {
+    this.set("investor", Value.fromBytes(value));
+  }
+
+  get security(): string {
+    let value = this.get("security");
+    return value!.toString();
+  }
+
+  set security(value: string) {
+    this.set("security", Value.fromString(value));
+  }
+
+  get securitySubscribed(): BigDecimal {
+    let value = this.get("securitySubscribed");
+    return value!.toBigDecimal();
+  }
+
+  set securitySubscribed(value: BigDecimal) {
+    this.set("securitySubscribed", Value.fromBigDecimal(value));
+  }
+
+  get currency(): Bytes {
+    let value = this.get("currency");
+    return value!.toBytes();
+  }
+
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
+  }
+
+  get allotedAmount(): BigDecimal {
+    let value = this.get("allotedAmount");
+    return value!.toBigDecimal();
+  }
+
+  set allotedAmount(value: BigDecimal) {
+    this.set("allotedAmount", Value.fromBigDecimal(value));
+  }
+}
+
+export class Refunds extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("poolid", Value.fromBytes(Bytes.empty()));
+    this.set("investor", Value.fromBytes(Bytes.empty()));
+    this.set("security", Value.fromString(""));
+    this.set("securitySubscribed", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("refundAmount", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Refunds entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Refunds entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Refunds", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Refunds | null {
+    return changetype<Refunds | null>(store.get("Refunds", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get poolid(): Bytes {
+    let value = this.get("poolid");
+    return value!.toBytes();
+  }
+
+  set poolid(value: Bytes) {
+    this.set("poolid", Value.fromBytes(value));
+  }
+
+  get investor(): Bytes {
+    let value = this.get("investor");
+    return value!.toBytes();
+  }
+
+  set investor(value: Bytes) {
+    this.set("investor", Value.fromBytes(value));
+  }
+
+  get security(): string {
+    let value = this.get("security");
+    return value!.toString();
+  }
+
+  set security(value: string) {
+    this.set("security", Value.fromString(value));
+  }
+
+  get securitySubscribed(): BigDecimal {
+    let value = this.get("securitySubscribed");
+    return value!.toBigDecimal();
+  }
+
+  set securitySubscribed(value: BigDecimal) {
+    this.set("securitySubscribed", Value.fromBigDecimal(value));
+  }
+
+  get currency(): Bytes {
+    let value = this.get("currency");
+    return value!.toBytes();
+  }
+
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
+  }
+
+  get refundAmount(): BigDecimal {
+    let value = this.get("refundAmount");
+    return value!.toBigDecimal();
+  }
+
+  set refundAmount(value: BigDecimal) {
+    this.set("refundAmount", Value.fromBigDecimal(value));
   }
 }

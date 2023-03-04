@@ -241,19 +241,6 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_signer",
-        "type": "address"
-      }
-    ],
-    "name": "setSigner",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
         "name": "security",
         "type": "address"
       },
@@ -412,11 +399,6 @@
           },
           {
             "internalType": "uint256",
-            "name": "askprice",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
             "name": "unitsToTransfer",
             "type": "uint256"
           },
@@ -514,31 +496,6 @@
         "internalType": "struct ISettlor.subscriptions[]",
         "name": "",
         "type": "tuple[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "ref",
-        "type": "bytes32"
-      }
-    ],
-    "name": "getTrade",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       }
     ],
     "stateMutability": "view",

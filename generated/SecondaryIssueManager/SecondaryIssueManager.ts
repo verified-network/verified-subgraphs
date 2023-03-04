@@ -187,32 +187,28 @@ export class SecondaryIssueManager__getSettlementRequestResultValue0Struct exten
     return this[6].toBigInt();
   }
 
-  get askprice(): BigInt {
+  get unitsToTransfer(): BigInt {
     return this[7].toBigInt();
   }
 
-  get unitsToTransfer(): BigInt {
+  get consideration(): BigInt {
     return this[8].toBigInt();
   }
 
-  get consideration(): BigInt {
+  get executionDate(): BigInt {
     return this[9].toBigInt();
   }
 
-  get executionDate(): BigInt {
-    return this[10].toBigInt();
-  }
-
   get orderPool(): Address {
-    return this[11].toAddress();
+    return this[10].toAddress();
   }
 
   get partyRef(): Bytes {
-    return this[12].toBytes();
+    return this[11].toBytes();
   }
 
   get counterpartyRef(): Bytes {
-    return this[13].toBytes();
+    return this[12].toBytes();
   }
 }
 
@@ -235,23 +231,6 @@ export class SecondaryIssueManager__getSubscribersResultValue0Struct extends eth
 
   get price(): BigInt {
     return this[4].toBigInt();
-  }
-}
-
-export class SecondaryIssueManager__getTradeResult {
-  value0: BigInt;
-  value1: BigInt;
-
-  constructor(value0: BigInt, value1: BigInt) {
-    this.value0 = value0;
-    this.value1 = value1;
-  }
-
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
-    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
-    return map;
   }
 }
 
@@ -312,7 +291,7 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
   ): SecondaryIssueManager__getSettlementRequestResultValue0Struct {
     let result = super.call(
       "getSettlementRequest",
-      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,address,uint256,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
+      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,address,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
       [ethereum.Value.fromFixedBytes(ref)]
     );
 
@@ -328,7 +307,7 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
   > {
     let result = super.tryCall(
       "getSettlementRequest",
-      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,address,uint256,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
+      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,address,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
       [ethereum.Value.fromFixedBytes(ref)]
     );
     if (result.reverted) {
@@ -374,37 +353,6 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
       value[0].toTupleArray<
         SecondaryIssueManager__getSubscribersResultValue0Struct
       >()
-    );
-  }
-
-  getTrade(ref: Bytes): SecondaryIssueManager__getTradeResult {
-    let result = super.call("getTrade", "getTrade(bytes32):(uint256,uint256)", [
-      ethereum.Value.fromFixedBytes(ref)
-    ]);
-
-    return new SecondaryIssueManager__getTradeResult(
-      result[0].toBigInt(),
-      result[1].toBigInt()
-    );
-  }
-
-  try_getTrade(
-    ref: Bytes
-  ): ethereum.CallResult<SecondaryIssueManager__getTradeResult> {
-    let result = super.tryCall(
-      "getTrade",
-      "getTrade(bytes32):(uint256,uint256)",
-      [ethereum.Value.fromFixedBytes(ref)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      new SecondaryIssueManager__getTradeResult(
-        value[0].toBigInt(),
-        value[1].toBigInt()
-      )
     );
   }
 
@@ -534,36 +482,6 @@ export class InitializeCall__Outputs {
   _call: InitializeCall;
 
   constructor(call: InitializeCall) {
-    this._call = call;
-  }
-}
-
-export class SetSignerCall extends ethereum.Call {
-  get inputs(): SetSignerCall__Inputs {
-    return new SetSignerCall__Inputs(this);
-  }
-
-  get outputs(): SetSignerCall__Outputs {
-    return new SetSignerCall__Outputs(this);
-  }
-}
-
-export class SetSignerCall__Inputs {
-  _call: SetSignerCall;
-
-  constructor(call: SetSignerCall) {
-    this._call = call;
-  }
-
-  get _signer(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-}
-
-export class SetSignerCall__Outputs {
-  _call: SetSignerCall;
-
-  constructor(call: SetSignerCall) {
     this._call = call;
   }
 }

@@ -2,13 +2,19 @@ import{
     marketmakers,
     subscribers,
     offers,
-    PrimaryIssueManager
+    PrimaryIssueManager,
+    closures,
+    allotments,
+    refunds
 } from "../../generated/PrimaryIssueManager/PrimaryIssueManager";
 
 import{
     LiquidityProviders,
     Subscribers,
-    Offers
+    Offers,
+    Closures,
+    Allotments,
+    Refunds
 } from "../../generated/schema";
 
 export function handleMarketmakers(event: marketmakers): void {
@@ -85,4 +91,64 @@ export function handleOffers(event: offers): void {
         offers.offeringDocs = event.params.offeringDocs;
         offers.save();
     }
+}
+
+export function handleClosures(event: closures): void {
+    let closures = Closures.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(closures==null){
+        let poolId = event.params.poolId.toHexString();
+        let closures = new Closures(poolId);
+        closures.poolid = event.params.poolId;
+        closures.security = event.params.security.toHexString();
+        closures.timestamp = event.params.timestamp.toI32();
+    }
+    else{
+        closures.poolid = event.params.poolId;
+        closures.security = event.params.security.toHexString();
+        closures.timestamp = event.params.timestamp.toI32();
+    }
+}
+
+export function handleAllotments(event: allotments): void {
+    let allotments = Allotments.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(allotments==null){
+        let poolId = event.params.poolId.toHexString();
+        let allotments = new Allotments(poolId);
+        allotments.poolid = event.params.poolId;
+        allotments.investor = event.params.investor;
+        allotments.security = event.params.security.toHexString();
+        allotments.securitySubscribed = event.params.securitySubscription.toBigDecimal();
+        allotments.currency = event.params.currency;
+        allotments.allotedAmount = event.params.allotedAmount.toBigDecimal();
+    }
+    else{
+        allotments.poolid = event.params.poolId;
+        allotments.investor = event.params.investor;
+        allotments.security = event.params.security.toHexString();
+        allotments.securitySubscribed = event.params.securitySubscription.toBigDecimal();
+        allotments.currency = event.params.currency;
+        allotments.allotedAmount = event.params.allotedAmount.toBigDecimal();
+    }
+}
+
+export function handleRefunds(event: refunds): void {
+    let refunds = Refunds.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(refunds==null){
+        let poolId = event.params.poolId.toHexString();
+        let refunds = new Refunds(poolId);
+        refunds.poolid = event.params.poolId;
+        refunds.investor = event.params.investor;
+        refunds.security = event.params.security.toHexString();
+        refunds.securitySubscribed = event.params.securitySubscription.toBigDecimal();
+        refunds.currency = event.params.currency;
+        refunds.refundAmount = event.params.refundAmount.toBigDecimal();
+    }
+    else{
+        refunds.poolid = event.params.poolId;
+        refunds.investor = event.params.investor;
+        refunds.security = event.params.security.toHexString();
+        refunds.securitySubscribed = event.params.securitySubscription.toBigDecimal();
+        refunds.currency = event.params.currency;
+        refunds.refundAmount = event.params.refundAmount.toBigDecimal();
+    }    
 }

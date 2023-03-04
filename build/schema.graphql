@@ -12,6 +12,8 @@ type Currency @entity {
   #trades: [Trades!] @derivedFrom(field: "currency")
   #primarySubscribers: [Subscribers!] @derivedFrom(field: "currency")
   #secondaryInvestors: [Investors!] @derivedFrom(field: "currency")
+  #primaryAllotments: [Allotments!] @derivedFrom(field: "currency")
+  #primaryRefunds: [Refunds!] @derivedFrom(field: "currency")
 }
 type User @entity {
   id: ID!
@@ -126,8 +128,11 @@ type Security @entity {
   primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
   secondaryInvestors: [Investors!] @derivedFrom(field: "security")
   trades: [Trades!] @derivedFrom(field: "security")
-  liquidityoffered: [LiquidityProviders!] @derivedFrom(field: "tokenOffered")
-  securityissued: [Offers!] @derivedFrom(field: "offered")
+  liquidityOffered: [LiquidityProviders!] @derivedFrom(field: "tokenOffered")
+  securityIssued: [Offers!] @derivedFrom(field: "offered")
+  subscriptionsClosed: [Closures!] @derivedFrom(field: "security")
+  primaryAllotments: [Allotments!] @derivedFrom(field: "security")
+  primaryRefunds: [Refunds!] @derivedFrom(field: "security")
 }
 type Offers @entity {
   id: ID!
@@ -195,4 +200,32 @@ type LiquidityProviders @entity {
   underwritten: BigDecimal!
   subscribed: BigDecimal
   earned: BigDecimal
+}
+type Closures @entity{
+  id: ID!
+  poolid: Bytes!
+  security: Security!
+  timestamp: Int! 
+}
+type Allotments @entity{
+  id: ID!
+  poolid: Bytes!
+  investor: Bytes!
+  #investor: User!
+  security: Security!
+  securitySubscribed: BigDecimal!
+  currency: Bytes!
+  #currency: Currency!
+  allotedAmount: BigDecimal!
+}
+type Refunds @entity{
+  id: ID!
+  poolid: Bytes!
+  investor: Bytes!
+  #investor: User!
+  security: Security!
+  securitySubscribed: BigDecimal!
+  currency: Bytes!
+  #currency: Currency!
+  refundAmount: BigDecimal!
 }

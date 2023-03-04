@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: goerli
     source:
-      address: '0x2Eb01628737adb496905D7288829341356ed7B79'
+      address: '0x5861D99A193577d52436Dbd0dC4185283517557b'
       abi: SecuritiesFactory
-      startBlock: 8586968
+      startBlock: 8586878
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -32,9 +32,9 @@ dataSources:
     name: Client
     network: goerli
     source:
-      address: '0xbB05bDc551c7e6dD7cF32FB119367b6440715646'
+      address: '0x70fB1961B358Ec0368e5740c432Ef8C1359De17C'
       abi: Client
-      startBlock: 8586965
+      startBlock: 8586874
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -57,9 +57,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: '0xc8Cc23D39fA6A32D4d76844ebaD80d09fA519cB6'
+      address: '0xFb0e69Be752c4de167d56Fc434cF512fa8741bf8'
       abi: PrimaryIssueManager
-      startBlock: 8586987
+      startBlock: 8586908
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -79,19 +79,19 @@ dataSources:
           handler: handlePrimaryInvestors
         - event: offers(address,address,indexed address,uint256,bytes32,uint256,string)
           handler: handleOffers
-        - event: closures(indexed bytes32,uint256)
+        - event: closures(indexed bytes32,address,uint256)
           handler: handleClosures
-        - event: allotments(indexed bytes32,address,address,address,uint256)
+        - event: allotments(indexed bytes32,address,address,uint256,address,uint256)
           handler: handleAllotments
-        - event: refunds(indexed bytes32,address,address,address,uint256)
+        - event: refunds(indexed bytes32,address,address,uint256,address,uint256)
           handler: handleRefunds
   - kind: ethereum/contract
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: '0x84176eED2492e6e13D0eb4C61E7996c2A2d88638'
+      address: '0x2A75359123e18efED8fA2391faF3c48188aB1651'
       abi: SecondaryIssueManager
-      startBlock: 8586992
+      startBlock: 8586913
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

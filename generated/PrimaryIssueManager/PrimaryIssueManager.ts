@@ -57,12 +57,16 @@ export class allotments__Params {
     return this._event.parameters[2].value.toAddress();
   }
 
+  get securitySubscription(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
   get currency(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[4].value.toAddress();
   }
 
   get allotedAmount(): BigInt {
-    return this._event.parameters[4].value.toBigInt();
+    return this._event.parameters[5].value.toBigInt();
   }
 }
 
@@ -83,8 +87,12 @@ export class closures__Params {
     return this._event.parameters[0].value.toBytes();
   }
 
+  get security(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
   get timestamp(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -215,34 +223,16 @@ export class refunds__Params {
     return this._event.parameters[2].value.toAddress();
   }
 
+  get securitySubscription(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
   get currency(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[4].value.toAddress();
   }
 
   get refundAmount(): BigInt {
-    return this._event.parameters[4].value.toBigInt();
-  }
-}
-
-export class rejectInvestor extends ethereum.Event {
-  get params(): rejectInvestor__Params {
-    return new rejectInvestor__Params(this);
-  }
-}
-
-export class rejectInvestor__Params {
-  _event: rejectInvestor;
-
-  constructor(event: rejectInvestor) {
-    this._event = event;
-  }
-
-  get security(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
-  get cash(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+    return this._event.parameters[5].value.toBigInt();
   }
 }
 
@@ -769,12 +759,8 @@ export class InitializeCall__Inputs {
     return this._call.inputValues[5].value.toAddress();
   }
 
-  get _bridge(): Address {
-    return this._call.inputValues[6].value.toAddress();
-  }
-
   get _distribution(): Address {
-    return this._call.inputValues[7].value.toAddress();
+    return this._call.inputValues[6].value.toAddress();
   }
 }
 
@@ -782,36 +768,6 @@ export class InitializeCall__Outputs {
   _call: InitializeCall;
 
   constructor(call: InitializeCall) {
-    this._call = call;
-  }
-}
-
-export class SetSignerCall extends ethereum.Call {
-  get inputs(): SetSignerCall__Inputs {
-    return new SetSignerCall__Inputs(this);
-  }
-
-  get outputs(): SetSignerCall__Outputs {
-    return new SetSignerCall__Outputs(this);
-  }
-}
-
-export class SetSignerCall__Inputs {
-  _call: SetSignerCall;
-
-  constructor(call: SetSignerCall) {
-    this._call = call;
-  }
-
-  get _signer(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-}
-
-export class SetSignerCall__Outputs {
-  _call: SetSignerCall;
-
-  constructor(call: SetSignerCall) {
     this._call = call;
   }
 }
