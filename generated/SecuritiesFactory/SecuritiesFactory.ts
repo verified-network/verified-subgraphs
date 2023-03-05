@@ -35,8 +35,8 @@ export class securitiesAdded__Params {
     return this._event.parameters[2].value.toBytes();
   }
 
-  get currency(): Bytes {
-    return this._event.parameters[3].value.toBytes();
+  get currency(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 
   get restricted(): boolean {
@@ -92,14 +92,14 @@ export class SecuritiesFactory__getSecurityTokenResult {
   value0: Address;
   value1: Bytes;
   value2: Bytes;
-  value3: Bytes;
+  value3: Address;
   value4: boolean;
 
   constructor(
     value0: Address,
     value1: Bytes,
     value2: Bytes,
-    value3: Bytes,
+    value3: Address,
     value4: boolean
   ) {
     this.value0 = value0;
@@ -114,7 +114,7 @@ export class SecuritiesFactory__getSecurityTokenResult {
     map.set("value0", ethereum.Value.fromAddress(this.value0));
     map.set("value1", ethereum.Value.fromFixedBytes(this.value1));
     map.set("value2", ethereum.Value.fromFixedBytes(this.value2));
-    map.set("value3", ethereum.Value.fromFixedBytes(this.value3));
+    map.set("value3", ethereum.Value.fromAddress(this.value3));
     map.set("value4", ethereum.Value.fromBoolean(this.value4));
     return map;
   }
@@ -430,7 +430,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
   ): SecuritiesFactory__getSecurityTokenResult {
     let result = super.call(
       "getSecurityToken",
-      "getSecurityToken(address,address):(address,bytes32,bytes32,bytes32,bool)",
+      "getSecurityToken(address,address):(address,bytes32,bytes32,address,bool)",
       [
         ethereum.Value.fromAddress(_securityToken),
         ethereum.Value.fromAddress(_issuer)
@@ -441,7 +441,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
       result[0].toAddress(),
       result[1].toBytes(),
       result[2].toBytes(),
-      result[3].toBytes(),
+      result[3].toAddress(),
       result[4].toBoolean()
     );
   }
@@ -452,7 +452,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
   ): ethereum.CallResult<SecuritiesFactory__getSecurityTokenResult> {
     let result = super.tryCall(
       "getSecurityToken",
-      "getSecurityToken(address,address):(address,bytes32,bytes32,bytes32,bool)",
+      "getSecurityToken(address,address):(address,bytes32,bytes32,address,bool)",
       [
         ethereum.Value.fromAddress(_securityToken),
         ethereum.Value.fromAddress(_issuer)
@@ -467,7 +467,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
         value[0].toAddress(),
         value[1].toBytes(),
         value[2].toBytes(),
-        value[3].toBytes(),
+        value[3].toAddress(),
         value[4].toBoolean()
       )
     );
@@ -886,8 +886,8 @@ export class IssueSecurityCall__Inputs {
     return this._call.inputValues[2].value.toBytes();
   }
 
-  get currency(): Bytes {
-    return this._call.inputValues[3].value.toBytes();
+  get currency(): Address {
+    return this._call.inputValues[3].value.toAddress();
   }
 
   get issuer(): Address {

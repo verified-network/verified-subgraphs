@@ -237,7 +237,7 @@
       {
         "indexed": false,
         "name": "currency",
-        "type": "bytes32"
+        "type": "address"
       },
       {
         "indexed": false,
@@ -363,7 +363,7 @@
       },
       {
         "name": "currency",
-        "type": "bytes32"
+        "type": "address"
       },
       {
         "name": "issuer",
@@ -450,7 +450,7 @@
       },
       {
         "name": "",
-        "type": "bytes32"
+        "type": "address"
       },
       {
         "name": "",

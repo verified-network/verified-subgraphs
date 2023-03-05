@@ -9,9 +9,9 @@ dataSources:
     name: SecuritiesFactory
     network: goerli
     source:
-      address: "0x5861D99A193577d52436Dbd0dC4185283517557b"
+      address: "0x4Ac7F6B13ef4acdEa1B22a7a07529C980584Fe97"
       abi: SecuritiesFactory
-      startBlock: 8586878
+      startBlock: 8598630
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -27,15 +27,15 @@ dataSources:
         - name: Security
           file: SecuritiesFactory\abis\Security.json
       eventHandlers:
-        - event: securitiesAdded(indexed address,address,bytes32,bytes32,bool,address)
+        - event: securitiesAdded(indexed address,address,bytes32,address,bool,address)
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
     network: goerli
     source:
-      address: "0x70fB1961B358Ec0368e5740c432Ef8C1359De17C"
+      address: "0x94100Bd9f28C1bd69C34601C7900d9d82C7cBF9B"
       abi: Client
-      startBlock: 8586874
+      startBlock: 8598627
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -58,9 +58,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: "0xFb0e69Be752c4de167d56Fc434cF512fa8741bf8"
+      address: "0xdfc474C18ECB343f4E096b7B71dB12e69980cA17"
       abi: PrimaryIssueManager
-      startBlock: 8586908
+      startBlock: 8598726
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -90,9 +90,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: "0x2A75359123e18efED8fA2391faF3c48188aB1651"
+      address: "0xe0066C97784D98b2747bb1896E5EfD0414243791"
       abi: SecondaryIssueManager
-      startBlock: 8586913
+      startBlock: 8598731
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
