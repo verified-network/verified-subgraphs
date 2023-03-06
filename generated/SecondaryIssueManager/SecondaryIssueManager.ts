@@ -71,44 +71,44 @@ export class subscribers__Params {
     this._event = event;
   }
 
-  get platform(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
   get poolId(): Bytes {
-    return this._event.parameters[1].value.toBytes();
+    return this._event.parameters[0].value.toBytes();
   }
 
   get party(): Address {
-    return this._event.parameters[2].value.toAddress();
+    return this._event.parameters[1].value.toAddress();
   }
 
   get counterparty(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[2].value.toAddress();
   }
 
   get securityTraded(): Address {
-    return this._event.parameters[4].value.toAddress();
+    return this._event.parameters[3].value.toAddress();
   }
 
   get currencySettled(): Address {
-    return this._event.parameters[5].value.toAddress();
+    return this._event.parameters[4].value.toAddress();
   }
 
   get amount(): BigInt {
-    return this._event.parameters[6].value.toBigInt();
+    return this._event.parameters[5].value.toBigInt();
   }
 
   get price(): BigInt {
-    return this._event.parameters[7].value.toBigInt();
+    return this._event.parameters[6].value.toBigInt();
   }
 
   get tradeRef(): Bytes {
-    return this._event.parameters[8].value.toBytes();
+    return this._event.parameters[7].value.toBytes();
   }
 
   get DPID(): Bytes {
-    return this._event.parameters[9].value.toBytes();
+    return this._event.parameters[8].value.toBytes();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[9].value.toBigInt();
   }
 }
 

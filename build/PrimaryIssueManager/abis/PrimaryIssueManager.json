@@ -154,12 +154,6 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "platform",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
         "name": "party",
         "type": "address"
       },
@@ -173,6 +167,18 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "amountOffered",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountDesired",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "minAmount",
         "type": "uint256"
       },
       {
@@ -251,12 +257,6 @@
       },
       {
         "indexed": false,
-        "internalType": "address",
-        "name": "platform",
-        "type": "address"
-      },
-      {
-        "indexed": false,
         "internalType": "bytes32",
         "name": "poolId",
         "type": "bytes32"
@@ -283,6 +283,12 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "securitySwapped",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
         "type": "uint256"
       }
     ],

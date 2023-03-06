@@ -49,7 +49,7 @@ type Token @entity {
   #primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
   #secondaryInvestors: [Investors!] @derivedFrom(field: "security")
   #trades: [Trades!] @derivedFrom(field: "security")
-  #liquidityoffered: [LiquidityProviders!] @derivedFrom(field: "tokenOffered")
+  #liquidityoffered: [LiquidityProviders!] @derivedFrom(field: "security")
   #securityissued: [Offers!] @derivedFrom(field: "offered")
   #security: [Security!] @derivedFrom(field: "security")
 }
@@ -128,21 +128,22 @@ type Security @entity {
   primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
   secondaryInvestors: [Investors!] @derivedFrom(field: "security")
   trades: [Trades!] @derivedFrom(field: "security")
-  liquidityOffered: [LiquidityProviders!] @derivedFrom(field: "tokenOffered")
-  securityIssued: [Offers!] @derivedFrom(field: "offered")
+  liquidityOffered: [LiquidityProviders!] @derivedFrom(field: "security")
+  #securityIssued: [Offers!] @derivedFrom(field: "offered")
   subscriptionsClosed: [Closures!] @derivedFrom(field: "security")
   primaryAllotments: [Allotments!] @derivedFrom(field: "security")
   primaryRefunds: [Refunds!] @derivedFrom(field: "security")
 }
 type Offers @entity {
   id: ID!
-  platform: Bytes!
   #offeredBy: User!
   offeredBy: Bytes!
   #offered: Token!
-  offered: Security!
+  offered: Bytes!
   isin: Bytes!
   amount: BigDecimal! 
+  desired: BigDecimal!
+  minimum: BigDecimal!
   orderSize: BigInt!
   offeringDocs: String!
 }
@@ -162,7 +163,6 @@ type Trades @entity {
 }
 type Subscribers @entity {
   id: ID!
-  platform: Bytes!
   #security: Token!
   security: Security!
   pool: Bytes!
@@ -172,10 +172,10 @@ type Subscribers @entity {
   currency: Bytes!
   cashSwapped: BigDecimal!   
   securitySwapped: BigDecimal! 
+  timestamp: Int!
 }
 type Investors @entity {
   id: ID!
-  platform: Bytes!
   pool: Bytes!
   #security: Token!
   security: Security!
@@ -189,16 +189,19 @@ type Investors @entity {
   price: BigDecimal! 
   tradeRef : Bytes!
   DPID : Bytes!
+  timestamp: Int!
 }
 type LiquidityProviders @entity {
   id: ID!
   platform: Bytes!
   #owner: User!
   owner: Bytes!
+  security: Security!
+  #currency: Currency!
+  currency: Bytes!
   #tokenOffered: Token!
-  tokenOffered: Security!
-  underwritten: BigDecimal!
-  subscribed: BigDecimal
+  tokenOffered: BigDecimal!
+  underwritten: BigDecimal
   earned: BigDecimal
 }
 type Closures @entity{

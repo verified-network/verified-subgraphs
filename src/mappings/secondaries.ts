@@ -12,7 +12,7 @@ import{
 export function handleTradeSettled(event: tradeSettled): void {
     let trades = Trades.load(event.params.transferor.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(trades==null){
-        let tradeId = event.params.transferor.toHexString();
+        let tradeId = event.params.transferor.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let trades = new Trades(tradeId);
         trades.poolid = event.params.poolid;
         trades.transferor = event.params.transferor;
@@ -40,9 +40,8 @@ export function handleTradeSettled(event: tradeSettled): void {
 export function handleSecondaryInvestors(event: subscribers): void {
     let investors = Investors.load(event.params.counterparty.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(investors==null){
-        let investorId = event.params.counterparty.toHexString();
+        let investorId = event.params.counterparty.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let investors = new Investors(investorId);
-        investors.platform = event.params.platform;
         investors.pool = event.params.poolId;
         investors.security = event.params.securityTraded.toHexString();
         investors.issuer = event.params.party;
@@ -52,10 +51,10 @@ export function handleSecondaryInvestors(event: subscribers): void {
         investors.price = event.params.price.toBigDecimal();
         investors.tradeRef = event.params.tradeRef;
         investors.DPID = event.params.DPID;
+        investors.timestamp = event.params.timestamp.toI32();
         investors.save();
     }
     else{
-        investors.platform = event.params.platform;
         investors.pool = event.params.poolId;
         investors.security = event.params.securityTraded.toHexString();
         investors.issuer = event.params.party;
@@ -65,6 +64,7 @@ export function handleSecondaryInvestors(event: subscribers): void {
         investors.price = event.params.price.toBigDecimal();
         investors.tradeRef = event.params.tradeRef;
         investors.DPID = event.params.DPID;
+        investors.timestamp = event.params.timestamp.toI32();
         investors.save();
     }
 }

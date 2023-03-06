@@ -169,32 +169,36 @@ export class offers__Params {
     this._event = event;
   }
 
-  get platform(): Address {
+  get party(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get party(): Address {
+  get offered(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get offered(): Address {
-    return this._event.parameters[2].value.toAddress();
+  get amountOffered(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 
-  get amountOffered(): BigInt {
+  get amountDesired(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 
+  get minAmount(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
   get isin(): Bytes {
-    return this._event.parameters[4].value.toBytes();
+    return this._event.parameters[5].value.toBytes();
   }
 
   get minimumOrderSize(): BigInt {
-    return this._event.parameters[5].value.toBigInt();
+    return this._event.parameters[6].value.toBigInt();
   }
 
   get offeringDocs(): string {
-    return this._event.parameters[6].value.toString();
+    return this._event.parameters[7].value.toString();
   }
 }
 
@@ -253,27 +257,27 @@ export class subscribers__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get platform(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
   get poolId(): Bytes {
-    return this._event.parameters[2].value.toBytes();
+    return this._event.parameters[1].value.toBytes();
   }
 
   get investor(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[2].value.toAddress();
   }
 
   get currency(): Address {
-    return this._event.parameters[4].value.toAddress();
+    return this._event.parameters[3].value.toAddress();
   }
 
   get cashSwapped(): BigInt {
-    return this._event.parameters[5].value.toBigInt();
+    return this._event.parameters[4].value.toBigInt();
   }
 
   get securitySwapped(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
     return this._event.parameters[6].value.toBigInt();
   }
 }
