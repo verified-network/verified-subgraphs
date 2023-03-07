@@ -20,7 +20,7 @@ import{
 export function handleMarketmakers(event: marketmakers): void {
     let lps = LiquidityProviders.load(event.params.provider.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(lps==null){
-        let lpId = event.params.provider.toHexString();
+        let lpId = event.params.provider.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let lps = new LiquidityProviders(lpId);
         lps.platform = event.params.platform;
         lps.owner = event.params.provider;
@@ -72,7 +72,7 @@ export function handlePrimaryInvestors(event: subscribers): void {
 export function handleOffers(event: offers): void {
     let offers = Offers.load(event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(offers==null){
-        let offerId = event.params.party.toHexString();
+        let offerId = event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let offers = new Offers(offerId);
         offers.offeredBy = event.params.party;
         offers.offered = event.params.offered;
@@ -100,7 +100,7 @@ export function handleOffers(event: offers): void {
 export function handleClosures(event: closures): void {
     let closures = Closures.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(closures==null){
-        let poolId = event.params.poolId.toHexString();
+        let poolId = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let closures = new Closures(poolId);
         closures.poolid = event.params.poolId;
         closures.security = event.params.security.toHexString();
@@ -116,7 +116,7 @@ export function handleClosures(event: closures): void {
 export function handleAllotments(event: allotments): void {
     let allotments = Allotments.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(allotments==null){
-        let poolId = event.params.poolId.toHexString();
+        let poolId = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let allotments = new Allotments(poolId);
         allotments.poolid = event.params.poolId;
         allotments.investor = event.params.investor;
@@ -138,7 +138,7 @@ export function handleAllotments(event: allotments): void {
 export function handleRefunds(event: refunds): void {
     let refunds = Refunds.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(refunds==null){
-        let poolId = event.params.poolId.toHexString();
+        let poolId = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let refunds = new Refunds(poolId);
         refunds.poolid = event.params.poolId;
         refunds.investor = event.params.investor;

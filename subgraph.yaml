@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: goerli
+    network: matic
     source:
-      address: '0xf012827B3F3d2b5069fdD43a2e0aE2Af1ad88A4e'
+      address: '0xbfAC42b83fBB6fb34914368BD0A9654fBEc559C3'
       abi: SecuritiesFactory
-      startBlock: 8605972
+      startBlock: 40040010
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -30,11 +30,11 @@ dataSources:
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: goerli
+    network: matic
     source:
-      address: '0x0E36Bf50E0b8F753d01Fb23Da81420b1E061dA26'
+      address: '0x4f1578c1F52401A600Cf000DD0aD3B19826baf5c'
       abi: Client
-      startBlock: 8605969
+      startBlock: 40039999
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -55,11 +55,11 @@ dataSources:
           handler: handleUserCreated
   - kind: ethereum/contract
     name: PrimaryIssueManager
-    network: goerli
+    network: matic
     source:
-      address: '0xbE3CC1ccffC3447CE05aE8E07b845a936b458151'
+      address: '0x5Ba7fa9Ac47Ad7CA0DBcc904CeDC2FC2f6d98729'
       abi: PrimaryIssueManager
-      startBlock: 8606006
+      startBlock: 40041537
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -87,11 +87,11 @@ dataSources:
           handler: handleRefunds
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: goerli
+    network: matic
     source:
-      address: '0xb8B818e571E9750D0c706933B8b444123780624E'
+      address: '0x9E2dD186477A263f0baEb150aD1eB83427bfCD9d'
       abi: SecondaryIssueManager
-      startBlock: 8606010
+      startBlock: 40041556
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -111,7 +111,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Cash
-    network: goerli
+    network: matic
     source:
       abi: Cash
     mapping:
@@ -140,7 +140,7 @@ templates:
       file: ./src/mappings/cash.ts  
   - kind: ethereum/contract
     name: Bond
-    network: goerli
+    network: matic
     source:
       abi: Bond
     mapping:
