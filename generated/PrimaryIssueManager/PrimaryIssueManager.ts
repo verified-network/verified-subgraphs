@@ -240,6 +240,48 @@ export class refunds__Params {
   }
 }
 
+export class settlements extends ethereum.Event {
+  get params(): settlements__Params {
+    return new settlements__Params(this);
+  }
+}
+
+export class settlements__Params {
+  _event: settlements;
+
+  constructor(event: settlements) {
+    this._event = event;
+  }
+
+  get poolId(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+
+  get security(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get currency(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get liquidityProvider(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get underwritingFee(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
+  get issuer(): Address {
+    return this._event.parameters[5].value.toAddress();
+  }
+
+  get subscription(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
+  }
+}
+
 export class subscribers extends ethereum.Event {
   get params(): subscribers__Params {
     return new subscribers__Params(this);

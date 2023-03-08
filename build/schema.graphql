@@ -160,6 +160,7 @@ type Trades @entity {
   price: BigDecimal!
   currency: Bytes!
   settlementStatus: Bytes!
+  tradingCommission: BigDecimal!
 }
 type Subscribers @entity {
   id: ID!
@@ -231,4 +232,17 @@ type Refunds @entity{
   currency: Bytes!
   #currency: Currency!
   refundAmount: BigDecimal!
+}
+type Settlements @entity{
+  id: ID!
+  poolid: Bytes!
+  security: Security!
+  currency: Bytes!
+  #currency: Currency!
+  liquidityProvider: Bytes!
+  #liquidityProvider: User!
+  underwritingFee: BigDecimal!
+  #issuer: User!
+  issuer: Bytes!
+  subscription: BigDecimal!  
 }

@@ -1607,6 +1607,7 @@ export class Trades extends Entity {
     this.set("price", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("settlementStatus", Value.fromBytes(Bytes.empty()));
+    this.set("tradingCommission", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
   save(): void {
@@ -1705,6 +1706,15 @@ export class Trades extends Entity {
 
   set settlementStatus(value: Bytes) {
     this.set("settlementStatus", Value.fromBytes(value));
+  }
+
+  get tradingCommission(): BigDecimal {
+    let value = this.get("tradingCommission");
+    return value!.toBigDecimal();
+  }
+
+  set tradingCommission(value: BigDecimal) {
+    this.set("tradingCommission", Value.fromBigDecimal(value));
   }
 }
 
@@ -2315,5 +2325,109 @@ export class Refunds extends Entity {
 
   set refundAmount(value: BigDecimal) {
     this.set("refundAmount", Value.fromBigDecimal(value));
+  }
+}
+
+export class Settlements extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("poolid", Value.fromBytes(Bytes.empty()));
+    this.set("security", Value.fromString(""));
+    this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("liquidityProvider", Value.fromBytes(Bytes.empty()));
+    this.set("underwritingFee", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("issuer", Value.fromBytes(Bytes.empty()));
+    this.set("subscription", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Settlements entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Settlements entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Settlements", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Settlements | null {
+    return changetype<Settlements | null>(store.get("Settlements", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get poolid(): Bytes {
+    let value = this.get("poolid");
+    return value!.toBytes();
+  }
+
+  set poolid(value: Bytes) {
+    this.set("poolid", Value.fromBytes(value));
+  }
+
+  get security(): string {
+    let value = this.get("security");
+    return value!.toString();
+  }
+
+  set security(value: string) {
+    this.set("security", Value.fromString(value));
+  }
+
+  get currency(): Bytes {
+    let value = this.get("currency");
+    return value!.toBytes();
+  }
+
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
+  }
+
+  get liquidityProvider(): Bytes {
+    let value = this.get("liquidityProvider");
+    return value!.toBytes();
+  }
+
+  set liquidityProvider(value: Bytes) {
+    this.set("liquidityProvider", Value.fromBytes(value));
+  }
+
+  get underwritingFee(): BigDecimal {
+    let value = this.get("underwritingFee");
+    return value!.toBigDecimal();
+  }
+
+  set underwritingFee(value: BigDecimal) {
+    this.set("underwritingFee", Value.fromBigDecimal(value));
+  }
+
+  get issuer(): Bytes {
+    let value = this.get("issuer");
+    return value!.toBytes();
+  }
+
+  set issuer(value: Bytes) {
+    this.set("issuer", Value.fromBytes(value));
+  }
+
+  get subscription(): BigDecimal {
+    let value = this.get("subscription");
+    return value!.toBigDecimal();
+  }
+
+  set subscription(value: BigDecimal) {
+    this.set("subscription", Value.fromBigDecimal(value));
   }
 }

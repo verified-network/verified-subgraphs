@@ -2,10 +2,10 @@ import{
     marketmakers,
     subscribers,
     offers,
-    PrimaryIssueManager,
     closures,
     allotments,
-    refunds
+    refunds,
+    settlements
 } from "../../generated/PrimaryIssueManager/PrimaryIssueManager";
 
 import{
@@ -14,7 +14,8 @@ import{
     Offers,
     Closures,
     Allotments,
-    Refunds
+    Refunds,
+    Settlements
 } from "../../generated/schema";
 
 export function handleMarketmakers(event: marketmakers): void {
@@ -154,5 +155,29 @@ export function handleRefunds(event: refunds): void {
         refunds.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         refunds.currency = event.params.currency;
         refunds.refundAmount = event.params.refundAmount.toBigDecimal();
-    }    
+    }
+}
+
+export function handlleSettlements(event: settlements): void {
+    let settlements = Settlements.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(settlements==null){
+        let poolId = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let settlements = new Settlements(poolId);
+        settlements.poolid = event.params.poolId;
+        settlements.security = event.params.security.toHexString();
+        settlements.currency = event.params.currency;
+        settlements.liquidityProvider = event.params.liquidityProvider;
+        settlements.underwritingFee = event.params.underwritingFee.toBigDecimal();
+        settlements.issuer = event.params.issuer;
+        settlements.subscription = event.params.subscription.toBigDecimal();
+    }
+    else{
+        settlements.poolid = event.params.poolId;
+        settlements.security = event.params.security.toHexString();
+        settlements.currency = event.params.currency;
+        settlements.liquidityProvider = event.params.liquidityProvider;
+        settlements.underwritingFee = event.params.underwritingFee.toBigDecimal();
+        settlements.issuer = event.params.issuer;
+        settlements.subscription = event.params.subscription.toBigDecimal();
+    }
 }

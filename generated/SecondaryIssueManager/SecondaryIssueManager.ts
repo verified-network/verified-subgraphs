@@ -32,32 +32,6 @@ export class OwnershipTransferred__Params {
   }
 }
 
-export class payFees extends ethereum.Event {
-  get params(): payFees__Params {
-    return new payFees__Params(this);
-  }
-}
-
-export class payFees__Params {
-  _event: payFees;
-
-  constructor(event: payFees) {
-    this._event = event;
-  }
-
-  get consideration(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
-  get fee(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-
-  get toPay(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-}
-
 export class subscribers extends ethereum.Event {
   get params(): subscribers__Params {
     return new subscribers__Params(this);
@@ -155,6 +129,10 @@ export class tradeSettled__Params {
 
   get settlementStatus(): Bytes {
     return this._event.parameters[7].value.toBytes();
+  }
+
+  get fee(): BigInt {
+    return this._event.parameters[8].value.toBigInt();
   }
 }
 

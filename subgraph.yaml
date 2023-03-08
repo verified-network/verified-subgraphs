@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: matic
+    network: goerli
     source:
-      address: '0xbfAC42b83fBB6fb34914368BD0A9654fBEc559C3'
+      address: '0xf012827B3F3d2b5069fdD43a2e0aE2Af1ad88A4e'
       abi: SecuritiesFactory
-      startBlock: 40040010
+      startBlock: 8605972
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -30,11 +30,11 @@ dataSources:
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: matic
+    network: goerli
     source:
-      address: '0x4f1578c1F52401A600Cf000DD0aD3B19826baf5c'
+      address: '0x0E36Bf50E0b8F753d01Fb23Da81420b1E061dA26'
       abi: Client
-      startBlock: 40039999
+      startBlock: 8605969
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -55,11 +55,11 @@ dataSources:
           handler: handleUserCreated
   - kind: ethereum/contract
     name: PrimaryIssueManager
-    network: matic
+    network: goerli
     source:
-      address: '0x5Ba7fa9Ac47Ad7CA0DBcc904CeDC2FC2f6d98729'
+      address: '0xC7075Eae19D21eEDB27bd2a804cC568c5Ab164f3'
       abi: PrimaryIssueManager
-      startBlock: 40041537
+      startBlock: 8610119
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -85,13 +85,15 @@ dataSources:
           handler: handleAllotments
         - event: refunds(indexed bytes32,address,address,uint256,address,uint256)
           handler: handleRefunds
+        - event: settlements(indexed bytes32,address,address,address,uint256,address,uint256)
+          handler: handleSettlements
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: matic
+    network: goerli
     source:
-      address: '0x9E2dD186477A263f0baEb150aD1eB83427bfCD9d'
+      address: '0xBED856DA1d5267010470e85Acd65102A2ba8D1C6'
       abi: SecondaryIssueManager
-      startBlock: 40041556
+      startBlock: 8610124
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -104,14 +106,14 @@ dataSources:
         - name: SecondaryIssueManager
           file: ./abis/SecondaryIssueManager.json
       eventHandlers:
-        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,bytes32)
+        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,bytes32,uint256)
           handler: handleTradeSettled
         - event: subscribers(bytes32,address,address,indexed address,address,uint256,uint256,bytes32,bytes32,uint256)
           handler: handleSecondaryInvestors
 templates:
   - kind: ethereum/contract
     name: Cash
-    network: matic
+    network: goerli
     source:
       abi: Cash
     mapping:
@@ -140,7 +142,7 @@ templates:
       file: ./src/mappings/cash.ts  
   - kind: ethereum/contract
     name: Bond
-    network: matic
+    network: goerli
     source:
       abi: Bond
     mapping:

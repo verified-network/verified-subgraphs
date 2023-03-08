@@ -22,6 +22,7 @@ export function handleTradeSettled(event: tradeSettled): void {
         trades.currency = event.params.currency;
         trades.price = event.params.price.toBigDecimal();
         trades.settlementStatus = event.params.settlementStatus;
+        trades.tradingCommission = event.params.fee.toBigDecimal();
         trades.save();
     }
     else{
@@ -33,6 +34,7 @@ export function handleTradeSettled(event: tradeSettled): void {
         trades.currency = event.params.currency;
         trades.price = event.params.price.toBigDecimal();
         trades.settlementStatus = event.params.settlementStatus;
+        trades.tradingCommission = event.params.fee.toBigDecimal();
         trades.save();
     }
 }
