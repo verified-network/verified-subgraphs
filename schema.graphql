@@ -53,6 +53,26 @@ type Token @entity {
   #securityissued: [Offers!] @derivedFrom(field: "offered")
   #security: [Security!] @derivedFrom(field: "security")
 }
+type Security @entity {
+  id: ID!
+  security: Bytes!
+  #issuer: User!
+  issuer: Bytes!
+  isin: Bytes!
+  #currency: Currency! 
+  currency: Bytes!
+  restricted: Boolean!
+  issueManager: Bytes!
+  primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
+  secondaryInvestors: [Investors!] @derivedFrom(field: "security")
+  trades: [Trades!] @derivedFrom(field: "security")
+  liquidityOffered: [LiquidityProviders!] @derivedFrom(field: "security")
+  #securityIssued: [Offers!] @derivedFrom(field: "offered")
+  subscriptionsClosed: [Closures!] @derivedFrom(field: "security")
+  primaryAllotments: [Allotments!] @derivedFrom(field: "security")
+  primaryRefunds: [Refunds!] @derivedFrom(field: "security")
+  primarySettlements: [Settlements!] @derivedFrom(field: "security")
+}
 type CashDeposited @entity {
   id: ID!
   party: User!
@@ -114,25 +134,6 @@ type Manager @entity {
   role: Bytes!
   country: Bytes
   managerId: Bytes
-}
-type Security @entity {
-  id: ID!
-  security: Bytes!
-  #issuer: User!
-  issuer: Bytes!
-  isin: Bytes!
-  #currency: Currency! 
-  currency: Bytes!
-  restricted: Boolean!
-  issueManager: Bytes!
-  primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
-  secondaryInvestors: [Investors!] @derivedFrom(field: "security")
-  trades: [Trades!] @derivedFrom(field: "security")
-  liquidityOffered: [LiquidityProviders!] @derivedFrom(field: "security")
-  #securityIssued: [Offers!] @derivedFrom(field: "offered")
-  subscriptionsClosed: [Closures!] @derivedFrom(field: "security")
-  primaryAllotments: [Allotments!] @derivedFrom(field: "security")
-  primaryRefunds: [Refunds!] @derivedFrom(field: "security")
 }
 type Offers @entity {
   id: ID!
