@@ -19,9 +19,9 @@ import{
 } from "../../generated/schema";
 
 export function handleMarketmakers(event: marketmakers): void {
-    let lps = LiquidityProviders.load(event.params.provider.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    let lps = LiquidityProviders.load(event.params.security.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(lps==null){
-        let lpId = event.params.provider.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let lpId = event.params.security.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let lps = new LiquidityProviders(lpId);
         lps.platform = event.params.platform;
         lps.owner = event.params.provider;
@@ -101,30 +101,33 @@ export function handleOffers(event: offers): void {
 export function handleClosures(event: closures): void {
     let closures = Closures.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(closures==null){
-        let poolId = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let closures = new Closures(poolId);
+        let pool = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let closures = new Closures(pool);
         closures.poolid = event.params.poolId;
         closures.security = event.params.security.toHexString();
         closures.timestamp = event.params.timestamp.toI32();
+        closures.save();
     }
     else{
         closures.poolid = event.params.poolId;
         closures.security = event.params.security.toHexString();
         closures.timestamp = event.params.timestamp.toI32();
+        closures.save();
     }
 }
 
 export function handleAllotments(event: allotments): void {
     let allotments = Allotments.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(allotments==null){
-        let poolId = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let allotments = new Allotments(poolId);
+        let pool = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let allotments = new Allotments(pool);
         allotments.poolid = event.params.poolId;
         allotments.investor = event.params.investor;
         allotments.security = event.params.security.toHexString();
         allotments.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         allotments.currency = event.params.currency;
         allotments.allotedAmount = event.params.allotedAmount.toBigDecimal();
+        allotments.save();
     }
     else{
         allotments.poolid = event.params.poolId;
@@ -133,20 +136,22 @@ export function handleAllotments(event: allotments): void {
         allotments.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         allotments.currency = event.params.currency;
         allotments.allotedAmount = event.params.allotedAmount.toBigDecimal();
+        allotments.save();
     }
 }
 
 export function handleRefunds(event: refunds): void {
     let refunds = Refunds.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(refunds==null){
-        let poolId = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let refunds = new Refunds(poolId);
+        let pool = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let refunds = new Refunds(pool);
         refunds.poolid = event.params.poolId;
         refunds.investor = event.params.investor;
         refunds.security = event.params.security.toHexString();
         refunds.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         refunds.currency = event.params.currency;
         refunds.refundAmount = event.params.refundAmount.toBigDecimal();
+        refunds.save();
     }
     else{
         refunds.poolid = event.params.poolId;
@@ -155,14 +160,15 @@ export function handleRefunds(event: refunds): void {
         refunds.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         refunds.currency = event.params.currency;
         refunds.refundAmount = event.params.refundAmount.toBigDecimal();
+        refunds.save();
     }
 }
 
-export function handlleSettlements(event: settlements): void {
+export function handleSettlements(event: settlements): void {
     let settlements = Settlements.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(settlements==null){
-        let poolId = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let settlements = new Settlements(poolId);
+        let pool = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let settlements = new Settlements(pool);
         settlements.poolid = event.params.poolId;
         settlements.security = event.params.security.toHexString();
         settlements.currency = event.params.currency;
@@ -170,6 +176,7 @@ export function handlleSettlements(event: settlements): void {
         settlements.underwritingFee = event.params.underwritingFee.toBigDecimal();
         settlements.issuer = event.params.issuer;
         settlements.subscription = event.params.subscription.toBigDecimal();
+        settlements.save();
     }
     else{
         settlements.poolid = event.params.poolId;
@@ -179,5 +186,6 @@ export function handlleSettlements(event: settlements): void {
         settlements.underwritingFee = event.params.underwritingFee.toBigDecimal();
         settlements.issuer = event.params.issuer;
         settlements.subscription = event.params.subscription.toBigDecimal();
+        settlements.save();
     }
 }
