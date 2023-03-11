@@ -66,8 +66,8 @@ type Security @entity {
   primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
   secondaryInvestors: [Investors!] @derivedFrom(field: "security")
   trades: [Trades!] @derivedFrom(field: "security")
-  liquidityOffered: [LiquidityProviders!] @derivedFrom(field: "security")
-  #securityIssued: [Offers!] @derivedFrom(field: "offered")
+  liquidityProviders: [LiquidityProviders!] @derivedFrom(field: "security")  
+  #liquidityOffered: [Offers!] @derivedFrom(field: "offered")
   subscriptionsClosed: [Closures!] @derivedFrom(field: "security")
   primaryAllotments: [Allotments!] @derivedFrom(field: "security")
   primaryRefunds: [Refunds!] @derivedFrom(field: "security")
@@ -141,6 +141,7 @@ type Offers @entity {
   offeredBy: Bytes!
   #offered: Token!
   offered: Bytes!
+  tomatch: Bytes!
   isin: Bytes!
   amount: BigDecimal! 
   desired: BigDecimal!
@@ -175,6 +176,7 @@ type Subscribers @entity {
   cashSwapped: BigDecimal!   
   securitySwapped: BigDecimal! 
   timestamp: Int!
+  bought: Boolean!
 }
 type Investors @entity {
   id: ID!

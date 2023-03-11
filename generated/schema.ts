@@ -746,8 +746,8 @@ export class Security extends Entity {
     }
   }
 
-  get liquidityOffered(): Array<string> | null {
-    let value = this.get("liquidityOffered");
+  get liquidityProviders(): Array<string> | null {
+    let value = this.get("liquidityProviders");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -755,11 +755,14 @@ export class Security extends Entity {
     }
   }
 
-  set liquidityOffered(value: Array<string> | null) {
+  set liquidityProviders(value: Array<string> | null) {
     if (!value) {
-      this.unset("liquidityOffered");
+      this.unset("liquidityProviders");
     } else {
-      this.set("liquidityOffered", Value.fromStringArray(<Array<string>>value));
+      this.set(
+        "liquidityProviders",
+        Value.fromStringArray(<Array<string>>value)
+      );
     }
   }
 
@@ -1507,6 +1510,7 @@ export class Offers extends Entity {
 
     this.set("offeredBy", Value.fromBytes(Bytes.empty()));
     this.set("offered", Value.fromBytes(Bytes.empty()));
+    this.set("tomatch", Value.fromBytes(Bytes.empty()));
     this.set("isin", Value.fromBytes(Bytes.empty()));
     this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("desired", Value.fromBigDecimal(BigDecimal.zero()));
@@ -1557,6 +1561,15 @@ export class Offers extends Entity {
 
   set offered(value: Bytes) {
     this.set("offered", Value.fromBytes(value));
+  }
+
+  get tomatch(): Bytes {
+    let value = this.get("tomatch");
+    return value!.toBytes();
+  }
+
+  set tomatch(value: Bytes) {
+    this.set("tomatch", Value.fromBytes(value));
   }
 
   get isin(): Bytes {
@@ -1750,6 +1763,7 @@ export class Subscribers extends Entity {
     this.set("cashSwapped", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("securitySwapped", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("timestamp", Value.fromI32(0));
+    this.set("bought", Value.fromBoolean(false));
   }
 
   save(): void {
@@ -1839,6 +1853,15 @@ export class Subscribers extends Entity {
 
   set timestamp(value: i32) {
     this.set("timestamp", Value.fromI32(value));
+  }
+
+  get bought(): boolean {
+    let value = this.get("bought");
+    return value!.toBoolean();
+  }
+
+  set bought(value: boolean) {
+    this.set("bought", Value.fromBoolean(value));
   }
 }
 

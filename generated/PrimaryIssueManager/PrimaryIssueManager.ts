@@ -181,24 +181,50 @@ export class offers__Params {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get amountDesired(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
+  get tomatch(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 
-  get minAmount(): BigInt {
+  get amountDesired(): BigInt {
     return this._event.parameters[4].value.toBigInt();
   }
 
+  get minAmount(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
   get isin(): Bytes {
-    return this._event.parameters[5].value.toBytes();
+    return this._event.parameters[6].value.toBytes();
   }
 
   get minimumOrderSize(): BigInt {
-    return this._event.parameters[6].value.toBigInt();
+    return this._event.parameters[7].value.toBigInt();
   }
 
   get offeringDocs(): string {
-    return this._event.parameters[7].value.toString();
+    return this._event.parameters[8].value.toString();
+  }
+}
+
+export class onallotment extends ethereum.Event {
+  get params(): onallotment__Params {
+    return new onallotment__Params(this);
+  }
+}
+
+export class onallotment__Params {
+  _event: onallotment;
+
+  constructor(event: onallotment) {
+    this._event = event;
+  }
+
+  get subscription(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get refund(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
   }
 }
 
@@ -321,6 +347,10 @@ export class subscribers__Params {
 
   get timestamp(): BigInt {
     return this._event.parameters[6].value.toBigInt();
+  }
+
+  get subscription(): boolean {
+    return this._event.parameters[7].value.toBoolean();
   }
 }
 

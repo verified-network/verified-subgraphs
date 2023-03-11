@@ -19,9 +19,9 @@ import{
 } from "../../generated/schema";
 
 export function handleMarketmakers(event: marketmakers): void {
-    let lps = LiquidityProviders.load(event.params.security.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    let lps = LiquidityProviders.load(event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(lps==null){
-        let lpId = event.params.security.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let lpId = event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let lps = new LiquidityProviders(lpId);
         lps.platform = event.params.platform;
         lps.owner = event.params.provider;
@@ -45,10 +45,10 @@ export function handleMarketmakers(event: marketmakers): void {
 }
 
 export function handlePrimaryInvestors(event: subscribers): void {
-    let investors = Subscribers.load(event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    let investors = Subscribers.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(investors==null){
-        let subscriberId = event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let investors = new Subscribers(subscriberId);
+        let pool = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let investors = new Subscribers(pool);
         investors.pool = event.params.poolId;
         investors.security = event.params.security.toHexString();
         investors.investor = event.params.investor;
@@ -56,6 +56,7 @@ export function handlePrimaryInvestors(event: subscribers): void {
         investors.cashSwapped = event.params.cashSwapped.toBigDecimal();
         investors.securitySwapped = event.params.securitySwapped.toBigDecimal();
         investors.timestamp = event.params.timestamp.toI32();
+        investors.bought = event.params.subscription;
         investors.save();
     }
     else{
@@ -66,17 +67,19 @@ export function handlePrimaryInvestors(event: subscribers): void {
         investors.cashSwapped = event.params.cashSwapped.toBigDecimal();
         investors.securitySwapped = event.params.securitySwapped.toBigDecimal();
         investors.timestamp = event.params.timestamp.toI32();
+        investors.bought = event.params.subscription;
         investors.save();
     }
 }
 
 export function handleOffers(event: offers): void {
-    let offers = Offers.load(event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    let offers = Offers.load(event.params.offered.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(offers==null){
-        let offerId = event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let offerId = event.params.offered.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let offers = new Offers(offerId);
         offers.offeredBy = event.params.party;
         offers.offered = event.params.offered;
+        offers.tomatch = event.params.tomatch;
         offers.isin = event.params.isin;
         offers.amount = event.params.amountOffered.toBigDecimal();
         offers.desired = event.params.amountDesired.toBigDecimal();
@@ -88,6 +91,7 @@ export function handleOffers(event: offers): void {
     else{
         offers.offeredBy = event.params.party;
         offers.offered = event.params.offered;
+        offers.tomatch = event.params.tomatch;
         offers.isin = event.params.isin;
         offers.amount = event.params.amountOffered.toBigDecimal();
         offers.desired = event.params.amountDesired.toBigDecimal();
