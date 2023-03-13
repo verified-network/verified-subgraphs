@@ -79,7 +79,7 @@ export function handleOffers(event: offers): void {
         let offers = new Offers(offerId);
         offers.offeredBy = event.params.party;
         offers.offered = event.params.offered;
-        offers.tomatch = event.params.tomatch;
+        offers.tomatch = event.params.tomatch.toHexString();
         offers.isin = event.params.isin;
         offers.amount = event.params.amountOffered.toBigDecimal();
         offers.desired = event.params.amountDesired.toBigDecimal();
@@ -91,7 +91,7 @@ export function handleOffers(event: offers): void {
     else{
         offers.offeredBy = event.params.party;
         offers.offered = event.params.offered;
-        offers.tomatch = event.params.tomatch;
+        offers.tomatch = event.params.tomatch.toHexString();
         offers.isin = event.params.isin;
         offers.amount = event.params.amountOffered.toBigDecimal();
         offers.desired = event.params.amountDesired.toBigDecimal();

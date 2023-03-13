@@ -67,7 +67,7 @@ type Security @entity {
   secondaryInvestors: [Investors!] @derivedFrom(field: "security")
   trades: [Trades!] @derivedFrom(field: "security")
   liquidityProviders: [LiquidityProviders!] @derivedFrom(field: "security")  
-  #liquidityOffered: [Offers!] @derivedFrom(field: "tomatch")
+  liquidityOffered: [Offers!] @derivedFrom(field: "tomatch")
   subscriptionsClosed: [Closures!] @derivedFrom(field: "security")
   primaryAllotments: [Allotments!] @derivedFrom(field: "security")
   primaryRefunds: [Refunds!] @derivedFrom(field: "security")
@@ -141,7 +141,7 @@ type Offers @entity {
   offeredBy: Bytes!
   #offered: Token!
   offered: Bytes!
-  tomatch: Bytes!
+  tomatch: Security!
   isin: Bytes!
   amount: BigDecimal! 
   desired: BigDecimal!

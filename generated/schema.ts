@@ -766,6 +766,23 @@ export class Security extends Entity {
     }
   }
 
+  get liquidityOffered(): Array<string> | null {
+    let value = this.get("liquidityOffered");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set liquidityOffered(value: Array<string> | null) {
+    if (!value) {
+      this.unset("liquidityOffered");
+    } else {
+      this.set("liquidityOffered", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
   get subscriptionsClosed(): Array<string> | null {
     let value = this.get("subscriptionsClosed");
     if (!value || value.kind == ValueKind.NULL) {
@@ -1510,7 +1527,7 @@ export class Offers extends Entity {
 
     this.set("offeredBy", Value.fromBytes(Bytes.empty()));
     this.set("offered", Value.fromBytes(Bytes.empty()));
-    this.set("tomatch", Value.fromBytes(Bytes.empty()));
+    this.set("tomatch", Value.fromString(""));
     this.set("isin", Value.fromBytes(Bytes.empty()));
     this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("desired", Value.fromBigDecimal(BigDecimal.zero()));
@@ -1563,13 +1580,13 @@ export class Offers extends Entity {
     this.set("offered", Value.fromBytes(value));
   }
 
-  get tomatch(): Bytes {
+  get tomatch(): string {
     let value = this.get("tomatch");
-    return value!.toBytes();
+    return value!.toString();
   }
 
-  set tomatch(value: Bytes) {
-    this.set("tomatch", Value.fromBytes(value));
+  set tomatch(value: string) {
+    this.set("tomatch", Value.fromString(value));
   }
 
   get isin(): Bytes {
