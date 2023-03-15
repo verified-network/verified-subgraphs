@@ -131,8 +131,12 @@ export class tradeSettled__Params {
     return this._event.parameters[7].value.toBytes();
   }
 
+  get tradeRef(): Bytes {
+    return this._event.parameters[8].value.toBytes();
+  }
+
   get fee(): BigInt {
-    return this._event.parameters[8].value.toBigInt();
+    return this._event.parameters[9].value.toBigInt();
   }
 }
 

@@ -1657,6 +1657,7 @@ export class Trades extends Entity {
     this.set("price", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("settlementStatus", Value.fromBytes(Bytes.empty()));
+    this.set("tradeRef", Value.fromBytes(Bytes.empty()));
     this.set("tradingCommission", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
@@ -1756,6 +1757,15 @@ export class Trades extends Entity {
 
   set settlementStatus(value: Bytes) {
     this.set("settlementStatus", Value.fromBytes(value));
+  }
+
+  get tradeRef(): Bytes {
+    let value = this.get("tradeRef");
+    return value!.toBytes();
+  }
+
+  set tradeRef(value: Bytes) {
+    this.set("tradeRef", Value.fromBytes(value));
   }
 
   get tradingCommission(): BigDecimal {

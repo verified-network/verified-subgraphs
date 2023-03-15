@@ -162,6 +162,7 @@ type Trades @entity {
   price: BigDecimal!
   currency: Bytes!
   settlementStatus: Bytes!
+  tradeRef: Bytes!
   tradingCommission: BigDecimal!
 }
 type Subscribers @entity {

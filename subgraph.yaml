@@ -57,9 +57,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: '0x2634C723483d5c680FE8d546bc0B9C1830Ed6017'
+      address: '0xadfc093F8Db26d6Cd24B8D786354BE651CcADC6A'
       abi: PrimaryIssueManager
-      startBlock: 8639355
+      startBlock: 8657724
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -91,9 +91,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: '0xC781B2b65e64E5fa49cfE05f84039B8f08304df9'
+      address: '0x83499055997ee6Cb6b26412bdA2ef777799E9d4a'
       abi: SecondaryIssueManager
-      startBlock: 8639359
+      startBlock: 8657728
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -106,7 +106,7 @@ dataSources:
         - name: SecondaryIssueManager
           file: ./abis/SecondaryIssueManager.json
       eventHandlers:
-        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,bytes32,uint256)
+        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,bytes32,bytes32,uint256)
           handler: handleTradeSettled
         - event: subscribers(bytes32,address,address,indexed address,address,uint256,uint256,bytes32,bytes32,uint256)
           handler: handleSecondaryInvestors

@@ -138,6 +138,12 @@
       },
       {
         "indexed": false,
+        "internalType": "bytes32",
+        "name": "tradeRef",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "fee",
         "type": "uint256"
