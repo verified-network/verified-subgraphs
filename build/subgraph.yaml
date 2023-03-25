@@ -1,6 +1,5 @@
 specVersion: 0.0.2
-description: Verified is a decentralized financial services network for payments,
-  investments and financing.
+description: The Verified Wallet is for issuers and investors of tokenized securities.
 repository: https://github.com/verified-network/verified-graph
 schema:
   file: schema.graphql
@@ -9,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: goerli
     source:
-      address: "0xf012827B3F3d2b5069fdD43a2e0aE2Af1ad88A4e"
+      address: "0x50e0ecA20A4C0842d5AA94e64aA56Cd2f1893B8D"
       abi: SecuritiesFactory
-      startBlock: 8605972
+      startBlock: 8712873
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -33,9 +32,9 @@ dataSources:
     name: Client
     network: goerli
     source:
-      address: "0x0E36Bf50E0b8F753d01Fb23Da81420b1E061dA26"
+      address: "0xa568032eEF0e87d7078dEDaf3024394dA7A1753E"
       abi: Client
-      startBlock: 8605969
+      startBlock: 8712870
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -58,9 +57,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: "0xadfc093F8Db26d6Cd24B8D786354BE651CcADC6A"
+      address: "0xe13F3dacCA742e5114bE03c885Bea6ECa50A560F"
       abi: PrimaryIssueManager
-      startBlock: 8657724
+      startBlock: 8712890
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -93,9 +92,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: "0x83499055997ee6Cb6b26412bdA2ef777799E9d4a"
+      address: "0xC82f8cFeBc039934806dd2eBd8e23d526423453c"
       abi: SecondaryIssueManager
-      startBlock: 8657728
+      startBlock: 8712894
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

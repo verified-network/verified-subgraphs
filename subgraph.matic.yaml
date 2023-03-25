@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: goerli
+    network: matic
     source:
-      address: '0x50e0ecA20A4C0842d5AA94e64aA56Cd2f1893B8D'
+      address: '0xB9f0De20f1b1E4357AA1BBF80eEC57930C941701'
       abi: SecuritiesFactory
-      startBlock: 8712873
+      startBlock: 40601380
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -30,11 +30,11 @@ dataSources:
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: goerli
+    network: matic
     source:
-      address: '0xa568032eEF0e87d7078dEDaf3024394dA7A1753E'
+      address: '0x5bedC9ef3f3075aBb8843E2A52381A683B5230cD'
       abi: Client
-      startBlock: 8712870
+      startBlock: 40601307
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -55,11 +55,11 @@ dataSources:
           handler: handleUserCreated
   - kind: ethereum/contract
     name: PrimaryIssueManager
-    network: goerli
+    network: matic
     source:
-      address: '0xe13F3dacCA742e5114bE03c885Bea6ECa50A560F'
+      address: '0xaeb0135cF07CDdb695dF7f15E8a9D5f7eCCF6076'
       abi: PrimaryIssueManager
-      startBlock: 8712890
+      startBlock: 40620422
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -89,11 +89,11 @@ dataSources:
           handler: handleSettlements
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: goerli
+    network: matic
     source:
-      address: '0xC82f8cFeBc039934806dd2eBd8e23d526423453c'
+      address: '0x1E99ae988c872598Bf1874BEf42020Df9796f6dA'
       abi: SecondaryIssueManager
-      startBlock: 8712894
+      startBlock: 40620442
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -113,7 +113,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Cash
-    network: goerli
+    network: matic
     source:
       abi: Cash
     mapping:
@@ -142,7 +142,7 @@ templates:
       file: ./src/mappings/cash.ts  
   - kind: ethereum/contract
     name: Bond
-    network: goerli
+    network: matic
     source:
       abi: Bond
     mapping:
@@ -169,6 +169,3 @@ templates:
         - event: BondIssueRequest(indexed address,bytes32,uint256)
           handler: handleBondIssueRequest
       file: ./src/mappings/bond.ts
-  
-
-

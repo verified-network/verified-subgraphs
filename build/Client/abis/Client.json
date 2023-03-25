@@ -309,52 +309,6 @@
         "type": "address"
       },
       {
-        "name": "name",
-        "type": "bytes32"
-      },
-      {
-        "name": "surname",
-        "type": "bytes32"
-      },
-      {
-        "name": "country",
-        "type": "bytes32"
-      },
-      {
-        "name": "status",
-        "type": "uint256"
-      },
-      {
-        "name": "_hashedMessage",
-        "type": "bytes32"
-      },
-      {
-        "name": "_v",
-        "type": "uint8"
-      },
-      {
-        "name": "_r",
-        "type": "bytes32"
-      },
-      {
-        "name": "_s",
-        "type": "bytes32"
-      }
-    ],
-    "name": "KycUpdate",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "client",
-        "type": "address"
-      },
-      {
         "name": "score",
         "type": "uint256"
       }
@@ -399,6 +353,56 @@
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "name": "surname",
+        "type": "bytes32"
+      },
+      {
+        "name": "country",
+        "type": "bytes32"
+      },
+      {
+        "name": "contact",
+        "type": "bytes32"
+      },
+      {
+        "name": "status",
+        "type": "uint256"
+      },
+      {
+        "name": "_hashedMessage",
+        "type": "bytes32"
+      },
+      {
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "name": "_s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "KycUpdate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [
       {
@@ -427,6 +431,63 @@
       {
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "name": "identity",
+        "type": "string"
+      },
+      {
+        "name": "videokyc",
+        "type": "string"
+      },
+      {
+        "name": "docs",
+        "type": "string"
+      }
+    ],
+    "name": "fullKycUpdate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      }
+    ],
+    "name": "getFullClientKYC",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "string"
       }
     ],
     "payable": false,

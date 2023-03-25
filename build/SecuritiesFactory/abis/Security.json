@@ -362,7 +362,7 @@
         "type": "address"
       },
       {
-        "name": "issueManager",
+        "name": "issuer",
         "type": "address"
       }
     ],

@@ -182,6 +182,29 @@ export class Client__getClientKYCResult {
   }
 }
 
+export class Client__getFullClientKYCResult {
+  value0: Bytes;
+  value1: string;
+  value2: string;
+  value3: string;
+
+  constructor(value0: Bytes, value1: string, value2: string, value3: string) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromFixedBytes(this.value0));
+    map.set("value1", ethereum.Value.fromString(this.value1));
+    map.set("value2", ethereum.Value.fromString(this.value2));
+    map.set("value3", ethereum.Value.fromString(this.value3));
+    return map;
+  }
+}
+
 export class Client__getCustodyAccountResultValue0Struct extends ethereum.Tuple {
   get currency(): Bytes {
     return this[0].toBytes();
@@ -314,6 +337,43 @@ export class Client extends ethereum.SmartContract {
         value[2].toBytes(),
         value[3].toBigInt(),
         value[4].toBigInt()
+      )
+    );
+  }
+
+  getFullClientKYC(client: Address): Client__getFullClientKYCResult {
+    let result = super.call(
+      "getFullClientKYC",
+      "getFullClientKYC(address):(bytes32,string,string,string)",
+      [ethereum.Value.fromAddress(client)]
+    );
+
+    return new Client__getFullClientKYCResult(
+      result[0].toBytes(),
+      result[1].toString(),
+      result[2].toString(),
+      result[3].toString()
+    );
+  }
+
+  try_getFullClientKYC(
+    client: Address
+  ): ethereum.CallResult<Client__getFullClientKYCResult> {
+    let result = super.tryCall(
+      "getFullClientKYC",
+      "getFullClientKYC(address):(bytes32,string,string,string)",
+      [ethereum.Value.fromAddress(client)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new Client__getFullClientKYCResult(
+        value[0].toBytes(),
+        value[1].toString(),
+        value[2].toString(),
+        value[3].toString()
       )
     );
   }
@@ -641,68 +701,6 @@ export class RemoveRoleCall__Outputs {
   }
 }
 
-export class KycUpdateCall extends ethereum.Call {
-  get inputs(): KycUpdateCall__Inputs {
-    return new KycUpdateCall__Inputs(this);
-  }
-
-  get outputs(): KycUpdateCall__Outputs {
-    return new KycUpdateCall__Outputs(this);
-  }
-}
-
-export class KycUpdateCall__Inputs {
-  _call: KycUpdateCall;
-
-  constructor(call: KycUpdateCall) {
-    this._call = call;
-  }
-
-  get client(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get name(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
-  }
-
-  get surname(): Bytes {
-    return this._call.inputValues[2].value.toBytes();
-  }
-
-  get country(): Bytes {
-    return this._call.inputValues[3].value.toBytes();
-  }
-
-  get status(): BigInt {
-    return this._call.inputValues[4].value.toBigInt();
-  }
-
-  get _hashedMessage(): Bytes {
-    return this._call.inputValues[5].value.toBytes();
-  }
-
-  get _v(): i32 {
-    return this._call.inputValues[6].value.toI32();
-  }
-
-  get _r(): Bytes {
-    return this._call.inputValues[7].value.toBytes();
-  }
-
-  get _s(): Bytes {
-    return this._call.inputValues[8].value.toBytes();
-  }
-}
-
-export class KycUpdateCall__Outputs {
-  _call: KycUpdateCall;
-
-  constructor(call: KycUpdateCall) {
-    this._call = call;
-  }
-}
-
 export class SetAmlScoreCall extends ethereum.Call {
   get inputs(): SetAmlScoreCall__Inputs {
     return new SetAmlScoreCall__Inputs(this);
@@ -763,6 +761,114 @@ export class SetAmlPassScoreCall__Outputs {
   _call: SetAmlPassScoreCall;
 
   constructor(call: SetAmlPassScoreCall) {
+    this._call = call;
+  }
+}
+
+export class KycUpdateCall extends ethereum.Call {
+  get inputs(): KycUpdateCall__Inputs {
+    return new KycUpdateCall__Inputs(this);
+  }
+
+  get outputs(): KycUpdateCall__Outputs {
+    return new KycUpdateCall__Outputs(this);
+  }
+}
+
+export class KycUpdateCall__Inputs {
+  _call: KycUpdateCall;
+
+  constructor(call: KycUpdateCall) {
+    this._call = call;
+  }
+
+  get client(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get name(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+  }
+
+  get surname(): Bytes {
+    return this._call.inputValues[2].value.toBytes();
+  }
+
+  get country(): Bytes {
+    return this._call.inputValues[3].value.toBytes();
+  }
+
+  get contact(): Bytes {
+    return this._call.inputValues[4].value.toBytes();
+  }
+
+  get status(): BigInt {
+    return this._call.inputValues[5].value.toBigInt();
+  }
+
+  get _hashedMessage(): Bytes {
+    return this._call.inputValues[6].value.toBytes();
+  }
+
+  get _v(): i32 {
+    return this._call.inputValues[7].value.toI32();
+  }
+
+  get _r(): Bytes {
+    return this._call.inputValues[8].value.toBytes();
+  }
+
+  get _s(): Bytes {
+    return this._call.inputValues[9].value.toBytes();
+  }
+}
+
+export class KycUpdateCall__Outputs {
+  _call: KycUpdateCall;
+
+  constructor(call: KycUpdateCall) {
+    this._call = call;
+  }
+}
+
+export class FullKycUpdateCall extends ethereum.Call {
+  get inputs(): FullKycUpdateCall__Inputs {
+    return new FullKycUpdateCall__Inputs(this);
+  }
+
+  get outputs(): FullKycUpdateCall__Outputs {
+    return new FullKycUpdateCall__Outputs(this);
+  }
+}
+
+export class FullKycUpdateCall__Inputs {
+  _call: FullKycUpdateCall;
+
+  constructor(call: FullKycUpdateCall) {
+    this._call = call;
+  }
+
+  get client(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get identity(): string {
+    return this._call.inputValues[1].value.toString();
+  }
+
+  get videokyc(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+
+  get docs(): string {
+    return this._call.inputValues[3].value.toString();
+  }
+}
+
+export class FullKycUpdateCall__Outputs {
+  _call: FullKycUpdateCall;
+
+  constructor(call: FullKycUpdateCall) {
     this._call = call;
   }
 }
