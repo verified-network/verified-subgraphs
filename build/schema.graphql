@@ -72,6 +72,8 @@ type Security @entity {
   primaryAllotments: [Allotments!] @derivedFrom(field: "security")
   primaryRefunds: [Refunds!] @derivedFrom(field: "security")
   primarySettlements: [Settlements!] @derivedFrom(field: "security")
+  resolutions: [Resolutions!] @derivedFrom(field: "security")
+  snapshots : [Snapshots!] @derivedFrom(field: "security")
 }
 type CashDeposited @entity {
   id: ID!
@@ -249,4 +251,17 @@ type Settlements @entity{
   #issuer: User!
   issuer: Bytes!
   subscription: BigDecimal!  
+}
+type Snapshots @entity{
+  id: ID!
+  security: Security
+  oldTime: Int
+  newTime: Int
+}
+type Resolutions @entity{
+  id: ID!
+  security: Security!
+  recordDate: Int!
+  resolution: String!
+  voting: Boolean
 }

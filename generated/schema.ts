@@ -859,6 +859,40 @@ export class Security extends Entity {
       );
     }
   }
+
+  get resolutions(): Array<string> | null {
+    let value = this.get("resolutions");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set resolutions(value: Array<string> | null) {
+    if (!value) {
+      this.unset("resolutions");
+    } else {
+      this.set("resolutions", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get snapshots(): Array<string> | null {
+    let value = this.get("snapshots");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set snapshots(value: Array<string> | null) {
+    if (!value) {
+      this.unset("snapshots");
+    } else {
+      this.set("snapshots", Value.fromStringArray(<Array<string>>value));
+    }
+  }
 }
 
 export class CashDeposited extends Entity {
@@ -2499,5 +2533,150 @@ export class Settlements extends Entity {
 
   set subscription(value: BigDecimal) {
     this.set("subscription", Value.fromBigDecimal(value));
+  }
+}
+
+export class Snapshots extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("oldTime", Value.fromI32(0));
+    this.set("newTime", Value.fromI32(0));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Snapshots entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Snapshots entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Snapshots", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Snapshots | null {
+    return changetype<Snapshots | null>(store.get("Snapshots", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get security(): string | null {
+    let value = this.get("security");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set security(value: string | null) {
+    if (!value) {
+      this.unset("security");
+    } else {
+      this.set("security", Value.fromString(<string>value));
+    }
+  }
+
+  get oldTime(): i32 {
+    let value = this.get("oldTime");
+    return value!.toI32();
+  }
+
+  set oldTime(value: i32) {
+    this.set("oldTime", Value.fromI32(value));
+  }
+
+  get newTime(): i32 {
+    let value = this.get("newTime");
+    return value!.toI32();
+  }
+
+  set newTime(value: i32) {
+    this.set("newTime", Value.fromI32(value));
+  }
+}
+
+export class Resolutions extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("security", Value.fromString(""));
+    this.set("recordDate", Value.fromI32(0));
+    this.set("resolution", Value.fromString(""));
+    this.set("voting", Value.fromBoolean(false));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Resolutions entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Resolutions entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Resolutions", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Resolutions | null {
+    return changetype<Resolutions | null>(store.get("Resolutions", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get security(): string {
+    let value = this.get("security");
+    return value!.toString();
+  }
+
+  set security(value: string) {
+    this.set("security", Value.fromString(value));
+  }
+
+  get recordDate(): i32 {
+    let value = this.get("recordDate");
+    return value!.toI32();
+  }
+
+  set recordDate(value: i32) {
+    this.set("recordDate", Value.fromI32(value));
+  }
+
+  get resolution(): string {
+    let value = this.get("resolution");
+    return value!.toString();
+  }
+
+  set resolution(value: string) {
+    this.set("resolution", Value.fromString(value));
+  }
+
+  get voting(): boolean {
+    let value = this.get("voting");
+    return value!.toBoolean();
+  }
+
+  set voting(value: boolean) {
+    this.set("voting", Value.fromBoolean(value));
   }
 }

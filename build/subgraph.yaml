@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: goerli
     source:
-      address: "0x50e0ecA20A4C0842d5AA94e64aA56Cd2f1893B8D"
+      address: "0x130df98bE9bdb08b4e696Dd549A4030785420b5E"
       abi: SecuritiesFactory
-      startBlock: 8712873
+      startBlock: 8798108
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -32,9 +32,9 @@ dataSources:
     name: Client
     network: goerli
     source:
-      address: "0xa568032eEF0e87d7078dEDaf3024394dA7A1753E"
+      address: "0x1E20C867c6F337Ca94BCcFF5431FA112b0c3d8b4"
       abi: Client
-      startBlock: 8712870
+      startBlock: 8798105
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -57,9 +57,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: "0xe13F3dacCA742e5114bE03c885Bea6ECa50A560F"
+      address: "0xf3c8eDE0C8b49438FeAC3208DC958B292b75EA7c"
       abi: PrimaryIssueManager
-      startBlock: 8712890
+      startBlock: 8798187
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -92,9 +92,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: "0xC82f8cFeBc039934806dd2eBd8e23d526423453c"
+      address: "0x110D19BFb87309a5173457FAc166F73D1a481B9F"
       abi: SecondaryIssueManager
-      startBlock: 8712894
+      startBlock: 8798191
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -114,6 +114,34 @@ dataSources:
             address,address,uint256,uint256,bytes32,bytes32,uint256)
           handler: handleSecondaryInvestors
 templates:
+  - kind: ethereum/contract
+    name: Security
+    network: goerli
+    source:
+      abi: Security
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Security
+        - Resolutions
+        - Snapshots
+      abis:
+        - name: Security
+          file: Security\abis\Security.json
+      eventHandlers:
+        - event: Mint(indexed address,uint256)
+          handler: handleSecurityIssued
+        - event: Burn(indexed address,uint256)
+          handler: handleSecurityExtinguished
+        - event: Resolution(indexed address,uint256,string,bool)
+          handler: handleResolutions
+        - event: SnapshotSchedule(indexed address,uint256,uint256)
+          handler: handleSchedulingSnapshot
+        - event: SnapshotUnschedule(indexed address,uint256)
+          handler: handleUnschedulingSnapshot
+      file: templates\Security\Security.wasm
   - kind: ethereum/contract
     name: Cash
     network: goerli

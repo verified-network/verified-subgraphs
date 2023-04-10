@@ -262,24 +262,19 @@
       {
         "components": [
           {
-            "internalType": "bytes32",
-            "name": "partyRef",
-            "type": "bytes32"
-          },
-          {
             "internalType": "address",
             "name": "partyAddress",
             "type": "address"
           },
           {
             "internalType": "bytes32",
-            "name": "counterpartyRef",
+            "name": "partyRef",
             "type": "bytes32"
           },
           {
-            "internalType": "uint256",
-            "name": "price",
-            "type": "uint256"
+            "internalType": "bytes32",
+            "name": "counterpartyRef",
+            "type": "bytes32"
           },
           {
             "internalType": "uint256",

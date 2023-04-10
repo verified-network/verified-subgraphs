@@ -206,28 +206,6 @@ export class offers__Params {
   }
 }
 
-export class onallotment extends ethereum.Event {
-  get params(): onallotment__Params {
-    return new onallotment__Params(this);
-  }
-}
-
-export class onallotment__Params {
-  _event: onallotment;
-
-  constructor(event: onallotment) {
-    this._event = event;
-  }
-
-  get subscription(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
-  get refund(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-}
-
 export class refunds extends ethereum.Event {
   get params(): refunds__Params {
     return new refunds__Params(this);

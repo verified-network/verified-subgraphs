@@ -463,6 +463,25 @@ export class Client extends ethereum.SmartContract {
       value[0].toTupleArray<Client__getCustodyAccountResultValue0Struct>()
     );
   }
+
+  getCustody(userAddress: Address): Bytes {
+    let result = super.call("getCustody", "getCustody(address):(bytes32)", [
+      ethereum.Value.fromAddress(userAddress)
+    ]);
+
+    return result[0].toBytes();
+  }
+
+  try_getCustody(userAddress: Address): ethereum.CallResult<Bytes> {
+    let result = super.tryCall("getCustody", "getCustody(address):(bytes32)", [
+      ethereum.Value.fromAddress(userAddress)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
 }
 
 export class RenounceOwnershipCall extends ethereum.Call {
@@ -805,22 +824,6 @@ export class KycUpdateCall__Inputs {
   get status(): BigInt {
     return this._call.inputValues[5].value.toBigInt();
   }
-
-  get _hashedMessage(): Bytes {
-    return this._call.inputValues[6].value.toBytes();
-  }
-
-  get _v(): i32 {
-    return this._call.inputValues[7].value.toI32();
-  }
-
-  get _r(): Bytes {
-    return this._call.inputValues[8].value.toBytes();
-  }
-
-  get _s(): Bytes {
-    return this._call.inputValues[9].value.toBytes();
-  }
 }
 
 export class KycUpdateCall__Outputs {
@@ -907,6 +910,40 @@ export class SetCustodyAccountCall__Outputs {
   _call: SetCustodyAccountCall;
 
   constructor(call: SetCustodyAccountCall) {
+    this._call = call;
+  }
+}
+
+export class SetCustodyCall extends ethereum.Call {
+  get inputs(): SetCustodyCall__Inputs {
+    return new SetCustodyCall__Inputs(this);
+  }
+
+  get outputs(): SetCustodyCall__Outputs {
+    return new SetCustodyCall__Outputs(this);
+  }
+}
+
+export class SetCustodyCall__Inputs {
+  _call: SetCustodyCall;
+
+  constructor(call: SetCustodyCall) {
+    this._call = call;
+  }
+
+  get userAddress(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get accountId(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+  }
+}
+
+export class SetCustodyCall__Outputs {
+  _call: SetCustodyCall;
+
+  constructor(call: SetCustodyCall) {
     this._call = call;
   }
 }

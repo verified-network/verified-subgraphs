@@ -21,6 +21,29 @@
         "type": "uint256"
       }
     ],
+    "name": "getDistribution",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
     "name": "snapshotTotalSupply",
     "outputs": [
       {
@@ -116,6 +139,47 @@
     "inputs": [],
     "name": "isPaused",
     "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      },
+      {
+        "name": "ballot",
+        "type": "bool"
+      }
+    ],
+    "name": "vote",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "getResolution",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
+      },
       {
         "name": "",
         "type": "bool"
@@ -249,11 +313,43 @@
     "inputs": [
       {
         "indexed": true,
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "recordDate",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "resolution",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "voting",
+        "type": "bool"
+      }
+    ],
+    "name": "Resolution",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "indexed": false,
         "name": "oldTime",
         "type": "uint256"
       },
       {
-        "indexed": true,
+        "indexed": false,
         "name": "newTime",
         "type": "uint256"
       }
@@ -266,6 +362,11 @@
     "inputs": [
       {
         "indexed": true,
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "indexed": false,
         "name": "time",
         "type": "uint256"
       }
@@ -363,6 +464,10 @@
       },
       {
         "name": "issuer",
+        "type": "address"
+      },
+      {
+        "name": "client",
         "type": "address"
       }
     ],
@@ -724,6 +829,107 @@
       }
     ],
     "name": "unscheduleSnapshot",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      },
+      {
+        "name": "votes",
+        "type": "bool"
+      },
+      {
+        "name": "ipfsLink",
+        "type": "string"
+      }
+    ],
+    "name": "createResolution",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "countVotes",
+    "outputs": [
+      {
+        "name": "total",
+        "type": "uint256"
+      },
+      {
+        "name": "yes",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      },
+      {
+        "name": "wallet",
+        "type": "address"
+      },
+      {
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "payoutProrata",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      },
+      {
+        "name": "holder",
+        "type": "address"
+      },
+      {
+        "name": "wallet",
+        "type": "address"
+      },
+      {
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "payout",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",

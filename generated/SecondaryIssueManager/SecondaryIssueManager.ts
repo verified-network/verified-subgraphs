@@ -551,32 +551,28 @@ export class RequestSettlementCall__Outputs {
 }
 
 export class RequestSettlementCallTradeToReportStruct extends ethereum.Tuple {
-  get partyRef(): Bytes {
-    return this[0].toBytes();
+  get partyAddress(): Address {
+    return this[0].toAddress();
   }
 
-  get partyAddress(): Address {
-    return this[1].toAddress();
+  get partyRef(): Bytes {
+    return this[1].toBytes();
   }
 
   get counterpartyRef(): Bytes {
     return this[2].toBytes();
   }
 
-  get price(): BigInt {
+  get dt(): BigInt {
     return this[3].toBigInt();
   }
 
-  get dt(): BigInt {
+  get securityTraded(): BigInt {
     return this[4].toBigInt();
   }
 
-  get securityTraded(): BigInt {
-    return this[5].toBigInt();
-  }
-
   get currencyTraded(): BigInt {
-    return this[6].toBigInt();
+    return this[5].toBigInt();
   }
 }
 

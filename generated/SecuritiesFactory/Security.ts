@@ -98,6 +98,36 @@ export class Mint__Params {
   }
 }
 
+export class Resolution extends ethereum.Event {
+  get params(): Resolution__Params {
+    return new Resolution__Params(this);
+  }
+}
+
+export class Resolution__Params {
+  _event: Resolution;
+
+  constructor(event: Resolution) {
+    this._event = event;
+  }
+
+  get security(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get recordDate(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get resolution(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get voting(): boolean {
+    return this._event.parameters[3].value.toBoolean();
+  }
+}
+
 export class SnapshotSchedule extends ethereum.Event {
   get params(): SnapshotSchedule__Params {
     return new SnapshotSchedule__Params(this);
@@ -111,12 +141,16 @@ export class SnapshotSchedule__Params {
     this._event = event;
   }
 
+  get security(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
   get oldTime(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
+    return this._event.parameters[1].value.toBigInt();
   }
 
   get newTime(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -133,8 +167,12 @@ export class SnapshotUnschedule__Params {
     this._event = event;
   }
 
+  get security(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
   get time(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
+    return this._event.parameters[1].value.toBigInt();
   }
 }
 
@@ -240,6 +278,57 @@ export class OwnershipTransferred__Params {
   }
 }
 
+export class Security__getDistributionResult {
+  value0: Address;
+  value1: BigInt;
+
+  constructor(value0: Address, value1: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromAddress(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    return map;
+  }
+}
+
+export class Security__getResolutionResult {
+  value0: string;
+  value1: boolean;
+
+  constructor(value0: string, value1: boolean) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromString(this.value0));
+    map.set("value1", ethereum.Value.fromBoolean(this.value1));
+    return map;
+  }
+}
+
+export class Security__countVotesResult {
+  value0: BigInt;
+  value1: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    return map;
+  }
+}
+
 export class Security extends ethereum.SmartContract {
   static bind(address: Address): Security {
     return new Security("Security", address);
@@ -258,6 +347,39 @@ export class Security extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  getDistribution(time: BigInt): Security__getDistributionResult {
+    let result = super.call(
+      "getDistribution",
+      "getDistribution(uint256):(address,uint256)",
+      [ethereum.Value.fromUnsignedBigInt(time)]
+    );
+
+    return new Security__getDistributionResult(
+      result[0].toAddress(),
+      result[1].toBigInt()
+    );
+  }
+
+  try_getDistribution(
+    time: BigInt
+  ): ethereum.CallResult<Security__getDistributionResult> {
+    let result = super.tryCall(
+      "getDistribution",
+      "getDistribution(uint256):(address,uint256)",
+      [ethereum.Value.fromUnsignedBigInt(time)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new Security__getDistributionResult(
+        value[0].toAddress(),
+        value[1].toBigInt()
+      )
+    );
   }
 
   snapshotTotalSupply(time: BigInt): BigInt {
@@ -377,6 +499,39 @@ export class Security extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  getResolution(time: BigInt): Security__getResolutionResult {
+    let result = super.call(
+      "getResolution",
+      "getResolution(uint256):(string,bool)",
+      [ethereum.Value.fromUnsignedBigInt(time)]
+    );
+
+    return new Security__getResolutionResult(
+      result[0].toString(),
+      result[1].toBoolean()
+    );
+  }
+
+  try_getResolution(
+    time: BigInt
+  ): ethereum.CallResult<Security__getResolutionResult> {
+    let result = super.tryCall(
+      "getResolution",
+      "getResolution(uint256):(string,bool)",
+      [ethereum.Value.fromUnsignedBigInt(time)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new Security__getResolutionResult(
+        value[0].toString(),
+        value[1].toBoolean()
+      )
+    );
   }
 
   allowance(owner: Address, spender: Address): BigInt {
@@ -632,6 +787,36 @@ export class Security extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
+
+  countVotes(time: BigInt): Security__countVotesResult {
+    let result = super.call(
+      "countVotes",
+      "countVotes(uint256):(uint256,uint256)",
+      [ethereum.Value.fromUnsignedBigInt(time)]
+    );
+
+    return new Security__countVotesResult(
+      result[0].toBigInt(),
+      result[1].toBigInt()
+    );
+  }
+
+  try_countVotes(
+    time: BigInt
+  ): ethereum.CallResult<Security__countVotesResult> {
+    let result = super.tryCall(
+      "countVotes",
+      "countVotes(uint256):(uint256,uint256)",
+      [ethereum.Value.fromUnsignedBigInt(time)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new Security__countVotesResult(value[0].toBigInt(), value[1].toBigInt())
+    );
+  }
 }
 
 export class RenounceOwnershipCall extends ethereum.Call {
@@ -656,6 +841,40 @@ export class RenounceOwnershipCall__Outputs {
   _call: RenounceOwnershipCall;
 
   constructor(call: RenounceOwnershipCall) {
+    this._call = call;
+  }
+}
+
+export class VoteCall extends ethereum.Call {
+  get inputs(): VoteCall__Inputs {
+    return new VoteCall__Inputs(this);
+  }
+
+  get outputs(): VoteCall__Outputs {
+    return new VoteCall__Outputs(this);
+  }
+}
+
+export class VoteCall__Inputs {
+  _call: VoteCall;
+
+  constructor(call: VoteCall) {
+    this._call = call;
+  }
+
+  get time(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get ballot(): boolean {
+    return this._call.inputValues[1].value.toBoolean();
+  }
+}
+
+export class VoteCall__Outputs {
+  _call: VoteCall;
+
+  constructor(call: VoteCall) {
     this._call = call;
   }
 }
@@ -721,6 +940,10 @@ export class InitializeCall__Inputs {
 
   get issuer(): Address {
     return this._call.inputValues[3].value.toAddress();
+  }
+
+  get client(): Address {
+    return this._call.inputValues[4].value.toAddress();
   }
 }
 
@@ -1276,6 +1499,132 @@ export class UnscheduleSnapshotCall__Outputs {
   _call: UnscheduleSnapshotCall;
 
   constructor(call: UnscheduleSnapshotCall) {
+    this._call = call;
+  }
+}
+
+export class CreateResolutionCall extends ethereum.Call {
+  get inputs(): CreateResolutionCall__Inputs {
+    return new CreateResolutionCall__Inputs(this);
+  }
+
+  get outputs(): CreateResolutionCall__Outputs {
+    return new CreateResolutionCall__Outputs(this);
+  }
+}
+
+export class CreateResolutionCall__Inputs {
+  _call: CreateResolutionCall;
+
+  constructor(call: CreateResolutionCall) {
+    this._call = call;
+  }
+
+  get time(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get votes(): boolean {
+    return this._call.inputValues[1].value.toBoolean();
+  }
+
+  get ipfsLink(): string {
+    return this._call.inputValues[2].value.toString();
+  }
+}
+
+export class CreateResolutionCall__Outputs {
+  _call: CreateResolutionCall;
+
+  constructor(call: CreateResolutionCall) {
+    this._call = call;
+  }
+}
+
+export class PayoutProrataCall extends ethereum.Call {
+  get inputs(): PayoutProrataCall__Inputs {
+    return new PayoutProrataCall__Inputs(this);
+  }
+
+  get outputs(): PayoutProrataCall__Outputs {
+    return new PayoutProrataCall__Outputs(this);
+  }
+}
+
+export class PayoutProrataCall__Inputs {
+  _call: PayoutProrataCall;
+
+  constructor(call: PayoutProrataCall) {
+    this._call = call;
+  }
+
+  get time(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get wallet(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get token(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+}
+
+export class PayoutProrataCall__Outputs {
+  _call: PayoutProrataCall;
+
+  constructor(call: PayoutProrataCall) {
+    this._call = call;
+  }
+}
+
+export class PayoutCall extends ethereum.Call {
+  get inputs(): PayoutCall__Inputs {
+    return new PayoutCall__Inputs(this);
+  }
+
+  get outputs(): PayoutCall__Outputs {
+    return new PayoutCall__Outputs(this);
+  }
+}
+
+export class PayoutCall__Inputs {
+  _call: PayoutCall;
+
+  constructor(call: PayoutCall) {
+    this._call = call;
+  }
+
+  get time(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get holder(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get wallet(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get token(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[4].value.toBigInt();
+  }
+}
+
+export class PayoutCall__Outputs {
+  _call: PayoutCall;
+
+  constructor(call: PayoutCall) {
     this._call = call;
   }
 }
