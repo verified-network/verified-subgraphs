@@ -35659,12 +35659,13 @@
         }
       },
       "links": {},
-      "address": "0x1E20C867c6F337Ca94BCcFF5431FA112b0c3d8b4",
-      "transactionHash": "0xda7b58608b0e6031e4707c15b5c7a1bc9ae0426670aa103c905b7f0ab16fa45a"
+      "address": "0x1BB3849848EC6EE16a4e8a81e8B2e94f97874783",
+      "transactionHash": "0x6b75deedd73f6dde8773de2e809ecb9c5bf7d886529f6fa8ef7416b066c73d49"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2023-04-10T07:16:33.246Z",
+  "updatedAt": "2023-04-11T00:42:28.360Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {
       "getTransferAgent(address)": {

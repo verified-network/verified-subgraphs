@@ -35513,12 +35513,13 @@
     "5": {
       "events": {},
       "links": {},
-      "address": "0xc45e76aC04D1409f5E19B49E8B061A318dBDcC9f",
-      "transactionHash": "0x201ca675255ce2c35b62d82cd37274a81d66cd8a629cbce1379370e455d79caa"
+      "address": "0x5266906543BdFAC071eFDb176f91930350e14C14",
+      "transactionHash": "0xdcba1dcbf703333cea267f5d88f7e305fb0889d098d01347929bb76c19b7620a"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2023-04-10T07:16:33.371Z",
+  "updatedAt": "2023-04-11T00:42:28.331Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {

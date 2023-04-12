@@ -483,6 +483,117 @@ export class User extends Entity {
       this.set("submanager", Value.fromStringArray(<Array<string>>value));
     }
   }
+
+  get shareholder(): Array<string> | null {
+    let value = this.get("shareholder");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set shareholder(value: Array<string> | null) {
+    if (!value) {
+      this.unset("shareholder");
+    } else {
+      this.set("shareholder", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get liquidityRequestor(): Array<string> | null {
+    let value = this.get("liquidityRequestor");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set liquidityRequestor(value: Array<string> | null) {
+    if (!value) {
+      this.unset("liquidityRequestor");
+    } else {
+      this.set(
+        "liquidityRequestor",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get liquidityIssuedTo(): Array<string> | null {
+    let value = this.get("liquidityIssuedTo");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set liquidityIssuedTo(value: Array<string> | null) {
+    if (!value) {
+      this.unset("liquidityIssuedTo");
+    } else {
+      this.set(
+        "liquidityIssuedTo",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get liquidityProvidedTo(): Array<string> | null {
+    let value = this.get("liquidityProvidedTo");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set liquidityProvidedTo(value: Array<string> | null) {
+    if (!value) {
+      this.unset("liquidityProvidedTo");
+    } else {
+      this.set(
+        "liquidityProvidedTo",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get earnedByManager(): Array<string> | null {
+    let value = this.get("earnedByManager");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set earnedByManager(value: Array<string> | null) {
+    if (!value) {
+      this.unset("earnedByManager");
+    } else {
+      this.set("earnedByManager", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get earnedByInvestor(): Array<string> | null {
+    let value = this.get("earnedByInvestor");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set earnedByInvestor(value: Array<string> | null) {
+    if (!value) {
+      this.unset("earnedByInvestor");
+    } else {
+      this.set("earnedByInvestor", Value.fromStringArray(<Array<string>>value));
+    }
+  }
 }
 
 export class Token extends Entity {
@@ -593,6 +704,86 @@ export class Token extends Entity {
 
   set bondRedemptions(value: Array<string>) {
     this.set("bondRedemptions", Value.fromStringArray(value));
+  }
+
+  get platformLiquidityProvidedWith(): Array<string> | null {
+    let value = this.get("platformLiquidityProvidedWith");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set platformLiquidityProvidedWith(value: Array<string> | null) {
+    if (!value) {
+      this.unset("platformLiquidityProvidedWith");
+    } else {
+      this.set(
+        "platformLiquidityProvidedWith",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get managerEarningsIn(): Array<string> | null {
+    let value = this.get("managerEarningsIn");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set managerEarningsIn(value: Array<string> | null) {
+    if (!value) {
+      this.unset("managerEarningsIn");
+    } else {
+      this.set(
+        "managerEarningsIn",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get platformEarningsIn(): Array<string> | null {
+    let value = this.get("platformEarningsIn");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set platformEarningsIn(value: Array<string> | null) {
+    if (!value) {
+      this.unset("platformEarningsIn");
+    } else {
+      this.set(
+        "platformEarningsIn",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
+  }
+
+  get investorEarningsIn(): Array<string> | null {
+    let value = this.get("investorEarningsIn");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set investorEarningsIn(value: Array<string> | null) {
+    if (!value) {
+      this.unset("investorEarningsIn");
+    } else {
+      this.set(
+        "investorEarningsIn",
+        Value.fromStringArray(<Array<string>>value)
+      );
+    }
   }
 }
 
@@ -2678,5 +2869,532 @@ export class Resolutions extends Entity {
 
   set voting(value: boolean) {
     this.set("voting", Value.fromBoolean(value));
+  }
+}
+
+export class RevenueShares extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("shareholder", Value.fromString(""));
+    this.set("shareholderType", Value.fromBytes(Bytes.empty()));
+    this.set("tokenName", Value.fromBytes(Bytes.empty()));
+    this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("timestamp", Value.fromI32(0));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save RevenueShares entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save RevenueShares entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("RevenueShares", id.toString(), this);
+    }
+  }
+
+  static load(id: string): RevenueShares | null {
+    return changetype<RevenueShares | null>(store.get("RevenueShares", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get shareholder(): string {
+    let value = this.get("shareholder");
+    return value!.toString();
+  }
+
+  set shareholder(value: string) {
+    this.set("shareholder", Value.fromString(value));
+  }
+
+  get shareholderType(): Bytes {
+    let value = this.get("shareholderType");
+    return value!.toBytes();
+  }
+
+  set shareholderType(value: Bytes) {
+    this.set("shareholderType", Value.fromBytes(value));
+  }
+
+  get tokenName(): Bytes {
+    let value = this.get("tokenName");
+    return value!.toBytes();
+  }
+
+  set tokenName(value: Bytes) {
+    this.set("tokenName", Value.fromBytes(value));
+  }
+
+  get amount(): BigDecimal {
+    let value = this.get("amount");
+    return value!.toBigDecimal();
+  }
+
+  set amount(value: BigDecimal) {
+    this.set("amount", Value.fromBigDecimal(value));
+  }
+
+  get timestamp(): i32 {
+    let value = this.get("timestamp");
+    return value!.toI32();
+  }
+
+  set timestamp(value: i32) {
+    this.set("timestamp", Value.fromI32(value));
+  }
+}
+
+export class LiquidityTokenRequests extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("investor", Value.fromString(""));
+    this.set("tokenName", Value.fromString(""));
+    this.set("tokenAmount", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save LiquidityTokenRequests entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save LiquidityTokenRequests entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("LiquidityTokenRequests", id.toString(), this);
+    }
+  }
+
+  static load(id: string): LiquidityTokenRequests | null {
+    return changetype<LiquidityTokenRequests | null>(
+      store.get("LiquidityTokenRequests", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get investor(): string {
+    let value = this.get("investor");
+    return value!.toString();
+  }
+
+  set investor(value: string) {
+    this.set("investor", Value.fromString(value));
+  }
+
+  get tokenName(): string {
+    let value = this.get("tokenName");
+    return value!.toString();
+  }
+
+  set tokenName(value: string) {
+    this.set("tokenName", Value.fromString(value));
+  }
+
+  get tokenAmount(): BigDecimal {
+    let value = this.get("tokenAmount");
+    return value!.toBigDecimal();
+  }
+
+  set tokenAmount(value: BigDecimal) {
+    this.set("tokenAmount", Value.fromBigDecimal(value));
+  }
+}
+
+export class LiquidityTokenIssues extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("investor", Value.fromString(""));
+    this.set("tokenName", Value.fromString(""));
+    this.set("tokenAmount", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("LPToIssue", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save LiquidityTokenIssues entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save LiquidityTokenIssues entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("LiquidityTokenIssues", id.toString(), this);
+    }
+  }
+
+  static load(id: string): LiquidityTokenIssues | null {
+    return changetype<LiquidityTokenIssues | null>(
+      store.get("LiquidityTokenIssues", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get investor(): string {
+    let value = this.get("investor");
+    return value!.toString();
+  }
+
+  set investor(value: string) {
+    this.set("investor", Value.fromString(value));
+  }
+
+  get tokenName(): string {
+    let value = this.get("tokenName");
+    return value!.toString();
+  }
+
+  set tokenName(value: string) {
+    this.set("tokenName", Value.fromString(value));
+  }
+
+  get tokenAmount(): BigDecimal {
+    let value = this.get("tokenAmount");
+    return value!.toBigDecimal();
+  }
+
+  set tokenAmount(value: BigDecimal) {
+    this.set("tokenAmount", Value.fromBigDecimal(value));
+  }
+
+  get LPToIssue(): BigDecimal {
+    let value = this.get("LPToIssue");
+    return value!.toBigDecimal();
+  }
+
+  set LPToIssue(value: BigDecimal) {
+    this.set("LPToIssue", Value.fromBigDecimal(value));
+  }
+}
+
+export class PlatformLiquidity extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("platform", Value.fromBytes(Bytes.empty()));
+    this.set("manager", Value.fromString(""));
+    this.set("LPToken", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("token", Value.fromString(""));
+    this.set("tokenAmount", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save PlatformLiquidity entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save PlatformLiquidity entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("PlatformLiquidity", id.toString(), this);
+    }
+  }
+
+  static load(id: string): PlatformLiquidity | null {
+    return changetype<PlatformLiquidity | null>(
+      store.get("PlatformLiquidity", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get platform(): Bytes {
+    let value = this.get("platform");
+    return value!.toBytes();
+  }
+
+  set platform(value: Bytes) {
+    this.set("platform", Value.fromBytes(value));
+  }
+
+  get manager(): string {
+    let value = this.get("manager");
+    return value!.toString();
+  }
+
+  set manager(value: string) {
+    this.set("manager", Value.fromString(value));
+  }
+
+  get LPToken(): BigDecimal {
+    let value = this.get("LPToken");
+    return value!.toBigDecimal();
+  }
+
+  set LPToken(value: BigDecimal) {
+    this.set("LPToken", Value.fromBigDecimal(value));
+  }
+
+  get token(): string {
+    let value = this.get("token");
+    return value!.toString();
+  }
+
+  set token(value: string) {
+    this.set("token", Value.fromString(value));
+  }
+
+  get tokenAmount(): BigDecimal {
+    let value = this.get("tokenAmount");
+    return value!.toBigDecimal();
+  }
+
+  set tokenAmount(value: BigDecimal) {
+    this.set("tokenAmount", Value.fromBigDecimal(value));
+  }
+}
+
+export class ManagerReturns extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("platform", Value.fromBytes(Bytes.empty()));
+    this.set("manager", Value.fromString(""));
+    this.set("token", Value.fromString(""));
+    this.set("distribution", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save ManagerReturns entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save ManagerReturns entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("ManagerReturns", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ManagerReturns | null {
+    return changetype<ManagerReturns | null>(store.get("ManagerReturns", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get platform(): Bytes {
+    let value = this.get("platform");
+    return value!.toBytes();
+  }
+
+  set platform(value: Bytes) {
+    this.set("platform", Value.fromBytes(value));
+  }
+
+  get manager(): string {
+    let value = this.get("manager");
+    return value!.toString();
+  }
+
+  set manager(value: string) {
+    this.set("manager", Value.fromString(value));
+  }
+
+  get token(): string {
+    let value = this.get("token");
+    return value!.toString();
+  }
+
+  set token(value: string) {
+    this.set("token", Value.fromString(value));
+  }
+
+  get distribution(): BigDecimal {
+    let value = this.get("distribution");
+    return value!.toBigDecimal();
+  }
+
+  set distribution(value: BigDecimal) {
+    this.set("distribution", Value.fromBigDecimal(value));
+  }
+}
+
+export class PlatformReturns extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("platform", Value.fromBytes(Bytes.empty()));
+    this.set("vitta", Value.fromString(""));
+    this.set("distribution", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save PlatformReturns entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save PlatformReturns entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("PlatformReturns", id.toString(), this);
+    }
+  }
+
+  static load(id: string): PlatformReturns | null {
+    return changetype<PlatformReturns | null>(store.get("PlatformReturns", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get platform(): Bytes {
+    let value = this.get("platform");
+    return value!.toBytes();
+  }
+
+  set platform(value: Bytes) {
+    this.set("platform", Value.fromBytes(value));
+  }
+
+  get vitta(): string {
+    let value = this.get("vitta");
+    return value!.toString();
+  }
+
+  set vitta(value: string) {
+    this.set("vitta", Value.fromString(value));
+  }
+
+  get distribution(): BigDecimal {
+    let value = this.get("distribution");
+    return value!.toBigDecimal();
+  }
+
+  set distribution(value: BigDecimal) {
+    this.set("distribution", Value.fromBigDecimal(value));
+  }
+}
+
+export class InvestorReturns extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("platform", Value.fromBytes(Bytes.empty()));
+    this.set("investor", Value.fromString(""));
+    this.set("vitta", Value.fromString(""));
+    this.set("prorataStake", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save InvestorReturns entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save InvestorReturns entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("InvestorReturns", id.toString(), this);
+    }
+  }
+
+  static load(id: string): InvestorReturns | null {
+    return changetype<InvestorReturns | null>(store.get("InvestorReturns", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get platform(): Bytes {
+    let value = this.get("platform");
+    return value!.toBytes();
+  }
+
+  set platform(value: Bytes) {
+    this.set("platform", Value.fromBytes(value));
+  }
+
+  get investor(): string {
+    let value = this.get("investor");
+    return value!.toString();
+  }
+
+  set investor(value: string) {
+    this.set("investor", Value.fromString(value));
+  }
+
+  get vitta(): string {
+    let value = this.get("vitta");
+    return value!.toString();
+  }
+
+  set vitta(value: string) {
+    this.set("vitta", Value.fromString(value));
+  }
+
+  get prorataStake(): BigDecimal {
+    let value = this.get("prorataStake");
+    return value!.toBigDecimal();
+  }
+
+  set prorataStake(value: BigDecimal) {
+    this.set("prorataStake", Value.fromBigDecimal(value));
   }
 }

@@ -17538,12 +17538,13 @@
         }
       },
       "links": {},
-      "address": "0x130df98bE9bdb08b4e696Dd549A4030785420b5E",
-      "transactionHash": "0x1538d2ebf5e71f4591b82190447c31c9095477f4569faf12afd9fb64e1d439ee"
+      "address": "0x2b0d51Bf006e5847aF9Fb3Cf3bA8612190133857",
+      "transactionHash": "0xc8fdf1c44ca9f0c5bdebd2bbf069eff0cb0d0f9cfa6158cd07b6db564a47ed56"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2023-04-10T07:16:33.339Z",
+  "updatedAt": "2023-04-11T00:42:28.189Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {
       "initialize(address)": {

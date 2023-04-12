@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: goerli
     source:
-      address: '0x130df98bE9bdb08b4e696Dd549A4030785420b5E'
+      address: '0x2b0d51Bf006e5847aF9Fb3Cf3bA8612190133857'
       abi: SecuritiesFactory
-      startBlock: 8798108
+      startBlock: 8809203
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -32,9 +32,9 @@ dataSources:
     name: Client
     network: goerli
     source:
-      address: '0x1E20C867c6F337Ca94BCcFF5431FA112b0c3d8b4'
+      address: '0x1BB3849848EC6EE16a4e8a81e8B2e94f97874783'
       abi: Client
-      startBlock: 8798105
+      startBlock: 8809200
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -54,12 +54,64 @@ dataSources:
         - event: UserAdded(address,bytes32,bytes32,bytes32,uint256)
           handler: handleUserCreated
   - kind: ethereum/contract
+    name: Liquidity
+    network: goerli
+    source:
+      address: '0x511ca18c39453fa89030Ca7DCe91dA8d1B2BDC18'
+      abi: Liquidity
+      startBlock: 8814744
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/liquidity.ts
+      entities:
+        - Platform
+        - User
+      abis:
+        - name: Liquidity
+          file: ./abis/Liquidity.json
+      eventHandlers:
+        - event: RequestIssue(indexed address,string,uint256)
+          handler: handleIssueRequest
+        - event: issuedVitta(indexed address,string,uint256,uint256)
+          handler: handleIssuedVitta
+        - event: platformLiquidity(indexed address,address,uint256,address,uint256)
+          handler: handlePlatformLiquidity
+        - event: managerReturns(address,indexed address,address,uint256)
+          handler: handleManagerReturns
+        - event: platformReturns(indexed address,address,uint256)
+          handler: handlePlatformReturns
+        - event: investorReturns(address,indexed address,address,uint256)
+          handler: handleInvestorReturns
+  - kind: ethereum/contract
+    name: Distribution
+    network: goerli
+    source:
+      address: '0x4aC9f5aC46a9A00D5c752Fc8788ea86E083EfaA8'
+      abi: Distribution
+      startBlock: 8814771
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/distribution.ts
+      entities:
+        - RevenueShares
+        - Token
+      abis:
+        - name: Distribution
+          file: ./abis/Distribution.json
+      eventHandlers:
+        - event: RevenueShare(bytes32,indexed address,bytes32,uint256,uint256)
+          handler: handleDistribution
+  - kind: ethereum/contract
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: '0xf3c8eDE0C8b49438FeAC3208DC958B292b75EA7c'
+      address: '0x658C6C5633422176464c559cfD705cf4eBD050e8'
       abi: PrimaryIssueManager
-      startBlock: 8798187
+      startBlock: 8814791
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -91,9 +143,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: '0x110D19BFb87309a5173457FAc166F73D1a481B9F'
+      address: '0xF8B381B9680DC940f2328c3442c48502Bf6097bb'
       abi: SecondaryIssueManager
-      startBlock: 8798191
+      startBlock: 8814795
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
