@@ -483,117 +483,6 @@ export class User extends Entity {
       this.set("submanager", Value.fromStringArray(<Array<string>>value));
     }
   }
-
-  get shareholder(): Array<string> | null {
-    let value = this.get("shareholder");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set shareholder(value: Array<string> | null) {
-    if (!value) {
-      this.unset("shareholder");
-    } else {
-      this.set("shareholder", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get liquidityRequestor(): Array<string> | null {
-    let value = this.get("liquidityRequestor");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set liquidityRequestor(value: Array<string> | null) {
-    if (!value) {
-      this.unset("liquidityRequestor");
-    } else {
-      this.set(
-        "liquidityRequestor",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get liquidityIssuedTo(): Array<string> | null {
-    let value = this.get("liquidityIssuedTo");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set liquidityIssuedTo(value: Array<string> | null) {
-    if (!value) {
-      this.unset("liquidityIssuedTo");
-    } else {
-      this.set(
-        "liquidityIssuedTo",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get liquidityProvidedTo(): Array<string> | null {
-    let value = this.get("liquidityProvidedTo");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set liquidityProvidedTo(value: Array<string> | null) {
-    if (!value) {
-      this.unset("liquidityProvidedTo");
-    } else {
-      this.set(
-        "liquidityProvidedTo",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get earnedByManager(): Array<string> | null {
-    let value = this.get("earnedByManager");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set earnedByManager(value: Array<string> | null) {
-    if (!value) {
-      this.unset("earnedByManager");
-    } else {
-      this.set("earnedByManager", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get earnedByInvestor(): Array<string> | null {
-    let value = this.get("earnedByInvestor");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set earnedByInvestor(value: Array<string> | null) {
-    if (!value) {
-      this.unset("earnedByInvestor");
-    } else {
-      this.set("earnedByInvestor", Value.fromStringArray(<Array<string>>value));
-    }
-  }
 }
 
 export class Token extends Entity {
@@ -705,86 +594,6 @@ export class Token extends Entity {
   set bondRedemptions(value: Array<string>) {
     this.set("bondRedemptions", Value.fromStringArray(value));
   }
-
-  get platformLiquidityProvidedWith(): Array<string> | null {
-    let value = this.get("platformLiquidityProvidedWith");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set platformLiquidityProvidedWith(value: Array<string> | null) {
-    if (!value) {
-      this.unset("platformLiquidityProvidedWith");
-    } else {
-      this.set(
-        "platformLiquidityProvidedWith",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get managerEarningsIn(): Array<string> | null {
-    let value = this.get("managerEarningsIn");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set managerEarningsIn(value: Array<string> | null) {
-    if (!value) {
-      this.unset("managerEarningsIn");
-    } else {
-      this.set(
-        "managerEarningsIn",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get platformEarningsIn(): Array<string> | null {
-    let value = this.get("platformEarningsIn");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set platformEarningsIn(value: Array<string> | null) {
-    if (!value) {
-      this.unset("platformEarningsIn");
-    } else {
-      this.set(
-        "platformEarningsIn",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
-
-  get investorEarningsIn(): Array<string> | null {
-    let value = this.get("investorEarningsIn");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set investorEarningsIn(value: Array<string> | null) {
-    if (!value) {
-      this.unset("investorEarningsIn");
-    } else {
-      this.set(
-        "investorEarningsIn",
-        Value.fromStringArray(<Array<string>>value)
-      );
-    }
-  }
 }
 
 export class Security extends Entity {
@@ -793,6 +602,7 @@ export class Security extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("security", Value.fromBytes(Bytes.empty()));
+    this.set("productCategory", Value.fromBytes(Bytes.empty()));
     this.set("issuer", Value.fromBytes(Bytes.empty()));
     this.set("isin", Value.fromBytes(Bytes.empty()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
@@ -833,6 +643,15 @@ export class Security extends Entity {
 
   set security(value: Bytes) {
     this.set("security", Value.fromBytes(value));
+  }
+
+  get productCategory(): Bytes {
+    let value = this.get("productCategory");
+    return value!.toBytes();
+  }
+
+  set productCategory(value: Bytes) {
+    this.set("productCategory", Value.fromBytes(value));
   }
 
   get issuer(): Bytes {
@@ -878,6 +697,40 @@ export class Security extends Entity {
 
   set issueManager(value: Bytes) {
     this.set("issueManager", Value.fromBytes(value));
+  }
+
+  get restrictions(): Array<Bytes> | null {
+    let value = this.get("restrictions");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytesArray();
+    }
+  }
+
+  set restrictions(value: Array<Bytes> | null) {
+    if (!value) {
+      this.unset("restrictions");
+    } else {
+      this.set("restrictions", Value.fromBytesArray(<Array<Bytes>>value));
+    }
+  }
+
+  get country(): Bytes | null {
+    let value = this.get("country");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set country(value: Bytes | null) {
+    if (!value) {
+      this.unset("country");
+    } else {
+      this.set("country", Value.fromBytes(<Bytes>value));
+    }
   }
 
   get primarySubscribers(): Array<string> | null {
@@ -2877,7 +2730,7 @@ export class RevenueShares extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("shareholder", Value.fromString(""));
+    this.set("shareholder", Value.fromBytes(Bytes.empty()));
     this.set("shareholderType", Value.fromBytes(Bytes.empty()));
     this.set("tokenName", Value.fromBytes(Bytes.empty()));
     this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
@@ -2910,13 +2763,13 @@ export class RevenueShares extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get shareholder(): string {
+  get shareholder(): Bytes {
     let value = this.get("shareholder");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set shareholder(value: string) {
-    this.set("shareholder", Value.fromString(value));
+  set shareholder(value: Bytes) {
+    this.set("shareholder", Value.fromBytes(value));
   }
 
   get shareholderType(): Bytes {
@@ -2961,7 +2814,7 @@ export class LiquidityTokenRequests extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("investor", Value.fromString(""));
+    this.set("investor", Value.fromBytes(Bytes.empty()));
     this.set("tokenName", Value.fromString(""));
     this.set("tokenAmount", Value.fromBigDecimal(BigDecimal.zero()));
   }
@@ -2997,13 +2850,13 @@ export class LiquidityTokenRequests extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get investor(): string {
+  get investor(): Bytes {
     let value = this.get("investor");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set investor(value: string) {
-    this.set("investor", Value.fromString(value));
+  set investor(value: Bytes) {
+    this.set("investor", Value.fromBytes(value));
   }
 
   get tokenName(): string {
@@ -3030,7 +2883,7 @@ export class LiquidityTokenIssues extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("investor", Value.fromString(""));
+    this.set("investor", Value.fromBytes(Bytes.empty()));
     this.set("tokenName", Value.fromString(""));
     this.set("tokenAmount", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("LPToIssue", Value.fromBigDecimal(BigDecimal.zero()));
@@ -3064,13 +2917,13 @@ export class LiquidityTokenIssues extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get investor(): string {
+  get investor(): Bytes {
     let value = this.get("investor");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set investor(value: string) {
-    this.set("investor", Value.fromString(value));
+  set investor(value: Bytes) {
+    this.set("investor", Value.fromBytes(value));
   }
 
   get tokenName(): string {
@@ -3107,9 +2960,9 @@ export class PlatformLiquidity extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("platform", Value.fromBytes(Bytes.empty()));
-    this.set("manager", Value.fromString(""));
+    this.set("manager", Value.fromBytes(Bytes.empty()));
     this.set("LPToken", Value.fromBigDecimal(BigDecimal.zero()));
-    this.set("token", Value.fromString(""));
+    this.set("token", Value.fromBytes(Bytes.empty()));
     this.set("tokenAmount", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
@@ -3150,13 +3003,13 @@ export class PlatformLiquidity extends Entity {
     this.set("platform", Value.fromBytes(value));
   }
 
-  get manager(): string {
+  get manager(): Bytes {
     let value = this.get("manager");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set manager(value: string) {
-    this.set("manager", Value.fromString(value));
+  set manager(value: Bytes) {
+    this.set("manager", Value.fromBytes(value));
   }
 
   get LPToken(): BigDecimal {
@@ -3168,13 +3021,13 @@ export class PlatformLiquidity extends Entity {
     this.set("LPToken", Value.fromBigDecimal(value));
   }
 
-  get token(): string {
+  get token(): Bytes {
     let value = this.get("token");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set token(value: string) {
-    this.set("token", Value.fromString(value));
+  set token(value: Bytes) {
+    this.set("token", Value.fromBytes(value));
   }
 
   get tokenAmount(): BigDecimal {
@@ -3193,8 +3046,8 @@ export class ManagerReturns extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("platform", Value.fromBytes(Bytes.empty()));
-    this.set("manager", Value.fromString(""));
-    this.set("token", Value.fromString(""));
+    this.set("manager", Value.fromBytes(Bytes.empty()));
+    this.set("token", Value.fromBytes(Bytes.empty()));
     this.set("distribution", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
@@ -3233,22 +3086,22 @@ export class ManagerReturns extends Entity {
     this.set("platform", Value.fromBytes(value));
   }
 
-  get manager(): string {
+  get manager(): Bytes {
     let value = this.get("manager");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set manager(value: string) {
-    this.set("manager", Value.fromString(value));
+  set manager(value: Bytes) {
+    this.set("manager", Value.fromBytes(value));
   }
 
-  get token(): string {
+  get token(): Bytes {
     let value = this.get("token");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set token(value: string) {
-    this.set("token", Value.fromString(value));
+  set token(value: Bytes) {
+    this.set("token", Value.fromBytes(value));
   }
 
   get distribution(): BigDecimal {
@@ -3267,7 +3120,7 @@ export class PlatformReturns extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("platform", Value.fromBytes(Bytes.empty()));
-    this.set("vitta", Value.fromString(""));
+    this.set("vitta", Value.fromBytes(Bytes.empty()));
     this.set("distribution", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
@@ -3306,13 +3159,13 @@ export class PlatformReturns extends Entity {
     this.set("platform", Value.fromBytes(value));
   }
 
-  get vitta(): string {
+  get vitta(): Bytes {
     let value = this.get("vitta");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set vitta(value: string) {
-    this.set("vitta", Value.fromString(value));
+  set vitta(value: Bytes) {
+    this.set("vitta", Value.fromBytes(value));
   }
 
   get distribution(): BigDecimal {
@@ -3331,8 +3184,8 @@ export class InvestorReturns extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("platform", Value.fromBytes(Bytes.empty()));
-    this.set("investor", Value.fromString(""));
-    this.set("vitta", Value.fromString(""));
+    this.set("investor", Value.fromBytes(Bytes.empty()));
+    this.set("vitta", Value.fromBytes(Bytes.empty()));
     this.set("prorataStake", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
@@ -3371,22 +3224,22 @@ export class InvestorReturns extends Entity {
     this.set("platform", Value.fromBytes(value));
   }
 
-  get investor(): string {
+  get investor(): Bytes {
     let value = this.get("investor");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set investor(value: string) {
-    this.set("investor", Value.fromString(value));
+  set investor(value: Bytes) {
+    this.set("investor", Value.fromBytes(value));
   }
 
-  get vitta(): string {
+  get vitta(): Bytes {
     let value = this.get("vitta");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set vitta(value: string) {
-    this.set("vitta", Value.fromString(value));
+  set vitta(value: Bytes) {
+    this.set("vitta", Value.fromBytes(value));
   }
 
   get prorataStake(): BigDecimal {

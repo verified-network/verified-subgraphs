@@ -27,24 +27,36 @@ export class securitiesAdded__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
+  get productCategory(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+
   get issuer(): Address {
-    return this._event.parameters[1].value.toAddress();
+    return this._event.parameters[2].value.toAddress();
   }
 
   get isin(): Bytes {
-    return this._event.parameters[2].value.toBytes();
+    return this._event.parameters[3].value.toBytes();
   }
 
   get currency(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[4].value.toAddress();
   }
 
   get restricted(): boolean {
-    return this._event.parameters[4].value.toBoolean();
+    return this._event.parameters[5].value.toBoolean();
   }
 
   get issueManager(): Address {
-    return this._event.parameters[5].value.toAddress();
+    return this._event.parameters[6].value.toAddress();
+  }
+
+  get restrictions(): Array<Bytes> {
+    return this._event.parameters[7].value.toBytesArray();
+  }
+
+  get country(): Bytes {
+    return this._event.parameters[8].value.toBytes();
   }
 }
 
@@ -878,28 +890,40 @@ export class IssueSecurityCall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get company(): Bytes {
+  get productCategory(): Bytes {
     return this._call.inputValues[1].value.toBytes();
   }
 
-  get isin(): Bytes {
+  get company(): Bytes {
     return this._call.inputValues[2].value.toBytes();
   }
 
-  get currency(): Address {
-    return this._call.inputValues[3].value.toAddress();
+  get isin(): Bytes {
+    return this._call.inputValues[3].value.toBytes();
   }
 
-  get issuer(): Address {
+  get currency(): Address {
     return this._call.inputValues[4].value.toAddress();
   }
 
-  get intermediary(): Address {
+  get issuer(): Address {
     return this._call.inputValues[5].value.toAddress();
   }
 
+  get intermediary(): Address {
+    return this._call.inputValues[6].value.toAddress();
+  }
+
   get qualified(): boolean {
-    return this._call.inputValues[6].value.toBoolean();
+    return this._call.inputValues[7].value.toBoolean();
+  }
+
+  get encodedRestrictions(): Bytes {
+    return this._call.inputValues[8].value.toBytes();
+  }
+
+  get country(): Bytes {
+    return this._call.inputValues[9].value.toBytes();
   }
 }
 

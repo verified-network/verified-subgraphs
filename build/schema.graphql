@@ -37,12 +37,12 @@ type User @entity {
   manager: [Manager!] @derived(field: "manager")
   submanager: [Manager!] @derivedFrom(field: "submanager")
   #securityissuer: [Issuer!] @derivedFrom(field: "issuer")
-  shareholder: [RevenueShares!] @derivedFrom(field: "shareholder")
-  liquidityRequestor: [LiquidityTokenRequests!] @derivedFrom(field: "investor")
-  liquidityIssuedTo: [LiquidityTokenIssues!] @derivedFrom(field: "investor")
-  liquidityProvidedTo: [PlatformLiquidity!] @derivedFrom(field: "manager")
-  earnedByManager: [ManagerReturns!] @derivedFrom(field: "manager")
-  earnedByInvestor: [InvestorReturns!] @derivedFrom(field: "investor") 
+  #shareholder: [RevenueShares!] @derivedFrom(field: "shareholder")
+  #liquidityRequestor: [LiquidityTokenRequests!] @derivedFrom(field: "investor")
+  #liquidityIssuedTo: [LiquidityTokenIssues!] @derivedFrom(field: "investor")
+  #liquidityProvidedTo: [PlatformLiquidity!] @derivedFrom(field: "manager")
+  #earnedByManager: [ManagerReturns!] @derivedFrom(field: "manager")
+  #earnedByInvestor: [InvestorReturns!] @derivedFrom(field: "investor") 
 }
 type Token @entity {
   id: ID!
@@ -58,14 +58,15 @@ type Token @entity {
   #liquidityoffered: [LiquidityProviders!] @derivedFrom(field: "security")
   #securityissued: [Offers!] @derivedFrom(field: "offered")
   #security: [Security!] @derivedFrom(field: "security")
-  platformLiquidityProvidedWith: [PlatformLiquidity!] @derivedFrom(field: "token")
-  managerEarningsIn: [ManagerReturns!] @derivedFrom(field: "token")
-  platformEarningsIn: [PlatformReturns!] @derivedFrom(field: "vitta")
-  investorEarningsIn: [InvestorReturns!] @derivedFrom(field: "vitta")
+  #platformLiquidityProvidedWith: [PlatformLiquidity!] @derivedFrom(field: "token")
+  #managerEarningsIn: [ManagerReturns!] @derivedFrom(field: "token")
+  #platformEarningsIn: [PlatformReturns!] @derivedFrom(field: "vitta")
+  #investorEarningsIn: [InvestorReturns!] @derivedFrom(field: "vitta")
 }
 type Security @entity {
   id: ID!
   security: Bytes!
+  productCategory: Bytes!
   #issuer: User!
   issuer: Bytes!
   isin: Bytes!
@@ -73,6 +74,8 @@ type Security @entity {
   currency: Bytes!
   restricted: Boolean!
   issueManager: Bytes!
+  restrictions: [Bytes!]
+  country: Bytes
   primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
   secondaryInvestors: [Investors!] @derivedFrom(field: "security")
   trades: [Trades!] @derivedFrom(field: "security")
@@ -277,7 +280,8 @@ type Resolutions @entity{
 }
 type RevenueShares @entity{
   id: ID!
-  shareholder: User!
+  #shareholder: User!
+  shareholder: Bytes!
   shareholderType: Bytes!
   tokenName: Bytes!
   amount: BigDecimal!
@@ -285,13 +289,15 @@ type RevenueShares @entity{
 }
 type LiquidityTokenRequests @entity{
   id: ID!
-  investor: User!
+  #investor: User!
+  investor: Bytes!
   tokenName: String!
   tokenAmount: BigDecimal!
 }
 type LiquidityTokenIssues @entity{
   id: ID!
-  investor: User!
+  #investor: User!
+  investor: Bytes!
   tokenName: String!
   tokenAmount: BigDecimal!
   LPToIssue: BigDecimal!
@@ -299,28 +305,35 @@ type LiquidityTokenIssues @entity{
 type PlatformLiquidity @entity{
   id: ID!
   platform: Bytes!
-  manager: User!
+  #manager: User!
+  manager: Bytes!
   LPToken: BigDecimal!
-  token: Token!
+  #token: Token!
+  token: Bytes!
   tokenAmount: BigDecimal!
 }
 type ManagerReturns @entity{
   id: ID!
   platform: Bytes!
-  manager: User!
-  token: Token!
+  #manager: User!
+  manager: Bytes!
+  #token: Token!
+  token: Bytes!
   distribution: BigDecimal!
 }
 type PlatformReturns @entity{
   id: ID!
   platform: Bytes!
-  vitta: Token!
+  #vitta: Token!
+  vitta: Bytes!
   distribution: BigDecimal!
 }
 type InvestorReturns @entity{
   id: ID!
   platform: Bytes!
-  investor: User!
-  vitta: Token!
+  #investor: User!
+  investor: Bytes!
+  #vitta: Token!
+  vitta: Bytes!
   prorataStake: BigDecimal!
 }

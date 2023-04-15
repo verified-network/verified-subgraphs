@@ -226,6 +226,11 @@
       },
       {
         "indexed": false,
+        "name": "productCategory",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
         "name": "issuer",
         "type": "address"
       },
@@ -248,6 +253,16 @@
         "indexed": false,
         "name": "issueManager",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "restrictions",
+        "type": "bytes32[]"
+      },
+      {
+        "indexed": false,
+        "name": "country",
+        "type": "bytes32"
       }
     ],
     "name": "securitiesAdded",
@@ -354,6 +369,10 @@
         "type": "address"
       },
       {
+        "name": "productCategory",
+        "type": "bytes32"
+      },
+      {
         "name": "company",
         "type": "bytes32"
       },
@@ -376,6 +395,14 @@
       {
         "name": "qualified",
         "type": "bool"
+      },
+      {
+        "name": "encodedRestrictions",
+        "type": "bytes"
+      },
+      {
+        "name": "country",
+        "type": "bytes32"
       }
     ],
     "name": "issueSecurity",
