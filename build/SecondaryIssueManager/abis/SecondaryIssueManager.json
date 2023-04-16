@@ -30,13 +30,13 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "party",
+        "name": "seller",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "address",
-        "name": "counterparty",
+        "name": "investor",
         "type": "address"
       },
       {

@@ -393,16 +393,16 @@
         "type": "address"
       },
       {
-        "name": "qualified",
-        "type": "bool"
-      },
-      {
         "name": "encodedRestrictions",
         "type": "bytes"
       },
       {
         "name": "country",
         "type": "bytes32"
+      },
+      {
+        "name": "qualified",
+        "type": "bool"
       }
     ],
     "name": "issueSecurity",

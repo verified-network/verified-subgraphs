@@ -138,24 +138,6 @@ export class marketmakers__Params {
   }
 }
 
-export class minPrice extends ethereum.Event {
-  get params(): minPrice__Params {
-    return new minPrice__Params(this);
-  }
-}
-
-export class minPrice__Params {
-  _event: minPrice;
-
-  constructor(event: minPrice) {
-    this._event = event;
-  }
-
-  get price(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-}
-
 export class offers extends ethereum.Event {
   get params(): offers__Params {
     return new offers__Params(this);

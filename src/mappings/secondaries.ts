@@ -42,14 +42,14 @@ export function handleTradeSettled(event: tradeSettled): void {
 }
 
 export function handleSecondaryInvestors(event: subscribers): void {
-    let investors = Investors.load(event.params.counterparty.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    let investors = Investors.load(event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(investors==null){
-        let investorId = event.params.counterparty.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let investorId = event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let investors = new Investors(investorId);
         investors.pool = event.params.poolId;
         investors.security = event.params.securityTraded.toHexString();
-        investors.issuer = event.params.party;
-        investors.investor = event.params.counterparty;
+        investors.issuer = event.params.seller;
+        investors.investor = event.params.investor;
         investors.currency = event.params.currencySettled;
         investors.amount = event.params.amount.toBigDecimal();
         investors.price = event.params.price.toBigDecimal();
@@ -61,8 +61,8 @@ export function handleSecondaryInvestors(event: subscribers): void {
     else{
         investors.pool = event.params.poolId;
         investors.security = event.params.securityTraded.toHexString();
-        investors.issuer = event.params.party;
-        investors.investor = event.params.counterparty;
+        investors.issuer = event.params.seller;
+        investors.investor = event.params.investor;
         investors.currency = event.params.currencySettled;
         investors.amount = event.params.amount.toBigDecimal();
         investors.price = event.params.price.toBigDecimal();

@@ -914,16 +914,16 @@ export class IssueSecurityCall__Inputs {
     return this._call.inputValues[6].value.toAddress();
   }
 
-  get qualified(): boolean {
-    return this._call.inputValues[7].value.toBoolean();
-  }
-
   get encodedRestrictions(): Bytes {
-    return this._call.inputValues[8].value.toBytes();
+    return this._call.inputValues[7].value.toBytes();
   }
 
   get country(): Bytes {
-    return this._call.inputValues[9].value.toBytes();
+    return this._call.inputValues[8].value.toBytes();
+  }
+
+  get qualified(): boolean {
+    return this._call.inputValues[9].value.toBoolean();
   }
 }
 

@@ -49,11 +49,11 @@ export class subscribers__Params {
     return this._event.parameters[0].value.toBytes();
   }
 
-  get party(): Address {
+  get seller(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get counterparty(): Address {
+  get investor(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 
