@@ -9,9 +9,9 @@ import {
   } from "../../generated/schema";
 
 export function handleResolutions(event: Resolution): void {
-    let resolutions = Resolutions.load(event.params.resolution.toString().concat('-').concat(event.transaction.hash.toHexString()));
+    let resolutions = Resolutions.load(event.params.resolution.concat('-').concat(event.transaction.hash.toHexString()));
     if(resolutions==null){
-        let resolution = event.params.resolution.toString();
+        let resolution = event.params.resolution;
         let resolutions = new Resolutions(resolution);
         resolutions.security = event.params.security.toHexString();
         resolutions.recordDate = event.params.recordDate.toI32();
