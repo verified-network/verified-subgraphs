@@ -360,6 +360,24 @@
         "type": "address"
       },
       {
+        "name": "score",
+        "type": "uint256"
+      }
+    ],
+    "name": "setCreditScore",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      },
+      {
         "name": "name",
         "type": "bytes32"
       },
@@ -403,6 +421,14 @@
       {
         "name": "",
         "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "uint256"
       },
       {
         "name": "",

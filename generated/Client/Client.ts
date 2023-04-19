@@ -155,20 +155,26 @@ export class Client__getClientKYCResult {
   value1: Bytes;
   value2: Bytes;
   value3: BigInt;
-  value4: BigInt;
+  value4: Bytes;
+  value5: BigInt;
+  value6: BigInt;
 
   constructor(
     value0: Bytes,
     value1: Bytes,
     value2: Bytes,
     value3: BigInt,
-    value4: BigInt
+    value4: Bytes,
+    value5: BigInt,
+    value6: BigInt
   ) {
     this.value0 = value0;
     this.value1 = value1;
     this.value2 = value2;
     this.value3 = value3;
     this.value4 = value4;
+    this.value5 = value5;
+    this.value6 = value6;
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
@@ -177,7 +183,9 @@ export class Client__getClientKYCResult {
     map.set("value1", ethereum.Value.fromFixedBytes(this.value1));
     map.set("value2", ethereum.Value.fromFixedBytes(this.value2));
     map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
-    map.set("value4", ethereum.Value.fromUnsignedBigInt(this.value4));
+    map.set("value4", ethereum.Value.fromFixedBytes(this.value4));
+    map.set("value5", ethereum.Value.fromUnsignedBigInt(this.value5));
+    map.set("value6", ethereum.Value.fromUnsignedBigInt(this.value6));
     return map;
   }
 }
@@ -305,7 +313,7 @@ export class Client extends ethereum.SmartContract {
   getClientKYC(client: Address): Client__getClientKYCResult {
     let result = super.call(
       "getClientKYC",
-      "getClientKYC(address):(bytes32,bytes32,bytes32,uint256,uint256)",
+      "getClientKYC(address):(bytes32,bytes32,bytes32,uint256,bytes32,uint256,uint256)",
       [ethereum.Value.fromAddress(client)]
     );
 
@@ -314,7 +322,9 @@ export class Client extends ethereum.SmartContract {
       result[1].toBytes(),
       result[2].toBytes(),
       result[3].toBigInt(),
-      result[4].toBigInt()
+      result[4].toBytes(),
+      result[5].toBigInt(),
+      result[6].toBigInt()
     );
   }
 
@@ -323,7 +333,7 @@ export class Client extends ethereum.SmartContract {
   ): ethereum.CallResult<Client__getClientKYCResult> {
     let result = super.tryCall(
       "getClientKYC",
-      "getClientKYC(address):(bytes32,bytes32,bytes32,uint256,uint256)",
+      "getClientKYC(address):(bytes32,bytes32,bytes32,uint256,bytes32,uint256,uint256)",
       [ethereum.Value.fromAddress(client)]
     );
     if (result.reverted) {
@@ -336,7 +346,9 @@ export class Client extends ethereum.SmartContract {
         value[1].toBytes(),
         value[2].toBytes(),
         value[3].toBigInt(),
-        value[4].toBigInt()
+        value[4].toBytes(),
+        value[5].toBigInt(),
+        value[6].toBigInt()
       )
     );
   }
@@ -780,6 +792,40 @@ export class SetAmlPassScoreCall__Outputs {
   _call: SetAmlPassScoreCall;
 
   constructor(call: SetAmlPassScoreCall) {
+    this._call = call;
+  }
+}
+
+export class SetCreditScoreCall extends ethereum.Call {
+  get inputs(): SetCreditScoreCall__Inputs {
+    return new SetCreditScoreCall__Inputs(this);
+  }
+
+  get outputs(): SetCreditScoreCall__Outputs {
+    return new SetCreditScoreCall__Outputs(this);
+  }
+}
+
+export class SetCreditScoreCall__Inputs {
+  _call: SetCreditScoreCall;
+
+  constructor(call: SetCreditScoreCall) {
+    this._call = call;
+  }
+
+  get client(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get score(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class SetCreditScoreCall__Outputs {
+  _call: SetCreditScoreCall;
+
+  constructor(call: SetCreditScoreCall) {
     this._call = call;
   }
 }

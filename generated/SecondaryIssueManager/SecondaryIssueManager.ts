@@ -32,6 +32,32 @@ export class OwnershipTransferred__Params {
   }
 }
 
+export class closures extends ethereum.Event {
+  get params(): closures__Params {
+    return new closures__Params(this);
+  }
+}
+
+export class closures__Params {
+  _event: closures;
+
+  constructor(event: closures) {
+    this._event = event;
+  }
+
+  get poolId(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+
+  get security(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
 export class subscribers extends ethereum.Event {
   get params(): subscribers__Params {
     return new subscribers__Params(this);
@@ -573,6 +599,36 @@ export class RequestSettlementCallTradeToReportStruct extends ethereum.Tuple {
 
   get currencyTraded(): BigInt {
     return this[5].toBigInt();
+  }
+}
+
+export class CloseCall extends ethereum.Call {
+  get inputs(): CloseCall__Inputs {
+    return new CloseCall__Inputs(this);
+  }
+
+  get outputs(): CloseCall__Outputs {
+    return new CloseCall__Outputs(this);
+  }
+}
+
+export class CloseCall__Inputs {
+  _call: CloseCall;
+
+  constructor(call: CloseCall) {
+    this._call = call;
+  }
+
+  get poolId(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+}
+
+export class CloseCall__Outputs {
+  _call: CloseCall;
+
+  constructor(call: CloseCall) {
+    this._call = call;
   }
 }
 

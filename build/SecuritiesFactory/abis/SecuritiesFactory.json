@@ -3,25 +3,6 @@
     "constant": true,
     "inputs": [
       {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "issues",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
         "name": "_salt",
         "type": "uint256"
       },

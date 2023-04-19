@@ -137,25 +137,6 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     return new SecuritiesFactory("SecuritiesFactory", address);
   }
 
-  issues(param0: BigInt): Address {
-    let result = super.call("issues", "issues(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
-    ]);
-
-    return result[0].toAddress();
-  }
-
-  try_issues(param0: BigInt): ethereum.CallResult<Address> {
-    let result = super.tryCall("issues", "issues(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
   getSigner(
     _salt: BigInt,
     _logic: Address,

@@ -1,12 +1,13 @@
 import {
     tradeSettled,
     subscribers,
-    SecondaryIssueManager
+    closures
 } from "../../generated/SecondaryIssueManager/SecondaryIssueManager";
 
 import{
     Trades,
     Investors,
+    Closures
 } from "../../generated/schema";
 
 export function handleTradeSettled(event: tradeSettled): void {
@@ -70,5 +71,23 @@ export function handleSecondaryInvestors(event: subscribers): void {
         investors.DPID = event.params.DPID;
         investors.timestamp = event.params.timestamp.toI32();
         investors.save();
+    }
+}
+
+export function handleClosures(event: closures): void {
+    let closures = Closures.load(event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(closures==null){
+        let pool = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let closures = new Closures(pool);
+        closures.poolid = event.params.poolId;
+        closures.security = event.params.security.toHexString();
+        closures.timestamp = event.params.timestamp.toI32();
+        closures.save();
+    }
+    else{
+        closures.poolid = event.params.poolId;
+        closures.security = event.params.security.toHexString();
+        closures.timestamp = event.params.timestamp.toI32();
+        closures.save();
     }
 }

@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: goerli
     source:
-      address: '0x02D7D0826181EF4d04cf51CE1d57C078A317dd31'
+      address: '0x498E6B98f206d6c0596c043bdEB0c31F4bdF9b2E'
       abi: SecuritiesFactory
-      startBlock: 8836977
+      startBlock: 8852794
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -32,9 +32,9 @@ dataSources:
     name: Client
     network: goerli
     source:
-      address: '0x61B94d09d45CaA35Ab8e16f6CC051B2289F37591'
+      address: '0xa364FBc00181aA25EB8aF84D59Caa5A86925616A'
       abi: Client
-      startBlock: 8836974
+      startBlock: 8852790
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -109,9 +109,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: '0xC177c6a00eE8E6728b842F359783bEF2DaA1Be47'
+      address: '0xFee9F96B4c6cAfca14fFcD49D6Ab126AE0470427'
       abi: PrimaryIssueManager
-      startBlock: 8837002
+      startBlock: 8852828
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -143,9 +143,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: '0x97F59661D2D285524D5bA6a272D6992280391e50'
+      address: '0x1E187BC2F1784BB428a0d1140d5b462387eB4BEa'
       abi: SecondaryIssueManager
-      startBlock: 8837007
+      startBlock: 8852832
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -162,6 +162,8 @@ dataSources:
           handler: handleTradeSettled
         - event: subscribers(bytes32,address,address,indexed address,address,uint256,uint256,bytes32,bytes32,uint256)
           handler: handleSecondaryInvestors
+        - event: closures(indexed bytes32,address,uint256)
+          handler: handleClosures
 templates:
   - kind: ethereum/contract
     name: Security
