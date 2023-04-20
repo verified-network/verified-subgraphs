@@ -165,6 +165,31 @@ dataSources:
         - event: closures(indexed bytes32,address,uint256)
           handler: handleClosures
   - kind: ethereum/contract
+    name: MarginIssueManager
+    network: goerli
+    source:
+      address: '0x5482761A7Cad2C562a314b6c5Bc6d0e3e54295f6'
+      abi: MarginIssueManager
+      startBlock: 8858655
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/margintrades.ts
+      entities:
+        - Trades
+        - Investors
+      abis:
+        - name: MarginIssueManager
+          file: ./abis/MarginIssueManager.json
+      eventHandlers:
+        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,bytes32,bytes32,uint256)
+          handler: handleTrades
+        - event: subscribers(address,address,indexed address,uint256,address,uint256)
+          handler: handleTraders
+        - event: closures(indexed bytes32,address,uint256)
+          handler: handleClosures
+  - kind: ethereum/contract
     name: Factory
     network: goerli
     source:

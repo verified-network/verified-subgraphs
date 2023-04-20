@@ -205,6 +205,16 @@ type Investors @entity {
   DPID : Bytes!
   timestamp: Int!
 }
+type Traders @entity {
+  id: ID!
+  transferor: Bytes!
+  transferee: Bytes!
+  security: Security!
+  securityTraded: BigDecimal!
+  currency: Bytes!
+  cashTraded: BigDecimal!
+}
+
 type LiquidityProviders @entity {
   id: ID!
   platform: Bytes!

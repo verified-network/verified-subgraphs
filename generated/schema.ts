@@ -2359,6 +2359,100 @@ export class Investors extends Entity {
   }
 }
 
+export class Traders extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("transferor", Value.fromBytes(Bytes.empty()));
+    this.set("transferee", Value.fromBytes(Bytes.empty()));
+    this.set("security", Value.fromString(""));
+    this.set("securityTraded", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("cashTraded", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Traders entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Traders entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Traders", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Traders | null {
+    return changetype<Traders | null>(store.get("Traders", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get transferor(): Bytes {
+    let value = this.get("transferor");
+    return value!.toBytes();
+  }
+
+  set transferor(value: Bytes) {
+    this.set("transferor", Value.fromBytes(value));
+  }
+
+  get transferee(): Bytes {
+    let value = this.get("transferee");
+    return value!.toBytes();
+  }
+
+  set transferee(value: Bytes) {
+    this.set("transferee", Value.fromBytes(value));
+  }
+
+  get security(): string {
+    let value = this.get("security");
+    return value!.toString();
+  }
+
+  set security(value: string) {
+    this.set("security", Value.fromString(value));
+  }
+
+  get securityTraded(): BigDecimal {
+    let value = this.get("securityTraded");
+    return value!.toBigDecimal();
+  }
+
+  set securityTraded(value: BigDecimal) {
+    this.set("securityTraded", Value.fromBigDecimal(value));
+  }
+
+  get currency(): Bytes {
+    let value = this.get("currency");
+    return value!.toBytes();
+  }
+
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
+  }
+
+  get cashTraded(): BigDecimal {
+    let value = this.get("cashTraded");
+    return value!.toBigDecimal();
+  }
+
+  set cashTraded(value: BigDecimal) {
+    this.set("cashTraded", Value.fromBigDecimal(value));
+  }
+}
+
 export class LiquidityProviders extends Entity {
   constructor(id: string) {
     super();
