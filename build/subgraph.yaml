@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: goerli
     source:
-      address: "0x498E6B98f206d6c0596c043bdEB0c31F4bdF9b2E"
+      address: "0xD563A0134e4DC1e626109eFA137E77cd68DC524c"
       abi: SecuritiesFactory
-      startBlock: 8852794
+      startBlock: 8858185
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -33,9 +33,9 @@ dataSources:
     name: Client
     network: goerli
     source:
-      address: "0xa364FBc00181aA25EB8aF84D59Caa5A86925616A"
+      address: "0xB1752A2Af74886B994596EdC6b3806c601d4f682"
       abi: Client
-      startBlock: 8852790
+      startBlock: 8858182
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -110,9 +110,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: "0xFee9F96B4c6cAfca14fFcD49D6Ab126AE0470427"
+      address: "0xBeC826060d9842e826d616F4eC6ba19e11b5054A"
       abi: PrimaryIssueManager
-      startBlock: 8852828
+      startBlock: 8858647
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -145,9 +145,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: "0x1E187BC2F1784BB428a0d1140d5b462387eB4BEa"
+      address: "0xEb273679963b9eCc51C9a14a56C491C02FF75f6a"
       abi: SecondaryIssueManager
-      startBlock: 8852832
+      startBlock: 8858651
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -168,6 +168,30 @@ dataSources:
           handler: handleSecondaryInvestors
         - event: closures(indexed bytes32,address,uint256)
           handler: handleClosures
+  - kind: ethereum/contract
+    name: Factory
+    network: goerli
+    source:
+      address: "0xD563A0134e4DC1e626109eFA137E77cd68DC524c"
+      abi: Factory
+      startBlock: 8858185
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: SecuritiesFactory\SecuritiesFactory.wasm
+      entities:
+        - Token
+      abis:
+        - name: Factory
+          file: Factory\abis\Factory.json
+      eventHandlers:
+        - event: CashIssuerCreated(indexed address,bytes32,bytes32)
+          handler: handleCashCreated
+        - event: BondIssuerCreated(indexed address,bytes32,bytes32)
+          handler: handleBondCreated
+        - event: TokenCreated(indexed address,bytes32,bytes32)
+          handler: handleBondTokenCreated
 templates:
   - kind: ethereum/contract
     name: Security
@@ -217,13 +241,13 @@ templates:
         - name: Cash
           file: Cash\abis\Cash.json
       eventHandlers:
-        - event: CashIssued(indexed address,bytes32,uint256)
+        - event: CashIssued(indexed address,bytes32,uint256,uint256)
           handler: handleCashIssued
-        - event: CashRedeemed(indexed address,bytes32,uint256)
+        - event: CashRedeemed(indexed address,bytes32,uint256,uint256,uint256)
           handler: handleCashRedeemed
-        - event: CashIssueRequest(indexed address,bytes32,uint256)
+        - event: CashDeposits(indexed address,bytes32,uint256)
           handler: handleCashDeposits
-        - event: CashTransfer(indexed address,address,bytes32,uint256)
+        - event: CashTransfer(indexed address,indexed address,bytes32,uint256,uint256)
           handler: handleCashTransfer
       file: templates\Cash\Cash.wasm
   - kind: ethereum/contract
@@ -246,12 +270,12 @@ templates:
         - name: Bond
           file: Bond\abis\Bond.json
       eventHandlers:
-        - event: BondIssued(indexed address,bytes32,uint256,address)
+        - event: BondIssued(indexed address,address,bytes32,uint256,bytes32,uint256,uint256)
           handler: handleBondIssued
-        - event: BondRedeemed(indexed address,bytes32,uint256,address)
+        - event: BondRedeemed(indexed address,address,uint256,bytes32,uint256,bytes32)
           handler: handleBondRedeemed
-        - event: BondPurchased(indexed address,bytes32,uint256,address)
+        - event: BondPurchased(indexed address,address,bytes32,uint256,bytes32,uint256,uint256)
           handler: handleBondPurchased
-        - event: BondIssueRequest(indexed address,bytes32,uint256)
-          handler: handleBondIssueRequest
+        - event: BondLiquidated(indexed address,address,uint256,bytes32,uint256,bytes32)
+          handler: handleBondLiquidation
       file: templates\Bond\Bond.wasm

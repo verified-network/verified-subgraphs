@@ -78,6 +78,20 @@
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "decimals",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -98,6 +112,84 @@
     ],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "issues",
+    "outputs": [
+      {
+        "name": "parValue",
+        "type": "uint256"
+      },
+      {
+        "name": "paidInAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "paidInCurrency",
+        "type": "bytes32"
+      },
+      {
+        "name": "timeIssuedOrSubscribed",
+        "type": "uint256"
+      },
+      {
+        "name": "purchasedIssueAmount",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "purchases",
+    "outputs": [
+      {
+        "name": "parValue",
+        "type": "uint256"
+      },
+      {
+        "name": "paidInAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "paidInCurrency",
+        "type": "bytes32"
+      },
+      {
+        "name": "timeIssuedOrSubscribed",
+        "type": "uint256"
+      },
+      {
+        "name": "purchasedIssueAmount",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -126,6 +218,20 @@
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "bondName",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -234,6 +340,25 @@
     "constant": true,
     "inputs": [
       {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "bondsIssued",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
         "name": "owner",
         "type": "address"
       },
@@ -277,8 +402,23 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "issuer",
+        "name": "party",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "bondName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -287,35 +427,13 @@
       },
       {
         "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "BondIssueRequest",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "issuer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "collateralCurrency",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "issuedAmount",
+        "name": "collateralAmount",
         "type": "uint256"
       },
       {
         "indexed": false,
-        "name": "token",
-        "type": "address"
+        "name": "issueTime",
+        "type": "uint256"
       }
     ],
     "name": "BondIssued",
@@ -326,23 +444,33 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "redeemer",
+        "name": "party",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "redemptionCurrency",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "redemptionAmount",
-        "type": "uint256"
       },
       {
         "indexed": false,
         "name": "token",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokenAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "tokenName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "currency",
+        "type": "bytes32"
       }
     ],
     "name": "BondRedeemed",
@@ -353,26 +481,78 @@
     "inputs": [
       {
         "indexed": true,
-        "name": "purchaser",
+        "name": "party",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "paidInCurrency",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "purchasedAmount",
-        "type": "uint256"
       },
       {
         "indexed": false,
         "name": "token",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "bondName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "paidInAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "purchaseTime",
+        "type": "uint256"
       }
     ],
     "name": "BondPurchased",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "party",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokenAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "tokenName",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "currency",
+        "type": "bytes32"
+      }
+    ],
+    "name": "BondLiquidated",
     "type": "event"
   },
   {
@@ -464,11 +644,15 @@
         "type": "address"
       },
       {
-        "name": "_fee",
+        "name": "_oracle",
         "type": "address"
       },
       {
-        "name": "_bridge",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "name": "_fee",
         "type": "address"
       }
     ],
@@ -496,43 +680,23 @@
     "constant": false,
     "inputs": [
       {
-        "name": "_signer",
-        "type": "address"
-      }
-    ],
-    "name": "setSigner",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
+        "name": "amount",
+        "type": "uint256"
+      },
       {
-        "name": "_token",
+        "name": "payer",
         "type": "address"
       },
       {
-        "name": "_name",
+        "name": "currency",
         "type": "bytes32"
-      }
-    ],
-    "name": "supportTokens",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
+      },
       {
-        "name": "_token",
+        "name": "cashContract",
         "type": "address"
       }
     ],
-    "name": "checkSupportForToken",
+    "name": "requestIssue",
     "outputs": [
       {
         "name": "",
@@ -540,27 +704,110 @@
       }
     ],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "payer",
+        "type": "address"
+      },
+      {
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "name": "cashContract",
+        "type": "address"
+      }
+    ],
+    "name": "requestPurchase",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "name": "payer",
+        "type": "address"
+      },
+      {
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenContract",
+        "type": "address"
+      }
+    ],
+    "name": "requestRedemption",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "name": "receiver",
+        "type": "address"
+      },
+      {
+        "name": "tokens",
+        "type": "uint256"
+      },
+      {
+        "name": "forwarder",
+        "type": "address"
+      }
+    ],
+    "name": "transferForward",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": true,
     "inputs": [],
-    "name": "getSupportedTokens",
+    "name": "getBonds",
     "outputs": [
       {
-        "components": [
-          {
-            "name": "tokenName",
-            "type": "bytes32"
-          },
-          {
-            "name": "tokenAddress",
-            "type": "address"
-          }
-        ],
         "name": "",
-        "type": "tuple[]"
+        "type": "address[]"
       }
     ],
     "payable": false,
@@ -568,151 +815,77 @@
     "type": "function"
   },
   {
-    "constant": false,
+    "constant": true,
     "inputs": [
-      {
-        "name": "_token",
-        "type": "address"
-      },
-      {
-        "name": "_amount",
-        "type": "uint256"
-      },
-      {
-        "name": "_buyer",
-        "type": "address"
-      }
-    ],
-    "name": "requestIssue",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "amount",
-        "type": "uint256"
-      },
       {
         "name": "issuer",
         "type": "address"
       },
       {
-        "name": "currency",
-        "type": "bytes32"
-      },
-      {
-        "name": "issuedBond",
+        "name": "bondToken",
         "type": "address"
-      },
-      {
-        "name": "_hashedMessage",
-        "type": "bytes32"
-      },
-      {
-        "name": "_v",
-        "type": "uint8"
-      },
-      {
-        "name": "_r",
-        "type": "bytes32"
-      },
-      {
-        "name": "_s",
-        "type": "bytes32"
       }
     ],
-    "name": "addIssuedBalance",
-    "outputs": [],
+    "name": "getBondIssues",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
-    "constant": false,
+    "constant": true,
     "inputs": [
-      {
-        "name": "amount",
-        "type": "uint256"
-      },
       {
         "name": "purchaser",
         "type": "address"
       },
       {
-        "name": "currency",
-        "type": "bytes32"
-      },
-      {
-        "name": "purchasedBond",
+        "name": "bondToken",
         "type": "address"
-      },
-      {
-        "name": "_hashedMessage",
-        "type": "bytes32"
-      },
-      {
-        "name": "_v",
-        "type": "uint8"
-      },
-      {
-        "name": "_r",
-        "type": "bytes32"
-      },
-      {
-        "name": "_s",
-        "type": "bytes32"
       }
     ],
-    "name": "purchase",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
+    "name": "getBondPurchases",
+    "outputs": [
       {
-        "name": "amount",
+        "name": "",
         "type": "uint256"
       },
       {
-        "name": "payOutTo",
-        "type": "address"
+        "name": "",
+        "type": "uint256"
       },
       {
-        "name": "currency",
+        "name": "",
         "type": "bytes32"
       },
       {
-        "name": "redeemedToken",
-        "type": "address"
-      },
-      {
-        "name": "_hashedMessage",
-        "type": "bytes32"
-      },
-      {
-        "name": "_v",
-        "type": "uint8"
-      },
-      {
-        "name": "_r",
-        "type": "bytes32"
-      },
-      {
-        "name": "_s",
-        "type": "bytes32"
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name": "redeemBond",
-    "outputs": [],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {

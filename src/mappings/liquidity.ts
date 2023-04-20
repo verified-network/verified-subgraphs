@@ -101,13 +101,13 @@ export function handlePlatformReturns(event: platformReturns): void {
         let platform = event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let platforms = new PlatformReturns(platform);
         platforms.platform = event.params.platform;
-        platforms.vitta = event.params.vitta.toHexString();
+        platforms.vitta = event.params.vitta;
         platforms.distribution = event.params.distribution.toBigDecimal();
         platforms.save();
     }
     else{
         platforms.platform = event.params.platform;
-        platforms.vitta = event.params.vitta.toHexString();
+        platforms.vitta = event.params.vitta;
         platforms.distribution = event.params.distribution.toBigDecimal();
         platforms.save();
     }
@@ -120,14 +120,14 @@ export function handleInvestorReturns(event: investorReturns): void {
         let investors = new InvestorReturns(investor);
         investors.platform = event.params.platform;
         investors.investor = event.params.investor.toHexString();
-        investors.vitta = event.params.vitta.toHexString();
+        investors.vitta = event.params.vitta;
         investors.prorataStake = event.params.prorataStake.toBigDecimal();
         investors.save();
     }
     else{
         investors.platform = event.params.platform;
         investors.investor = event.params.investor.toHexString();
-        investors.vitta = event.params.vitta.toHexString();
+        investors.vitta = event.params.vitta;
         investors.prorataStake = event.params.prorataStake.toBigDecimal();
         investors.save();
     }

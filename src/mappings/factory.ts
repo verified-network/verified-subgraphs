@@ -1,8 +1,15 @@
 import { 
         securitiesAdded 
       } from "../../generated/SecuritiesFactory/SecuritiesFactory";
+import {
+        CashIssuerCreated,
+        BondIssuerCreated,
+        TokenCreated
+      } from "../../generated/Factory/Factory";
 import { 
-        Security
+        Currency,
+        Security,
+        Token
       } from "../../generated/schema";
 import { 
         Cash, 
@@ -36,5 +43,55 @@ export function handleSecurityCreated(event: securitiesAdded): void {
     securities.restrictions = event.params.restrictions;
     securities.country = event.params.country;
     securities.save();
+  }
+}
+
+export function handleCashCreated(event: CashIssuerCreated): void {
+  let currencies = Currency.load(event.params.issuer.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+  if(currencies==null){
+    let currency = event.params.issuer.toHexString();
+    let currencies = new Currency(currency);
+    currencies.name = event.params.tokenName;
+    currencies.save();
+  }
+  else{
+    currencies.name = event.params.tokenName;
+    currencies.save();
+  }
+}
+
+export function handleBondCreated(event: BondIssuerCreated): void {
+  let bonds = Token.load(event.params.issuer.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+  if(bonds==null){
+    let bond = event.params.issuer.toHexString();
+    let bonds = new Token(bond);
+    bonds.token = event.params.issuer;
+    bonds.tokenName = event.params.tokenName;
+    bonds.tokenType = event.params.tokenType;
+    bonds.save();
+  }
+  else{
+    bonds.token = event.params.issuer;
+    bonds.tokenName = event.params.tokenName;
+    bonds.tokenType = event.params.tokenType;
+    bonds.save();
+  }
+}
+
+export function handleBondTokenCreated(event: TokenCreated): void {
+  let bonds = Token.load(event.params.token.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+  if(bonds==null){
+    let bond = event.params.token.toHexString();
+    let bonds = new Token(bond);
+    bonds.token = event.params.token;
+    bonds.tokenName = event.params.tokenName;
+    bonds.tokenType = event.params.tokenType;
+    bonds.save();
+  }
+  else{
+    bonds.token = event.params.token;
+    bonds.tokenName = event.params.tokenName;
+    bonds.tokenType = event.params.tokenType;
+    bonds.save();
   }
 }

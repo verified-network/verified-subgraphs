@@ -10,32 +10,6 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
-export class BondIssueRequest extends ethereum.Event {
-  get params(): BondIssueRequest__Params {
-    return new BondIssueRequest__Params(this);
-  }
-}
-
-export class BondIssueRequest__Params {
-  _event: BondIssueRequest;
-
-  constructor(event: BondIssueRequest) {
-    this._event = event;
-  }
-
-  get issuer(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get currency(): Bytes {
-    return this._event.parameters[1].value.toBytes();
-  }
-
-  get amount(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-}
-
 export class BondIssued extends ethereum.Event {
   get params(): BondIssued__Params {
     return new BondIssued__Params(this);
@@ -49,20 +23,32 @@ export class BondIssued__Params {
     this._event = event;
   }
 
-  get issuer(): Address {
+  get party(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get collateralCurrency(): Bytes {
-    return this._event.parameters[1].value.toBytes();
-  }
-
-  get issuedAmount(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-
   get token(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get bondName(): Bytes {
+    return this._event.parameters[2].value.toBytes();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get currency(): Bytes {
+    return this._event.parameters[4].value.toBytes();
+  }
+
+  get collateralAmount(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
+  get issueTime(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
   }
 }
 
@@ -79,20 +65,28 @@ export class BondRedeemed__Params {
     this._event = event;
   }
 
-  get redeemer(): Address {
+  get party(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get redemptionCurrency(): Bytes {
-    return this._event.parameters[1].value.toBytes();
+  get token(): Address {
+    return this._event.parameters[1].value.toAddress();
   }
 
-  get redemptionAmount(): BigInt {
+  get tokenAmount(): BigInt {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get token(): Address {
-    return this._event.parameters[3].value.toAddress();
+  get tokenName(): Bytes {
+    return this._event.parameters[3].value.toBytes();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
+  get currency(): Bytes {
+    return this._event.parameters[5].value.toBytes();
   }
 }
 
@@ -109,20 +103,70 @@ export class BondPurchased__Params {
     this._event = event;
   }
 
-  get purchaser(): Address {
+  get party(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get paidInCurrency(): Bytes {
-    return this._event.parameters[1].value.toBytes();
+  get token(): Address {
+    return this._event.parameters[1].value.toAddress();
   }
 
-  get purchasedAmount(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+  get bondName(): Bytes {
+    return this._event.parameters[2].value.toBytes();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get currency(): Bytes {
+    return this._event.parameters[4].value.toBytes();
+  }
+
+  get paidInAmount(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
+  get purchaseTime(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
+  }
+}
+
+export class BondLiquidated extends ethereum.Event {
+  get params(): BondLiquidated__Params {
+    return new BondLiquidated__Params(this);
+  }
+}
+
+export class BondLiquidated__Params {
+  _event: BondLiquidated;
+
+  constructor(event: BondLiquidated) {
+    this._event = event;
+  }
+
+  get party(): Address {
+    return this._event.parameters[0].value.toAddress();
   }
 
   get token(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get tokenAmount(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get tokenName(): Bytes {
+    return this._event.parameters[3].value.toBytes();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
+  get currency(): Bytes {
+    return this._event.parameters[5].value.toBytes();
   }
 }
 
@@ -228,13 +272,122 @@ export class Approval__Params {
   }
 }
 
-export class Bond__getSupportedTokensResultValue0Struct extends ethereum.Tuple {
-  get tokenName(): Bytes {
-    return this[0].toBytes();
+export class Bond__issuesResult {
+  value0: BigInt;
+  value1: BigInt;
+  value2: Bytes;
+  value3: BigInt;
+  value4: BigInt;
+
+  constructor(
+    value0: BigInt,
+    value1: BigInt,
+    value2: Bytes,
+    value3: BigInt,
+    value4: BigInt
+  ) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+    this.value4 = value4;
   }
 
-  get tokenAddress(): Address {
-    return this[1].toAddress();
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    map.set("value2", ethereum.Value.fromFixedBytes(this.value2));
+    map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
+    map.set("value4", ethereum.Value.fromUnsignedBigInt(this.value4));
+    return map;
+  }
+}
+
+export class Bond__purchasesResult {
+  value0: BigInt;
+  value1: BigInt;
+  value2: Bytes;
+  value3: BigInt;
+  value4: BigInt;
+
+  constructor(
+    value0: BigInt,
+    value1: BigInt,
+    value2: Bytes,
+    value3: BigInt,
+    value4: BigInt
+  ) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+    this.value4 = value4;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    map.set("value2", ethereum.Value.fromFixedBytes(this.value2));
+    map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
+    map.set("value4", ethereum.Value.fromUnsignedBigInt(this.value4));
+    return map;
+  }
+}
+
+export class Bond__getBondIssuesResult {
+  value0: BigInt;
+  value1: BigInt;
+  value2: BigInt;
+  value3: Bytes;
+  value4: BigInt;
+
+  constructor(
+    value0: BigInt,
+    value1: BigInt,
+    value2: BigInt,
+    value3: Bytes,
+    value4: BigInt
+  ) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+    this.value4 = value4;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
+    map.set("value3", ethereum.Value.fromFixedBytes(this.value3));
+    map.set("value4", ethereum.Value.fromUnsignedBigInt(this.value4));
+    return map;
+  }
+}
+
+export class Bond__getBondPurchasesResult {
+  value0: BigInt;
+  value1: BigInt;
+  value2: Bytes;
+  value3: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt, value2: Bytes, value3: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    map.set("value2", ethereum.Value.fromFixedBytes(this.value2));
+    map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
+    return map;
   }
 }
 
@@ -329,6 +482,21 @@ export class Bond extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
+  decimals(): i32 {
+    let result = super.call("decimals", "decimals():(uint8)", []);
+
+    return result[0].toI32();
+  }
+
+  try_decimals(): ethereum.CallResult<i32> {
+    let result = super.tryCall("decimals", "decimals():(uint8)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toI32());
+  }
+
   increaseAllowance(spender: Address, addedValue: BigInt): boolean {
     let result = super.call(
       "increaseAllowance",
@@ -361,6 +529,86 @@ export class Bond extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
+  issues(param0: Address, param1: Address): Bond__issuesResult {
+    let result = super.call(
+      "issues",
+      "issues(address,address):(uint256,uint256,bytes32,uint256,uint256)",
+      [ethereum.Value.fromAddress(param0), ethereum.Value.fromAddress(param1)]
+    );
+
+    return new Bond__issuesResult(
+      result[0].toBigInt(),
+      result[1].toBigInt(),
+      result[2].toBytes(),
+      result[3].toBigInt(),
+      result[4].toBigInt()
+    );
+  }
+
+  try_issues(
+    param0: Address,
+    param1: Address
+  ): ethereum.CallResult<Bond__issuesResult> {
+    let result = super.tryCall(
+      "issues",
+      "issues(address,address):(uint256,uint256,bytes32,uint256,uint256)",
+      [ethereum.Value.fromAddress(param0), ethereum.Value.fromAddress(param1)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new Bond__issuesResult(
+        value[0].toBigInt(),
+        value[1].toBigInt(),
+        value[2].toBytes(),
+        value[3].toBigInt(),
+        value[4].toBigInt()
+      )
+    );
+  }
+
+  purchases(param0: Address, param1: Address): Bond__purchasesResult {
+    let result = super.call(
+      "purchases",
+      "purchases(address,address):(uint256,uint256,bytes32,uint256,uint256)",
+      [ethereum.Value.fromAddress(param0), ethereum.Value.fromAddress(param1)]
+    );
+
+    return new Bond__purchasesResult(
+      result[0].toBigInt(),
+      result[1].toBigInt(),
+      result[2].toBytes(),
+      result[3].toBigInt(),
+      result[4].toBigInt()
+    );
+  }
+
+  try_purchases(
+    param0: Address,
+    param1: Address
+  ): ethereum.CallResult<Bond__purchasesResult> {
+    let result = super.tryCall(
+      "purchases",
+      "purchases(address,address):(uint256,uint256,bytes32,uint256,uint256)",
+      [ethereum.Value.fromAddress(param0), ethereum.Value.fromAddress(param1)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new Bond__purchasesResult(
+        value[0].toBigInt(),
+        value[1].toBigInt(),
+        value[2].toBytes(),
+        value[3].toBigInt(),
+        value[4].toBigInt()
+      )
+    );
+  }
+
   balanceOf(account: Address): BigInt {
     let result = super.call("balanceOf", "balanceOf(address):(uint256)", [
       ethereum.Value.fromAddress(account)
@@ -378,6 +626,21 @@ export class Bond extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  bondName(): Bytes {
+    let result = super.call("bondName", "bondName():(bytes32)", []);
+
+    return result[0].toBytes();
+  }
+
+  try_bondName(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall("bondName", "bondName():(bytes32)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
   owner(): Address {
@@ -496,6 +759,27 @@ export class Bond extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
+  bondsIssued(param0: BigInt): Address {
+    let result = super.call("bondsIssued", "bondsIssued(uint256):(address)", [
+      ethereum.Value.fromUnsignedBigInt(param0)
+    ]);
+
+    return result[0].toAddress();
+  }
+
+  try_bondsIssued(param0: BigInt): ethereum.CallResult<Address> {
+    let result = super.tryCall(
+      "bondsIssued",
+      "bondsIssued(uint256):(address)",
+      [ethereum.Value.fromUnsignedBigInt(param0)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
   allowance(owner: Address, spender: Address): BigInt {
     let result = super.call(
       "allowance",
@@ -519,21 +803,41 @@ export class Bond extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  checkSupportForToken(_token: Address): boolean {
+  requestIssue(
+    amount: BigInt,
+    payer: Address,
+    currency: Bytes,
+    cashContract: Address
+  ): boolean {
     let result = super.call(
-      "checkSupportForToken",
-      "checkSupportForToken(address):(bool)",
-      [ethereum.Value.fromAddress(_token)]
+      "requestIssue",
+      "requestIssue(uint256,address,bytes32,address):(bool)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(payer),
+        ethereum.Value.fromFixedBytes(currency),
+        ethereum.Value.fromAddress(cashContract)
+      ]
     );
 
     return result[0].toBoolean();
   }
 
-  try_checkSupportForToken(_token: Address): ethereum.CallResult<boolean> {
+  try_requestIssue(
+    amount: BigInt,
+    payer: Address,
+    currency: Bytes,
+    cashContract: Address
+  ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
-      "checkSupportForToken",
-      "checkSupportForToken(address):(bool)",
-      [ethereum.Value.fromAddress(_token)]
+      "requestIssue",
+      "requestIssue(uint256,address,bytes32,address):(bool)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(payer),
+        ethereum.Value.fromFixedBytes(currency),
+        ethereum.Value.fromAddress(cashContract)
+      ]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -542,30 +846,243 @@ export class Bond extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  getSupportedTokens(): Array<Bond__getSupportedTokensResultValue0Struct> {
+  requestPurchase(
+    amount: BigInt,
+    payer: Address,
+    currency: Bytes,
+    cashContract: Address
+  ): boolean {
     let result = super.call(
-      "getSupportedTokens",
-      "getSupportedTokens():((bytes32,address)[])",
-      []
+      "requestPurchase",
+      "requestPurchase(uint256,address,bytes32,address):(bool)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(payer),
+        ethereum.Value.fromFixedBytes(currency),
+        ethereum.Value.fromAddress(cashContract)
+      ]
     );
 
-    return result[0].toTupleArray<Bond__getSupportedTokensResultValue0Struct>();
+    return result[0].toBoolean();
   }
 
-  try_getSupportedTokens(): ethereum.CallResult<
-    Array<Bond__getSupportedTokensResultValue0Struct>
-  > {
+  try_requestPurchase(
+    amount: BigInt,
+    payer: Address,
+    currency: Bytes,
+    cashContract: Address
+  ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
-      "getSupportedTokens",
-      "getSupportedTokens():((bytes32,address)[])",
-      []
+      "requestPurchase",
+      "requestPurchase(uint256,address,bytes32,address):(bool)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(payer),
+        ethereum.Value.fromFixedBytes(currency),
+        ethereum.Value.fromAddress(cashContract)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  requestRedemption(
+    amount: BigInt,
+    payer: Address,
+    currency: Bytes,
+    tokenContract: Address
+  ): boolean {
+    let result = super.call(
+      "requestRedemption",
+      "requestRedemption(uint256,address,bytes32,address):(bool)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(payer),
+        ethereum.Value.fromFixedBytes(currency),
+        ethereum.Value.fromAddress(tokenContract)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_requestRedemption(
+    amount: BigInt,
+    payer: Address,
+    currency: Bytes,
+    tokenContract: Address
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "requestRedemption",
+      "requestRedemption(uint256,address,bytes32,address):(bool)",
+      [
+        ethereum.Value.fromUnsignedBigInt(amount),
+        ethereum.Value.fromAddress(payer),
+        ethereum.Value.fromFixedBytes(currency),
+        ethereum.Value.fromAddress(tokenContract)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  transferForward(
+    sender: Address,
+    receiver: Address,
+    tokens: BigInt,
+    forwarder: Address
+  ): boolean {
+    let result = super.call(
+      "transferForward",
+      "transferForward(address,address,uint256,address):(bool)",
+      [
+        ethereum.Value.fromAddress(sender),
+        ethereum.Value.fromAddress(receiver),
+        ethereum.Value.fromUnsignedBigInt(tokens),
+        ethereum.Value.fromAddress(forwarder)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_transferForward(
+    sender: Address,
+    receiver: Address,
+    tokens: BigInt,
+    forwarder: Address
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "transferForward",
+      "transferForward(address,address,uint256,address):(bool)",
+      [
+        ethereum.Value.fromAddress(sender),
+        ethereum.Value.fromAddress(receiver),
+        ethereum.Value.fromUnsignedBigInt(tokens),
+        ethereum.Value.fromAddress(forwarder)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
+  getBonds(): Array<Address> {
+    let result = super.call("getBonds", "getBonds():(address[])", []);
+
+    return result[0].toAddressArray();
+  }
+
+  try_getBonds(): ethereum.CallResult<Array<Address>> {
+    let result = super.tryCall("getBonds", "getBonds():(address[])", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddressArray());
+  }
+
+  getBondIssues(
+    issuer: Address,
+    bondToken: Address
+  ): Bond__getBondIssuesResult {
+    let result = super.call(
+      "getBondIssues",
+      "getBondIssues(address,address):(uint256,uint256,uint256,bytes32,uint256)",
+      [
+        ethereum.Value.fromAddress(issuer),
+        ethereum.Value.fromAddress(bondToken)
+      ]
+    );
+
+    return new Bond__getBondIssuesResult(
+      result[0].toBigInt(),
+      result[1].toBigInt(),
+      result[2].toBigInt(),
+      result[3].toBytes(),
+      result[4].toBigInt()
+    );
+  }
+
+  try_getBondIssues(
+    issuer: Address,
+    bondToken: Address
+  ): ethereum.CallResult<Bond__getBondIssuesResult> {
+    let result = super.tryCall(
+      "getBondIssues",
+      "getBondIssues(address,address):(uint256,uint256,uint256,bytes32,uint256)",
+      [
+        ethereum.Value.fromAddress(issuer),
+        ethereum.Value.fromAddress(bondToken)
+      ]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<Bond__getSupportedTokensResultValue0Struct>()
+      new Bond__getBondIssuesResult(
+        value[0].toBigInt(),
+        value[1].toBigInt(),
+        value[2].toBigInt(),
+        value[3].toBytes(),
+        value[4].toBigInt()
+      )
+    );
+  }
+
+  getBondPurchases(
+    purchaser: Address,
+    bondToken: Address
+  ): Bond__getBondPurchasesResult {
+    let result = super.call(
+      "getBondPurchases",
+      "getBondPurchases(address,address):(uint256,uint256,bytes32,uint256)",
+      [
+        ethereum.Value.fromAddress(purchaser),
+        ethereum.Value.fromAddress(bondToken)
+      ]
+    );
+
+    return new Bond__getBondPurchasesResult(
+      result[0].toBigInt(),
+      result[1].toBigInt(),
+      result[2].toBytes(),
+      result[3].toBigInt()
+    );
+  }
+
+  try_getBondPurchases(
+    purchaser: Address,
+    bondToken: Address
+  ): ethereum.CallResult<Bond__getBondPurchasesResult> {
+    let result = super.tryCall(
+      "getBondPurchases",
+      "getBondPurchases(address,address):(uint256,uint256,bytes32,uint256)",
+      [
+        ethereum.Value.fromAddress(purchaser),
+        ethereum.Value.fromAddress(bondToken)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new Bond__getBondPurchasesResult(
+        value[0].toBigInt(),
+        value[1].toBigInt(),
+        value[2].toBytes(),
+        value[3].toBigInt()
+      )
     );
   }
 }
@@ -875,12 +1392,16 @@ export class InitializeCall__Inputs {
     return this._call.inputValues[2].value.toAddress();
   }
 
-  get _fee(): Address {
+  get _oracle(): Address {
     return this._call.inputValues[3].value.toAddress();
   }
 
-  get _bridge(): Address {
+  get _token(): Address {
     return this._call.inputValues[4].value.toAddress();
+  }
+
+  get _fee(): Address {
+    return this._call.inputValues[5].value.toAddress();
   }
 }
 
@@ -922,70 +1443,6 @@ export class Initialize1Call__Outputs {
   }
 }
 
-export class SetSignerCall extends ethereum.Call {
-  get inputs(): SetSignerCall__Inputs {
-    return new SetSignerCall__Inputs(this);
-  }
-
-  get outputs(): SetSignerCall__Outputs {
-    return new SetSignerCall__Outputs(this);
-  }
-}
-
-export class SetSignerCall__Inputs {
-  _call: SetSignerCall;
-
-  constructor(call: SetSignerCall) {
-    this._call = call;
-  }
-
-  get _signer(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-}
-
-export class SetSignerCall__Outputs {
-  _call: SetSignerCall;
-
-  constructor(call: SetSignerCall) {
-    this._call = call;
-  }
-}
-
-export class SupportTokensCall extends ethereum.Call {
-  get inputs(): SupportTokensCall__Inputs {
-    return new SupportTokensCall__Inputs(this);
-  }
-
-  get outputs(): SupportTokensCall__Outputs {
-    return new SupportTokensCall__Outputs(this);
-  }
-}
-
-export class SupportTokensCall__Inputs {
-  _call: SupportTokensCall;
-
-  constructor(call: SupportTokensCall) {
-    this._call = call;
-  }
-
-  get _token(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get _name(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
-  }
-}
-
-export class SupportTokensCall__Outputs {
-  _call: SupportTokensCall;
-
-  constructor(call: SupportTokensCall) {
-    this._call = call;
-  }
-}
-
 export class RequestIssueCall extends ethereum.Call {
   get inputs(): RequestIssueCall__Inputs {
     return new RequestIssueCall__Inputs(this);
@@ -1003,16 +1460,20 @@ export class RequestIssueCall__Inputs {
     this._call = call;
   }
 
-  get _token(): Address {
-    return this._call.inputValues[0].value.toAddress();
+  get amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
   }
 
-  get _amount(): BigInt {
-    return this._call.inputValues[1].value.toBigInt();
+  get payer(): Address {
+    return this._call.inputValues[1].value.toAddress();
   }
 
-  get _buyer(): Address {
-    return this._call.inputValues[2].value.toAddress();
+  get currency(): Bytes {
+    return this._call.inputValues[2].value.toBytes();
+  }
+
+  get cashContract(): Address {
+    return this._call.inputValues[3].value.toAddress();
   }
 }
 
@@ -1022,22 +1483,26 @@ export class RequestIssueCall__Outputs {
   constructor(call: RequestIssueCall) {
     this._call = call;
   }
-}
 
-export class AddIssuedBalanceCall extends ethereum.Call {
-  get inputs(): AddIssuedBalanceCall__Inputs {
-    return new AddIssuedBalanceCall__Inputs(this);
-  }
-
-  get outputs(): AddIssuedBalanceCall__Outputs {
-    return new AddIssuedBalanceCall__Outputs(this);
+  get value0(): boolean {
+    return this._call.outputValues[0].value.toBoolean();
   }
 }
 
-export class AddIssuedBalanceCall__Inputs {
-  _call: AddIssuedBalanceCall;
+export class RequestPurchaseCall extends ethereum.Call {
+  get inputs(): RequestPurchaseCall__Inputs {
+    return new RequestPurchaseCall__Inputs(this);
+  }
 
-  constructor(call: AddIssuedBalanceCall) {
+  get outputs(): RequestPurchaseCall__Outputs {
+    return new RequestPurchaseCall__Outputs(this);
+  }
+}
+
+export class RequestPurchaseCall__Inputs {
+  _call: RequestPurchaseCall;
+
+  constructor(call: RequestPurchaseCall) {
     this._call = call;
   }
 
@@ -1045,7 +1510,7 @@ export class AddIssuedBalanceCall__Inputs {
     return this._call.inputValues[0].value.toBigInt();
   }
 
-  get issuer(): Address {
+  get payer(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
@@ -1053,49 +1518,37 @@ export class AddIssuedBalanceCall__Inputs {
     return this._call.inputValues[2].value.toBytes();
   }
 
-  get issuedBond(): Address {
+  get cashContract(): Address {
     return this._call.inputValues[3].value.toAddress();
   }
-
-  get _hashedMessage(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-
-  get _v(): i32 {
-    return this._call.inputValues[5].value.toI32();
-  }
-
-  get _r(): Bytes {
-    return this._call.inputValues[6].value.toBytes();
-  }
-
-  get _s(): Bytes {
-    return this._call.inputValues[7].value.toBytes();
-  }
 }
 
-export class AddIssuedBalanceCall__Outputs {
-  _call: AddIssuedBalanceCall;
+export class RequestPurchaseCall__Outputs {
+  _call: RequestPurchaseCall;
 
-  constructor(call: AddIssuedBalanceCall) {
+  constructor(call: RequestPurchaseCall) {
     this._call = call;
   }
-}
 
-export class PurchaseCall extends ethereum.Call {
-  get inputs(): PurchaseCall__Inputs {
-    return new PurchaseCall__Inputs(this);
-  }
-
-  get outputs(): PurchaseCall__Outputs {
-    return new PurchaseCall__Outputs(this);
+  get value0(): boolean {
+    return this._call.outputValues[0].value.toBoolean();
   }
 }
 
-export class PurchaseCall__Inputs {
-  _call: PurchaseCall;
+export class RequestRedemptionCall extends ethereum.Call {
+  get inputs(): RequestRedemptionCall__Inputs {
+    return new RequestRedemptionCall__Inputs(this);
+  }
 
-  constructor(call: PurchaseCall) {
+  get outputs(): RequestRedemptionCall__Outputs {
+    return new RequestRedemptionCall__Outputs(this);
+  }
+}
+
+export class RequestRedemptionCall__Inputs {
+  _call: RequestRedemptionCall;
+
+  constructor(call: RequestRedemptionCall) {
     this._call = call;
   }
 
@@ -1103,7 +1556,7 @@ export class PurchaseCall__Inputs {
     return this._call.inputValues[0].value.toBigInt();
   }
 
-  get purchaser(): Address {
+  get payer(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
@@ -1111,90 +1564,66 @@ export class PurchaseCall__Inputs {
     return this._call.inputValues[2].value.toBytes();
   }
 
-  get purchasedBond(): Address {
+  get tokenContract(): Address {
     return this._call.inputValues[3].value.toAddress();
   }
-
-  get _hashedMessage(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-
-  get _v(): i32 {
-    return this._call.inputValues[5].value.toI32();
-  }
-
-  get _r(): Bytes {
-    return this._call.inputValues[6].value.toBytes();
-  }
-
-  get _s(): Bytes {
-    return this._call.inputValues[7].value.toBytes();
-  }
 }
 
-export class PurchaseCall__Outputs {
-  _call: PurchaseCall;
+export class RequestRedemptionCall__Outputs {
+  _call: RequestRedemptionCall;
 
-  constructor(call: PurchaseCall) {
-    this._call = call;
-  }
-}
-
-export class RedeemBondCall extends ethereum.Call {
-  get inputs(): RedeemBondCall__Inputs {
-    return new RedeemBondCall__Inputs(this);
-  }
-
-  get outputs(): RedeemBondCall__Outputs {
-    return new RedeemBondCall__Outputs(this);
-  }
-}
-
-export class RedeemBondCall__Inputs {
-  _call: RedeemBondCall;
-
-  constructor(call: RedeemBondCall) {
+  constructor(call: RequestRedemptionCall) {
     this._call = call;
   }
 
-  get amount(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
+  get value0(): boolean {
+    return this._call.outputValues[0].value.toBoolean();
+  }
+}
+
+export class TransferForwardCall extends ethereum.Call {
+  get inputs(): TransferForwardCall__Inputs {
+    return new TransferForwardCall__Inputs(this);
   }
 
-  get payOutTo(): Address {
+  get outputs(): TransferForwardCall__Outputs {
+    return new TransferForwardCall__Outputs(this);
+  }
+}
+
+export class TransferForwardCall__Inputs {
+  _call: TransferForwardCall;
+
+  constructor(call: TransferForwardCall) {
+    this._call = call;
+  }
+
+  get sender(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get receiver(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get currency(): Bytes {
-    return this._call.inputValues[2].value.toBytes();
+  get tokens(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
   }
 
-  get redeemedToken(): Address {
+  get forwarder(): Address {
     return this._call.inputValues[3].value.toAddress();
-  }
-
-  get _hashedMessage(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-
-  get _v(): i32 {
-    return this._call.inputValues[5].value.toI32();
-  }
-
-  get _r(): Bytes {
-    return this._call.inputValues[6].value.toBytes();
-  }
-
-  get _s(): Bytes {
-    return this._call.inputValues[7].value.toBytes();
   }
 }
 
-export class RedeemBondCall__Outputs {
-  _call: RedeemBondCall;
+export class TransferForwardCall__Outputs {
+  _call: TransferForwardCall;
 
-  constructor(call: RedeemBondCall) {
+  constructor(call: TransferForwardCall) {
     this._call = call;
+  }
+
+  get value0(): boolean {
+    return this._call.outputValues[0].value.toBoolean();
   }
 }
 
