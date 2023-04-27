@@ -169,6 +169,29 @@ export class MarginIssueManager extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
+
+  getTradingFeeCollected(_token: Address): BigInt {
+    let result = super.call(
+      "getTradingFeeCollected",
+      "getTradingFeeCollected(address):(uint256)",
+      [ethereum.Value.fromAddress(_token)]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_getTradingFeeCollected(_token: Address): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getTradingFeeCollected",
+      "getTradingFeeCollected(address):(uint256)",
+      [ethereum.Value.fromAddress(_token)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
 }
 
 export class RenounceOwnershipCall extends ethereum.Call {
@@ -254,6 +277,10 @@ export class InitializeCall__Inputs {
 
   get products(): Address {
     return this._call.inputValues[2].value.toAddress();
+  }
+
+  get distribution(): Address {
+    return this._call.inputValues[3].value.toAddress();
   }
 }
 
@@ -432,6 +459,40 @@ export class OnTradeCall__Outputs {
 
   constructor(call: OnTradeCall) {
     this._call = call;
+  }
+}
+
+export class GetTradingFeeCollectedCall extends ethereum.Call {
+  get inputs(): GetTradingFeeCollectedCall__Inputs {
+    return new GetTradingFeeCollectedCall__Inputs(this);
+  }
+
+  get outputs(): GetTradingFeeCollectedCall__Outputs {
+    return new GetTradingFeeCollectedCall__Outputs(this);
+  }
+}
+
+export class GetTradingFeeCollectedCall__Inputs {
+  _call: GetTradingFeeCollectedCall;
+
+  constructor(call: GetTradingFeeCollectedCall) {
+    this._call = call;
+  }
+
+  get _token(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class GetTradingFeeCollectedCall__Outputs {
+  _call: GetTradingFeeCollectedCall;
+
+  constructor(call: GetTradingFeeCollectedCall) {
+    this._call = call;
+  }
+
+  get value0(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
   }
 }
 

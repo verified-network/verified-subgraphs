@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: goerli
     source:
-      address: '0xD563A0134e4DC1e626109eFA137E77cd68DC524c'
+      address: '0x7F0B92c1FBB5F71B5c9cc65d030cB09Dd6812E88'
       abi: SecuritiesFactory
-      startBlock: 8858185
+      startBlock: 8891975
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -32,9 +32,9 @@ dataSources:
     name: Client
     network: goerli
     source:
-      address: '0xB1752A2Af74886B994596EdC6b3806c601d4f682'
+      address: '0x3a4258bE84ddDb689CFeD49107726B8700ec593e'
       abi: Client
-      startBlock: 8858182
+      startBlock: 8891972
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -109,9 +109,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: '0xBeC826060d9842e826d616F4eC6ba19e11b5054A'
+      address: '0x7F2Daa91D6FB41Ba095Cca5ab9219997def3Fb90'
       abi: PrimaryIssueManager
-      startBlock: 8858647
+      startBlock: 8892011
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -143,9 +143,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: '0xEb273679963b9eCc51C9a14a56C491C02FF75f6a'
+      address: '0xcF42bf1B2445ffCBC1172F5f6B77cFD5D02D6751'
       abi: SecondaryIssueManager
-      startBlock: 8858651
+      startBlock: 8892015
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -168,9 +168,9 @@ dataSources:
     name: MarginIssueManager
     network: goerli
     source:
-      address: '0x5482761A7Cad2C562a314b6c5Bc6d0e3e54295f6'
+      address: '0xeaA3d0A44789B26295fAAC62eF5De82ed61223a8'
       abi: MarginIssueManager
-      startBlock: 8858655
+      startBlock: 8892019
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -193,9 +193,9 @@ dataSources:
     name: Factory
     network: goerli
     source:
-      address: '0xD563A0134e4DC1e626109eFA137E77cd68DC524c'
+      address: '0x979096681423F77396e1C2a4d0A0B1e2cfd4b886'
       abi: Factory
-      startBlock: 8858185
+      startBlock: 8897721
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

@@ -32,6 +32,40 @@ export class OwnershipTransferred__Params {
   }
 }
 
+export class closure extends ethereum.Event {
+  get params(): closure__Params {
+    return new closure__Params(this);
+  }
+}
+
+export class closure__Params {
+  _event: closure;
+
+  constructor(event: closure) {
+    this._event = event;
+  }
+
+  get currency(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get issuer(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get currencyBalance(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get security(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get securityBalance(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
 export class closures extends ethereum.Event {
   get params(): closures__Params {
     return new closures__Params(this);

@@ -16,8 +16,8 @@ export function handleTradeSettled(event: tradeSettled): void {
         let tradeId = event.params.transferor.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let trades = new Trades(tradeId);
         trades.poolid = event.params.poolid;
-        trades.transferor = event.params.transferor;
-        trades.transferee = event.params.transferee;
+        trades.transferor = event.params.transferor.toHexString();
+        trades.transferee = event.params.transferee.toHexString();
         trades.unitsToTransfer = event.params.unitsToTransfer;
         trades.security = event.params.security.toHexString();
         trades.currency = event.params.currency;
@@ -29,8 +29,8 @@ export function handleTradeSettled(event: tradeSettled): void {
     }
     else{
         trades.poolid = event.params.poolid;
-        trades.transferor = event.params.transferor;
-        trades.transferee = event.params.transferee;
+        trades.transferor = event.params.transferor.toHexString();
+        trades.transferee = event.params.transferee.toHexString();
         trades.unitsToTransfer = event.params.unitsToTransfer;
         trades.security = event.params.security.toHexString();
         trades.currency = event.params.currency;
@@ -49,8 +49,8 @@ export function handleSecondaryInvestors(event: subscribers): void {
         let investors = new Investors(investorId);
         investors.pool = event.params.poolId;
         investors.security = event.params.securityTraded.toHexString();
-        investors.issuer = event.params.seller;
-        investors.investor = event.params.investor;
+        investors.issuer = event.params.seller.toHexString();
+        investors.investor = event.params.investor.toHexString();
         investors.currency = event.params.currencySettled;
         investors.amount = event.params.amount.toBigDecimal();
         investors.price = event.params.price.toBigDecimal();
@@ -62,8 +62,8 @@ export function handleSecondaryInvestors(event: subscribers): void {
     else{
         investors.pool = event.params.poolId;
         investors.security = event.params.securityTraded.toHexString();
-        investors.issuer = event.params.seller;
-        investors.investor = event.params.investor;
+        investors.issuer = event.params.seller.toHexString();
+        investors.investor = event.params.investor.toHexString();
         investors.currency = event.params.currencySettled;
         investors.amount = event.params.amount.toBigDecimal();
         investors.price = event.params.price.toBigDecimal();

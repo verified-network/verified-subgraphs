@@ -203,6 +203,11 @@
         "internalType": "address",
         "name": "products",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "distribution",
+        "type": "address"
       }
     ],
     "name": "initialize",
@@ -346,6 +351,25 @@
     ],
     "name": "onTrade",
     "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      }
+    ],
+    "name": "getTradingFeeCollected",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },

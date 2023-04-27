@@ -717,21 +717,30 @@ export class Factory extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toString());
   }
 
-  getCryptoDataUrl(currency: string): string {
+  getCryptoDataUrl(fromCurrency: Bytes, toCurrency: Bytes): string {
     let result = super.call(
       "getCryptoDataUrl",
-      "getCryptoDataUrl(string):(string)",
-      [ethereum.Value.fromString(currency)]
+      "getCryptoDataUrl(bytes32,bytes32):(string)",
+      [
+        ethereum.Value.fromFixedBytes(fromCurrency),
+        ethereum.Value.fromFixedBytes(toCurrency)
+      ]
     );
 
     return result[0].toString();
   }
 
-  try_getCryptoDataUrl(currency: string): ethereum.CallResult<string> {
+  try_getCryptoDataUrl(
+    fromCurrency: Bytes,
+    toCurrency: Bytes
+  ): ethereum.CallResult<string> {
     let result = super.tryCall(
       "getCryptoDataUrl",
-      "getCryptoDataUrl(string):(string)",
-      [ethereum.Value.fromString(currency)]
+      "getCryptoDataUrl(bytes32,bytes32):(string)",
+      [
+        ethereum.Value.fromFixedBytes(fromCurrency),
+        ethereum.Value.fromFixedBytes(toCurrency)
+      ]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1302,8 +1311,12 @@ export class SetCryptoDataURLCall__Inputs {
     return this._call.inputValues[0].value.toString();
   }
 
-  get _currency(): string {
-    return this._call.inputValues[1].value.toString();
+  get _fromCurrency(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+  }
+
+  get _toCurrency(): Bytes {
+    return this._call.inputValues[2].value.toBytes();
   }
 }
 

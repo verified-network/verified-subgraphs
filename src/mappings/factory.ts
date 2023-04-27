@@ -24,7 +24,7 @@ export function handleSecurityCreated(event: securitiesAdded): void {
     securities.isin = event.params.isin;
     securities.currency = event.params.currency;
     securities.security = event.params.security;
-    securities.issuer = event.params.issuer;
+    securities.issuer = event.params.issuer.toHexString();
     securities.restricted = event.params.restricted;
     securities.issueManager = event.params.issueManager;
     securities.productCategory = event.params.productCategory;
@@ -36,7 +36,7 @@ export function handleSecurityCreated(event: securitiesAdded): void {
     securities.isin = event.params.isin;
     securities.currency = event.params.currency;
     securities.security = event.params.security;
-    securities.issuer = event.params.issuer;
+    securities.issuer = event.params.issuer.toHexString();
     securities.restricted = event.params.restricted;
     securities.issueManager = event.params.issueManager;
     securities.productCategory = event.params.productCategory;

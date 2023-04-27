@@ -25,19 +25,28 @@ type User @entity {
   bondPurchases: [BondPurchases!] @derivedFrom(field: "purchaser")
   bondRedemptions: [BondRedemptions!] @derivedFrom(field: "redeemer")
   BondLiquidations: [BondLiquidations!] @derivedFrom(field: "liquidator")
-  #offers: [Offers!] @derivedFrom(field: "offeredBy")
-  #primarySubscribers: [Subscribers!] @derivedFrom(field: "investor")
-  #secondaryInvestors: [Investors!] @derivedFrom(field: "investor")
-  #liquidityProviders: [LiquidityProviders!] @derivedFrom(field: "owner")
+  offers: [Offers!] @derivedFrom(field: "offeredBy")
+  securitySeller: [Trades!] @derivedFrom(field: "transferor")
+  securityBuyer: [Trades!] @derivedFrom(field: "transferee")
+  primarySubscribers: [Subscribers!] @derivedFrom(field: "investor")
+  secondaryIssuers: [Investors!] @derivedFrom(field: "issuer")
+  secondaryInvestors: [Investors!] @derivedFrom(field: "investor")
+  tradeTransferor: [Traders!] @derivedFrom(field: "transferor")
+  tradeTransferee: [Traders!] @derivedFrom(field: "transferee")
+  liquidityProviders: [LiquidityProviders!] @derivedFrom(field: "owner")
+  allotedTo: [Allotments!] @derivedFrom(field: "investor")
+  refundedTo: [Refunds!] @derivedFrom(field: "investor")
+  liquidityProviderSettled: [Settlements!] @derivedFrom(field: "liquidityProvider")
+  issuerSettled: [Settlements!] @derivedFrom(field: "issuer")
   manager: [Manager!] @derived(field: "manager")
   submanager: [Manager!] @derivedFrom(field: "submanager")
-  #securityissuer: [Issuer!] @derivedFrom(field: "issuer")
-  #shareholder: [RevenueShares!] @derivedFrom(field: "shareholder")
+  shareholder: [RevenueShares!] @derivedFrom(field: "shareholder")
   liquidityRequestor: [LiquidityTokenRequests!] @derivedFrom(field: "investor")
   liquidityIssuedTo: [LiquidityTokenIssues!] @derivedFrom(field: "investor")
   liquidityProvidedTo: [PlatformLiquidity!] @derivedFrom(field: "manager")
   earnedByManager: [ManagerReturns!] @derivedFrom(field: "manager")
   earnedByInvestor: [InvestorReturns!] @derivedFrom(field: "investor") 
+  issuer: [Security!] @derivedFrom(field: "issuer")
 }
 type Token @entity {
   id: ID!
@@ -53,8 +62,8 @@ type Security @entity {
   id: ID!
   security: Bytes!
   productCategory: Bytes!
-  #issuer: User!
-  issuer: Bytes!
+  issuer: User!
+  #issuer: Bytes!
   isin: Bytes!
   currency: Bytes!
   restricted: Boolean!
@@ -152,8 +161,8 @@ type Manager @entity {
 }
 type Offers @entity {
   id: ID!
-  #offeredBy: User!
-  offeredBy: Bytes!
+  offeredBy: User!
+  #offeredBy: Bytes!
   offered: Bytes!
   tomatch: Security!
   isin: Bytes!
@@ -166,10 +175,10 @@ type Offers @entity {
 type Trades @entity {
   id: ID!
   poolid: Bytes!
-  #transferor: User!
-  transferor: Bytes!
-  #transferee: User!
-  transferee: Bytes!
+  transferor: User!
+  #transferor: Bytes!
+  transferee: User!
+  #transferee: Bytes!
   unitsToTransfer: BigInt!
   security: Security!
   price: BigDecimal!
@@ -182,8 +191,8 @@ type Subscribers @entity {
   id: ID!
   security: Security!
   pool: Bytes!
-  #investor: User!
-  investor: Bytes!
+  investor: User!
+  #investor: Bytes!
   currency: Bytes!
   cashSwapped: BigDecimal!   
   securitySwapped: BigDecimal! 
@@ -194,10 +203,10 @@ type Investors @entity {
   id: ID!
   pool: Bytes!
   security: Security!
-  #issuer: User!
-  issuer: Bytes!
-  #investor: User!
-  investor: Bytes!
+  issuer: User!
+  #issuer: Bytes!
+  investor: User!
+  #investor: Bytes!
   currency: Bytes!
   amount: BigDecimal!   
   price: BigDecimal! 
@@ -207,19 +216,20 @@ type Investors @entity {
 }
 type Traders @entity {
   id: ID!
-  transferor: Bytes!
-  transferee: Bytes!
+  #transferor: Bytes!
+  transferor: User!
+  #transferee: Bytes!
+  transferee: User!
   security: Security!
   securityTraded: BigDecimal!
   currency: Bytes!
   cashTraded: BigDecimal!
 }
-
 type LiquidityProviders @entity {
   id: ID!
   platform: Bytes!
-  #owner: User!
-  owner: Bytes!
+  owner: User!
+  #owner: Bytes!
   security: Security!
   currency: Bytes!
   tokenOffered: BigDecimal!
@@ -235,8 +245,8 @@ type Closures @entity{
 type Allotments @entity{
   id: ID!
   poolid: Bytes!
-  investor: Bytes!
-  #investor: User!
+  #investor: Bytes!
+  investor: User!
   security: Security!
   securitySubscribed: BigDecimal!
   currency: Bytes!
@@ -245,8 +255,8 @@ type Allotments @entity{
 type Refunds @entity{
   id: ID!
   poolid: Bytes!
-  investor: Bytes!
-  #investor: User!
+  #investor: Bytes!
+  investor: User!
   security: Security!
   securitySubscribed: BigDecimal!
   currency: Bytes!
@@ -257,11 +267,11 @@ type Settlements @entity{
   poolid: Bytes!
   security: Security!
   currency: Bytes!
-  liquidityProvider: Bytes!
-  #liquidityProvider: User!
+  #liquidityProvider: Bytes!
+  liquidityProvider: User!
   underwritingFee: BigDecimal!
-  #issuer: User!
-  issuer: Bytes!
+  issuer: User!
+  #issuer: Bytes!
   subscription: BigDecimal!  
 }
 type Snapshots @entity{

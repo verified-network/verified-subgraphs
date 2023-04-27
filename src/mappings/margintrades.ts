@@ -16,8 +16,8 @@ export function handleTrades(event: tradeSettled): void {
         let tradeId = event.params.transferor.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let trades = new Trades(tradeId);
         trades.poolid = event.params.poolid;
-        trades.transferor = event.params.transferor;
-        trades.transferee = event.params.transferee;
+        trades.transferor = event.params.transferor.toHexString();
+        trades.transferee = event.params.transferee.toHexString();
         trades.unitsToTransfer = event.params.unitsToTransfer;
         trades.security = event.params.security.toHexString();
         trades.currency = event.params.currency;
@@ -29,8 +29,8 @@ export function handleTrades(event: tradeSettled): void {
     }
     else{
         trades.poolid = event.params.poolid;
-        trades.transferor = event.params.transferor;
-        trades.transferee = event.params.transferee;
+        trades.transferor = event.params.transferor.toHexString();
+        trades.transferee = event.params.transferee.toHexString();
         trades.unitsToTransfer = event.params.unitsToTransfer;
         trades.security = event.params.security.toHexString();
         trades.currency = event.params.currency;
@@ -48,8 +48,8 @@ export function handleTraders(event: subscribers): void {
         let investorId = event.params.counterparty.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let investors = new Traders(investorId);
         investors.security = event.params.securityTraded.toHexString();
-        investors.transferor = event.params.party;
-        investors.transferee = event.params.counterparty;
+        investors.transferor = event.params.party.toHexString();
+        investors.transferee = event.params.counterparty.toHexString();
         investors.currency = event.params.currencySettled;
         investors.securityTraded = event.params.securityAmount.toBigDecimal();
         investors.cashTraded = event.params.cashAmount.toBigDecimal();
@@ -57,8 +57,8 @@ export function handleTraders(event: subscribers): void {
     }
     else{
         investors.security = event.params.securityTraded.toHexString();
-        investors.transferor = event.params.party;
-        investors.transferee = event.params.counterparty;
+        investors.transferor = event.params.party.toHexString();
+        investors.transferee = event.params.counterparty.toHexString();
         investors.currency = event.params.currencySettled;
         investors.securityTraded = event.params.securityAmount.toBigDecimal();
         investors.cashTraded = event.params.cashAmount.toBigDecimal();

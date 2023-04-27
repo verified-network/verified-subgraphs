@@ -24,7 +24,7 @@ export function handleMarketmakers(event: marketmakers): void {
         let lpId = event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let lps = new LiquidityProviders(lpId);
         lps.platform = event.params.platform;
-        lps.owner = event.params.provider;
+        lps.owner = event.params.provider.toHexString();
         lps.security = event.params.security.toHexString();
         lps.currency = event.params.currency;
         lps.tokenOffered = event.params.tokenOffered.toBigDecimal();
@@ -34,7 +34,7 @@ export function handleMarketmakers(event: marketmakers): void {
     }
     else{
         lps.platform = event.params.platform;
-        lps.owner = event.params.provider;
+        lps.owner = event.params.provider.toHexString();
         lps.security = event.params.security.toHexString();
         lps.currency = event.params.currency;
         lps.tokenOffered = event.params.tokenOffered.toBigDecimal();
@@ -51,7 +51,7 @@ export function handlePrimaryInvestors(event: subscribers): void {
         let investors = new Subscribers(pool);
         investors.pool = event.params.poolId;
         investors.security = event.params.security.toHexString();
-        investors.investor = event.params.investor;
+        investors.investor = event.params.investor.toHexString();
         investors.currency = event.params.currency;
         investors.cashSwapped = event.params.cashSwapped.toBigDecimal();
         investors.securitySwapped = event.params.securitySwapped.toBigDecimal();
@@ -62,7 +62,7 @@ export function handlePrimaryInvestors(event: subscribers): void {
     else{
         investors.pool = event.params.poolId;
         investors.security = event.params.security.toHexString();
-        investors.investor = event.params.investor;
+        investors.investor = event.params.investor.toHexString();
         investors.currency = event.params.currency;
         investors.cashSwapped = event.params.cashSwapped.toBigDecimal();
         investors.securitySwapped = event.params.securitySwapped.toBigDecimal();
@@ -77,7 +77,7 @@ export function handleOffers(event: offers): void {
     if(offers==null){
         let offerId = event.params.offered.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let offers = new Offers(offerId);
-        offers.offeredBy = event.params.party;
+        offers.offeredBy = event.params.party.toHexString();
         offers.offered = event.params.offered;
         offers.tomatch = event.params.tomatch.toHexString();
         offers.isin = event.params.isin;
@@ -89,7 +89,7 @@ export function handleOffers(event: offers): void {
         offers.save();
     }
     else{
-        offers.offeredBy = event.params.party;
+        offers.offeredBy = event.params.party.toHexString();
         offers.offered = event.params.offered;
         offers.tomatch = event.params.tomatch.toHexString();
         offers.isin = event.params.isin;
@@ -126,7 +126,7 @@ export function handleAllotments(event: allotments): void {
         let pool = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let allotments = new Allotments(pool);
         allotments.poolid = event.params.poolId;
-        allotments.investor = event.params.investor;
+        allotments.investor = event.params.investor.toHexString();
         allotments.security = event.params.security.toHexString();
         allotments.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         allotments.currency = event.params.currency;
@@ -135,7 +135,7 @@ export function handleAllotments(event: allotments): void {
     }
     else{
         allotments.poolid = event.params.poolId;
-        allotments.investor = event.params.investor;
+        allotments.investor = event.params.investor.toHexString();
         allotments.security = event.params.security.toHexString();
         allotments.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         allotments.currency = event.params.currency;
@@ -150,7 +150,7 @@ export function handleRefunds(event: refunds): void {
         let pool = event.params.poolId.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let refunds = new Refunds(pool);
         refunds.poolid = event.params.poolId;
-        refunds.investor = event.params.investor;
+        refunds.investor = event.params.investor.toHexString();
         refunds.security = event.params.security.toHexString();
         refunds.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         refunds.currency = event.params.currency;
@@ -159,7 +159,7 @@ export function handleRefunds(event: refunds): void {
     }
     else{
         refunds.poolid = event.params.poolId;
-        refunds.investor = event.params.investor;
+        refunds.investor = event.params.investor.toHexString();
         refunds.security = event.params.security.toHexString();
         refunds.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         refunds.currency = event.params.currency;
@@ -176,9 +176,9 @@ export function handleSettlements(event: settlements): void {
         settlements.poolid = event.params.poolId;
         settlements.security = event.params.security.toHexString();
         settlements.currency = event.params.currency;
-        settlements.liquidityProvider = event.params.liquidityProvider;
+        settlements.liquidityProvider = event.params.liquidityProvider.toHexString();
         settlements.underwritingFee = event.params.underwritingFee.toBigDecimal();
-        settlements.issuer = event.params.issuer;
+        settlements.issuer = event.params.issuer.toHexString();
         settlements.subscription = event.params.subscription.toBigDecimal();
         settlements.save();
     }
@@ -186,9 +186,9 @@ export function handleSettlements(event: settlements): void {
         settlements.poolid = event.params.poolId;
         settlements.security = event.params.security.toHexString();
         settlements.currency = event.params.currency;
-        settlements.liquidityProvider = event.params.liquidityProvider;
+        settlements.liquidityProvider = event.params.liquidityProvider.toHexString();
         settlements.underwritingFee = event.params.underwritingFee.toBigDecimal();
-        settlements.issuer = event.params.issuer;
+        settlements.issuer = event.params.issuer.toHexString();
         settlements.subscription = event.params.subscription.toBigDecimal();
         settlements.save();
     }

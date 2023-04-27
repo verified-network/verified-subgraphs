@@ -571,8 +571,12 @@
     "constant": true,
     "inputs": [
       {
-        "name": "currency",
-        "type": "string"
+        "name": "fromCurrency",
+        "type": "bytes32"
+      },
+      {
+        "name": "toCurrency",
+        "type": "bytes32"
       }
     ],
     "name": "getCryptoDataUrl",
@@ -733,8 +737,12 @@
         "type": "string"
       },
       {
-        "name": "_currency",
-        "type": "string"
+        "name": "_fromCurrency",
+        "type": "bytes32"
+      },
+      {
+        "name": "_toCurrency",
+        "type": "bytes32"
       }
     ],
     "name": "setCryptoDataURL",
