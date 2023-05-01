@@ -32,40 +32,6 @@ export class OwnershipTransferred__Params {
   }
 }
 
-export class closure extends ethereum.Event {
-  get params(): closure__Params {
-    return new closure__Params(this);
-  }
-}
-
-export class closure__Params {
-  _event: closure;
-
-  constructor(event: closure) {
-    this._event = event;
-  }
-
-  get currency(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get issuer(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
-  get currencyBalance(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-
-  get security(): Address {
-    return this._event.parameters[3].value.toAddress();
-  }
-
-  get securityBalance(): BigInt {
-    return this._event.parameters[4].value.toBigInt();
-  }
-}
-
 export class closures extends ethereum.Event {
   get params(): closures__Params {
     return new closures__Params(this);
@@ -89,6 +55,54 @@ export class closures__Params {
 
   get timestamp(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class feecollection extends ethereum.Event {
+  get params(): feecollection__Params {
+    return new feecollection__Params(this);
+  }
+}
+
+export class feecollection__Params {
+  _event: feecollection;
+
+  constructor(event: feecollection) {
+    this._event = event;
+  }
+
+  get platform(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get collection(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class reject extends ethereum.Event {
+  get params(): reject__Params {
+    return new reject__Params(this);
+  }
+}
+
+export class reject__Params {
+  _event: reject;
+
+  constructor(event: reject) {
+    this._event = event;
+  }
+
+  get consideration(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get unitsTransferred(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
   }
 }
 
@@ -201,48 +215,48 @@ export class tradeSettled__Params {
 }
 
 export class SecondaryIssueManager__getSettlementRequestResultValue0Struct extends ethereum.Tuple {
-  get transferor(): Address {
+  get orderPool(): Address {
     return this[0].toAddress();
   }
 
-  get transferee(): Address {
+  get transferor(): Address {
     return this[1].toAddress();
   }
 
-  get security(): Address {
+  get transferee(): Address {
     return this[2].toAddress();
   }
 
-  get status(): Bytes {
-    return this[3].toBytes();
-  }
-
-  get DPID(): Bytes {
-    return this[4].toBytes();
+  get security(): Address {
+    return this[3].toAddress();
   }
 
   get currency(): Address {
-    return this[5].toAddress();
+    return this[4].toAddress();
+  }
+
+  get status(): Bytes {
+    return this[5].toBytes();
+  }
+
+  get DPID(): Bytes {
+    return this[6].toBytes();
   }
 
   get price(): BigInt {
-    return this[6].toBigInt();
-  }
-
-  get unitsToTransfer(): BigInt {
     return this[7].toBigInt();
   }
 
-  get consideration(): BigInt {
+  get unitsToTransfer(): BigInt {
     return this[8].toBigInt();
   }
 
-  get executionDate(): BigInt {
+  get consideration(): BigInt {
     return this[9].toBigInt();
   }
 
-  get orderPool(): Address {
-    return this[10].toAddress();
+  get executionDate(): BigInt {
+    return this[10].toBigInt();
   }
 
   get partyRef(): Bytes {
@@ -333,7 +347,7 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
   ): SecondaryIssueManager__getSettlementRequestResultValue0Struct {
     let result = super.call(
       "getSettlementRequest",
-      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,address,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
+      "getSettlementRequest(bytes32):((address,address,address,address,address,bytes32,bytes32,uint256,uint256,uint256,uint256,bytes32,bytes32))",
       [ethereum.Value.fromFixedBytes(ref)]
     );
 
@@ -349,7 +363,7 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
   > {
     let result = super.tryCall(
       "getSettlementRequest",
-      "getSettlementRequest(bytes32):((address,address,address,bytes32,bytes32,address,uint256,uint256,uint256,uint256,address,bytes32,bytes32))",
+      "getSettlementRequest(bytes32):((address,address,address,address,address,bytes32,bytes32,uint256,uint256,uint256,uint256,bytes32,bytes32))",
       [ethereum.Value.fromFixedBytes(ref)]
     );
     if (result.reverted) {
@@ -570,6 +584,44 @@ export class IssueSecondaryCall__Outputs {
   _call: IssueSecondaryCall;
 
   constructor(call: IssueSecondaryCall) {
+    this._call = call;
+  }
+}
+
+export class SetIssuingFeeCall extends ethereum.Call {
+  get inputs(): SetIssuingFeeCall__Inputs {
+    return new SetIssuingFeeCall__Inputs(this);
+  }
+
+  get outputs(): SetIssuingFeeCall__Outputs {
+    return new SetIssuingFeeCall__Outputs(this);
+  }
+}
+
+export class SetIssuingFeeCall__Inputs {
+  _call: SetIssuingFeeCall;
+
+  constructor(call: SetIssuingFeeCall) {
+    this._call = call;
+  }
+
+  get security(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get currency(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get swapfee(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+}
+
+export class SetIssuingFeeCall__Outputs {
+  _call: SetIssuingFeeCall;
+
+  constructor(call: SetIssuingFeeCall) {
     this._call = call;
   }
 }

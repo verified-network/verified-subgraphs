@@ -58,6 +58,32 @@ export class closures__Params {
   }
 }
 
+export class feecollection extends ethereum.Event {
+  get params(): feecollection__Params {
+    return new feecollection__Params(this);
+  }
+}
+
+export class feecollection__Params {
+  _event: feecollection;
+
+  constructor(event: feecollection) {
+    this._event = event;
+  }
+
+  get platform(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get collection(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
 export class subscribers extends ethereum.Event {
   get params(): subscribers__Params {
     return new subscribers__Params(this);

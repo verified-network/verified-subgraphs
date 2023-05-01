@@ -1,13 +1,15 @@
 import {
     tradeSettled,
     subscribers,
-    closures
+    closures,
+    feecollection
 } from "../../generated/SecondaryIssueManager/SecondaryIssueManager";
 
 import{
     Trades,
     Investors,
-    Closures
+    Closures,
+    FeeCollections
 } from "../../generated/schema";
 
 export function handleTradeSettled(event: tradeSettled): void {
@@ -89,5 +91,23 @@ export function handleClosures(event: closures): void {
         closures.security = event.params.security.toHexString();
         closures.timestamp = event.params.timestamp.toI32();
         closures.save();
+    }
+}
+
+export function handleFeeCollections(event: feecollection): void {
+    let collections = FeeCollections.load(event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(collections==null){
+        let platform = event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let collections = new FeeCollections(platform);
+        collections.platform = event.params.platform;
+        collections.feeCollected = event.params.collection.toBigDecimal();
+        collections.timestamp = event.params.timestamp.toI32();
+        collections.save();
+    }
+    else{
+        collections.platform = event.params.platform;
+        collections.feeCollected = event.params.collection.toBigDecimal();
+        collections.timestamp = event.params.timestamp.toI32();
+        collections.save();
     }
 }

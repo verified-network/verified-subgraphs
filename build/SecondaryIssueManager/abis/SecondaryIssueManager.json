@@ -22,43 +22,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "currency",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "issuer",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "currencyBalance",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "security",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "securityBalance",
-        "type": "uint256"
-      }
-    ],
-    "name": "closure",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": true,
         "internalType": "bytes32",
         "name": "poolId",
@@ -78,6 +41,50 @@
       }
     ],
     "name": "closures",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "platform",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "collection",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "feecollection",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "consideration",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "unitsTransferred",
+        "type": "uint256"
+      }
+    ],
+    "name": "reject",
     "type": "event"
   },
   {
@@ -225,8 +232,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -322,6 +328,29 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "currency",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "swapfee",
+        "type": "uint256"
+      }
+    ],
+    "name": "setIssuingFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "components": [
           {
             "internalType": "address",
@@ -391,8 +420,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -406,6 +434,11 @@
     "outputs": [
       {
         "components": [
+          {
+            "internalType": "contract IOrder",
+            "name": "orderPool",
+            "type": "address"
+          },
           {
             "internalType": "address",
             "name": "transferor",
@@ -422,6 +455,11 @@
             "type": "address"
           },
           {
+            "internalType": "address",
+            "name": "currency",
+            "type": "address"
+          },
+          {
             "internalType": "bytes32",
             "name": "status",
             "type": "bytes32"
@@ -430,11 +468,6 @@
             "internalType": "bytes32",
             "name": "DPID",
             "type": "bytes32"
-          },
-          {
-            "internalType": "address",
-            "name": "currency",
-            "type": "address"
           },
           {
             "internalType": "uint256",
@@ -457,11 +490,6 @@
             "type": "uint256"
           },
           {
-            "internalType": "contract IOrder",
-            "name": "orderPool",
-            "type": "address"
-          },
-          {
             "internalType": "bytes32",
             "name": "partyRef",
             "type": "bytes32"
@@ -478,8 +506,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -556,8 +583,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [

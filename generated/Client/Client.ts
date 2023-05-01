@@ -95,7 +95,7 @@ export class UserAdded__Params {
     return this._event.parameters[1].value.toBytes();
   }
 
-  get surname(): Bytes {
+  get accountid(): Bytes {
     return this._event.parameters[2].value.toBytes();
   }
 
@@ -855,7 +855,7 @@ export class KycUpdateCall__Inputs {
     return this._call.inputValues[1].value.toBytes();
   }
 
-  get surname(): Bytes {
+  get accountid(): Bytes {
     return this._call.inputValues[2].value.toBytes();
   }
 

@@ -50,7 +50,7 @@ export function handleUserCreated(event: UserAdded): void {
     let users = new User(userId);
     users.client = event.params.client;
     users.name = event.params.name;
-    users.surname = event.params.surname;
+    users.accountid = event.params.accountid;
     users.country = event.params.country;
     users.status = event.params.status.toI32();
     users.save();
@@ -58,7 +58,7 @@ export function handleUserCreated(event: UserAdded): void {
   else{
     users.client = event.params.client;
     users.name = event.params.name;
-    users.surname = event.params.surname;
+    users.accountid = event.params.accountid;
     users.country = event.params.country;
     users.status = event.params.status.toI32();
     users.save();

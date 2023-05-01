@@ -96,6 +96,32 @@ export class closures__Params {
   }
 }
 
+export class feecollection extends ethereum.Event {
+  get params(): feecollection__Params {
+    return new feecollection__Params(this);
+  }
+}
+
+export class feecollection__Params {
+  _event: feecollection;
+
+  constructor(event: feecollection) {
+    this._event = event;
+  }
+
+  get platform(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get collection(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
 export class marketmakers extends ethereum.Event {
   get params(): marketmakers__Params {
     return new marketmakers__Params(this);
@@ -426,23 +452,6 @@ export class PrimaryIssueManager__getSubscribersResultValue0Struct extends ether
   }
 }
 
-export class PrimaryIssueManager__closeResult {
-  value0: Array<Bytes>;
-  value1: boolean;
-
-  constructor(value0: Array<Bytes>, value1: boolean) {
-    this.value0 = value0;
-    this.value1 = value1;
-  }
-
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromFixedBytesArray(this.value0));
-    map.set("value1", ethereum.Value.fromBoolean(this.value1));
-    return map;
-  }
-}
-
 export class PrimaryIssueManager extends ethereum.SmartContract {
   static bind(address: Address): PrimaryIssueManager {
     return new PrimaryIssueManager("PrimaryIssueManager", address);
@@ -623,39 +632,6 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
       value[0].toTupleArray<
         PrimaryIssueManager__getSubscribersResultValue0Struct
       >()
-    );
-  }
-
-  close(security: Address, redeem: boolean): PrimaryIssueManager__closeResult {
-    let result = super.call("close", "close(address,bool):(bytes32[],bool)", [
-      ethereum.Value.fromAddress(security),
-      ethereum.Value.fromBoolean(redeem)
-    ]);
-
-    return new PrimaryIssueManager__closeResult(
-      result[0].toBytesArray(),
-      result[1].toBoolean()
-    );
-  }
-
-  try_close(
-    security: Address,
-    redeem: boolean
-  ): ethereum.CallResult<PrimaryIssueManager__closeResult> {
-    let result = super.tryCall(
-      "close",
-      "close(address,bool):(bytes32[],bool)",
-      [ethereum.Value.fromAddress(security), ethereum.Value.fromBoolean(redeem)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      new PrimaryIssueManager__closeResult(
-        value[0].toBytesArray(),
-        value[1].toBoolean()
-      )
     );
   }
 
@@ -908,6 +884,48 @@ export class SetOfferTermsCall__Outputs {
   }
 }
 
+export class SetIssuingFeeCall extends ethereum.Call {
+  get inputs(): SetIssuingFeeCall__Inputs {
+    return new SetIssuingFeeCall__Inputs(this);
+  }
+
+  get outputs(): SetIssuingFeeCall__Outputs {
+    return new SetIssuingFeeCall__Outputs(this);
+  }
+}
+
+export class SetIssuingFeeCall__Inputs {
+  _call: SetIssuingFeeCall;
+
+  constructor(call: SetIssuingFeeCall) {
+    this._call = call;
+  }
+
+  get owner(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get owned(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get tomatch(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get swapfee(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
+  }
+}
+
+export class SetIssuingFeeCall__Outputs {
+  _call: SetIssuingFeeCall;
+
+  constructor(call: SetIssuingFeeCall) {
+    this._call = call;
+  }
+}
+
 export class StakeCall extends ethereum.Call {
   get inputs(): StakeCall__Inputs {
     return new StakeCall__Inputs(this);
@@ -1058,10 +1076,6 @@ export class CloseCall__Inputs {
   get security(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
-
-  get redeem(): boolean {
-    return this._call.inputValues[1].value.toBoolean();
-  }
 }
 
 export class CloseCall__Outputs {
@@ -1069,14 +1083,6 @@ export class CloseCall__Outputs {
 
   constructor(call: CloseCall) {
     this._call = call;
-  }
-
-  get value0(): Array<Bytes> {
-    return this._call.outputValues[0].value.toBytesArray();
-  }
-
-  get value1(): boolean {
-    return this._call.outputValues[1].value.toBoolean();
   }
 }
 
