@@ -2278,6 +2278,7 @@ export class Trades extends Entity {
     this.set("settlementStatus", Value.fromBytes(Bytes.empty()));
     this.set("tradeRef", Value.fromBytes(Bytes.empty()));
     this.set("tradingCommission", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("timestamp", Value.fromI32(0));
   }
 
   save(): void {
@@ -2410,6 +2411,15 @@ export class Trades extends Entity {
 
   set tradingCommission(value: BigDecimal) {
     this.set("tradingCommission", Value.fromBigDecimal(value));
+  }
+
+  get timestamp(): i32 {
+    let value = this.get("timestamp");
+    return value!.toI32();
+  }
+
+  set timestamp(value: i32) {
+    this.set("timestamp", Value.fromI32(value));
   }
 }
 
@@ -3696,7 +3706,7 @@ export class LiquidityTokenIssues extends Entity {
   }
 }
 
-export class PlatformLiquidity extends Entity {
+export class LiquidityOnPlatform extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -3709,20 +3719,20 @@ export class PlatformLiquidity extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save PlatformLiquidity entity without an ID");
+    assert(id != null, "Cannot save LiquidityOnPlatform entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save PlatformLiquidity entity with non-string ID. " +
+        "Cannot save LiquidityOnPlatform entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("PlatformLiquidity", id.toString(), this);
+      store.set("LiquidityOnPlatform", id.toString(), this);
     }
   }
 
-  static load(id: string): PlatformLiquidity | null {
-    return changetype<PlatformLiquidity | null>(
-      store.get("PlatformLiquidity", id)
+  static load(id: string): LiquidityOnPlatform | null {
+    return changetype<LiquidityOnPlatform | null>(
+      store.get("LiquidityOnPlatform", id)
     );
   }
 
@@ -3789,7 +3799,7 @@ export class PlatformLiquidity extends Entity {
   }
 }
 
-export class ManagerReturns extends Entity {
+export class ManagerRoI extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -3801,19 +3811,19 @@ export class ManagerReturns extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save ManagerReturns entity without an ID");
+    assert(id != null, "Cannot save ManagerRoI entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save ManagerReturns entity with non-string ID. " +
+        "Cannot save ManagerRoI entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("ManagerReturns", id.toString(), this);
+      store.set("ManagerRoI", id.toString(), this);
     }
   }
 
-  static load(id: string): ManagerReturns | null {
-    return changetype<ManagerReturns | null>(store.get("ManagerReturns", id));
+  static load(id: string): ManagerRoI | null {
+    return changetype<ManagerRoI | null>(store.get("ManagerRoI", id));
   }
 
   get id(): string {
@@ -3870,7 +3880,7 @@ export class ManagerReturns extends Entity {
   }
 }
 
-export class PlatformReturns extends Entity {
+export class PlatformRoI extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -3882,19 +3892,19 @@ export class PlatformReturns extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save PlatformReturns entity without an ID");
+    assert(id != null, "Cannot save PlatformRoI entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save PlatformReturns entity with non-string ID. " +
+        "Cannot save PlatformRoI entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("PlatformReturns", id.toString(), this);
+      store.set("PlatformRoI", id.toString(), this);
     }
   }
 
-  static load(id: string): PlatformReturns | null {
-    return changetype<PlatformReturns | null>(store.get("PlatformReturns", id));
+  static load(id: string): PlatformRoI | null {
+    return changetype<PlatformRoI | null>(store.get("PlatformRoI", id));
   }
 
   get id(): string {
@@ -3934,7 +3944,7 @@ export class PlatformReturns extends Entity {
   }
 }
 
-export class InvestorReturns extends Entity {
+export class InvestorRoI extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -3946,19 +3956,19 @@ export class InvestorReturns extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save InvestorReturns entity without an ID");
+    assert(id != null, "Cannot save InvestorRoI entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save InvestorReturns entity with non-string ID. " +
+        "Cannot save InvestorRoI entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("InvestorReturns", id.toString(), this);
+      store.set("InvestorRoI", id.toString(), this);
     }
   }
 
-  static load(id: string): InvestorReturns | null {
-    return changetype<InvestorReturns | null>(store.get("InvestorReturns", id));
+  static load(id: string): InvestorRoI | null {
+    return changetype<InvestorRoI | null>(store.get("InvestorRoI", id));
   }
 
   get id(): string {

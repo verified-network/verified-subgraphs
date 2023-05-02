@@ -1,18 +1,18 @@
 import { 
     RequestIssue,
-    issuedVitta,
-    platformLiquidity,
-    managerReturns,
-    platformReturns,
-    investorReturns 
+    IssuedVitta,
+    PlatformLiquidity,
+    ManagerReturns,
+    PlatformReturns,
+    InvestorReturns 
   } from "../../generated/Liquidity/Liquidity";
 import { 
     LiquidityTokenRequests,
     LiquidityTokenIssues,
-    PlatformLiquidity,
-    ManagerReturns,
-    PlatformReturns,
-    InvestorReturns
+    LiquidityOnPlatform,
+    ManagerRoI,
+    PlatformRoI,
+    InvestorRoI
   } from "../../generated/schema";
 
 export function handleIssueRequest(event: RequestIssue): void {
@@ -33,7 +33,7 @@ export function handleIssueRequest(event: RequestIssue): void {
     }
 }
 
-export function handleIssuedVitta(event: issuedVitta): void {
+export function handleIssuedVitta(event: IssuedVitta): void {
     let lptokenHolders = LiquidityTokenIssues.load(event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(lptokenHolders==null){
         let lptokenHolder = event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString());
@@ -53,11 +53,11 @@ export function handleIssuedVitta(event: issuedVitta): void {
     }
 }
 
-export function handlePlatformLiquidity(event: platformLiquidity): void {
-    let platforms = PlatformLiquidity.load(event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+export function handlePlatformLiquidity(event: PlatformLiquidity): void {
+    let platforms = LiquidityOnPlatform.load(event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(platforms==null){
         let platform = event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let platforms = new PlatformLiquidity(platform);
+        let platforms = new LiquidityOnPlatform(platform);
         platforms.platform = event.params.platform;
         platforms.manager = event.params.manager.toHexString();
         platforms.token = event.params.token;
@@ -75,11 +75,11 @@ export function handlePlatformLiquidity(event: platformLiquidity): void {
     }
 }
 
-export function handleManagerReturns(event: managerReturns): void {
-    let managers = ManagerReturns.load(event.params.manager.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+export function handleManagerReturns(event: ManagerReturns): void {
+    let managers = ManagerRoI.load(event.params.manager.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(managers==null){
         let manager = event.params.manager.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let managers = new ManagerReturns(manager);
+        let managers = new ManagerRoI(manager);
         managers.platform = event.params.platform;
         managers.manager = event.params.manager.toHexString();
         managers.token = event.params.token;
@@ -95,11 +95,11 @@ export function handleManagerReturns(event: managerReturns): void {
     }
 }
 
-export function handlePlatformReturns(event: platformReturns): void {
-    let platforms = PlatformReturns.load(event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+export function handlePlatformReturns(event: PlatformReturns): void {
+    let platforms = PlatformRoI.load(event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(platforms==null){
         let platform = event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let platforms = new PlatformReturns(platform);
+        let platforms = new PlatformRoI(platform);
         platforms.platform = event.params.platform;
         platforms.vitta = event.params.vitta;
         platforms.distribution = event.params.distribution.toBigDecimal();
@@ -113,11 +113,11 @@ export function handlePlatformReturns(event: platformReturns): void {
     }
 }
 
-export function handleInvestorReturns(event: investorReturns): void {
-    let investors = InvestorReturns.load(event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+export function handleInvestorReturns(event: InvestorReturns): void {
+    let investors = InvestorRoI.load(event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(investors==null){
         let investor = event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let investors = new InvestorReturns(investor);
+        let investors = new InvestorRoI(investor);
         investors.platform = event.params.platform;
         investors.investor = event.params.investor.toHexString();
         investors.vitta = event.params.vitta;

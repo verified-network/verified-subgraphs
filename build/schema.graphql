@@ -43,9 +43,9 @@ type User @entity {
   shareholder: [RevenueShares!] @derivedFrom(field: "shareholder")
   liquidityRequestor: [LiquidityTokenRequests!] @derivedFrom(field: "investor")
   liquidityIssuedTo: [LiquidityTokenIssues!] @derivedFrom(field: "investor")
-  liquidityProvidedTo: [PlatformLiquidity!] @derivedFrom(field: "manager")
-  earnedByManager: [ManagerReturns!] @derivedFrom(field: "manager")
-  earnedByInvestor: [InvestorReturns!] @derivedFrom(field: "investor") 
+  liquidityProvidedTo: [LiquidityOnPlatform!] @derivedFrom(field: "manager")
+  earnedByManager: [ManagerRoI!] @derivedFrom(field: "manager")
+  earnedByInvestor: [InvestorRoI!] @derivedFrom(field: "investor") 
   issuer: [Security!] @derivedFrom(field: "issuer")
 }
 type Token @entity {
@@ -186,6 +186,7 @@ type Trades @entity {
   settlementStatus: Bytes!
   tradeRef: Bytes!
   tradingCommission: BigDecimal!
+  timestamp: Int!
 }
 type Subscribers @entity {
   id: ID!
@@ -311,7 +312,7 @@ type LiquidityTokenIssues @entity{
   tokenAmount: BigDecimal!
   LPToIssue: BigDecimal!
 }
-type PlatformLiquidity @entity{
+type LiquidityOnPlatform @entity{
   id: ID!
   platform: Bytes!
   manager: User
@@ -320,7 +321,7 @@ type PlatformLiquidity @entity{
   token: Bytes!
   tokenAmount: BigDecimal!
 }
-type ManagerReturns @entity{
+type ManagerRoI @entity{
   id: ID!
   platform: Bytes!
   manager: User
@@ -328,13 +329,13 @@ type ManagerReturns @entity{
   token: Bytes!
   distribution: BigDecimal!
 }
-type PlatformReturns @entity{
+type PlatformRoI @entity{
   id: ID!
   platform: Bytes!
   vitta: Bytes!
   distribution: BigDecimal!
 }
-type InvestorReturns @entity{
+type InvestorRoI @entity{
   id: ID!
   platform: Bytes!
   investor: User

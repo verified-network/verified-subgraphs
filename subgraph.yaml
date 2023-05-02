@@ -74,15 +74,15 @@ dataSources:
       eventHandlers:
         - event: RequestIssue(indexed address,string,uint256)
           handler: handleIssueRequest
-        - event: issuedVitta(indexed address,string,uint256,uint256)
+        - event: IssuedVitta(indexed address,string,uint256,uint256)
           handler: handleIssuedVitta
-        - event: platformLiquidity(indexed address,address,uint256,address,uint256)
+        - event: PlatformLiquidity(indexed address,address,uint256,address,uint256)
           handler: handlePlatformLiquidity
-        - event: managerReturns(address,indexed address,address,uint256)
+        - event: ManagerReturns(indexed address,indexed address,address,uint256)
           handler: handleManagerReturns
-        - event: platformReturns(indexed address,address,uint256)
+        - event: PlatformReturns(indexed address,address,uint256)
           handler: handlePlatformReturns
-        - event: investorReturns(address,indexed address,address,uint256)
+        - event: InvestorReturns(address,indexed address,address,uint256)
           handler: handleInvestorReturns
   - kind: ethereum/contract
     name: Distribution
@@ -160,7 +160,7 @@ dataSources:
         - name: SecondaryIssueManager
           file: ./abis/SecondaryIssueManager.json
       eventHandlers:
-        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,bytes32,bytes32,uint256)
+        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,bytes32,bytes32,uint256,uint256)
           handler: handleTradeSettled
         - event: subscribers(bytes32,address,address,indexed address,address,uint256,uint256,bytes32,bytes32,uint256)
           handler: handleSecondaryInvestors

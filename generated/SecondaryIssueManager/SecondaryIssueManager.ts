@@ -212,6 +212,10 @@ export class tradeSettled__Params {
   get fee(): BigInt {
     return this._event.parameters[9].value.toBigInt();
   }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[10].value.toBigInt();
+  }
 }
 
 export class SecondaryIssueManager__getSettlementRequestResultValue0Struct extends ethereum.Tuple {

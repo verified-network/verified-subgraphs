@@ -10,6 +10,96 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
+export class InvestorReturns extends ethereum.Event {
+  get params(): InvestorReturns__Params {
+    return new InvestorReturns__Params(this);
+  }
+}
+
+export class InvestorReturns__Params {
+  _event: InvestorReturns;
+
+  constructor(event: InvestorReturns) {
+    this._event = event;
+  }
+
+  get platform(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get investor(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get vitta(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get prorataStake(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
+export class IssuedVitta extends ethereum.Event {
+  get params(): IssuedVitta__Params {
+    return new IssuedVitta__Params(this);
+  }
+}
+
+export class IssuedVitta__Params {
+  _event: IssuedVitta;
+
+  constructor(event: IssuedVitta) {
+    this._event = event;
+  }
+
+  get investor(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get tokenName(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get tokenAmount(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get LPToIssue(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
+export class ManagerReturns extends ethereum.Event {
+  get params(): ManagerReturns__Params {
+    return new ManagerReturns__Params(this);
+  }
+}
+
+export class ManagerReturns__Params {
+  _event: ManagerReturns;
+
+  constructor(event: ManagerReturns) {
+    this._event = event;
+  }
+
+  get platform(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get manager(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get token(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get distribution(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
 export class OwnershipTransferred extends ethereum.Event {
   get params(): OwnershipTransferred__Params {
     return new OwnershipTransferred__Params(this);
@@ -50,6 +140,66 @@ export class Paused__Params {
   }
 }
 
+export class PlatformLiquidity extends ethereum.Event {
+  get params(): PlatformLiquidity__Params {
+    return new PlatformLiquidity__Params(this);
+  }
+}
+
+export class PlatformLiquidity__Params {
+  _event: PlatformLiquidity;
+
+  constructor(event: PlatformLiquidity) {
+    this._event = event;
+  }
+
+  get platform(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get manager(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get LPToken(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get token(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get tokenAmount(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
+export class PlatformReturns extends ethereum.Event {
+  get params(): PlatformReturns__Params {
+    return new PlatformReturns__Params(this);
+  }
+}
+
+export class PlatformReturns__Params {
+  _event: PlatformReturns;
+
+  constructor(event: PlatformReturns) {
+    this._event = event;
+  }
+
+  get platform(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get vitta(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get distribution(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
 export class RequestIssue extends ethereum.Event {
   get params(): RequestIssue__Params {
     return new RequestIssue__Params(this);
@@ -76,6 +226,28 @@ export class RequestIssue__Params {
   }
 }
 
+export class RequestRate extends ethereum.Event {
+  get params(): RequestRate__Params {
+    return new RequestRate__Params(this);
+  }
+}
+
+export class RequestRate__Params {
+  _event: RequestRate;
+
+  constructor(event: RequestRate) {
+    this._event = event;
+  }
+
+  get token(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
 export class Unpaused extends ethereum.Event {
   get params(): Unpaused__Params {
     return new Unpaused__Params(this);
@@ -91,156 +263,6 @@ export class Unpaused__Params {
 
   get account(): Address {
     return this._event.parameters[0].value.toAddress();
-  }
-}
-
-export class investorReturns extends ethereum.Event {
-  get params(): investorReturns__Params {
-    return new investorReturns__Params(this);
-  }
-}
-
-export class investorReturns__Params {
-  _event: investorReturns;
-
-  constructor(event: investorReturns) {
-    this._event = event;
-  }
-
-  get platform(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get investor(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
-  get vitta(): Address {
-    return this._event.parameters[2].value.toAddress();
-  }
-
-  get prorataStake(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
-  }
-}
-
-export class issuedVitta extends ethereum.Event {
-  get params(): issuedVitta__Params {
-    return new issuedVitta__Params(this);
-  }
-}
-
-export class issuedVitta__Params {
-  _event: issuedVitta;
-
-  constructor(event: issuedVitta) {
-    this._event = event;
-  }
-
-  get investor(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get tokenName(): string {
-    return this._event.parameters[1].value.toString();
-  }
-
-  get tokenAmount(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-
-  get LPToIssue(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
-  }
-}
-
-export class managerReturns extends ethereum.Event {
-  get params(): managerReturns__Params {
-    return new managerReturns__Params(this);
-  }
-}
-
-export class managerReturns__Params {
-  _event: managerReturns;
-
-  constructor(event: managerReturns) {
-    this._event = event;
-  }
-
-  get platform(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get manager(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
-  get token(): Address {
-    return this._event.parameters[2].value.toAddress();
-  }
-
-  get distribution(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
-  }
-}
-
-export class platformLiquidity extends ethereum.Event {
-  get params(): platformLiquidity__Params {
-    return new platformLiquidity__Params(this);
-  }
-}
-
-export class platformLiquidity__Params {
-  _event: platformLiquidity;
-
-  constructor(event: platformLiquidity) {
-    this._event = event;
-  }
-
-  get platform(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get manager(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
-  get LPToken(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-
-  get token(): Address {
-    return this._event.parameters[3].value.toAddress();
-  }
-
-  get tokenAmount(): BigInt {
-    return this._event.parameters[4].value.toBigInt();
-  }
-}
-
-export class platformReturns extends ethereum.Event {
-  get params(): platformReturns__Params {
-    return new platformReturns__Params(this);
-  }
-}
-
-export class platformReturns__Params {
-  _event: platformReturns;
-
-  constructor(event: platformReturns) {
-    this._event = event;
-  }
-
-  get platform(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get vitta(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
-  get distribution(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -1148,6 +1170,70 @@ export class UnpauseCall__Outputs {
   _call: UnpauseCall;
 
   constructor(call: UnpauseCall) {
+    this._call = call;
+  }
+}
+
+export class SetOracleCall extends ethereum.Call {
+  get inputs(): SetOracleCall__Inputs {
+    return new SetOracleCall__Inputs(this);
+  }
+
+  get outputs(): SetOracleCall__Outputs {
+    return new SetOracleCall__Outputs(this);
+  }
+}
+
+export class SetOracleCall__Inputs {
+  _call: SetOracleCall;
+
+  constructor(call: SetOracleCall) {
+    this._call = call;
+  }
+
+  get _oracle(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class SetOracleCall__Outputs {
+  _call: SetOracleCall;
+
+  constructor(call: SetOracleCall) {
+    this._call = call;
+  }
+}
+
+export class SetExchangeRateCall extends ethereum.Call {
+  get inputs(): SetExchangeRateCall__Inputs {
+    return new SetExchangeRateCall__Inputs(this);
+  }
+
+  get outputs(): SetExchangeRateCall__Outputs {
+    return new SetExchangeRateCall__Outputs(this);
+  }
+}
+
+export class SetExchangeRateCall__Inputs {
+  _call: SetExchangeRateCall;
+
+  constructor(call: SetExchangeRateCall) {
+    this._call = call;
+  }
+
+  get token(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get rate(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class SetExchangeRateCall__Outputs {
+  _call: SetExchangeRateCall;
+
+  constructor(call: SetExchangeRateCall) {
     this._call = call;
   }
 }
