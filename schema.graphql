@@ -252,6 +252,7 @@ type Allotments @entity{
   securitySubscribed: BigDecimal!
   currency: Bytes!
   allotedAmount: BigDecimal!
+  timestamp: Int!
 }
 type Refunds @entity{
   id: ID!
@@ -262,6 +263,7 @@ type Refunds @entity{
   securitySubscribed: BigDecimal!
   currency: Bytes!
   refundAmount: BigDecimal!
+  timestamp: Int!
 }
 type Settlements @entity{
   id: ID!

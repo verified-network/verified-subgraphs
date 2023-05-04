@@ -3001,6 +3001,7 @@ export class Allotments extends Entity {
     this.set("securitySubscribed", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("allotedAmount", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("timestamp", Value.fromI32(0));
   }
 
   save(): void {
@@ -3090,6 +3091,15 @@ export class Allotments extends Entity {
   set allotedAmount(value: BigDecimal) {
     this.set("allotedAmount", Value.fromBigDecimal(value));
   }
+
+  get timestamp(): i32 {
+    let value = this.get("timestamp");
+    return value!.toI32();
+  }
+
+  set timestamp(value: i32) {
+    this.set("timestamp", Value.fromI32(value));
+  }
 }
 
 export class Refunds extends Entity {
@@ -3102,6 +3112,7 @@ export class Refunds extends Entity {
     this.set("securitySubscribed", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("refundAmount", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("timestamp", Value.fromI32(0));
   }
 
   save(): void {
@@ -3190,6 +3201,15 @@ export class Refunds extends Entity {
 
   set refundAmount(value: BigDecimal) {
     this.set("refundAmount", Value.fromBigDecimal(value));
+  }
+
+  get timestamp(): i32 {
+    let value = this.get("timestamp");
+    return value!.toI32();
+  }
+
+  set timestamp(value: i32) {
+    this.set("timestamp", Value.fromI32(value));
   }
 }
 

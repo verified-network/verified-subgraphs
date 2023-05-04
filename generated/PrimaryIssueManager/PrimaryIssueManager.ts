@@ -68,6 +68,10 @@ export class allotments__Params {
   get allotedAmount(): BigInt {
     return this._event.parameters[5].value.toBigInt();
   }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
+  }
 }
 
 export class closures extends ethereum.Event {
@@ -249,6 +253,10 @@ export class refunds__Params {
 
   get refundAmount(): BigInt {
     return this._event.parameters[5].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
   }
 }
 

@@ -133,6 +133,7 @@ export function handleAllotments(event: allotments): void {
         allotments.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         allotments.currency = event.params.currency;
         allotments.allotedAmount = event.params.allotedAmount.toBigDecimal();
+        allotments.timestamp = event.params.timestamp.toI32();
         allotments.save();
     }
     else{
@@ -142,6 +143,7 @@ export function handleAllotments(event: allotments): void {
         allotments.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         allotments.currency = event.params.currency;
         allotments.allotedAmount = event.params.allotedAmount.toBigDecimal();
+        allotments.timestamp = event.params.timestamp.toI32();
         allotments.save();
     }
 }
@@ -157,6 +159,7 @@ export function handleRefunds(event: refunds): void {
         refunds.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         refunds.currency = event.params.currency;
         refunds.refundAmount = event.params.refundAmount.toBigDecimal();
+        refunds.timestamp = event.params.timestamp.toI32();
         refunds.save();
     }
     else{
@@ -166,6 +169,7 @@ export function handleRefunds(event: refunds): void {
         refunds.securitySubscribed = event.params.securitySubscription.toBigDecimal();
         refunds.currency = event.params.currency;
         refunds.refundAmount = event.params.refundAmount.toBigDecimal();
+        refunds.timestamp = event.params.timestamp.toI32();
         refunds.save();
     }
 }

@@ -56,6 +56,12 @@
         "internalType": "uint256",
         "name": "allotedAmount",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
       }
     ],
     "name": "allotments",
@@ -258,6 +264,12 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "refundAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
         "type": "uint256"
       }
     ],

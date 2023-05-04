@@ -135,9 +135,9 @@ dataSources:
           handler: handleOffers
         - event: closures(indexed bytes32,address,uint256)
           handler: handleClosures
-        - event: allotments(indexed bytes32,address,address,uint256,address,uint256)
+        - event: allotments(indexed bytes32,address,address,uint256,address,uint256,uint256)
           handler: handleAllotments
-        - event: refunds(indexed bytes32,address,address,uint256,address,uint256)
+        - event: refunds(indexed bytes32,address,address,uint256,address,uint256,uint256)
           handler: handleRefunds
         - event: settlements(indexed bytes32,address,address,address,uint256,address,uint256)
           handler: handleSettlements
@@ -241,6 +241,10 @@ templates:
       abis:
         - name: Security
           file: Security\abis\Security.json
+        - name: Snapshot
+          file: Security\abis\Snapshot.json
+        - name: CorporateActions
+          file: Security\abis\CorporateActions.json
       eventHandlers:
         - event: Mint(indexed address,uint256)
           handler: handleSecurityIssued
