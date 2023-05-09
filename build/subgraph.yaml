@@ -110,9 +110,9 @@ dataSources:
     name: PrimaryIssueManager
     network: gnosis
     source:
-      address: "0x2e9926a4Fb07419C9661D320f63AcC489C0e5D4C"
+      address: "0x5640812D73f0D3d820832BFb53ed6fC4a9383283"
       abi: PrimaryIssueManager
-      startBlock: 27843566
+      startBlock: 27855629
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -147,9 +147,9 @@ dataSources:
     name: SecondaryIssueManager
     network: gnosis
     source:
-      address: "0x0b3a0EF7679420fd08147d67A302b5e3fb898f50"
+      address: "0x178E33786349cEE3E4dec3c51EF2a1108E8d958e"
       abi: SecondaryIssueManager
-      startBlock: 27843572
+      startBlock: 27855634
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -176,9 +176,9 @@ dataSources:
     name: MarginIssueManager
     network: gnosis
     source:
-      address: "0x4EB89fb547611d5468ee9688E9422B5005480aBF"
+      address: "0x6013c4f00Bc8456aD45EF945FEA4DC4ab30026Fc"
       abi: MarginIssueManager
-      startBlock: 27843578
+      startBlock: 27855640
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
