@@ -4050,8 +4050,6 @@ export class FeeCollections extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("platform", Value.fromBytes(Bytes.empty()));
-    this.set("feeCollected", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("timestamp", Value.fromI32(0));
   }
 
@@ -4081,22 +4079,38 @@ export class FeeCollections extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get platform(): Bytes {
+  get platform(): Bytes | null {
     let value = this.get("platform");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
   }
 
-  set platform(value: Bytes) {
-    this.set("platform", Value.fromBytes(value));
+  set platform(value: Bytes | null) {
+    if (!value) {
+      this.unset("platform");
+    } else {
+      this.set("platform", Value.fromBytes(<Bytes>value));
+    }
   }
 
-  get feeCollected(): BigDecimal {
+  get feeCollected(): BigDecimal | null {
     let value = this.get("feeCollected");
-    return value!.toBigDecimal();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigDecimal();
+    }
   }
 
-  set feeCollected(value: BigDecimal) {
-    this.set("feeCollected", Value.fromBigDecimal(value));
+  set feeCollected(value: BigDecimal | null) {
+    if (!value) {
+      this.unset("feeCollected");
+    } else {
+      this.set("feeCollected", Value.fromBigDecimal(<BigDecimal>value));
+    }
   }
 
   get timestamp(): i32 {

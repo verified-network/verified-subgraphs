@@ -347,7 +347,7 @@ type InvestorRoI @entity{
 }
 type FeeCollections @entity{
   id: ID!
-  platform: Bytes!
-  feeCollected: BigDecimal!
-  timestamp: Int!
+  platform: Bytes
+  feeCollected: BigDecimal
+  timestamp: Int
 }

@@ -11,7 +11,7 @@ import {
 export function handleManagerCreated(event: ManagerAdded): void {
   let managers = Manager.load(event.params.submanager.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
   if(managers==null){
-    let managerId = event.params.submanager.toHexString();
+    let managerId = event.params.submanager.toHexString().concat('-').concat(event.transaction.hash.toHexString());
     let managers = new Manager(managerId);
     managers.manager = event.params.manager.toHexString();
     managers.submanager = event.params.submanager.toHexString();
@@ -33,7 +33,7 @@ export function handleManagerCreated(event: ManagerAdded): void {
 export function handleManagerRemoved(event: ManagerRemoved): void {
   let managers = Manager.load(event.params.submanager.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
   if(managers!=null){
-    let managerId = event.params.submanager.toHexString();
+    let managerId = event.params.submanager.toHexString().concat('-').concat(event.transaction.hash.toHexString());
     let managers = new Manager(managerId);
     managers.manager = event.params.manager.toHexString();
     managers.submanager = event.params.submanager.toHexString();
@@ -46,7 +46,7 @@ export function handleManagerRemoved(event: ManagerRemoved): void {
 export function handleUserCreated(event: UserAdded): void {
   let users = User.load(event.params.client.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
   if(users==null){
-    let userId = event.params.client.toHexString();
+    let userId = event.params.client.toHexString().concat('-').concat(event.transaction.hash.toHexString());
     let users = new User(userId);
     users.client = event.params.client;
     users.name = event.params.name;

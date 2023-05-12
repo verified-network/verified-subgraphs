@@ -68,6 +68,12 @@ dataSources:
       entities:
         - Platform
         - User
+        - LiquidityTokenRequests
+        - LiquidityTokenIssues
+        - LiquidityOnPlatform
+        - ManagerRoI
+        - PlatformRoI
+        - InvestorRoI
       abis:
         - name: Liquidity
           file: ./abis/Liquidity.json
@@ -121,6 +127,11 @@ dataSources:
         - Subscribers
         - LiquidityProviders
         - Offers
+        - Closures
+        - Refunds
+        - Allotments
+        - Settlements
+        - FeeCollections
       abis:
         - name: PrimaryIssueManager
           file: ./abis/PrimaryIssueManager.json
@@ -156,6 +167,8 @@ dataSources:
       entities:
         - Trades
         - Investors
+        - Closures
+        - FeeCollections
       abis:
         - name: SecondaryIssueManager
           file: ./abis/SecondaryIssueManager.json
@@ -183,6 +196,8 @@ dataSources:
       entities:
         - Trades
         - Investors
+        - Closures
+        - FeeCollections
       abis:
         - name: MarginIssueManager
           file: ./abis/MarginIssueManager.json
