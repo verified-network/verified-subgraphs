@@ -101,13 +101,13 @@ export function handleFeeCollections(event: feecollection): void {
     if(collections==null){
         let platform = event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let collections = new FeeCollections(platform);
-        collections.platform = event.params.platform;
+        collections.platform = event.params.platform.toHexString();
         collections.feeCollected = event.params.collection.toBigDecimal();
         collections.timestamp = event.params.timestamp.toI32();
         collections.save();
     }
     else{
-        collections.platform = event.params.platform;
+        collections.platform = event.params.platform.toHexString();
         collections.feeCollected = event.params.collection.toBigDecimal();
         collections.timestamp = event.params.timestamp.toI32();
         collections.save();

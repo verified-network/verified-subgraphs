@@ -8,7 +8,7 @@ import {
         TokenCreated
       } from "../../generated/Factory/Factory";
 import { 
-        Currency,
+        Cash,
         Security,
         Token
       } from "../../generated/schema";
@@ -17,15 +17,9 @@ import {Security as SecurityTemplate } from '../../generated/templates';
 import {Cash as CashTemplate } from '../../generated/templates';
 import {Bond as BondTemplate } from '../../generated/templates';
 
-/*import { 
-        Cash, 
-        Bond,
-        //Security
-      } from "../../generated/templates";*/
-
 export function handleSecurityCreated(event: securitiesAdded): void {
   let securityAddress: Address = event.params.security;  
-  let securities = Security.load(event.params.security.toHexString());//.concat('-').concat(event.transaction.hash.toHexString()));
+  let securities = Security.load(event.params.security.toHexString());
   if(securities==null){
     let securityId = event.params.security.toHexString();
     let securities = new Security(securityId);    
@@ -58,10 +52,10 @@ export function handleSecurityCreated(event: securitiesAdded): void {
 
 export function handleCashCreated(event: CashIssuerCreated): void {
   let currencyAddress: Address = event.params.issuer; 
-  let currencies = Currency.load(event.params.issuer.toHexString());//.concat('-').concat(event.transaction.hash.toHexString()));
+  let currencies = Cash.load(event.params.issuer.toHexString());
   if(currencies==null){
     let currency = event.params.issuer.toHexString();
-    let currencies = new Currency(currency);
+    let currencies = new Cash(currency);
     currencies.name = event.params.tokenName;
     currencies.save();
     CashTemplate.create(currencyAddress);
@@ -75,7 +69,7 @@ export function handleCashCreated(event: CashIssuerCreated): void {
 
 export function handleBondCreated(event: BondIssuerCreated): void {
   let bondAddress: Address = event.params.issuer;   
-  let bonds = Token.load(event.params.issuer.toHexString());//.concat('-').concat(event.transaction.hash.toHexString()));
+  let bonds = Token.load(event.params.issuer.toHexString());
   if(bonds==null){
     let bond = event.params.issuer.toHexString();
     let bonds = new Token(bond);
@@ -95,7 +89,7 @@ export function handleBondCreated(event: BondIssuerCreated): void {
 }
 
 export function handleBondTokenCreated(event: TokenCreated): void {
-  let bonds = Token.load(event.params.token.toHexString());//.concat('-').concat(event.transaction.hash.toHexString()));
+  let bonds = Token.load(event.params.token.toHexString());
   if(bonds==null){
     let bond = event.params.token.toHexString();
     let bonds = new Token(bond);

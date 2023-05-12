@@ -57,8 +57,8 @@ export class IssuedVitta__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get tokenName(): string {
-    return this._event.parameters[1].value.toString();
+  get token(): Address {
+    return this._event.parameters[1].value.toAddress();
   }
 
   get tokenAmount(): BigInt {
@@ -200,6 +200,28 @@ export class PlatformReturns__Params {
   }
 }
 
+export class RegisterPlatform extends ethereum.Event {
+  get params(): RegisterPlatform__Params {
+    return new RegisterPlatform__Params(this);
+  }
+}
+
+export class RegisterPlatform__Params {
+  _event: RegisterPlatform;
+
+  constructor(event: RegisterPlatform) {
+    this._event = event;
+  }
+
+  get platform(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get platformName(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+}
+
 export class RequestIssue extends ethereum.Event {
   get params(): RequestIssue__Params {
     return new RequestIssue__Params(this);
@@ -217,8 +239,8 @@ export class RequestIssue__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get tokenName(): string {
-    return this._event.parameters[1].value.toString();
+  get token(): Address {
+    return this._event.parameters[1].value.toAddress();
   }
 
   get tokenAmount(): BigInt {
@@ -245,6 +267,28 @@ export class RequestRate__Params {
 
   get amount(): BigInt {
     return this._event.parameters[1].value.toBigInt();
+  }
+}
+
+export class SupportToken extends ethereum.Event {
+  get params(): SupportToken__Params {
+    return new SupportToken__Params(this);
+  }
+}
+
+export class SupportToken__Params {
+  _event: SupportToken;
+
+  constructor(event: SupportToken) {
+    this._event = event;
+  }
+
+  get token(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get tokenName(): string {
+    return this._event.parameters[1].value.toString();
   }
 }
 

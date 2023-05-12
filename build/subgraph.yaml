@@ -79,9 +79,13 @@ dataSources:
         - name: Liquidity
           file: Liquidity\abis\Liquidity.json
       eventHandlers:
-        - event: RequestIssue(indexed address,string,uint256)
+        - event: SupportToken(indexed address,string)
+          handler: handleSupportedToken
+        - event: RegisterPlatform(indexed address,bytes32)
+          handler: handlePlatformRegistration
+        - event: RequestIssue(indexed address,address,uint256)
           handler: handleIssueRequest
-        - event: IssuedVitta(indexed address,string,uint256,uint256)
+        - event: IssuedVitta(indexed address,address,uint256,uint256)
           handler: handleIssuedVitta
         - event: PlatformLiquidity(indexed address,address,uint256,address,uint256)
           handler: handlePlatformLiquidity
@@ -261,10 +265,6 @@ templates:
         - name: CorporateActions
           file: Security\abis\CorporateActions.json
       eventHandlers:
-        - event: Mint(indexed address,uint256)
-          handler: handleSecurityIssued
-        - event: Burn(indexed address,uint256)
-          handler: handleSecurityExtinguished
         - event: Resolution(indexed address,uint256,string,bool)
           handler: handleResolutions
         - event: SnapshotSchedule(indexed address,uint256,uint256)

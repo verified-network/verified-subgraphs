@@ -1,26 +1,15 @@
 import { 
     Resolution,
     SnapshotSchedule,
-    SnapshotUnschedule,
-    Security
+    SnapshotUnschedule
   } from "../../generated/templates/Security/Security";
+
 import { 
     Snapshots,
     Resolutions 
-  } from "../../generated/schema";
+} from "../../generated/schema";
 
 export function handleResolutions(event: Resolution): void {
-    /*let securityAddress = event.address;
-    let securityContract = Security.bind(securityAddress);
-    let securityId = securityContract.try_symbol();
-    let securityValue = securityId.value;
-    let resolution = Resolutions.load(securityValue) as Resolutions;
-    resolution.security = event.params.security.toHexString();
-    resolution.recordDate = event.params.recordDate.toI32();
-    resolution.resolution = event.params.resolution;
-    resolution.voting = event.params.voting;
-    resolution.save();*/
-
     let resolutions = Resolutions.load(event.params.security.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(resolutions==null){
         let resolution = event.params.security.toHexString().concat('-').concat(event.transaction.hash.toHexString());

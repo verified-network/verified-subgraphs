@@ -1,4 +1,4 @@
-type Currency @entity {
+type Cash @entity {
   id: ID!
   name: Bytes
   cashIssues: [CashIssues!] @derivedFrom(field: "currency")
@@ -58,12 +58,30 @@ type Token @entity {
   bondRedemptions: [BondRedemptions!]! @derivedFrom(field: "token")
   bondLiquidations: [BondLiquidations!] @derivedFrom(field: "token")
 }
+type Platform @entity {
+  id: ID!
+  platform: Bytes!
+  name: Bytes!
+  feeCollections: [FeeCollections!] @derivedFrom(field: "platform")
+  investorReturns: [InvestorRoI!] @derivedFrom(field: "platform")
+  managerReturns: [ManagerRoI!] @derivedFrom(field: "platform")
+  platformReturns: [PlatformRoI!] @derivedFrom(field: "platform")
+  platformLiquidity: [LiquidityOnPlatform!] @derivedFrom(field: "platform")
+}
+type Currency @entity {
+  id: ID!
+  token: Bytes!
+  name: String!
+  liquidityTokenRequests: [LiquidityTokenRequests!] @derivedFrom(field: "token")
+  liquidityTokenIssues: [LiquidityTokenIssues!] @derivedFrom(field: "token")
+  liquidityOnPlatform: [LiquidityOnPlatform!] @derivedFrom(field: "token")
+  liquidityEarningsByManager: [ManagerRoI!] @derivedFrom(field: "token")
+}
 type Security @entity {
   id: ID!
   security: Bytes!
   productCategory: Bytes!
   issuer: User
-  #issuer: Bytes!
   isin: Bytes!
   currency: Bytes!
   restricted: Boolean!
@@ -85,20 +103,20 @@ type Security @entity {
 type CashDeposited @entity {
   id: ID!
   party: User!
-  currency: Currency!
+  currency: Cash!
   amount : BigDecimal!  
 }
 type CashIssues @entity {
   id: ID!
   party: User! 
-  currency: Currency!
+  currency: Cash!
   amount : BigDecimal!
   balance: BigDecimal!
 }
 type CashRedemptions @entity {
   id: ID!
   party: User!
-  currency: Currency!
+  currency: Cash!
   amount : BigDecimal!
   redeemedFor: BigDecimal!
   balance: BigDecimal!
@@ -107,7 +125,7 @@ type CashTransfers @entity {
   id: ID!
   transferor: User!
   transferee: User!
-  currency: Currency!
+  currency: Cash!
   amount : BigDecimal!
   deposit: BigDecimal!
 }
@@ -117,7 +135,7 @@ type BondIssues @entity {
   token: Token!
   bondName: Bytes!
   issuedAmount: BigDecimal!  
-  collateralCurrency: Currency!
+  collateralCurrency: Cash!
   collateralAmount : BigDecimal!
   issueTime: Int!     
 }
@@ -127,7 +145,7 @@ type BondPurchases @entity {
   token: Token!
   bondName: Bytes!
   purchaseValue: BigDecimal!
-  paidInCurrency: Currency!
+  paidInCurrency: Cash!
   purchasedAmount : BigDecimal!
   purchaseTime: Int!
 }
@@ -137,7 +155,7 @@ type BondRedemptions @entity {
   token: Token!
   bondName: Bytes!
   redeemedValue: BigDecimal!
-  redemptionCurrency: Currency!
+  redemptionCurrency: Cash!
   redemptionAmount : BigDecimal!
 }
 type BondLiquidations @entity {
@@ -146,15 +164,13 @@ type BondLiquidations @entity {
   token: Token!
   liquidatedValue: BigDecimal!
   bondName: Bytes!
-  liquidationCurrency: Currency!
+  liquidationCurrency: Cash!
   liquidatedAmount : BigDecimal! 
 }
 type Manager @entity {
   id: ID!
   manager: User
-  #manager: Bytes
   submanager: User
-  #submanager: Bytes!
   role: Bytes!
   country: Bytes
   managerId: Bytes
@@ -162,7 +178,6 @@ type Manager @entity {
 type Offers @entity {
   id: ID!
   offeredBy: User
-  #offeredBy: Bytes!
   offered: Bytes!
   tomatch: Security!
   isin: Bytes!
@@ -176,9 +191,7 @@ type Trades @entity {
   id: ID!
   poolid: Bytes!
   transferor: User
-  #transferor: Bytes!
   transferee: User
-  #transferee: Bytes!
   unitsToTransfer: BigInt!
   security: Security!
   price: BigDecimal!
@@ -193,7 +206,6 @@ type Subscribers @entity {
   security: Security!
   pool: Bytes!
   investor: User
-  #investor: Bytes!
   currency: Bytes!
   cashSwapped: BigDecimal!   
   securitySwapped: BigDecimal! 
@@ -205,9 +217,7 @@ type Investors @entity {
   pool: Bytes!
   security: Security!
   issuer: User
-  #issuer: Bytes!
   investor: User
-  #investor: Bytes!
   currency: Bytes!
   amount: BigDecimal!   
   price: BigDecimal! 
@@ -217,9 +227,7 @@ type Investors @entity {
 }
 type Traders @entity {
   id: ID!
-  #transferor: Bytes!
   transferor: User
-  #transferee: Bytes!
   transferee: User
   security: Security!
   securityTraded: BigDecimal!
@@ -230,7 +238,6 @@ type LiquidityProviders @entity {
   id: ID!
   platform: Bytes!
   owner: User
-  #owner: Bytes!
   security: Security!
   currency: Bytes!
   tokenOffered: BigDecimal!
@@ -246,7 +253,6 @@ type Closures @entity{
 type Allotments @entity{
   id: ID!
   poolid: Bytes!
-  #investor: Bytes!
   investor: User
   security: Security!
   securitySubscribed: BigDecimal!
@@ -257,7 +263,6 @@ type Allotments @entity{
 type Refunds @entity{
   id: ID!
   poolid: Bytes!
-  #investor: Bytes!
   investor: User
   security: Security!
   securitySubscribed: BigDecimal!
@@ -270,16 +275,14 @@ type Settlements @entity{
   poolid: Bytes!
   security: Security!
   currency: Bytes!
-  #liquidityProvider: Bytes!
   liquidityProvider: User
   underwritingFee: BigDecimal!
   issuer: User
-  #issuer: Bytes!
   subscription: BigDecimal!  
 }
 type Snapshots @entity{
   id: ID!
-  security: Security
+  security: Security!
   oldTime: Int
   newTime: Int
 }
@@ -293,7 +296,6 @@ type Resolutions @entity{
 type RevenueShares @entity{
   id: ID!
   shareholder: User
-  #shareholder: Bytes!
   shareholderType: Bytes!
   tokenName: Bytes!
   amount: BigDecimal!
@@ -302,52 +304,47 @@ type RevenueShares @entity{
 type LiquidityTokenRequests @entity{
   id: ID!
   investor: User
-  #investor: Bytes!
-  tokenName: String!
+  token: Currency!
   tokenAmount: BigDecimal!
 }
 type LiquidityTokenIssues @entity{
   id: ID!
   investor: User
-  #investor: Bytes!
-  tokenName: String!
+  token: Currency!
   tokenAmount: BigDecimal!
   LPToIssue: BigDecimal!
 }
 type LiquidityOnPlatform @entity{
   id: ID!
-  platform: Bytes!
+  platform: Platform!
   manager: User
-  #manager: Bytes!
   LPToken: BigDecimal!
-  token: Bytes!
+  token: Currency!
   tokenAmount: BigDecimal!
 }
 type ManagerRoI @entity{
   id: ID!
-  platform: Bytes!
+  platform: Platform!
   manager: User
-  #manager: Bytes!
-  token: Bytes!
+  token: Currency!
   distribution: BigDecimal!
 }
 type PlatformRoI @entity{
   id: ID!
-  platform: Bytes!
+  platform: Platform!
   vitta: Bytes!
   distribution: BigDecimal!
 }
 type InvestorRoI @entity{
   id: ID!
-  platform: Bytes!
+  platform: Platform!
   investor: User
-  #investor: Bytes!
   vitta: Bytes!
   prorataStake: BigDecimal!
 }
 type FeeCollections @entity{
   id: ID!
-  platform: Bytes
+  platform: Platform!
   feeCollected: BigDecimal
   timestamp: Int
 }
