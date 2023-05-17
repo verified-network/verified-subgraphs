@@ -97,12 +97,28 @@ export class reject__Params {
     this._event = event;
   }
 
+  get transferor(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get currency(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
   get consideration(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get transferee(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get security(): Address {
+    return this._event.parameters[4].value.toAddress();
   }
 
   get unitsTransferred(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+    return this._event.parameters[5].value.toBigInt();
   }
 }
 
@@ -571,16 +587,20 @@ export class IssueSecondaryCall__Inputs {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get securityAmount(): BigInt {
+  get securityOutstanding(): BigInt {
     return this._call.inputValues[2].value.toBigInt();
   }
 
-  get minSecurityOrder(): BigInt {
+  get securityOffered(): BigInt {
     return this._call.inputValues[3].value.toBigInt();
   }
 
-  get cashAmount(): BigInt {
+  get minSecurityOrder(): BigInt {
     return this._call.inputValues[4].value.toBigInt();
+  }
+
+  get cashAmount(): BigInt {
+    return this._call.inputValues[5].value.toBigInt();
   }
 }
 

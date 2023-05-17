@@ -73,9 +73,33 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "address",
+        "name": "transferor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "currency",
+        "type": "address"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "consideration",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "transferee",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "security",
+        "type": "address"
       },
       {
         "indexed": false,
@@ -313,7 +337,12 @@
       },
       {
         "internalType": "uint256",
-        "name": "securityAmount",
+        "name": "securityOutstanding",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "securityOffered",
         "type": "uint256"
       },
       {
