@@ -6,7 +6,8 @@ import {
     PlatformReturns,
     InvestorReturns,
     SupportToken,
-    RegisterPlatform 
+    RegisterPlatform,
+    PlatformManagers 
   } from "../../generated/Liquidity/Liquidity";
 
 import { 
@@ -17,7 +18,8 @@ import {
     PlatformRoI,
     InvestorRoI,
     Currency,
-    Platform
+    Platform,
+    ManagersOnPlatform
   } from "../../generated/schema";
 
 export function handleSupportedToken(event: SupportToken): void{
@@ -157,5 +159,21 @@ export function handleInvestorReturns(event: InvestorReturns): void {
         investors.vitta = event.params.vitta;
         investors.prorataStake = event.params.prorataStake.toBigDecimal();
         investors.save();
+    }
+}
+
+export function handlePlatformManagers(event: PlatformManagers): void {
+    let managers = ManagersOnPlatform.load(event.params.manager.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(managers==null){
+        let manager = event.params.manager.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let managers = new ManagersOnPlatform(manager);
+        managers.platform = event.params.platform.toHexString();
+        managers.manager = event.params.manager.toHexString();
+        managers.save();
+    }
+    else{
+        managers.platform = event.params.platform.toHexString();
+        managers.manager = event.params.manager.toHexString();
+        managers.save();
     }
 }

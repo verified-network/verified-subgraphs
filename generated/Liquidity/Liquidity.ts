@@ -174,6 +174,28 @@ export class PlatformLiquidity__Params {
   }
 }
 
+export class PlatformManagers extends ethereum.Event {
+  get params(): PlatformManagers__Params {
+    return new PlatformManagers__Params(this);
+  }
+}
+
+export class PlatformManagers__Params {
+  _event: PlatformManagers;
+
+  constructor(event: PlatformManagers) {
+    this._event = event;
+  }
+
+  get platform(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get manager(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+}
+
 export class PlatformReturns extends ethereum.Event {
   get params(): PlatformReturns__Params {
     return new PlatformReturns__Params(this);

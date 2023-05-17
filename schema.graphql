@@ -348,3 +348,8 @@ type FeeCollections @entity{
   feeCollected: BigDecimal
   timestamp: Int
 }
+type ManagersOnPlatform @entity{
+  id: ID!
+  platform: Platform!
+  manager: User!
+}

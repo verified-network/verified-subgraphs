@@ -84,44 +84,6 @@ export class feecollection__Params {
   }
 }
 
-export class reject extends ethereum.Event {
-  get params(): reject__Params {
-    return new reject__Params(this);
-  }
-}
-
-export class reject__Params {
-  _event: reject;
-
-  constructor(event: reject) {
-    this._event = event;
-  }
-
-  get transferor(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get currency(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
-  get consideration(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-
-  get transferee(): Address {
-    return this._event.parameters[3].value.toAddress();
-  }
-
-  get security(): Address {
-    return this._event.parameters[4].value.toAddress();
-  }
-
-  get unitsTransferred(): BigInt {
-    return this._event.parameters[5].value.toBigInt();
-  }
-}
-
 export class subscribers extends ethereum.Event {
   get params(): subscribers__Params {
     return new subscribers__Params(this);

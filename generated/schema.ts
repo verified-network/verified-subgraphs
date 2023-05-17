@@ -4384,3 +4384,59 @@ export class FeeCollections extends Entity {
     this.set("timestamp", Value.fromI32(value));
   }
 }
+
+export class ManagersOnPlatform extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("platform", Value.fromString(""));
+    this.set("manager", Value.fromString(""));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save ManagersOnPlatform entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save ManagersOnPlatform entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("ManagersOnPlatform", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ManagersOnPlatform | null {
+    return changetype<ManagersOnPlatform | null>(
+      store.get("ManagersOnPlatform", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get platform(): string {
+    let value = this.get("platform");
+    return value!.toString();
+  }
+
+  set platform(value: string) {
+    this.set("platform", Value.fromString(value));
+  }
+
+  get manager(): string {
+    let value = this.get("manager");
+    return value!.toString();
+  }
+
+  set manager(value: string) {
+    this.set("manager", Value.fromString(value));
+  }
+}
