@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: matic
+    network: goerli
     source:
-      address: '0x1aF6015fBc9E20ad48EEAC363249B8B0b4aAa929'
+      address: '0xC3F4c43664A25Ae044EEe40E586760dbbF05d6Cd'
       abi: SecuritiesFactory
-      startBlock: 42819493
+      startBlock: 9046876
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -30,11 +30,11 @@ dataSources:
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: matic
+    network: goerli
     source:
-      address: '0x1e37Ec2Bff3185f9047b7554dd4032C2CbEDfC7A'
+      address: '0xEC9c47e925ce60D49d5f72E7C0EBadc152e013D3'
       abi: Client
-      startBlock: 42819480
+      startBlock: 9046873
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -55,11 +55,11 @@ dataSources:
           handler: handleUserCreated
   - kind: ethereum/contract
     name: Liquidity
-    network: matic
+    network: goerli
     source:
-      address: '0x93581c9DD7dc73a6C3887F4bd0bA74D175aDbD85'
+      address: '0x46f984775147843Fa152bB6365FF750505F52fAD'
       abi: Liquidity
-      startBlock: 42817642
+      startBlock: 9046826
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -98,11 +98,11 @@ dataSources:
           handler: handlePlatformManagers
   - kind: ethereum/contract
     name: Distribution
-    network: matic
+    network: goerli
     source:
-      address: '0x2d99a4c42a386408C687A4825D7Ea3ab378994B8'
+      address: '0xd234d2433a877465cbdF6B478bfC027dB7910b0b'
       abi: Distribution
-      startBlock: 42819687
+      startBlock: 9046852
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -119,11 +119,11 @@ dataSources:
           handler: handleDistribution
   - kind: ethereum/contract
     name: PrimaryIssueManager
-    network: matic
+    network: goerli
     source:
-      address: '0xf1e1641864A1d606AeAe5Ce776927748e76986A3'
+      address: '0x3Af6bae7e4779808B5B6cE03c5095Af00Fd87731'
       abi: PrimaryIssueManager
-      startBlock: 42821340
+      startBlock: 9046947
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -160,11 +160,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: matic
+    network: goerli
     source:
-      address: '0xAA0489b224097732452007073bBE6B98F8528E5D'
+      address: '0x305a09D57Ea30EeF22fBb2B1048f3A09164C9b12'
       abi: SecondaryIssueManager
-      startBlock: 42821360
+      startBlock: 9046951
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -189,11 +189,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: MarginIssueManager
-    network: matic
+    network: goerli
     source:
-      address: '0xCF611F446D81a965B927f8Cb2D31c38c0D41A5A9'
+      address: '0xEf329d1d0E47A0185b32bC62e69ab16a95533D75'
       abi: MarginIssueManager
-      startBlock: 8972617
+      startBlock: 9046955
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -218,7 +218,7 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: Factory
-    network: matic
+    network: goerli
     source:
       address: '0x979096681423F77396e1C2a4d0A0B1e2cfd4b886'
       abi: Factory
@@ -243,7 +243,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Security
-    network: matic
+    network: goerli
     source:
       abi: Security
     mapping:
@@ -275,7 +275,7 @@ templates:
       file: ./src/mappings/security.ts
   - kind: ethereum/contract
     name: Cash
-    network: matic
+    network: goerli
     source:
       abi: Cash
     mapping:
@@ -304,7 +304,7 @@ templates:
       file: ./src/mappings/cash.ts  
   - kind: ethereum/contract
     name: Bond
-    network: matic
+    network: goerli
     source:
       abi: Bond
     mapping:
