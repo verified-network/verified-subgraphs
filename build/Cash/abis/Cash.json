@@ -419,6 +419,45 @@
   },
   {
     "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "currency",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "condition",
+        "type": "uint256"
+      }
+    ],
+    "name": "redemption",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "issued",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "balanceAmount",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
     "inputs": [],
     "name": "Paused",
     "type": "event"

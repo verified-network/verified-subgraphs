@@ -74,9 +74,9 @@
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
-        "name": "tokenName",
-        "type": "bytes32"
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
       },
       {
         "indexed": false,
@@ -156,6 +156,35 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "getRevenueShares",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -196,9 +225,9 @@
         "type": "address"
       },
       {
-        "internalType": "bytes32",
+        "internalType": "address",
         "name": "_currency",
-        "type": "bytes32"
+        "type": "address"
       }
     ],
     "name": "addRevenueShareholder",
@@ -214,9 +243,9 @@
         "type": "bytes32"
       },
       {
-        "internalType": "bytes32",
+        "internalType": "address",
         "name": "_currency",
-        "type": "bytes32"
+        "type": "address"
       }
     ],
     "name": "getRevenueShareholders",

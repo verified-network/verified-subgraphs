@@ -115,7 +115,7 @@ dataSources:
         - name: Distribution
           file: ./abis/Distribution.json
       eventHandlers:
-        - event: RevenueShare(bytes32,indexed address,bytes32,uint256,uint256)
+        - event: RevenueShare(bytes32,indexed address,address,uint256,uint256)
           handler: handleDistribution
   - kind: ethereum/contract
     name: PrimaryIssueManager

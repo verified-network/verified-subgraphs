@@ -134,6 +134,54 @@ export class CashTransfer__Params {
   }
 }
 
+export class redemption extends ethereum.Event {
+  get params(): redemption__Params {
+    return new redemption__Params(this);
+  }
+}
+
+export class redemption__Params {
+  _event: redemption;
+
+  constructor(event: redemption) {
+    this._event = event;
+  }
+
+  get currency(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get condition(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class balanceAmount extends ethereum.Event {
+  get params(): balanceAmount__Params {
+    return new balanceAmount__Params(this);
+  }
+}
+
+export class balanceAmount__Params {
+  _event: balanceAmount;
+
+  constructor(event: balanceAmount) {
+    this._event = event;
+  }
+
+  get issued(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
 export class Paused extends ethereum.Event {
   get params(): Paused__Params {
     return new Paused__Params(this);

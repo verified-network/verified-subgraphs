@@ -295,21 +295,21 @@ type Resolutions @entity{
 }
 type RevenueShares @entity{
   id: ID!
-  shareholder: User
+  shareholder: User!
   shareholderType: Bytes!
-  tokenName: Bytes!
+  token: Bytes!
   amount: BigDecimal!
   timestamp: Int!
 }
 type LiquidityTokenRequests @entity{
   id: ID!
-  investor: User
+  investor: User!
   token: Currency!
   tokenAmount: BigDecimal!
 }
 type LiquidityTokenIssues @entity{
   id: ID!
-  investor: User
+  investor: User!
   token: Currency!
   tokenAmount: BigDecimal!
   LPToIssue: BigDecimal!
@@ -317,7 +317,7 @@ type LiquidityTokenIssues @entity{
 type LiquidityOnPlatform @entity{
   id: ID!
   platform: Platform!
-  manager: User
+  manager: User!
   LPToken: BigDecimal!
   token: Currency!
   tokenAmount: BigDecimal!
@@ -325,7 +325,7 @@ type LiquidityOnPlatform @entity{
 type ManagerRoI @entity{
   id: ID!
   platform: Platform!
-  manager: User
+  manager: User!
   token: Currency!
   distribution: BigDecimal!
 }
@@ -338,7 +338,7 @@ type PlatformRoI @entity{
 type InvestorRoI @entity{
   id: ID!
   platform: Platform!
-  investor: User
+  investor: User!
   vitta: Bytes!
   prorataStake: BigDecimal!
 }

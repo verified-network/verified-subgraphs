@@ -13,7 +13,7 @@ export function handleDistribution(event: RevenueShare): void {
         let shareholders = new RevenueShares(shareholder);
         shareholders.shareholder = event.params.shareholder.toHexString();
         shareholders.shareholderType = event.params.shareholderType;
-        shareholders.tokenName = event.params.tokenName;
+        shareholders.token = event.params.token;
         shareholders.amount = event.params.amount.toBigDecimal();
         shareholders.timestamp = event.params.timestamp.toI32();
         shareholders.save();
@@ -21,7 +21,7 @@ export function handleDistribution(event: RevenueShare): void {
     else{
         shareholders.shareholder = event.params.shareholder.toHexString();
         shareholders.shareholderType = event.params.shareholderType;
-        shareholders.tokenName = event.params.tokenName;
+        shareholders.token = event.params.token;
         shareholders.amount = event.params.amount.toBigDecimal();
         shareholders.timestamp = event.params.timestamp.toI32();
         shareholders.save();

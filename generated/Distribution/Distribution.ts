@@ -71,8 +71,8 @@ export class RevenueShare__Params {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get tokenName(): Bytes {
-    return this._event.parameters[2].value.toBytes();
+  get token(): Address {
+    return this._event.parameters[2].value.toAddress();
   }
 
   get amount(): BigInt {
@@ -99,6 +99,29 @@ export class Unpaused__Params {
 
   get account(): Address {
     return this._event.parameters[0].value.toAddress();
+  }
+}
+
+export class Distribution__getRevenueSharesResult {
+  value0: BigInt;
+  value1: BigInt;
+  value2: BigInt;
+  value3: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt, value2: BigInt, value3: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+    this.value2 = value2;
+    this.value3 = value3;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
+    map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
+    return map;
   }
 }
 
@@ -137,13 +160,50 @@ export class Distribution extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  getRevenueShareholders(_type: Bytes, _currency: Bytes): Array<Address> {
+  getRevenueShares(): Distribution__getRevenueSharesResult {
+    let result = super.call(
+      "getRevenueShares",
+      "getRevenueShares():(uint256,uint256,uint256,uint256)",
+      []
+    );
+
+    return new Distribution__getRevenueSharesResult(
+      result[0].toBigInt(),
+      result[1].toBigInt(),
+      result[2].toBigInt(),
+      result[3].toBigInt()
+    );
+  }
+
+  try_getRevenueShares(): ethereum.CallResult<
+    Distribution__getRevenueSharesResult
+  > {
+    let result = super.tryCall(
+      "getRevenueShares",
+      "getRevenueShares():(uint256,uint256,uint256,uint256)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new Distribution__getRevenueSharesResult(
+        value[0].toBigInt(),
+        value[1].toBigInt(),
+        value[2].toBigInt(),
+        value[3].toBigInt()
+      )
+    );
+  }
+
+  getRevenueShareholders(_type: Bytes, _currency: Address): Array<Address> {
     let result = super.call(
       "getRevenueShareholders",
-      "getRevenueShareholders(bytes32,bytes32):(address[])",
+      "getRevenueShareholders(bytes32,address):(address[])",
       [
         ethereum.Value.fromFixedBytes(_type),
-        ethereum.Value.fromFixedBytes(_currency)
+        ethereum.Value.fromAddress(_currency)
       ]
     );
 
@@ -152,14 +212,14 @@ export class Distribution extends ethereum.SmartContract {
 
   try_getRevenueShareholders(
     _type: Bytes,
-    _currency: Bytes
+    _currency: Address
   ): ethereum.CallResult<Array<Address>> {
     let result = super.tryCall(
       "getRevenueShareholders",
-      "getRevenueShareholders(bytes32,bytes32):(address[])",
+      "getRevenueShareholders(bytes32,address):(address[])",
       [
         ethereum.Value.fromFixedBytes(_type),
-        ethereum.Value.fromFixedBytes(_currency)
+        ethereum.Value.fromAddress(_currency)
       ]
     );
     if (result.reverted) {
@@ -445,8 +505,8 @@ export class AddRevenueShareholderCall__Inputs {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get _currency(): Bytes {
-    return this._call.inputValues[2].value.toBytes();
+  get _currency(): Address {
+    return this._call.inputValues[2].value.toAddress();
   }
 }
 
