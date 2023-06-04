@@ -102,6 +102,40 @@ export class Unpaused__Params {
   }
 }
 
+export class distributionFee extends ethereum.Event {
+  get params(): distributionFee__Params {
+    return new distributionFee__Params(this);
+  }
+}
+
+export class distributionFee__Params {
+  _event: distributionFee;
+
+  constructor(event: distributionFee) {
+    this._event = event;
+  }
+
+  get fees(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get business(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get operator(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get founder(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get investor(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
 export class Distribution__getRevenueSharesResult {
   value0: BigInt;
   value1: BigInt;
