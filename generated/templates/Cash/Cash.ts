@@ -134,6 +134,64 @@ export class CashTransfer__Params {
   }
 }
 
+export class requestedIssue extends ethereum.Event {
+  get params(): requestedIssue__Params {
+    return new requestedIssue__Params(this);
+  }
+}
+
+export class requestedIssue__Params {
+  _event: requestedIssue;
+
+  constructor(event: requestedIssue) {
+    this._event = event;
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class toIssue extends ethereum.Event {
+  get params(): toIssue__Params {
+    return new toIssue__Params(this);
+  }
+}
+
+export class toIssue__Params {
+  _event: toIssue;
+
+  constructor(event: toIssue) {
+    this._event = event;
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class transferTo extends ethereum.Event {
+  get params(): transferTo__Params {
+    return new transferTo__Params(this);
+  }
+}
+
+export class transferTo__Params {
+  _event: transferTo;
+
+  constructor(event: transferTo) {
+    this._event = event;
+  }
+
+  get from(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get to(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+}
+
 export class redemption extends ethereum.Event {
   get params(): redemption__Params {
     return new redemption__Params(this);
