@@ -501,6 +501,27 @@ export class Security extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
+  vote(time: BigInt, ballot: boolean): boolean {
+    let result = super.call("vote", "vote(uint256,bool):(bool)", [
+      ethereum.Value.fromUnsignedBigInt(time),
+      ethereum.Value.fromBoolean(ballot)
+    ]);
+
+    return result[0].toBoolean();
+  }
+
+  try_vote(time: BigInt, ballot: boolean): ethereum.CallResult<boolean> {
+    let result = super.tryCall("vote", "vote(uint256,bool):(bool)", [
+      ethereum.Value.fromUnsignedBigInt(time),
+      ethereum.Value.fromBoolean(ballot)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
   getResolution(time: BigInt): Security__getResolutionResult {
     let result = super.call(
       "getResolution",
@@ -876,6 +897,10 @@ export class VoteCall__Outputs {
 
   constructor(call: VoteCall) {
     this._call = call;
+  }
+
+  get value0(): boolean {
+    return this._call.outputValues[0].value.toBoolean();
   }
 }
 

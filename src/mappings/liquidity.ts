@@ -143,9 +143,9 @@ export function handlePlatformReturns(event: PlatformReturns): void {
 }
 
 export function handleInvestorReturns(event: InvestorReturns): void {
-    let investors = InvestorRoI.load(event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    let investors = InvestorRoI.load(event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(investors==null){
-        let investor = event.params.platform.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let investor = event.params.investor.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let investors = new InvestorRoI(investor);
         investors.platform = event.params.platform.toHexString();
         investors.investor = event.params.investor.toHexString();
