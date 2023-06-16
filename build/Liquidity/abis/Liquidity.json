@@ -12,6 +12,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint256",
+        "name": "_share",
+        "type": "uint256"
+      },
+      {
         "internalType": "address",
         "name": "_vitta",
         "type": "address"
@@ -319,6 +324,51 @@
       }
     ],
     "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "cap",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "LP",
+        "type": "address"
+      }
+    ],
+    "name": "investorAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "LP",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "paidOut",
     "type": "event"
   },
   {
@@ -871,6 +921,19 @@
       }
     ],
     "name": "setExchangeRate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_treasurer",
+        "type": "address"
+      }
+    ],
+    "name": "setTreasurer",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

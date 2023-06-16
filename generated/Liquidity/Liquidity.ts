@@ -332,6 +332,64 @@ export class Unpaused__Params {
   }
 }
 
+export class cap extends ethereum.Event {
+  get params(): cap__Params {
+    return new cap__Params(this);
+  }
+}
+
+export class cap__Params {
+  _event: cap;
+
+  constructor(event: cap) {
+    this._event = event;
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
+export class investorAdded extends ethereum.Event {
+  get params(): investorAdded__Params {
+    return new investorAdded__Params(this);
+  }
+}
+
+export class investorAdded__Params {
+  _event: investorAdded;
+
+  constructor(event: investorAdded) {
+    this._event = event;
+  }
+
+  get LP(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+}
+
+export class paidOut extends ethereum.Event {
+  get params(): paidOut__Params {
+    return new paidOut__Params(this);
+  }
+}
+
+export class paidOut__Params {
+  _event: paidOut;
+
+  constructor(event: paidOut) {
+    this._event = event;
+  }
+
+  get LP(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get amount(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
 export class Liquidity__getSupportedTokensResultValue0Struct extends ethereum.Tuple {
   get tokenName(): string {
     return this[0].toString();
@@ -717,8 +775,12 @@ export class ConstructorCall__Inputs {
     return this._call.inputValues[1].value.toBigInt();
   }
 
+  get _share(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
   get _vitta(): Address {
-    return this._call.inputValues[2].value.toAddress();
+    return this._call.inputValues[3].value.toAddress();
   }
 }
 
@@ -1300,6 +1362,36 @@ export class SetExchangeRateCall__Outputs {
   _call: SetExchangeRateCall;
 
   constructor(call: SetExchangeRateCall) {
+    this._call = call;
+  }
+}
+
+export class SetTreasurerCall extends ethereum.Call {
+  get inputs(): SetTreasurerCall__Inputs {
+    return new SetTreasurerCall__Inputs(this);
+  }
+
+  get outputs(): SetTreasurerCall__Outputs {
+    return new SetTreasurerCall__Outputs(this);
+  }
+}
+
+export class SetTreasurerCall__Inputs {
+  _call: SetTreasurerCall;
+
+  constructor(call: SetTreasurerCall) {
+    this._call = call;
+  }
+
+  get _treasurer(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class SetTreasurerCall__Outputs {
+  _call: SetTreasurerCall;
+
+  constructor(call: SetTreasurerCall) {
     this._call = call;
   }
 }
