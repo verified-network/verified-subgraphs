@@ -616,13 +616,13 @@ export class Liquidity extends ethereum.SmartContract {
     );
   }
 
-  getInvestment(_investor: Address, _tokenName: string): BigInt {
+  getInvestment(_investor: Address, _token: Address): BigInt {
     let result = super.call(
       "getInvestment",
-      "getInvestment(address,string):(uint256)",
+      "getInvestment(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(_investor),
-        ethereum.Value.fromString(_tokenName)
+        ethereum.Value.fromAddress(_token)
       ]
     );
 
@@ -631,14 +631,14 @@ export class Liquidity extends ethereum.SmartContract {
 
   try_getInvestment(
     _investor: Address,
-    _tokenName: string
+    _token: Address
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getInvestment",
-      "getInvestment(address,string):(uint256)",
+      "getInvestment(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(_investor),
-        ethereum.Value.fromString(_tokenName)
+        ethereum.Value.fromAddress(_token)
       ]
     );
     if (result.reverted) {
@@ -1073,8 +1073,8 @@ export class IssueCall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get _tokenName(): string {
-    return this._call.inputValues[1].value.toString();
+  get _token(): Address {
+    return this._call.inputValues[1].value.toAddress();
   }
 
   get _tokenAmount(): BigInt {

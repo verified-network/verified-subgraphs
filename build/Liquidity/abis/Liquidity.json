@@ -658,9 +658,9 @@
         "type": "address"
       },
       {
-        "internalType": "string",
-        "name": "_tokenName",
-        "type": "string"
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
       }
     ],
     "name": "getInvestment",
@@ -683,9 +683,9 @@
         "type": "address"
       },
       {
-        "internalType": "string",
-        "name": "_tokenName",
-        "type": "string"
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
       },
       {
         "internalType": "uint256",
