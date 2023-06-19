@@ -218,36 +218,6 @@ export class offers__Params {
   }
 }
 
-export class poolAmounts extends ethereum.Event {
-  get params(): poolAmounts__Params {
-    return new poolAmounts__Params(this);
-  }
-}
-
-export class poolAmounts__Params {
-  _event: poolAmounts;
-
-  constructor(event: poolAmounts) {
-    this._event = event;
-  }
-
-  get sbalance(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
-  get samount(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-
-  get cbalance(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-
-  get camount(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
-  }
-}
-
 export class refunds extends ethereum.Event {
   get params(): refunds__Params {
     return new refunds__Params(this);

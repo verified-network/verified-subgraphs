@@ -332,24 +332,6 @@ export class Unpaused__Params {
   }
 }
 
-export class cap extends ethereum.Event {
-  get params(): cap__Params {
-    return new cap__Params(this);
-  }
-}
-
-export class cap__Params {
-  _event: cap;
-
-  constructor(event: cap) {
-    this._event = event;
-  }
-
-  get amount(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-}
-
 export class investorAdded extends ethereum.Event {
   get params(): investorAdded__Params {
     return new investorAdded__Params(this);
