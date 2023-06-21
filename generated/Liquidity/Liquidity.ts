@@ -332,46 +332,6 @@ export class Unpaused__Params {
   }
 }
 
-export class investorAdded extends ethereum.Event {
-  get params(): investorAdded__Params {
-    return new investorAdded__Params(this);
-  }
-}
-
-export class investorAdded__Params {
-  _event: investorAdded;
-
-  constructor(event: investorAdded) {
-    this._event = event;
-  }
-
-  get LP(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-}
-
-export class paidOut extends ethereum.Event {
-  get params(): paidOut__Params {
-    return new paidOut__Params(this);
-  }
-}
-
-export class paidOut__Params {
-  _event: paidOut;
-
-  constructor(event: paidOut) {
-    this._event = event;
-  }
-
-  get LP(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
-  get amount(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-}
-
 export class Liquidity__getSupportedTokensResultValue0Struct extends ethereum.Tuple {
   get tokenName(): string {
     return this[0].toString();
