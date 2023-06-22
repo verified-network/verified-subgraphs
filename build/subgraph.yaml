@@ -122,9 +122,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: "0x6B592F7609442569E063483b74561790Be532607"
+      address: "0x2D2C9a67FB4518cb0F8F13cb97A566eF5e72a5c6"
       abi: PrimaryIssueManager
-      startBlock: 9215289
+      startBlock: 9220921
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
