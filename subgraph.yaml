@@ -100,9 +100,9 @@ dataSources:
     name: Distribution
     network: goerli
     source:
-      address: '0x07E4C2ada55cb78ECeA1cA2ab115111263bb6363'
+      address: '0x719141e877FcF9306299A3Ec5b7F9dcadd0F4cD8'
       abi: Distribution
-      startBlock: 9215276
+      startBlock: 9224102
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -121,9 +121,9 @@ dataSources:
     name: PrimaryIssueManager
     network: goerli
     source:
-      address: '0x2D2C9a67FB4518cb0F8F13cb97A566eF5e72a5c6'
+      address: '0x57E416421ffCDF26d630F2bf36776Dc019A9Dc02'
       abi: PrimaryIssueManager
-      startBlock: 9220921
+      startBlock: 9224149
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -162,9 +162,9 @@ dataSources:
     name: SecondaryIssueManager
     network: goerli
     source:
-      address: '0x23229B3A15D20a6F5dba6C14b44D8Fd79bD1d617'
+      address: '0x252b67835032D25b3913571446EDB0d1597D2DFf'
       abi: SecondaryIssueManager
-      startBlock: 9215293
+      startBlock: 9224153
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -191,9 +191,9 @@ dataSources:
     name: MarginIssueManager
     network: goerli
     source:
-      address: '0x1043Fd279F08f816e573FCF82e2618CCD3E3e8A5'
+      address: '0xeC1Ebd0629c7D8db515cbD29DcafB7Ca106C56e5'
       abi: MarginIssueManager
-      startBlock: 9215297
+      startBlock: 9224157
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
