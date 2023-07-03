@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: goerli
+    network: gnosis
     source:
-      address: "0x647a7EA364a31fa18c65f4043CD55718d245D774"
+      address: "0x04631b0B934c1d35B1f0FDAa1E000AC85c93ec7A"
       abi: SecuritiesFactory
-      startBlock: 9180253
+      startBlock: 28759663
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -31,11 +31,11 @@ dataSources:
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: goerli
+    network: gnosis
     source:
-      address: "0x3e132ee9fc32428655b2151A4E6C3f2B1FD49923"
+      address: "0xE7422FdB4e9a39489bFe7ef9F1E1b27dC7860195"
       abi: Client
-      startBlock: 9180250
+      startBlock: 28759659
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -56,11 +56,11 @@ dataSources:
           handler: handleUserCreated
   - kind: ethereum/contract
     name: Liquidity
-    network: goerli
+    network: gnosis
     source:
-      address: "0xce6FD14dD748F5f371BB226a3FdF6fEA3a4C423B"
+      address: "0xBD5A0178C276d1553Eb388AdA03F6Cb79Eb6F67D"
       abi: Liquidity
-      startBlock: 9215262
+      startBlock: 28761245
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -99,11 +99,11 @@ dataSources:
           handler: handlePlatformManagers
   - kind: ethereum/contract
     name: Distribution
-    network: goerli
+    network: gnosis
     source:
-      address: "0x719141e877FcF9306299A3Ec5b7F9dcadd0F4cD8"
+      address: "0x8acBeFF5F1F2e0A4298A6449494C0aA6Dd830d3D"
       abi: Distribution
-      startBlock: 9224102
+      startBlock: 28761373
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -120,11 +120,11 @@ dataSources:
           handler: handleDistribution
   - kind: ethereum/contract
     name: PrimaryIssueManager
-    network: goerli
+    network: gnosis
     source:
-      address: "0x57E416421ffCDF26d630F2bf36776Dc019A9Dc02"
+      address: "0x2A46d8Ca28F0b84D58d20b5158C2417E6F9CE76F"
       abi: PrimaryIssueManager
-      startBlock: 9224149
+      startBlock: 28761529
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -162,11 +162,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: goerli
+    network: gnosis
     source:
-      address: "0x252b67835032D25b3913571446EDB0d1597D2DFf"
+      address: "0x2c6F953dfc7b922ef3101c65c62f9349fCd65e1A"
       abi: SecondaryIssueManager
-      startBlock: 9224153
+      startBlock: 28761535
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -193,11 +193,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: MarginIssueManager
-    network: goerli
+    network: gnosis
     source:
-      address: "0xeC1Ebd0629c7D8db515cbD29DcafB7Ca106C56e5"
+      address: "0x0d062A0064b762ed8AEe7DE9E79b532e6215c77a"
       abi: MarginIssueManager
-      startBlock: 9224157
+      startBlock: 28761541
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -213,7 +213,7 @@ dataSources:
           file: MarginIssueManager\abis\MarginIssueManager.json
       eventHandlers:
         - event: tradeSettled(indexed
-            bytes32,address,address,uint256,address,uint256,address,bytes32,bytes32,uint256)
+            bytes32,address,address,uint256,address,uint256,address,uint256,bytes32,uint256)
           handler: handleTrades
         - event: subscribers(address,address,indexed address,uint256,address,uint256)
           handler: handleTraders
@@ -223,11 +223,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: Factory
-    network: goerli
+    network: gnosis
     source:
-      address: "0x4c74BB3B701Ad556bEC623228555e363923d7d7f"
+      address: "0x388d1591A572800C2f9cd0987f8A536F178C9806"
       abi: Factory
-      startBlock: 9147053
+      startBlock: 27843309
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -248,7 +248,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Security
-    network: goerli
+    network: gnosis
     source:
       abi: Security
     mapping:
@@ -276,7 +276,7 @@ templates:
       file: templates\Security\Security.wasm
   - kind: ethereum/contract
     name: Cash
-    network: goerli
+    network: gnosis
     source:
       abi: Cash
     mapping:
@@ -305,7 +305,7 @@ templates:
       file: templates\Cash\Cash.wasm
   - kind: ethereum/contract
     name: Bond
-    network: goerli
+    network: gnosis
     source:
       abi: Bond
     mapping:

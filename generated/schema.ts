@@ -2551,7 +2551,6 @@ export class Trades extends Entity {
     this.set("security", Value.fromString(""));
     this.set("price", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
-    this.set("settlementStatus", Value.fromBytes(Bytes.empty()));
     this.set("tradeRef", Value.fromBytes(Bytes.empty()));
     this.set("tradingCommission", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("timestamp", Value.fromI32(0));
@@ -2662,13 +2661,38 @@ export class Trades extends Entity {
     this.set("currency", Value.fromBytes(value));
   }
 
-  get settlementStatus(): Bytes {
+  get settlementStatus(): Bytes | null {
     let value = this.get("settlementStatus");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
   }
 
-  set settlementStatus(value: Bytes) {
-    this.set("settlementStatus", Value.fromBytes(value));
+  set settlementStatus(value: Bytes | null) {
+    if (!value) {
+      this.unset("settlementStatus");
+    } else {
+      this.set("settlementStatus", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get amountPaid(): BigDecimal | null {
+    let value = this.get("amountPaid");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigDecimal();
+    }
+  }
+
+  set amountPaid(value: BigDecimal | null) {
+    if (!value) {
+      this.unset("amountPaid");
+    } else {
+      this.set("amountPaid", Value.fromBigDecimal(<BigDecimal>value));
+    }
   }
 
   get tradeRef(): Bytes {

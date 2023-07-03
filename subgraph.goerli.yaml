@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: gnosis
+    network: goerli
     source:
-      address: '0x00674E4f81C613afd1B832d3839dCEdc4679F50B'
+      address: '0x647a7EA364a31fa18c65f4043CD55718d245D774'
       abi: SecuritiesFactory
-      startBlock: 27843498
+      startBlock: 9180253
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -30,11 +30,11 @@ dataSources:
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: gnosis
+    network: goerli
     source:
-      address: '0x44d2463791Ef7d13574675733e75f160311970b9'
+      address: '0x3e132ee9fc32428655b2151A4E6C3f2B1FD49923'
       abi: Client
-      startBlock: 27843495
+      startBlock: 9180250
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -55,11 +55,11 @@ dataSources:
           handler: handleUserCreated
   - kind: ethereum/contract
     name: Liquidity
-    network: gnosis
+    network: goerli
     source:
-      address: '0x8365A76099629CDd6B28c3D85862A220504C0b46'
+      address: '0xce6FD14dD748F5f371BB226a3FdF6fEA3a4C423B'
       abi: Liquidity
-      startBlock: 27843092
+      startBlock: 9215262
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -98,11 +98,11 @@ dataSources:
           handler: handlePlatformManagers
   - kind: ethereum/contract
     name: Distribution
-    network: gnosis
+    network: goerli
     source:
-      address: '0xe44Dc13cBF4C785843ac7B325DD8F6b01D2961CA'
+      address: '0x719141e877FcF9306299A3Ec5b7F9dcadd0F4cD8'
       abi: Distribution
-      startBlock: 27843449
+      startBlock: 9224102
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -119,11 +119,11 @@ dataSources:
           handler: handleDistribution
   - kind: ethereum/contract
     name: PrimaryIssueManager
-    network: gnosis
+    network: goerli
     source:
-      address: '0x5640812D73f0D3d820832BFb53ed6fC4a9383283'
+      address: '0x57E416421ffCDF26d630F2bf36776Dc019A9Dc02'
       abi: PrimaryIssueManager
-      startBlock: 27855629
+      startBlock: 9224149
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -160,11 +160,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: gnosis
+    network: goerli
     source:
-      address: '0x178E33786349cEE3E4dec3c51EF2a1108E8d958e'
+      address: '0x252b67835032D25b3913571446EDB0d1597D2DFf'
       abi: SecondaryIssueManager
-      startBlock: 27855634
+      startBlock: 9224153
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -189,11 +189,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: MarginIssueManager
-    network: gnosis
+    network: goerli
     source:
-      address: '0x6013c4f00Bc8456aD45EF945FEA4DC4ab30026Fc'
+      address: '0xeC1Ebd0629c7D8db515cbD29DcafB7Ca106C56e5'
       abi: MarginIssueManager
-      startBlock: 27855640
+      startBlock: 9224157
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -218,11 +218,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: Factory
-    network: gnosis
+    network: goerli
     source:
-      address: '0x388d1591A572800C2f9cd0987f8A536F178C9806'
+      address: '0x4c74BB3B701Ad556bEC623228555e363923d7d7f'
       abi: Factory
-      startBlock: 27843309
+      startBlock: 9147053
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -243,7 +243,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Security
-    network: gnosis
+    network: goerli
     source:
       abi: Security
     mapping:
@@ -275,7 +275,7 @@ templates:
       file: ./src/mappings/security.ts
   - kind: ethereum/contract
     name: Cash
-    network: gnosis
+    network: goerli
     source:
       abi: Cash
     mapping:
@@ -304,7 +304,7 @@ templates:
       file: ./src/mappings/cash.ts  
   - kind: ethereum/contract
     name: Bond
-    network: gnosis
+    network: goerli
     source:
       abi: Bond
     mapping:

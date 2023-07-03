@@ -163,8 +163,8 @@ export class tradeSettled__Params {
     return this._event.parameters[6].value.toAddress();
   }
 
-  get settlementStatus(): Bytes {
-    return this._event.parameters[7].value.toBytes();
+  get amountPaid(): BigInt {
+    return this._event.parameters[7].value.toBigInt();
   }
 
   get tradeRef(): Bytes {
@@ -194,6 +194,61 @@ export class MarginIssueManager extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  onMatch(
+    party: Address,
+    counterparty: Address,
+    orderRef: Bytes,
+    security: Address,
+    securityTraded: BigInt,
+    currency: Address,
+    cashTraded: BigInt
+  ): boolean {
+    let result = super.call(
+      "onMatch",
+      "onMatch(address,address,bytes32,address,uint256,address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(party),
+        ethereum.Value.fromAddress(counterparty),
+        ethereum.Value.fromFixedBytes(orderRef),
+        ethereum.Value.fromAddress(security),
+        ethereum.Value.fromUnsignedBigInt(securityTraded),
+        ethereum.Value.fromAddress(currency),
+        ethereum.Value.fromUnsignedBigInt(cashTraded)
+      ]
+    );
+
+    return result[0].toBoolean();
+  }
+
+  try_onMatch(
+    party: Address,
+    counterparty: Address,
+    orderRef: Bytes,
+    security: Address,
+    securityTraded: BigInt,
+    currency: Address,
+    cashTraded: BigInt
+  ): ethereum.CallResult<boolean> {
+    let result = super.tryCall(
+      "onMatch",
+      "onMatch(address,address,bytes32,address,uint256,address,uint256):(bool)",
+      [
+        ethereum.Value.fromAddress(party),
+        ethereum.Value.fromAddress(counterparty),
+        ethereum.Value.fromFixedBytes(orderRef),
+        ethereum.Value.fromAddress(security),
+        ethereum.Value.fromUnsignedBigInt(securityTraded),
+        ethereum.Value.fromAddress(currency),
+        ethereum.Value.fromUnsignedBigInt(cashTraded)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
   getTradingFeeCollected(_token: Address): BigInt {
@@ -384,6 +439,108 @@ export class IssueProductCall__Outputs {
   }
 }
 
+export class CloseCall extends ethereum.Call {
+  get inputs(): CloseCall__Inputs {
+    return new CloseCall__Inputs(this);
+  }
+
+  get outputs(): CloseCall__Outputs {
+    return new CloseCall__Outputs(this);
+  }
+}
+
+export class CloseCall__Inputs {
+  _call: CloseCall;
+
+  constructor(call: CloseCall) {
+    this._call = call;
+  }
+
+  get poolId(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+}
+
+export class CloseCall__Outputs {
+  _call: CloseCall;
+
+  constructor(call: CloseCall) {
+    this._call = call;
+  }
+}
+
+export class OfferCollateralCall extends ethereum.Call {
+  get inputs(): OfferCollateralCall__Inputs {
+    return new OfferCollateralCall__Inputs(this);
+  }
+
+  get outputs(): OfferCollateralCall__Outputs {
+    return new OfferCollateralCall__Outputs(this);
+  }
+}
+
+export class OfferCollateralCall__Inputs {
+  _call: OfferCollateralCall;
+
+  constructor(call: OfferCollateralCall) {
+    this._call = call;
+  }
+
+  get cashToken(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class OfferCollateralCall__Outputs {
+  _call: OfferCollateralCall;
+
+  constructor(call: OfferCollateralCall) {
+    this._call = call;
+  }
+}
+
+export class SendCollateralCall extends ethereum.Call {
+  get inputs(): SendCollateralCall__Inputs {
+    return new SendCollateralCall__Inputs(this);
+  }
+
+  get outputs(): SendCollateralCall__Outputs {
+    return new SendCollateralCall__Outputs(this);
+  }
+}
+
+export class SendCollateralCall__Inputs {
+  _call: SendCollateralCall;
+
+  constructor(call: SendCollateralCall) {
+    this._call = call;
+  }
+
+  get cashToken(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+
+  get poolId(): Bytes {
+    return this._call.inputValues[2].value.toBytes();
+  }
+}
+
+export class SendCollateralCall__Outputs {
+  _call: SendCollateralCall;
+
+  constructor(call: SendCollateralCall) {
+    this._call = call;
+  }
+}
+
 export class OnMatchCall extends ethereum.Call {
   get inputs(): OnMatchCall__Inputs {
     return new OnMatchCall__Inputs(this);
@@ -436,6 +593,10 @@ export class OnMatchCall__Outputs {
   constructor(call: OnMatchCall) {
     this._call = call;
   }
+
+  get value0(): boolean {
+    return this._call.outputValues[0].value.toBoolean();
+  }
 }
 
 export class OnTradeCall extends ethereum.Call {
@@ -478,12 +639,104 @@ export class OnTradeCall__Inputs {
   get currencyTraded(): BigInt {
     return this._call.inputValues[5].value.toBigInt();
   }
+
+  get executionTime(): BigInt {
+    return this._call.inputValues[6].value.toBigInt();
+  }
 }
 
 export class OnTradeCall__Outputs {
   _call: OnTradeCall;
 
   constructor(call: OnTradeCall) {
+    this._call = call;
+  }
+}
+
+export class OnSettleCall extends ethereum.Call {
+  get inputs(): OnSettleCall__Inputs {
+    return new OnSettleCall__Inputs(this);
+  }
+
+  get outputs(): OnSettleCall__Outputs {
+    return new OnSettleCall__Outputs(this);
+  }
+}
+
+export class OnSettleCall__Inputs {
+  _call: OnSettleCall;
+
+  constructor(call: OnSettleCall) {
+    this._call = call;
+  }
+
+  get security(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get currency(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get financingPerSec(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
+  }
+
+  get charge(): boolean {
+    return this._call.inputValues[3].value.toBoolean();
+  }
+
+  get dividendPerSec(): BigInt {
+    return this._call.inputValues[4].value.toBigInt();
+  }
+
+  get payout(): boolean {
+    return this._call.inputValues[5].value.toBoolean();
+  }
+
+  get settlementTime(): BigInt {
+    return this._call.inputValues[6].value.toBigInt();
+  }
+}
+
+export class OnSettleCall__Outputs {
+  _call: OnSettleCall;
+
+  constructor(call: OnSettleCall) {
+    this._call = call;
+  }
+}
+
+export class WithdrawCall extends ethereum.Call {
+  get inputs(): WithdrawCall__Inputs {
+    return new WithdrawCall__Inputs(this);
+  }
+
+  get outputs(): WithdrawCall__Outputs {
+    return new WithdrawCall__Outputs(this);
+  }
+}
+
+export class WithdrawCall__Inputs {
+  _call: WithdrawCall;
+
+  constructor(call: WithdrawCall) {
+    this._call = call;
+  }
+
+  get security(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get currency(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class WithdrawCall__Outputs {
+  _call: WithdrawCall;
+
+  constructor(call: WithdrawCall) {
     this._call = call;
   }
 }
@@ -519,35 +772,5 @@ export class GetTradingFeeCollectedCall__Outputs {
 
   get value0(): BigInt {
     return this._call.outputValues[0].value.toBigInt();
-  }
-}
-
-export class CloseCall extends ethereum.Call {
-  get inputs(): CloseCall__Inputs {
-    return new CloseCall__Inputs(this);
-  }
-
-  get outputs(): CloseCall__Outputs {
-    return new CloseCall__Outputs(this);
-  }
-}
-
-export class CloseCall__Inputs {
-  _call: CloseCall;
-
-  constructor(call: CloseCall) {
-    this._call = call;
-  }
-
-  get poolId(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
-  }
-}
-
-export class CloseCall__Outputs {
-  _call: CloseCall;
-
-  constructor(call: CloseCall) {
-    this._call = call;
   }
 }

@@ -158,9 +158,9 @@
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
-        "name": "settlementStatus",
-        "type": "bytes32"
+        "internalType": "uint256",
+        "name": "amountPaid",
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -189,8 +189,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -301,6 +300,60 @@
   {
     "inputs": [
       {
+        "internalType": "bytes32",
+        "name": "poolId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "close",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "cashToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "offerCollateral",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "cashToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "poolId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "sendCollateral",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "party",
         "type": "address"
@@ -337,7 +390,13 @@
       }
     ],
     "name": "onMatch",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -372,9 +431,75 @@
         "internalType": "uint256",
         "name": "currencyTraded",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "executionTime",
+        "type": "uint256"
       }
     ],
     "name": "onTrade",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "currency",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "financingPerSec",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "charge",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "dividendPerSec",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "payout",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "settlementTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "onSettle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "currency",
+        "type": "address"
+      }
+    ],
+    "name": "withdraw",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -395,19 +520,6 @@
         "type": "uint256"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "poolId",
-        "type": "bytes32"
-      }
-    ],
-    "name": "close",
-    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   }

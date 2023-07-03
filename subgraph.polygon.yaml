@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: matic
     source:
-      address: '0x9e3171ed30C27fFE694b5B44E99c1cCEFe4Fb85d'
+      address: '0xF0bbA007515fF51C9310225106512B921de4cdAA'
       abi: SecuritiesFactory
-      startBlock: 42888181
+      startBlock: 44622398
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -32,9 +32,9 @@ dataSources:
     name: Client
     network: matic
     source:
-      address: '0xd234d2433a877465cbdF6B478bfC027dB7910b0b'
+      address: '0x2C5718206b37b8744784ce44f374DE13dd7BC2d1'
       abi: Client
-      startBlock: 42888166
+      startBlock: 44622376
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -57,9 +57,9 @@ dataSources:
     name: Liquidity
     network: matic
     source:
-      address: '0x93581c9DD7dc73a6C3887F4bd0bA74D175aDbD85'
+      address: '0x2E6F17DF38B4686D17C6ec63eF3Ee8f926b1769a'
       abi: Liquidity
-      startBlock: 42817642
+      startBlock: 44243899
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -100,9 +100,9 @@ dataSources:
     name: Distribution
     network: matic
     source:
-      address: '0x2d99a4c42a386408C687A4825D7Ea3ab378994B8'
+      address: '0x96De7417058Dff11D570011eA100e6F0B6Af98eC'
       abi: Distribution
-      startBlock: 42819687
+      startBlock: 44623254
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -121,9 +121,9 @@ dataSources:
     name: PrimaryIssueManager
     network: matic
     source:
-      address: '0x3Af6bae7e4779808B5B6cE03c5095Af00Fd87731'
+      address: '0x30fE817317Ffc5A45e8cB457fD1AC8ca0CE068D4'
       abi: PrimaryIssueManager
-      startBlock: 42888477
+      startBlock: 44623750
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -162,9 +162,9 @@ dataSources:
     name: SecondaryIssueManager
     network: matic
     source:
-      address: '0x305a09D57Ea30EeF22fBb2B1048f3A09164C9b12'
+      address: '0xb9AD11aC80AD0BE1B83ba6b83E4E27C110c18a33'
       abi: SecondaryIssueManager
-      startBlock: 42888493
+      startBlock: 44623769
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -208,7 +208,7 @@ dataSources:
         - name: MarginIssueManager
           file: ./abis/MarginIssueManager.json
       eventHandlers:
-        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,bytes32,bytes32,uint256)
+        - event: tradeSettled(indexed bytes32,address,address,uint256,address,uint256,address,uint256,bytes32,uint256)
           handler: handleTrades
         - event: subscribers(address,address,indexed address,uint256,address,uint256)
           handler: handleTraders

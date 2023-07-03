@@ -196,7 +196,8 @@ type Trades @entity {
   security: Security!
   price: BigDecimal!
   currency: Bytes!
-  settlementStatus: Bytes!
+  settlementStatus: Bytes
+  amountPaid: BigDecimal
   tradeRef: Bytes!
   tradingCommission: BigDecimal!
   timestamp: Int!
