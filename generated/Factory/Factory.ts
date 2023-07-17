@@ -779,14 +779,20 @@ export class Factory extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddressArray());
   }
 
-  getBondTerm(): BigInt {
-    let result = super.call("getBondTerm", "getBondTerm():(uint256)", []);
+  getBondTerm(_bondToken: Address): BigInt {
+    let result = super.call("getBondTerm", "getBondTerm(address):(uint256)", [
+      ethereum.Value.fromAddress(_bondToken)
+    ]);
 
     return result[0].toBigInt();
   }
 
-  try_getBondTerm(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall("getBondTerm", "getBondTerm():(uint256)", []);
+  try_getBondTerm(_bondToken: Address): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getBondTerm",
+      "getBondTerm(address):(uint256)",
+      [ethereum.Value.fromAddress(_bondToken)]
+    );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -1375,8 +1381,12 @@ export class SetBondTermCall__Inputs {
     this._call = call;
   }
 
+  get _bondToken(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
   get _term(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
+    return this._call.inputValues[1].value.toBigInt();
   }
 }
 

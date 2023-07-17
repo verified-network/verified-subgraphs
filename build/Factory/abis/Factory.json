@@ -620,7 +620,12 @@
   },
   {
     "constant": true,
-    "inputs": [],
+    "inputs": [
+      {
+        "name": "_bondToken",
+        "type": "address"
+      }
+    ],
     "name": "getBondTerm",
     "outputs": [
       {
@@ -768,6 +773,10 @@
   {
     "constant": false,
     "inputs": [
+      {
+        "name": "_bondToken",
+        "type": "address"
+      },
       {
         "name": "_term",
         "type": "uint256"

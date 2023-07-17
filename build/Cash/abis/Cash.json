@@ -412,89 +412,14 @@
         "indexed": false,
         "name": "deposit",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "counter",
+        "type": "uint256"
       }
     ],
     "name": "CashTransfer",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "requestedIssue",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "toIssue",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "to",
-        "type": "address"
-      }
-    ],
-    "name": "transferTo",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "currency",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "condition",
-        "type": "uint256"
-      }
-    ],
-    "name": "redemption",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "issued",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "balanceAmount",
     "type": "event"
   },
   {

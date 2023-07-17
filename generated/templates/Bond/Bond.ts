@@ -396,6 +396,21 @@ export class Bond extends ethereum.SmartContract {
     return new Bond("Bond", address);
   }
 
+  bondCurrency(): Bytes {
+    let result = super.call("bondCurrency", "bondCurrency():(bytes32)", []);
+
+    return result[0].toBytes();
+  }
+
+  try_bondCurrency(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall("bondCurrency", "bondCurrency():(bytes32)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
+  }
+
   name(): string {
     let result = super.call("name", "name():(string)", []);
 
