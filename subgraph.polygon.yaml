@@ -240,6 +240,34 @@ dataSources:
           handler: handleBondCreated
         - event: TokenCreated(indexed address,bytes32,bytes32)
           handler: handleBondTokenCreated
+  - kind: ethereum/contract
+    name: VerifiedMarkets
+    network: matic
+    source:
+      address: '0xf8287e8D37863Db0Cabd25B55f77652d5d6aEb83'
+      abi: VerifiedMarkets
+      startBlock: 9484074
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/secondaries.ts
+      entities:
+        - RWA
+        - Collateral
+        - CompoundLoans
+      abis:
+        - name: VerifiedMarkets
+          file: ./abis/VerifiedMarkets.json
+      eventHandlers:
+        - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
+          handler: handleNewRWA
+        - event: PostedCollateral(indexed address,indexed address,address,uint256)
+          handler: handleCollateral
+        - event: Borrowed(indexed address,indexed address,uint256)
+          handler: handleBorrowing
+        - event: Repaid(indexed address,indexed address,uint256)
+          handler: handleRepayment
 templates:
   - kind: ethereum/contract
     name: Security
