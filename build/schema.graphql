@@ -356,29 +356,36 @@ type ManagersOnPlatform @entity{
 }
 type RWA @entity{
   id: ID!
-  issuer: User!
-  asset: Security!
-  bond: Token!
+  #issuer: User!
+  issuer: Bytes!
+  #asset: Security!
+  asset: Bytes!
+  #bond: Token!
+  bond: Bytes!
   apy: Int!
   issuingDocs:String!
   faceValue: BigDecimal!
 }
 type Collateral @entity{
   id: ID!
-  issuer: User!
-  asset: Security!
+  #issuer: User!
+  issuer: Bytes!
+  #asset: Security!
+  asset: Bytes!
   collateral: Bytes!
   amount: BigDecimal!
 }
 type CollaterizedLoan @entity{
   id: ID!
-  borrower: User!
+  #borrower: User!
+  borrower: Bytes!
   base: Bytes! 
   amount: BigDecimal!
 }
 type CollaterizedLoanRepayment @entity{
   id: ID!
-  borrower: User!
+  #borrower: User!
+  borrower: Bytes!
   base: Bytes! 
   amount: BigDecimal!
 }

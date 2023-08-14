@@ -16,18 +16,24 @@ export function handleNewRWA(event: NewRWA): void {
     if(rwa==null){
         let assetId = event.params.asset.toHexString();
         let rwa = new RWA(assetId);
-        rwa.issuer = event.params.issuer.toHexString();
+        /*rwa.issuer = event.params.issuer.toHexString();
         rwa.asset = event.params.asset.toHexString();
-        rwa.bond = event.params.bond.toHexString();
+        rwa.bond = event.params.bond.toHexString();*/
+        rwa.issuer = event.params.issuer;
+        rwa.asset = event.params.asset;
+        rwa.bond = event.params.bond;
         rwa.apy = event.params.apy.toI32();
         rwa.issuingDocs = event.params.issuingDocs;
         rwa.faceValue = event.params.faceValue.toBigDecimal();
         rwa.save();
     }
     else{
-        rwa.issuer = event.params.issuer.toHexString();
+        /*rwa.issuer = event.params.issuer.toHexString();
         rwa.asset = event.params.asset.toHexString();
-        rwa.bond = event.params.bond.toHexString();
+        rwa.bond = event.params.bond.toHexString();*/
+        rwa.issuer = event.params.issuer;
+        rwa.asset = event.params.asset;
+        rwa.bond = event.params.bond;
         rwa.apy = event.params.apy.toI32();
         rwa.issuingDocs = event.params.issuingDocs;
         rwa.faceValue = event.params.faceValue.toBigDecimal();
@@ -40,15 +46,19 @@ export function handleCollateral(event: PostedCollateral): void {
     if(collateral==null){
         let assetId = event.params.asset.toHexString();
         let collateral = new Collateral(assetId);
-        collateral.issuer = event.params.issuer.toHexString();
-        collateral.asset = event.params.asset.toHexString();
+        /*collateral.issuer = event.params.issuer.toHexString();
+        collateral.asset = event.params.asset.toHexString();*/
+        collateral.issuer = event.params.issuer;
+        collateral.asset = event.params.asset;
         collateral.collateral = event.params.collateral;
         collateral.amount = event.params.amount.toBigDecimal();
         collateral.save();
     }   
     else{
-        collateral.issuer = event.params.issuer.toHexString();
-        collateral.asset = event.params.asset.toHexString();
+        /*collateral.issuer = event.params.issuer.toHexString();
+        collateral.asset = event.params.asset.toHexString();*/
+        collateral.issuer = event.params.issuer;
+        collateral.asset = event.params.asset;
         collateral.collateral = event.params.collateral;
         collateral.amount = event.params.amount.toBigDecimal();
         collateral.save();
@@ -60,13 +70,15 @@ export function handleBorrowing(event: Borrowed): void {
     if(borrowings==null){
         let borrowerId = event.params.borrower.toHexString();
         let borrowings = new CollaterizedLoan(borrowerId);
-        borrowings.borrower = event.params.borrower.toHexString();
+        //borrowings.borrower = event.params.borrower.toHexString();
+        borrowings.borrower = event.params.borrower;
         borrowings.base = event.params.base;
         borrowings.amount = event.params.amount.toBigDecimal();
         borrowings.save();
     }   
     else{
-        borrowings.borrower = event.params.borrower.toHexString();
+        //borrowings.borrower = event.params.borrower.toHexString();
+        borrowings.borrower = event.params.borrower;
         borrowings.base = event.params.base;
         borrowings.amount = event.params.amount.toBigDecimal();
         borrowings.save();
@@ -78,13 +90,15 @@ export function handleRepayment(event: Repaid): void {
     if(repayments==null){
         let borrowerId = event.params.borrower.toHexString();
         let repayments = new CollaterizedLoanRepayment(borrowerId);
-        repayments.borrower = event.params.borrower.toHexString();
+        //repayments.borrower = event.params.borrower.toHexString();
+        repayments.borrower = event.params.borrower;
         repayments.base = event.params.base;
         repayments.amount = event.params.amount.toBigDecimal();
         repayments.save();
     }   
     else{
-        repayments.borrower = event.params.borrower.toHexString();
+        //repayments.borrower = event.params.borrower.toHexString();
+        repayments.borrower = event.params.borrower;
         repayments.base = event.params.base;
         repayments.amount = event.params.amount.toBigDecimal();
         repayments.save();

@@ -4428,9 +4428,9 @@ export class RWA extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("issuer", Value.fromString(""));
-    this.set("asset", Value.fromString(""));
-    this.set("bond", Value.fromString(""));
+    this.set("issuer", Value.fromBytes(Bytes.empty()));
+    this.set("asset", Value.fromBytes(Bytes.empty()));
+    this.set("bond", Value.fromBytes(Bytes.empty()));
     this.set("apy", Value.fromI32(0));
     this.set("issuingDocs", Value.fromString(""));
     this.set("faceValue", Value.fromBigDecimal(BigDecimal.zero()));
@@ -4462,31 +4462,31 @@ export class RWA extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get issuer(): string {
+  get issuer(): Bytes {
     let value = this.get("issuer");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set issuer(value: string) {
-    this.set("issuer", Value.fromString(value));
+  set issuer(value: Bytes) {
+    this.set("issuer", Value.fromBytes(value));
   }
 
-  get asset(): string {
+  get asset(): Bytes {
     let value = this.get("asset");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set asset(value: string) {
-    this.set("asset", Value.fromString(value));
+  set asset(value: Bytes) {
+    this.set("asset", Value.fromBytes(value));
   }
 
-  get bond(): string {
+  get bond(): Bytes {
     let value = this.get("bond");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set bond(value: string) {
-    this.set("bond", Value.fromString(value));
+  set bond(value: Bytes) {
+    this.set("bond", Value.fromBytes(value));
   }
 
   get apy(): i32 {
@@ -4522,8 +4522,8 @@ export class Collateral extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("issuer", Value.fromString(""));
-    this.set("asset", Value.fromString(""));
+    this.set("issuer", Value.fromBytes(Bytes.empty()));
+    this.set("asset", Value.fromBytes(Bytes.empty()));
     this.set("collateral", Value.fromBytes(Bytes.empty()));
     this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
   }
@@ -4554,22 +4554,22 @@ export class Collateral extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get issuer(): string {
+  get issuer(): Bytes {
     let value = this.get("issuer");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set issuer(value: string) {
-    this.set("issuer", Value.fromString(value));
+  set issuer(value: Bytes) {
+    this.set("issuer", Value.fromBytes(value));
   }
 
-  get asset(): string {
+  get asset(): Bytes {
     let value = this.get("asset");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set asset(value: string) {
-    this.set("asset", Value.fromString(value));
+  set asset(value: Bytes) {
+    this.set("asset", Value.fromBytes(value));
   }
 
   get collateral(): Bytes {
@@ -4596,7 +4596,7 @@ export class CollaterizedLoan extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("borrower", Value.fromString(""));
+    this.set("borrower", Value.fromBytes(Bytes.empty()));
     this.set("base", Value.fromBytes(Bytes.empty()));
     this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
   }
@@ -4629,13 +4629,13 @@ export class CollaterizedLoan extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get borrower(): string {
+  get borrower(): Bytes {
     let value = this.get("borrower");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set borrower(value: string) {
-    this.set("borrower", Value.fromString(value));
+  set borrower(value: Bytes) {
+    this.set("borrower", Value.fromBytes(value));
   }
 
   get base(): Bytes {
@@ -4662,7 +4662,7 @@ export class CollaterizedLoanRepayment extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("borrower", Value.fromString(""));
+    this.set("borrower", Value.fromBytes(Bytes.empty()));
     this.set("base", Value.fromBytes(Bytes.empty()));
     this.set("amount", Value.fromBigDecimal(BigDecimal.zero()));
   }
@@ -4698,13 +4698,13 @@ export class CollaterizedLoanRepayment extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get borrower(): string {
+  get borrower(): Bytes {
     let value = this.get("borrower");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set borrower(value: string) {
-    this.set("borrower", Value.fromString(value));
+  set borrower(value: Bytes) {
+    this.set("borrower", Value.fromBytes(value));
   }
 
   get base(): Bytes {
