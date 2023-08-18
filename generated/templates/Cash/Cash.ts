@@ -132,10 +132,6 @@ export class CashTransfer__Params {
   get deposit(): BigInt {
     return this._event.parameters[4].value.toBigInt();
   }
-
-  get counter(): BigInt {
-    return this._event.parameters[5].value.toBigInt();
-  }
 }
 
 export class Paused extends ethereum.Event {

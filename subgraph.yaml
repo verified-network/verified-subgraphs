@@ -220,9 +220,9 @@ dataSources:
     name: Factory
     network: goerli
     source:
-      address: '0xAFf627DF5f856f5696597f223DCC4AB9EFf689DF'
+      address: '0xFA2ADf68Eb4fc9d4331Df124B5902021A78D2842'
       abi: Factory
-      startBlock: 9356501
+      startBlock: 9537390
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -328,7 +328,7 @@ templates:
           handler: handleCashRedeemed
         - event: CashDeposits(indexed address,bytes32,uint256)
           handler: handleCashDeposits
-        - event: CashTransfer(indexed address,indexed address,bytes32,uint256,uint256,uint256)
+        - event: CashTransfer(indexed address,indexed address,bytes32,uint256,uint256)
           handler: handleCashTransfer
       file: ./src/mappings/cash.ts  
   - kind: ethereum/contract

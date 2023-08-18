@@ -170,6 +170,28 @@ export class BondLiquidated__Params {
   }
 }
 
+export class Transfers extends ethereum.Event {
+  get params(): Transfers__Params {
+    return new Transfers__Params(this);
+  }
+}
+
+export class Transfers__Params {
+  _event: Transfers;
+
+  constructor(event: Transfers) {
+    this._event = event;
+  }
+
+  get txAmnt(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get balance(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
 export class Paused extends ethereum.Event {
   get params(): Paused__Params {
     return new Paused__Params(this);
@@ -1348,32 +1370,6 @@ export class TransferOwnershipCall__Outputs {
   _call: TransferOwnershipCall;
 
   constructor(call: TransferOwnershipCall) {
-    this._call = call;
-  }
-}
-
-export class DefaultCall extends ethereum.Call {
-  get inputs(): DefaultCall__Inputs {
-    return new DefaultCall__Inputs(this);
-  }
-
-  get outputs(): DefaultCall__Outputs {
-    return new DefaultCall__Outputs(this);
-  }
-}
-
-export class DefaultCall__Inputs {
-  _call: DefaultCall;
-
-  constructor(call: DefaultCall) {
-    this._call = call;
-  }
-}
-
-export class DefaultCall__Outputs {
-  _call: DefaultCall;
-
-  constructor(call: DefaultCall) {
     this._call = call;
   }
 }
