@@ -52,12 +52,14 @@ export function handleIssueRequest(event: RequestIssue): void {
         lpTokenRequestors.investor = event.params.investor.toHexString();
         lpTokenRequestors.token = event.params.token.toHexString();
         lpTokenRequestors.tokenAmount = event.params.tokenAmount.toBigDecimal();
+        lpTokenRequestors.timestamp = event.params.timestamp.toI32();
         lpTokenRequestors.save();
     }
     else{
         lpTokenRequestors.investor = event.params.investor.toHexString();
         lpTokenRequestors.token = event.params.token.toHexString();
         lpTokenRequestors.tokenAmount = event.params.tokenAmount.toBigDecimal();
+        lpTokenRequestors.timestamp = event.params.timestamp.toI32();
         lpTokenRequestors.save();
     }
 }
@@ -151,6 +153,7 @@ export function handleInvestorReturns(event: InvestorReturns): void {
         investors.investor = event.params.investor.toHexString();
         investors.vitta = event.params.vitta;
         investors.prorataStake = event.params.prorataStake.toBigDecimal();
+        investors.timestamp = event.params.timestamp.toI32();
         investors.save();
     }
     else{
@@ -158,6 +161,7 @@ export function handleInvestorReturns(event: InvestorReturns): void {
         investors.investor = event.params.investor.toHexString();
         investors.vitta = event.params.vitta;
         investors.prorataStake = event.params.prorataStake.toBigDecimal();
+        investors.timestamp = event.params.timestamp.toI32();
         investors.save();
     }
 }

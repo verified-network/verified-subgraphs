@@ -3861,6 +3861,7 @@ export class LiquidityTokenRequests extends Entity {
     this.set("investor", Value.fromString(""));
     this.set("token", Value.fromString(""));
     this.set("tokenAmount", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("timestamp", Value.fromI32(0));
   }
 
   save(): void {
@@ -3919,6 +3920,15 @@ export class LiquidityTokenRequests extends Entity {
 
   set tokenAmount(value: BigDecimal) {
     this.set("tokenAmount", Value.fromBigDecimal(value));
+  }
+
+  get timestamp(): i32 {
+    let value = this.get("timestamp");
+    return value!.toI32();
+  }
+
+  set timestamp(value: i32) {
+    this.set("timestamp", Value.fromI32(value));
   }
 }
 
@@ -4231,6 +4241,7 @@ export class InvestorRoI extends Entity {
     this.set("investor", Value.fromString(""));
     this.set("vitta", Value.fromBytes(Bytes.empty()));
     this.set("prorataStake", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("timestamp", Value.fromI32(0));
   }
 
   save(): void {
@@ -4293,6 +4304,15 @@ export class InvestorRoI extends Entity {
 
   set prorataStake(value: BigDecimal) {
     this.set("prorataStake", Value.fromBigDecimal(value));
+  }
+
+  get timestamp(): i32 {
+    let value = this.get("timestamp");
+    return value!.toI32();
+  }
+
+  set timestamp(value: i32) {
+    this.set("timestamp", Value.fromI32(value));
   }
 }
 

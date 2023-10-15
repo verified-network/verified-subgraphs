@@ -38,6 +38,10 @@ export class InvestorReturns__Params {
   get prorataStake(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
 }
 
 export class IssuedVitta extends ethereum.Event {
@@ -267,6 +271,10 @@ export class RequestIssue__Params {
 
   get tokenAmount(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
@@ -858,6 +866,36 @@ export class SupportTokensCall__Outputs {
   }
 }
 
+export class RemoveTokenCall extends ethereum.Call {
+  get inputs(): RemoveTokenCall__Inputs {
+    return new RemoveTokenCall__Inputs(this);
+  }
+
+  get outputs(): RemoveTokenCall__Outputs {
+    return new RemoveTokenCall__Outputs(this);
+  }
+}
+
+export class RemoveTokenCall__Inputs {
+  _call: RemoveTokenCall;
+
+  constructor(call: RemoveTokenCall) {
+    this._call = call;
+  }
+
+  get _token(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class RemoveTokenCall__Outputs {
+  _call: RemoveTokenCall;
+
+  constructor(call: RemoveTokenCall) {
+    this._call = call;
+  }
+}
+
 export class RegisterPlatformCall extends ethereum.Call {
   get inputs(): RegisterPlatformCall__Inputs {
     return new RegisterPlatformCall__Inputs(this);
@@ -1334,6 +1372,36 @@ export class SetTreasurerCall__Outputs {
   _call: SetTreasurerCall;
 
   constructor(call: SetTreasurerCall) {
+    this._call = call;
+  }
+}
+
+export class SetLiquidityShareCall extends ethereum.Call {
+  get inputs(): SetLiquidityShareCall__Inputs {
+    return new SetLiquidityShareCall__Inputs(this);
+  }
+
+  get outputs(): SetLiquidityShareCall__Outputs {
+    return new SetLiquidityShareCall__Outputs(this);
+  }
+}
+
+export class SetLiquidityShareCall__Inputs {
+  _call: SetLiquidityShareCall;
+
+  constructor(call: SetLiquidityShareCall) {
+    this._call = call;
+  }
+
+  get _share(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetLiquidityShareCall__Outputs {
+  _call: SetLiquidityShareCall;
+
+  constructor(call: SetLiquidityShareCall) {
     this._call = call;
   }
 }

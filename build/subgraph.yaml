@@ -83,7 +83,7 @@ dataSources:
           handler: handleSupportedToken
         - event: RegisterPlatform(indexed address,bytes32)
           handler: handlePlatformRegistration
-        - event: RequestIssue(indexed address,address,uint256)
+        - event: RequestIssue(indexed address,address,uint256,uint256)
           handler: handleIssueRequest
         - event: IssuedVitta(indexed address,address,uint256,uint256)
           handler: handleIssuedVitta
@@ -93,7 +93,7 @@ dataSources:
           handler: handleManagerReturns
         - event: PlatformReturns(indexed address,address,uint256)
           handler: handlePlatformReturns
-        - event: InvestorReturns(indexed address,indexed address,address,uint256)
+        - event: InvestorReturns(indexed address,indexed address,address,uint256,uint256)
           handler: handleInvestorReturns
         - event: PlatformManagers(indexed address,address)
           handler: handlePlatformManagers

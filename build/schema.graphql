@@ -307,6 +307,7 @@ type LiquidityTokenRequests @entity{
   investor: User!
   token: Currency!
   tokenAmount: BigDecimal!
+  timestamp: Int!
 }
 type LiquidityTokenIssues @entity{
   id: ID!
@@ -342,6 +343,7 @@ type InvestorRoI @entity{
   investor: User!
   vitta: Bytes!
   prorataStake: BigDecimal!
+  timestamp: Int!
 }
 type FeeCollections @entity{
   id: ID!
