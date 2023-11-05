@@ -3001,6 +3001,7 @@ export class Traders extends Entity {
     this.set("securityTraded", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("cashTraded", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("orderRef", Value.fromBytes(Bytes.empty()));
   }
 
   save(): void {
@@ -3097,6 +3098,15 @@ export class Traders extends Entity {
 
   set cashTraded(value: BigDecimal) {
     this.set("cashTraded", Value.fromBigDecimal(value));
+  }
+
+  get orderRef(): Bytes {
+    let value = this.get("orderRef");
+    return value!.toBytes();
+  }
+
+  set orderRef(value: Bytes) {
+    this.set("orderRef", Value.fromBytes(value));
   }
 }
 

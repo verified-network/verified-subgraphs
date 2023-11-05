@@ -55,6 +55,7 @@ export function handleTraders(event: subscribers): void {
         investors.currency = event.params.currencySettled;
         investors.securityTraded = event.params.securityAmount.toBigDecimal();
         investors.cashTraded = event.params.cashAmount.toBigDecimal();
+        investors.orderRef = event.params.orderRef;
         investors.save();
     }
     else{
@@ -64,6 +65,7 @@ export function handleTraders(event: subscribers): void {
         investors.currency = event.params.currencySettled;
         investors.securityTraded = event.params.securityAmount.toBigDecimal();
         investors.cashTraded = event.params.cashAmount.toBigDecimal();
+        investors.orderRef = event.params.orderRef;
         investors.save();
     }
 }

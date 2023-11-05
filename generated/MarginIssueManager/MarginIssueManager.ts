@@ -120,6 +120,10 @@ export class subscribers__Params {
   get cashAmount(): BigInt {
     return this._event.parameters[5].value.toBigInt();
   }
+
+  get orderRef(): Bytes {
+    return this._event.parameters[6].value.toBytes();
+  }
 }
 
 export class tradeSettled extends ethereum.Event {
@@ -194,61 +198,6 @@ export class MarginIssueManager extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  onMatch(
-    party: Address,
-    counterparty: Address,
-    orderRef: Bytes,
-    security: Address,
-    securityTraded: BigInt,
-    currency: Address,
-    cashTraded: BigInt
-  ): boolean {
-    let result = super.call(
-      "onMatch",
-      "onMatch(address,address,bytes32,address,uint256,address,uint256):(bool)",
-      [
-        ethereum.Value.fromAddress(party),
-        ethereum.Value.fromAddress(counterparty),
-        ethereum.Value.fromFixedBytes(orderRef),
-        ethereum.Value.fromAddress(security),
-        ethereum.Value.fromUnsignedBigInt(securityTraded),
-        ethereum.Value.fromAddress(currency),
-        ethereum.Value.fromUnsignedBigInt(cashTraded)
-      ]
-    );
-
-    return result[0].toBoolean();
-  }
-
-  try_onMatch(
-    party: Address,
-    counterparty: Address,
-    orderRef: Bytes,
-    security: Address,
-    securityTraded: BigInt,
-    currency: Address,
-    cashTraded: BigInt
-  ): ethereum.CallResult<boolean> {
-    let result = super.tryCall(
-      "onMatch",
-      "onMatch(address,address,bytes32,address,uint256,address,uint256):(bool)",
-      [
-        ethereum.Value.fromAddress(party),
-        ethereum.Value.fromAddress(counterparty),
-        ethereum.Value.fromFixedBytes(orderRef),
-        ethereum.Value.fromAddress(security),
-        ethereum.Value.fromUnsignedBigInt(securityTraded),
-        ethereum.Value.fromAddress(currency),
-        ethereum.Value.fromUnsignedBigInt(cashTraded)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
   getTradingFeeCollected(_token: Address): BigInt {
@@ -356,7 +305,7 @@ export class InitializeCall__Inputs {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get products(): Address {
+  get securityFactory(): Address {
     return this._call.inputValues[2].value.toAddress();
   }
 
@@ -456,8 +405,8 @@ export class CloseCall__Inputs {
     this._call = call;
   }
 
-  get poolId(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
+  get security(): Address {
+    return this._call.inputValues[0].value.toAddress();
   }
 }
 
@@ -492,6 +441,10 @@ export class OfferCollateralCall__Inputs {
 
   get amount(): BigInt {
     return this._call.inputValues[1].value.toBigInt();
+  }
+
+  get security(): Address {
+    return this._call.inputValues[2].value.toAddress();
   }
 }
 
@@ -528,8 +481,8 @@ export class SendCollateralCall__Inputs {
     return this._call.inputValues[1].value.toBigInt();
   }
 
-  get poolId(): Bytes {
-    return this._call.inputValues[2].value.toBytes();
+  get security(): Address {
+    return this._call.inputValues[2].value.toAddress();
   }
 }
 
@@ -592,10 +545,6 @@ export class OnMatchCall__Outputs {
 
   constructor(call: OnMatchCall) {
     this._call = call;
-  }
-
-  get value0(): boolean {
-    return this._call.outputValues[0].value.toBoolean();
   }
 }
 

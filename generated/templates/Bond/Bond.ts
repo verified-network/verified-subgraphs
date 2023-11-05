@@ -170,28 +170,6 @@ export class BondLiquidated__Params {
   }
 }
 
-export class Transfers extends ethereum.Event {
-  get params(): Transfers__Params {
-    return new Transfers__Params(this);
-  }
-}
-
-export class Transfers__Params {
-  _event: Transfers;
-
-  constructor(event: Transfers) {
-    this._event = event;
-  }
-
-  get txAmnt(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
-  get balance(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-}
-
 export class Paused extends ethereum.Event {
   get params(): Paused__Params {
     return new Paused__Params(this);

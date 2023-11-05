@@ -566,23 +566,6 @@
   },
   {
     "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "txAmnt",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "balance",
-        "type": "uint256"
-      }
-    ],
-    "name": "Transfers",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [],
     "name": "Paused",
     "type": "event"
