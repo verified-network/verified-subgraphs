@@ -90,6 +90,7 @@ type Security @entity {
   country: Bytes
   primarySubscribers: [Subscribers!] @derivedFrom(field: "security")
   secondaryInvestors: [Investors!] @derivedFrom(field: "security")
+  marginTraders: [Traders!] @derivedFrom(field: "security")
   trades: [Trades!] @derivedFrom(field: "security")
   liquidityProviders: [LiquidityProviders!] @derivedFrom(field: "security")  
   liquidityOffered: [Offers!] @derivedFrom(field: "tomatch")

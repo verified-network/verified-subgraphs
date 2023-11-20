@@ -1428,6 +1428,23 @@ export class Security extends Entity {
     }
   }
 
+  get marginTraders(): Array<string> | null {
+    let value = this.get("marginTraders");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set marginTraders(value: Array<string> | null) {
+    if (!value) {
+      this.unset("marginTraders");
+    } else {
+      this.set("marginTraders", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
   get trades(): Array<string> | null {
     let value = this.get("trades");
     if (!value || value.kind == ValueKind.NULL) {
