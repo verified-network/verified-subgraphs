@@ -124,6 +124,10 @@ export class subscribers__Params {
   get orderRef(): Bytes {
     return this._event.parameters[6].value.toBytes();
   }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[7].value.toBigInt();
+  }
 }
 
 export class tradeSettled extends ethereum.Event {

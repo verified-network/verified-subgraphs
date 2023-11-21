@@ -215,7 +215,8 @@ dataSources:
         - event: tradeSettled(indexed
             bytes32,address,address,uint256,address,uint256,address,uint256,bytes32,uint256)
           handler: handleTrades
-        - event: subscribers(address,address,indexed address,uint256,address,uint256,bytes32)
+        - event: subscribers(address,address,indexed
+            address,uint256,address,uint256,bytes32,uint256)
           handler: handleTraders
         - event: closures(indexed bytes32,address,uint256)
           handler: handleClosures

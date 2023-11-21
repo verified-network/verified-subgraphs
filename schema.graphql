@@ -236,6 +236,7 @@ type Traders @entity {
   currency: Bytes!
   cashTraded: BigDecimal!
   orderRef: Bytes!
+  timestamp: Int!
 }
 type LiquidityProviders @entity {
   id: ID!
