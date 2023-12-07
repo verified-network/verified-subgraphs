@@ -32,6 +32,24 @@ export class OwnershipTransferred__Params {
   }
 }
 
+export class balCollateral extends ethereum.Event {
+  get params(): balCollateral__Params {
+    return new balCollateral__Params(this);
+  }
+}
+
+export class balCollateral__Params {
+  _event: balCollateral;
+
+  constructor(event: balCollateral) {
+    this._event = event;
+  }
+
+  get b(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+}
+
 export class closures extends ethereum.Event {
   get params(): closures__Params {
     return new closures__Params(this);
@@ -81,6 +99,24 @@ export class feecollection__Params {
 
   get timestamp(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class oCollateral extends ethereum.Event {
+  get params(): oCollateral__Params {
+    return new oCollateral__Params(this);
+  }
+}
+
+export class oCollateral__Params {
+  _event: oCollateral;
+
+  constructor(event: oCollateral) {
+    this._event = event;
+  }
+
+  get c(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 }
 
