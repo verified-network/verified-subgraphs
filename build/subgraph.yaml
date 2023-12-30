@@ -195,9 +195,9 @@ dataSources:
     name: MarginIssueManager
     network: goerli
     source:
-      address: "0x88E22D74F4B8269FA25102d60e3e9b9273604817"
+      address: "0x41dC42e66031B3A08eFe21E37583A4C9a0e887fe"
       abi: MarginIssueManager
-      startBlock: 10173493
+      startBlock: 10196020
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
