@@ -20,26 +20,28 @@ export function handleTrades(event: tradeSettled): void {
         trades.poolid = event.params.poolid;
         trades.transferor = event.params.transferor.toHexString();
         trades.transferee = event.params.transferee.toHexString();
-        trades.unitsToTransfer = event.params.unitsToTransfer;
+        //trades.unitsToTransfer = event.params.unitsToTransfer;
         trades.security = event.params.security.toHexString();
         trades.currency = event.params.currency;
         trades.price = event.params.price.toBigDecimal();
-        trades.amountPaid = event.params.amountPaid.toBigDecimal();
+        //trades.amountPaid = event.params.amountPaid.toBigDecimal();
         trades.tradeRef = event.params.tradeRef;
         trades.tradingCommission = event.params.fee.toBigDecimal();
+        trades.timestamp = event.params.timestamp.toI32();
         trades.save();
     }
     else{
         trades.poolid = event.params.poolid;
         trades.transferor = event.params.transferor.toHexString();
         trades.transferee = event.params.transferee.toHexString();
-        trades.unitsToTransfer = event.params.unitsToTransfer;
+        //trades.unitsToTransfer = event.params.unitsToTransfer;
         trades.security = event.params.security.toHexString();
         trades.currency = event.params.currency;
         trades.price = event.params.price.toBigDecimal();
-        trades.amountPaid = event.params.amountPaid.toBigDecimal();
+        //trades.amountPaid = event.params.amountPaid.toBigDecimal();
         trades.tradeRef = event.params.tradeRef;
         trades.tradingCommission = event.params.fee.toBigDecimal();
+        trades.timestamp = event.params.timestamp.toI32();
         trades.save();
     }
 }

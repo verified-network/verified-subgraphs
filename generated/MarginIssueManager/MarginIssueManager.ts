@@ -32,24 +32,6 @@ export class OwnershipTransferred__Params {
   }
 }
 
-export class balCollateral extends ethereum.Event {
-  get params(): balCollateral__Params {
-    return new balCollateral__Params(this);
-  }
-}
-
-export class balCollateral__Params {
-  _event: balCollateral;
-
-  constructor(event: balCollateral) {
-    this._event = event;
-  }
-
-  get b(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-}
-
 export class closures extends ethereum.Event {
   get params(): closures__Params {
     return new closures__Params(this);
@@ -102,21 +84,33 @@ export class feecollection__Params {
   }
 }
 
-export class oCollateral extends ethereum.Event {
-  get params(): oCollateral__Params {
-    return new oCollateral__Params(this);
+export class ptc extends ethereum.Event {
+  get params(): ptc__Params {
+    return new ptc__Params(this);
   }
 }
 
-export class oCollateral__Params {
-  _event: oCollateral;
+export class ptc__Params {
+  _event: ptc;
 
-  constructor(event: oCollateral) {
+  constructor(event: ptc) {
     this._event = event;
   }
 
-  get c(): BigInt {
+  get serial(): BigInt {
     return this._event.parameters[0].value.toBigInt();
+  }
+
+  get collateral(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get balance(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get trader(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 }
 
@@ -191,32 +185,28 @@ export class tradeSettled__Params {
     return this._event.parameters[2].value.toAddress();
   }
 
-  get unitsToTransfer(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
-  }
-
   get security(): Address {
-    return this._event.parameters[4].value.toAddress();
+    return this._event.parameters[3].value.toAddress();
   }
 
   get price(): BigInt {
-    return this._event.parameters[5].value.toBigInt();
+    return this._event.parameters[4].value.toBigInt();
   }
 
   get currency(): Address {
-    return this._event.parameters[6].value.toAddress();
-  }
-
-  get amountPaid(): BigInt {
-    return this._event.parameters[7].value.toBigInt();
+    return this._event.parameters[5].value.toAddress();
   }
 
   get tradeRef(): Bytes {
-    return this._event.parameters[8].value.toBytes();
+    return this._event.parameters[6].value.toBytes();
   }
 
   get fee(): BigInt {
-    return this._event.parameters[9].value.toBigInt();
+    return this._event.parameters[7].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[8].value.toBigInt();
   }
 }
 
