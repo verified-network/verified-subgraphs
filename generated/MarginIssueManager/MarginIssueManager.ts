@@ -97,8 +97,8 @@ export class ptc__Params {
     this._event = event;
   }
 
-  get serial(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
+  get serial(): Address {
+    return this._event.parameters[0].value.toAddress();
   }
 
   get collateral(): BigInt {
@@ -185,28 +185,36 @@ export class tradeSettled__Params {
     return this._event.parameters[2].value.toAddress();
   }
 
+  get unitsToTransfer(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
   get security(): Address {
-    return this._event.parameters[3].value.toAddress();
+    return this._event.parameters[4].value.toAddress();
   }
 
   get price(): BigInt {
-    return this._event.parameters[4].value.toBigInt();
+    return this._event.parameters[5].value.toBigInt();
   }
 
   get currency(): Address {
-    return this._event.parameters[5].value.toAddress();
+    return this._event.parameters[6].value.toAddress();
   }
 
-  get tradeRef(): Bytes {
-    return this._event.parameters[6].value.toBytes();
-  }
-
-  get fee(): BigInt {
+  get amountPaid(): BigInt {
     return this._event.parameters[7].value.toBigInt();
   }
 
+  get tradeRef(): Bytes {
+    return this._event.parameters[8].value.toBytes();
+  }
+
+  get fee(): BigInt {
+    return this._event.parameters[9].value.toBigInt();
+  }
+
   get timestamp(): BigInt {
-    return this._event.parameters[8].value.toBigInt();
+    return this._event.parameters[10].value.toBigInt();
   }
 }
 

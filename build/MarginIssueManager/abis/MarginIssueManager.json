@@ -73,9 +73,9 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "address",
         "name": "serial",
-        "type": "uint256"
+        "type": "address"
       },
       {
         "indexed": false,
@@ -177,6 +177,12 @@
       },
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "unitsToTransfer",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
         "internalType": "address",
         "name": "security",
         "type": "address"
@@ -192,6 +198,12 @@
         "internalType": "address",
         "name": "currency",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountPaid",
+        "type": "uint256"
       },
       {
         "indexed": false,

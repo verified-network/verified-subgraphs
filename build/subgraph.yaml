@@ -195,9 +195,9 @@ dataSources:
     name: MarginIssueManager
     network: goerli
     source:
-      address: "0xaEE3e10512D74CEd30b73883f8C9cFd2627C1c32"
+      address: "0x760DbfA77007EEcEe92256E3BA87AF036BB4524b"
       abi: MarginIssueManager
-      startBlock: 10411440
+      startBlock: 10416623
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -213,7 +213,7 @@ dataSources:
           file: MarginIssueManager\abis\MarginIssueManager.json
       eventHandlers:
         - event: tradeSettled(indexed
-            bytes32,address,address,address,uint256,address,bytes32,uint256,uint256)
+            bytes32,address,address,uint256,address,uint256,address,uint256,bytes32,uint256,uint256)
           handler: handleTrades
         - event: subscribers(address,address,indexed
             address,uint256,address,uint256,bytes32,uint256)
