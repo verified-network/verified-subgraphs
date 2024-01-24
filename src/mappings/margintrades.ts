@@ -23,9 +23,9 @@ export function handleTrades(event: tradeSettled): void {
         trades.unitsToTransfer = event.params.unitsToTransfer;
         trades.security = event.params.security.toHexString();
         trades.currency = event.params.currency;
-        trades.price = event.params.price.toBigDecimal();
         trades.amountPaid = event.params.amountPaid.toBigDecimal();
-        trades.tradeRef = event.params.tradeRef;
+        trades.tradeRef = event.params.cref;
+        trades.orderRef = event.params.ref;
         trades.tradingCommission = event.params.fee.toBigDecimal();
         trades.timestamp = event.params.timestamp.toI32();
         trades.save();
@@ -37,9 +37,9 @@ export function handleTrades(event: tradeSettled): void {
         trades.unitsToTransfer = event.params.unitsToTransfer;
         trades.security = event.params.security.toHexString();
         trades.currency = event.params.currency;
-        trades.price = event.params.price.toBigDecimal();
         trades.amountPaid = event.params.amountPaid.toBigDecimal();
-        trades.tradeRef = event.params.tradeRef;
+        trades.tradeRef = event.params.cref;
+        trades.orderRef = event.params.ref;
         trades.tradingCommission = event.params.fee.toBigDecimal();
         trades.timestamp = event.params.timestamp.toI32();
         trades.save();

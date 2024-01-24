@@ -193,19 +193,19 @@ export class tradeSettled__Params {
     return this._event.parameters[4].value.toAddress();
   }
 
-  get price(): BigInt {
-    return this._event.parameters[5].value.toBigInt();
-  }
-
   get currency(): Address {
-    return this._event.parameters[6].value.toAddress();
+    return this._event.parameters[5].value.toAddress();
   }
 
   get amountPaid(): BigInt {
-    return this._event.parameters[7].value.toBigInt();
+    return this._event.parameters[6].value.toBigInt();
   }
 
-  get tradeRef(): Bytes {
+  get cref(): Bytes {
+    return this._event.parameters[7].value.toBytes();
+  }
+
+  get ref(): Bytes {
     return this._event.parameters[8].value.toBytes();
   }
 

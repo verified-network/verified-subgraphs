@@ -200,6 +200,7 @@ type Trades @entity {
   settlementStatus: Bytes
   amountPaid: BigDecimal
   tradeRef: Bytes!
+  orderRef: Bytes!
   tradingCommission: BigDecimal!
   timestamp: Int!
 }
