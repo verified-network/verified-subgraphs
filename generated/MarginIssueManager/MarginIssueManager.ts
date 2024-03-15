@@ -84,36 +84,6 @@ export class feecollection__Params {
   }
 }
 
-export class ptc extends ethereum.Event {
-  get params(): ptc__Params {
-    return new ptc__Params(this);
-  }
-}
-
-export class ptc__Params {
-  _event: ptc;
-
-  constructor(event: ptc) {
-    this._event = event;
-  }
-
-  get serial(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get collateral(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-
-  get balance(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-
-  get trader(): Address {
-    return this._event.parameters[3].value.toAddress();
-  }
-}
-
 export class subscribers extends ethereum.Event {
   get params(): subscribers__Params {
     return new subscribers__Params(this);
@@ -382,6 +352,36 @@ export class InitializeCall__Outputs {
   _call: InitializeCall;
 
   constructor(call: InitializeCall) {
+    this._call = call;
+  }
+}
+
+export class SetBridgeCall extends ethereum.Call {
+  get inputs(): SetBridgeCall__Inputs {
+    return new SetBridgeCall__Inputs(this);
+  }
+
+  get outputs(): SetBridgeCall__Outputs {
+    return new SetBridgeCall__Outputs(this);
+  }
+}
+
+export class SetBridgeCall__Inputs {
+  _call: SetBridgeCall;
+
+  constructor(call: SetBridgeCall) {
+    this._call = call;
+  }
+
+  get bridge(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class SetBridgeCall__Outputs {
+  _call: SetBridgeCall;
+
+  constructor(call: SetBridgeCall) {
     this._call = call;
   }
 }
