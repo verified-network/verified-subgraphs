@@ -286,10 +286,6 @@
         "type": "address"
       },
       {
-        "name": "_bridge",
-        "type": "address"
-      },
-      {
         "name": "_client",
         "type": "address"
       }
@@ -309,20 +305,6 @@
       }
     ],
     "name": "initialize",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_signer",
-        "type": "address"
-      }
-    ],
-    "name": "setSigner",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",

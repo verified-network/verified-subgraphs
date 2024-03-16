@@ -773,12 +773,8 @@ export class InitializeCall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get _bridge(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
   get _client(): Address {
-    return this._call.inputValues[2].value.toAddress();
+    return this._call.inputValues[1].value.toAddress();
   }
 }
 
@@ -816,36 +812,6 @@ export class Initialize1Call__Outputs {
   _call: Initialize1Call;
 
   constructor(call: Initialize1Call) {
-    this._call = call;
-  }
-}
-
-export class SetSignerCall extends ethereum.Call {
-  get inputs(): SetSignerCall__Inputs {
-    return new SetSignerCall__Inputs(this);
-  }
-
-  get outputs(): SetSignerCall__Outputs {
-    return new SetSignerCall__Outputs(this);
-  }
-}
-
-export class SetSignerCall__Inputs {
-  _call: SetSignerCall;
-
-  constructor(call: SetSignerCall) {
-    this._call = call;
-  }
-
-  get _signer(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-}
-
-export class SetSignerCall__Outputs {
-  _call: SetSignerCall;
-
-  constructor(call: SetSignerCall) {
     this._call = call;
   }
 }
