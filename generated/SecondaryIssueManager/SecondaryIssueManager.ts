@@ -138,6 +138,24 @@ export class subscribers__Params {
   }
 }
 
+export class test extends ethereum.Event {
+  get params(): test__Params {
+    return new test__Params(this);
+  }
+}
+
+export class test__Params {
+  _event: test;
+
+  constructor(event: test) {
+    this._event = event;
+  }
+
+  get okay(): boolean {
+    return this._event.parameters[0].value.toBoolean();
+  }
+}
+
 export class tradeSettled extends ethereum.Event {
   get params(): tradeSettled__Params {
     return new tradeSettled__Params(this);
