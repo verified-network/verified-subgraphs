@@ -5,10 +5,10 @@ type Cash @entity {
   cashDeposits: [CashDeposited!] @derivedFrom(field: "currency")
   cashRedemptions: [CashRedemptions!] @derivedFrom(field: "currency")
   cashTransfers: [CashTransfers!] @derivedFrom(field: "currency")  
-  bondIssues: [BondIssues!] @derivedFrom(field: "collateralCurrency")
-  bondPurchases: [BondPurchases!] @derivedFrom(field: "paidInCurrency")
-  bondRedemptions: [BondRedemptions!] @derivedFrom(field: "redemptionCurrency")
-  BondLiquidations: [BondLiquidations!] @derivedFrom(field: "liquidationCurrency")
+  #bondIssues: [BondIssues!] @derivedFrom(field: "collateralCurrency")
+  #bondPurchases: [BondPurchases!] @derivedFrom(field: "paidInCurrency")
+  #bondRedemptions: [BondRedemptions!] @derivedFrom(field: "redemptionCurrency")
+  #BondLiquidations: [BondLiquidations!] @derivedFrom(field: "liquidationCurrency")
 }
 type User @entity {
   id: ID!
@@ -136,7 +136,7 @@ type BondIssues @entity {
   token: Token!
   bondName: Bytes!
   issuedAmount: BigDecimal!  
-  collateralCurrency: Cash!
+  collateralCurrency: Bytes!
   collateralAmount : BigDecimal!
   issueTime: Int!     
 }
@@ -146,7 +146,7 @@ type BondPurchases @entity {
   token: Token!
   bondName: Bytes!
   purchaseValue: BigDecimal!
-  paidInCurrency: Cash!
+  paidInCurrency: Bytes!
   purchasedAmount : BigDecimal!
   purchaseTime: Int!
 }
@@ -156,7 +156,7 @@ type BondRedemptions @entity {
   token: Token!
   bondName: Bytes!
   redeemedValue: BigDecimal!
-  redemptionCurrency: Cash!
+  redemptionCurrency: Bytes!
   redemptionAmount : BigDecimal!
 }
 type BondLiquidations @entity {
@@ -165,7 +165,7 @@ type BondLiquidations @entity {
   token: Token!
   liquidatedValue: BigDecimal!
   bondName: Bytes!
-  liquidationCurrency: Cash!
+  liquidationCurrency: Bytes!
   liquidatedAmount : BigDecimal! 
 }
 type Manager @entity {

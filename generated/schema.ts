@@ -127,74 +127,6 @@ export class Cash extends Entity {
       this.set("cashTransfers", Value.fromStringArray(<Array<string>>value));
     }
   }
-
-  get bondIssues(): Array<string> | null {
-    let value = this.get("bondIssues");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set bondIssues(value: Array<string> | null) {
-    if (!value) {
-      this.unset("bondIssues");
-    } else {
-      this.set("bondIssues", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get bondPurchases(): Array<string> | null {
-    let value = this.get("bondPurchases");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set bondPurchases(value: Array<string> | null) {
-    if (!value) {
-      this.unset("bondPurchases");
-    } else {
-      this.set("bondPurchases", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get bondRedemptions(): Array<string> | null {
-    let value = this.get("bondRedemptions");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set bondRedemptions(value: Array<string> | null) {
-    if (!value) {
-      this.unset("bondRedemptions");
-    } else {
-      this.set("bondRedemptions", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get BondLiquidations(): Array<string> | null {
-    let value = this.get("BondLiquidations");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set BondLiquidations(value: Array<string> | null) {
-    if (!value) {
-      this.unset("BondLiquidations");
-    } else {
-      this.set("BondLiquidations", Value.fromStringArray(<Array<string>>value));
-    }
-  }
 }
 
 export class User extends Entity {
@@ -1926,7 +1858,7 @@ export class BondIssues extends Entity {
     this.set("token", Value.fromString(""));
     this.set("bondName", Value.fromBytes(Bytes.empty()));
     this.set("issuedAmount", Value.fromBigDecimal(BigDecimal.zero()));
-    this.set("collateralCurrency", Value.fromString(""));
+    this.set("collateralCurrency", Value.fromBytes(Bytes.empty()));
     this.set("collateralAmount", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("issueTime", Value.fromI32(0));
   }
@@ -1993,13 +1925,13 @@ export class BondIssues extends Entity {
     this.set("issuedAmount", Value.fromBigDecimal(value));
   }
 
-  get collateralCurrency(): string {
+  get collateralCurrency(): Bytes {
     let value = this.get("collateralCurrency");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set collateralCurrency(value: string) {
-    this.set("collateralCurrency", Value.fromString(value));
+  set collateralCurrency(value: Bytes) {
+    this.set("collateralCurrency", Value.fromBytes(value));
   }
 
   get collateralAmount(): BigDecimal {
@@ -2030,7 +1962,7 @@ export class BondPurchases extends Entity {
     this.set("token", Value.fromString(""));
     this.set("bondName", Value.fromBytes(Bytes.empty()));
     this.set("purchaseValue", Value.fromBigDecimal(BigDecimal.zero()));
-    this.set("paidInCurrency", Value.fromString(""));
+    this.set("paidInCurrency", Value.fromBytes(Bytes.empty()));
     this.set("purchasedAmount", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("purchaseTime", Value.fromI32(0));
   }
@@ -2097,13 +2029,13 @@ export class BondPurchases extends Entity {
     this.set("purchaseValue", Value.fromBigDecimal(value));
   }
 
-  get paidInCurrency(): string {
+  get paidInCurrency(): Bytes {
     let value = this.get("paidInCurrency");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set paidInCurrency(value: string) {
-    this.set("paidInCurrency", Value.fromString(value));
+  set paidInCurrency(value: Bytes) {
+    this.set("paidInCurrency", Value.fromBytes(value));
   }
 
   get purchasedAmount(): BigDecimal {
@@ -2134,7 +2066,7 @@ export class BondRedemptions extends Entity {
     this.set("token", Value.fromString(""));
     this.set("bondName", Value.fromBytes(Bytes.empty()));
     this.set("redeemedValue", Value.fromBigDecimal(BigDecimal.zero()));
-    this.set("redemptionCurrency", Value.fromString(""));
+    this.set("redemptionCurrency", Value.fromBytes(Bytes.empty()));
     this.set("redemptionAmount", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
@@ -2200,13 +2132,13 @@ export class BondRedemptions extends Entity {
     this.set("redeemedValue", Value.fromBigDecimal(value));
   }
 
-  get redemptionCurrency(): string {
+  get redemptionCurrency(): Bytes {
     let value = this.get("redemptionCurrency");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set redemptionCurrency(value: string) {
-    this.set("redemptionCurrency", Value.fromString(value));
+  set redemptionCurrency(value: Bytes) {
+    this.set("redemptionCurrency", Value.fromBytes(value));
   }
 
   get redemptionAmount(): BigDecimal {
@@ -2228,7 +2160,7 @@ export class BondLiquidations extends Entity {
     this.set("token", Value.fromString(""));
     this.set("liquidatedValue", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("bondName", Value.fromBytes(Bytes.empty()));
-    this.set("liquidationCurrency", Value.fromString(""));
+    this.set("liquidationCurrency", Value.fromBytes(Bytes.empty()));
     this.set("liquidatedAmount", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
@@ -2296,13 +2228,13 @@ export class BondLiquidations extends Entity {
     this.set("bondName", Value.fromBytes(value));
   }
 
-  get liquidationCurrency(): string {
+  get liquidationCurrency(): Bytes {
     let value = this.get("liquidationCurrency");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set liquidationCurrency(value: string) {
-    this.set("liquidationCurrency", Value.fromString(value));
+  set liquidationCurrency(value: Bytes) {
+    this.set("liquidationCurrency", Value.fromBytes(value));
   }
 
   get liquidatedAmount(): BigDecimal {

@@ -20,7 +20,8 @@ export function handleBondIssued(event: BondIssued): void {
     issues.token = event.params.token.toHexString();
     issues.bondName = event.params.bondName;
     issues.issuedAmount = event.params.amount.toBigDecimal();
-    issues.collateralCurrency = event.params.currency.toHexString();
+    //issues.collateralCurrency = event.params.currency.toHexString();
+    issues.collateralCurrency = event.params.currency;
     issues.collateralAmount = event.params.collateralAmount.toBigDecimal();
     issues.issueTime = event.params.issueTime.toI32();
     issues.save();
@@ -30,7 +31,8 @@ export function handleBondIssued(event: BondIssued): void {
     issues.token = event.params.token.toHexString();
     issues.bondName = event.params.bondName;
     issues.issuedAmount = event.params.amount.toBigDecimal();
-    issues.collateralCurrency = event.params.currency.toHexString();
+    //issues.collateralCurrency = event.params.currency.toHexString();
+    issues.collateralCurrency = event.params.currency;
     issues.collateralAmount = event.params.collateralAmount.toBigDecimal();
     issues.issueTime = event.params.issueTime.toI32();
     issues.save();
@@ -46,7 +48,8 @@ export function handleBondRedeemed(event: BondRedeemed): void {
     redemptions.token = event.params.token.toHexString();
     redemptions.bondName = event.params.tokenName;
     redemptions.redeemedValue = event.params.tokenAmount.toBigDecimal();
-    redemptions.redemptionCurrency = event.params.currency.toHexString();
+    //redemptions.redemptionCurrency = event.params.currency.toHexString();
+    redemptions.redemptionCurrency = event.params.currency;
     redemptions.redemptionAmount = event.params.amount.toBigDecimal();
     redemptions.save();
   }
@@ -55,7 +58,8 @@ export function handleBondRedeemed(event: BondRedeemed): void {
     redemptions.token = event.params.token.toHexString();
     redemptions.bondName = event.params.tokenName;
     redemptions.redeemedValue = event.params.tokenAmount.toBigDecimal();
-    redemptions.redemptionCurrency = event.params.currency.toHexString();
+    //redemptions.redemptionCurrency = event.params.currency.toHexString();
+    redemptions.redemptionCurrency = event.params.currency;
     redemptions.redemptionAmount = event.params.amount.toBigDecimal();
     redemptions.save();
   }
@@ -70,7 +74,8 @@ export function handleBondPurchased(event: BondPurchased): void {
     purchases.token = event.params.token.toHexString();
     purchases.bondName = event.params.bondName;
     purchases.purchaseValue = event.params.amount.toBigDecimal();
-    purchases.paidInCurrency = event.params.currency.toHexString();
+    //purchases.paidInCurrency = event.params.currency.toHexString();
+    purchases.paidInCurrency = event.params.currency;
     purchases.purchasedAmount = event.params.paidInAmount.toBigDecimal();
     purchases.purchaseTime = event.params.purchaseTime.toI32();
     purchases.save();
@@ -80,7 +85,8 @@ export function handleBondPurchased(event: BondPurchased): void {
     purchases.token = event.params.token.toHexString();
     purchases.bondName = event.params.bondName;
     purchases.purchaseValue = event.params.amount.toBigDecimal();
-    purchases.paidInCurrency = event.params.currency.toHexString();
+    //purchases.paidInCurrency = event.params.currency.toHexString();
+    purchases.paidInCurrency = event.params.currency;
     purchases.purchasedAmount = event.params.paidInAmount.toBigDecimal();
     purchases.purchaseTime = event.params.purchaseTime.toI32();
     purchases.save();
@@ -96,7 +102,8 @@ export function handleBondLiquidation(event: BondLiquidated): void {
     liquidations.token = event.params.token.toHexString();
     liquidations.bondName = event.params.tokenName;
     liquidations.liquidatedValue = event.params.tokenAmount.toBigDecimal();
-    liquidations.liquidationCurrency = event.params.currency.toHexString();
+    //liquidations.liquidationCurrency = event.params.currency.toHexString();
+    liquidations.liquidationCurrency = event.params.currency;
     liquidations.liquidatedAmount = event.params.amount.toBigDecimal();
     liquidations.save();
   }
@@ -105,7 +112,8 @@ export function handleBondLiquidation(event: BondLiquidated): void {
     liquidations.token = event.params.token.toHexString();
     liquidations.bondName = event.params.tokenName;
     liquidations.liquidatedValue = event.params.tokenAmount.toBigDecimal();
-    liquidations.liquidationCurrency = event.params.currency.toHexString();
+    //liquidations.liquidationCurrency = event.params.currency.toHexString();
+    liquidations.liquidationCurrency = event.params.currency;
     liquidations.liquidatedAmount = event.params.amount.toBigDecimal();
     liquidations.save();
   }  
