@@ -4,55 +4,55 @@ repository: https://github.com/verified-network/verified-graph
 schema:
   file: ./schema.graphql
 dataSources:
-  #- kind: ethereum/contract
-  #  name: SecuritiesFactory
-  #  network: base-sepolia
-  #  source:
-  #    address: '0x647a7EA364a31fa18c65f4043CD55718d245D774'
-  #    abi: SecuritiesFactory
-  #    startBlock: 9180253
-  #  mapping:
-  #    kind: ethereum/events
-  #    apiVersion: 0.0.5
-  #    language: wasm/assemblyscript
-  #    file: ./src/mappings/factory.ts
-  #    entities:
-  #      - Issuer
-  #      - Token
-  #      - Security
-  #    abis:
-  #      - name: SecuritiesFactory
-  #        file: ./abis/SecuritiesFactory.json
-  #      - name: Security
-  #        file: ./abis/Security.json
-  #    eventHandlers:
-  #      - event: securitiesAdded(indexed address,bytes32,address,bytes32,address,bool,address,bytes32[],bytes32)
-  #        handler: handleSecurityCreated
-  #- kind: ethereum/contract
-  #  name: Client
-  #  network: base-sepolia
-  #  source:
-  #    address: '0x3e132ee9fc32428655b2151A4E6C3f2B1FD49923'
-  #    abi: Client
-  #    startBlock: 9180250
-  #  mapping:
-  #    kind: ethereum/events
-  #    apiVersion: 0.0.5
-  #    language: wasm/assemblyscript
-  #    file: ./src/mappings/client.ts
-  #    entities:
-  #      - Manager
-  #      - User
-  #    abis:
-  #      - name: Client
-  #        file: ./abis/Client.json
-  #    eventHandlers:
-  #      - event: ManagerAdded(address,indexed address,bytes32,bytes32,bytes32)
-  #        handler: handleManagerCreated
-  #      - event: ManagerRemoved(address,indexed address,bytes32,bytes32)
-  #        handler: handleManagerRemoved
-  #      - event: UserAdded(address,bytes32,bytes32,bytes32,uint256)
-  #        handler: handleUserCreated
+  - kind: ethereum/contract
+    name: SecuritiesFactory
+    network: base-sepolia
+    source:
+      address: '0x68497F1380f29b2C41Ca8Ff1Da3B5a3BD8327d4D'
+      abi: SecuritiesFactory
+      startBlock: 10908942
+    mapping:
+     kind: ethereum/events
+     apiVersion: 0.0.5
+     language: wasm/assemblyscript
+     file: ./src/mappings/factory.ts
+     entities:
+       - Issuer
+       - Token
+       - Security
+     abis:
+       - name: SecuritiesFactory
+         file: ./abis/SecuritiesFactory.json
+       - name: Security
+         file: ./abis/Security.json
+     eventHandlers:
+       - event: securitiesAdded(indexed address,bytes32,address,bytes32,address,bool,address,bytes32[],bytes32)
+         handler: handleSecurityCreated
+  - kind: ethereum/contract
+    name: Client
+    network: base-sepolia
+    source:
+     address: '0x266d35A820B8e7f1CcAf7f14A24eC2232aE3D010'
+     abi: Client
+     startBlock: 10908938
+    mapping:
+     kind: ethereum/events
+     apiVersion: 0.0.5
+     language: wasm/assemblyscript
+     file: ./src/mappings/client.ts
+     entities:
+       - Manager
+       - User
+     abis:
+       - name: Client
+         file: ./abis/Client.json
+     eventHandlers:
+       - event: ManagerAdded(address,indexed address,bytes32,bytes32,bytes32)
+         handler: handleManagerCreated
+       - event: ManagerRemoved(address,indexed address,bytes32,bytes32)
+         handler: handleManagerRemoved
+       - event: UserAdded(address,bytes32,bytes32,bytes32,uint256)
+         handler: handleUserCreated
   #- kind: ethereum/contract
   #  name: Liquidity
   #  network: base-sepolia
@@ -240,35 +240,35 @@ dataSources:
           handler: handleBondCreated
         - event: TokenCreated(indexed address,bytes32,bytes32)
           handler: handleBondTokenCreated
-  #- kind: ethereum/contract
-  #  name: VerifiedMarkets
-  #  network: base-sepolia
-  #  source:
-  #    address: '0xf8287e8D37863Db0Cabd25B55f77652d5d6aEb83'
-  #    abi: VerifiedMarkets
-  #    startBlock: 9484074
-  #  mapping:
-  #    kind: ethereum/events
-  #    apiVersion: 0.0.5
-  #    language: wasm/assemblyscript
-  #    file: ./src/mappings/collateralizedloans.ts
-  #    entities:
-  #      - RWA
-  #      - Collateral
-  #      - CollaterizedLoan
-  #      - CollaterizedLoanRepayment
-  #    abis:
-  #      - name: VerifiedMarkets
-  #        file: ./abis/VerifiedMarkets.json
-  #    eventHandlers:
-  #      - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
-  #        handler: handleNewRWA
-  #      - event: PostedCollateral(indexed address,indexed address,address,uint256)
-  #        handler: handleCollateral
-  #      - event: Borrowed(indexed address,indexed address,uint256)
-  #        handler: handleBorrowing
-  #      - event: Repaid(indexed address,indexed address,uint256)
-  #        handler: handleRepayment
+  - kind: ethereum/contract
+    name: VerifiedMarkets
+    network: base-sepolia
+    source:
+     address: '0xc090208AF73839e2Ec074Db27294548e7d19d8FA'
+     abi: VerifiedMarkets
+     startBlock: 10910444
+    mapping:
+     kind: ethereum/events
+     apiVersion: 0.0.5
+     language: wasm/assemblyscript
+     file: ./src/mappings/collateralizedloans.ts
+     entities:
+       - RWA
+       - Collateral
+       - CollaterizedLoan
+       - CollaterizedLoanRepayment
+     abis:
+       - name: VerifiedMarkets
+         file: ./abis/VerifiedMarkets.json
+     eventHandlers:
+       - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
+         handler: handleNewRWA
+       - event: PostedCollateral(indexed address,indexed address,address,uint256)
+         handler: handleCollateral
+       - event: Borrowed(indexed address,indexed address,uint256)
+         handler: handleBorrowing
+       - event: Repaid(indexed address,indexed address,uint256)
+         handler: handleRepayment
 templates:
   - kind: ethereum/contract
     name: Security
