@@ -19,7 +19,7 @@ export function handleNewRWA(event: NewRWA): void {
         rwa.issuer = event.params.issuer.toHexString();
         rwa.asset = event.params.asset.toHexString();
         rwa.bond = event.params.bond.toHexString();
-        rwa.apy = event.params.apy.toI32();
+        rwa.apy = event.params.apy.toBigDecimal();
         rwa.issuingDocs = event.params.issuingDocs;
         rwa.faceValue = event.params.faceValue.toBigDecimal();
         rwa.save();
@@ -28,7 +28,7 @@ export function handleNewRWA(event: NewRWA): void {
         rwa.issuer = event.params.issuer.toHexString();
         rwa.asset = event.params.asset.toHexString();
         rwa.bond = event.params.bond.toHexString();
-        rwa.apy = event.params.apy.toI32();
+        rwa.apy = event.params.apy.toBigDecimal();
         rwa.issuingDocs = event.params.issuingDocs;
         rwa.faceValue = event.params.faceValue.toBigDecimal();
         rwa.save();

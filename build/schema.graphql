@@ -365,7 +365,7 @@ type RWA @entity{
   issuer: User!
   asset: Security!
   bond: Token!
-  apy: Int!
+  apy: BigDecimal!
   issuingDocs:String!
   faceValue: BigDecimal!
 }

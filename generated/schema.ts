@@ -4430,7 +4430,7 @@ export class RWA extends Entity {
     this.set("issuer", Value.fromString(""));
     this.set("asset", Value.fromString(""));
     this.set("bond", Value.fromString(""));
-    this.set("apy", Value.fromI32(0));
+    this.set("apy", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("issuingDocs", Value.fromString(""));
     this.set("faceValue", Value.fromBigDecimal(BigDecimal.zero()));
   }
@@ -4488,13 +4488,13 @@ export class RWA extends Entity {
     this.set("bond", Value.fromString(value));
   }
 
-  get apy(): i32 {
+  get apy(): BigDecimal {
     let value = this.get("apy");
-    return value!.toI32();
+    return value!.toBigDecimal();
   }
 
-  set apy(value: i32) {
-    this.set("apy", Value.fromI32(value));
+  set apy(value: BigDecimal) {
+    this.set("apy", Value.fromBigDecimal(value));
   }
 
   get issuingDocs(): string {
