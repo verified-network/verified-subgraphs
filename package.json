@@ -4,12 +4,12 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy-mainnet": "graph deploy --product hosted-service verified-network/wallet --network mainnet --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "deploy-mainnet": "graph deploy wallet",
     "deploy-base-sepolia": "graph deploy wallet-base",
-    "deploy-sepolia": "graph deploy --product hosted-service verified-network/wallet --network sepolia --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "deploy-matic": "graph deploy --product hosted-service verified-network/wallet-matic --network matic --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "deploy-bsc": "graph deploy --product hosted-service verified-network/wallet-bsc --network bsc --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "deploy-gnosis": "graph deploy --product hosted-service verified-network/wallet-gnosis --network gnosis --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "deploy-sepolia": "graph deploy wallet",
+    "deploy-matic": "graph deploy wallet-matic",
+    "deploy-bsc": "graph deploy wallet-bsc",
+    "deploy-gnosis": "graph deploy wallet-gnosis",
     "create-local": "graph create --node http://localhost:8020/ verified-network/wallet",
     "remove-local": "graph remove --node http://localhost:8020/ verified-network/wallet",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 verified-network/wallet"
