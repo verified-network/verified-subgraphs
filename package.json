@@ -6,7 +6,7 @@
     "build": "graph build",
     "deploy-mainnet": "graph deploy wallet",
     "deploy-base-sepolia": "graph deploy wallet-base",
-    "deploy-sepolia": "graph deploy wallet",
+    "deploy-sepolia": "graph deploy verified-wallet",
     "deploy-matic": "graph deploy wallet-matic",
     "deploy-bsc": "graph deploy wallet-bsc",
     "deploy-gnosis": "graph deploy wallet-gnosis",

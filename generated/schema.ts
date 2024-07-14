@@ -3610,6 +3610,170 @@ export class Settlements extends Entity {
   }
 }
 
+export class MarginCollateral extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("action", Value.fromBytes(Bytes.empty()));
+    this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("balance", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save MarginCollateral entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save MarginCollateral entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("MarginCollateral", id.toString(), this);
+    }
+  }
+
+  static load(id: string): MarginCollateral | null {
+    return changetype<MarginCollateral | null>(
+      store.get("MarginCollateral", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get action(): Bytes {
+    let value = this.get("action");
+    return value!.toBytes();
+  }
+
+  set action(value: Bytes) {
+    this.set("action", Value.fromBytes(value));
+  }
+
+  get user(): string | null {
+    let value = this.get("user");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set user(value: string | null) {
+    if (!value) {
+      this.unset("user");
+    } else {
+      this.set("user", Value.fromString(<string>value));
+    }
+  }
+
+  get currency(): Bytes {
+    let value = this.get("currency");
+    return value!.toBytes();
+  }
+
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
+  }
+
+  get balance(): BigDecimal {
+    let value = this.get("balance");
+    return value!.toBigDecimal();
+  }
+
+  set balance(value: BigDecimal) {
+    this.set("balance", Value.fromBigDecimal(value));
+  }
+}
+
+export class MarginTradePnL extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("currency", Value.fromBytes(Bytes.empty()));
+    this.set("financing", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("dividends", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save MarginTradePnL entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save MarginTradePnL entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("MarginTradePnL", id.toString(), this);
+    }
+  }
+
+  static load(id: string): MarginTradePnL | null {
+    return changetype<MarginTradePnL | null>(store.get("MarginTradePnL", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get user(): string | null {
+    let value = this.get("user");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set user(value: string | null) {
+    if (!value) {
+      this.unset("user");
+    } else {
+      this.set("user", Value.fromString(<string>value));
+    }
+  }
+
+  get currency(): Bytes {
+    let value = this.get("currency");
+    return value!.toBytes();
+  }
+
+  set currency(value: Bytes) {
+    this.set("currency", Value.fromBytes(value));
+  }
+
+  get financing(): BigDecimal {
+    let value = this.get("financing");
+    return value!.toBigDecimal();
+  }
+
+  set financing(value: BigDecimal) {
+    this.set("financing", Value.fromBigDecimal(value));
+  }
+
+  get dividends(): BigDecimal {
+    let value = this.get("dividends");
+    return value!.toBigDecimal();
+  }
+
+  set dividends(value: BigDecimal) {
+    this.set("dividends", Value.fromBigDecimal(value));
+  }
+}
+
 export class Snapshots extends Entity {
   constructor(id: string) {
     super();

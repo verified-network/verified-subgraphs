@@ -32,6 +32,36 @@ export class OwnershipTransferred__Params {
   }
 }
 
+export class PnLSettled extends ethereum.Event {
+  get params(): PnLSettled__Params {
+    return new PnLSettled__Params(this);
+  }
+}
+
+export class PnLSettled__Params {
+  _event: PnLSettled;
+
+  constructor(event: PnLSettled) {
+    this._event = event;
+  }
+
+  get user(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get currency(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get financing(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get dividends(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
 export class closures extends ethereum.Event {
   get params(): closures__Params {
     return new closures__Params(this);
@@ -55,6 +85,36 @@ export class closures__Params {
 
   get timestamp(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class collateral extends ethereum.Event {
+  get params(): collateral__Params {
+    return new collateral__Params(this);
+  }
+}
+
+export class collateral__Params {
+  _event: collateral;
+
+  constructor(event: collateral) {
+    this._event = event;
+  }
+
+  get action(): Bytes {
+    return this._event.parameters[0].value.toBytes();
+  }
+
+  get user(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get currency(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get balance(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
@@ -208,24 +268,30 @@ export class MarginIssueManager extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
-  getCollateral(party: Address, currency: Address): BigInt {
+  getCollateral(poolId: Bytes, currency: Address): BigInt {
     let result = super.call(
       "getCollateral",
-      "getCollateral(address,address):(int256)",
-      [ethereum.Value.fromAddress(party), ethereum.Value.fromAddress(currency)]
+      "getCollateral(bytes32,address):(uint256)",
+      [
+        ethereum.Value.fromFixedBytes(poolId),
+        ethereum.Value.fromAddress(currency)
+      ]
     );
 
     return result[0].toBigInt();
   }
 
   try_getCollateral(
-    party: Address,
+    poolId: Bytes,
     currency: Address
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getCollateral",
-      "getCollateral(address,address):(int256)",
-      [ethereum.Value.fromAddress(party), ethereum.Value.fromAddress(currency)]
+      "getCollateral(bytes32,address):(uint256)",
+      [
+        ethereum.Value.fromFixedBytes(poolId),
+        ethereum.Value.fromAddress(currency)
+      ]
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -435,7 +501,7 @@ export class IssueProductCall__Inputs {
     return this._call.inputValues[7].value.toBigInt();
   }
 
-  get collateral(): BigInt {
+  get collateralAmnt(): BigInt {
     return this._call.inputValues[8].value.toBigInt();
   }
 
@@ -691,24 +757,16 @@ export class OnSettleCall__Inputs {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get financingPerSec(): BigInt {
+  get financing(): BigInt {
     return this._call.inputValues[2].value.toBigInt();
   }
 
-  get charge(): boolean {
-    return this._call.inputValues[3].value.toBoolean();
+  get dividends(): BigInt {
+    return this._call.inputValues[3].value.toBigInt();
   }
 
-  get dividendPerSec(): BigInt {
+  get commissions(): BigInt {
     return this._call.inputValues[4].value.toBigInt();
-  }
-
-  get payout(): boolean {
-    return this._call.inputValues[5].value.toBoolean();
-  }
-
-  get settlementTime(): BigInt {
-    return this._call.inputValues[6].value.toBigInt();
   }
 }
 
@@ -743,6 +801,10 @@ export class WithdrawCall__Inputs {
 
   get currency(): Address {
     return this._call.inputValues[1].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[2].value.toBigInt();
   }
 }
 

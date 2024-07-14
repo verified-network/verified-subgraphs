@@ -204,6 +204,8 @@ dataSources:
   #      - Investors
   #      - Closures
   #      - FeeCollections
+  #      - MarginCollateral
+  #      - MarginTradePnL
   #    abis:
   #      - name: MarginIssueManager
   #        file: ./abis/MarginIssueManager.json
@@ -215,7 +217,11 @@ dataSources:
   #      - event: closures(indexed bytes32,address,uint256)
   #        handler: handleClosures
   #      - event: feecollection(indexed address,uint256,uint256)
-  #        handler: handleFeeCollections  
+  #        handler: handleFeeCollections
+  #      - event: collateral(bytes32,indexed address,address,int256)
+  #        handler: handleMarginCollateral
+  #      - event: PnLSettled(indexed address,address,uint256,uint256)
+  #        handler:  handleMarginSettlements   
   - kind: ethereum/contract
     name: Factory
     network: base-sepolia

@@ -285,6 +285,20 @@ type Settlements @entity{
   issuer: User
   subscription: BigDecimal!  
 }
+type MarginCollateral @entity{
+  id: ID!
+  action: Bytes!
+  user: User
+  currency: Bytes!
+  balance: BigDecimal!
+}
+type MarginTradePnL @entity{
+  id: ID!
+  user: User
+  currency: Bytes!
+  financing: BigDecimal!
+  dividends: BigDecimal!
+}
 type Snapshots @entity{
   id: ID!
   security: Security!

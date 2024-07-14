@@ -2,14 +2,18 @@ import {
     tradeSettled,
     subscribers,
     closures,
-    feecollection
+    feecollection,
+    collateral,
+    PnLSettled
 } from "../../generated/MarginIssueManager/MarginIssueManager";
 
 import{
     Trades,
     Traders,
     Closures,
-    FeeCollections
+    FeeCollections,
+    MarginCollateral,
+    MarginTradePnL
 } from "../../generated/schema";
 
 export function handleTrades(event: tradeSettled): void {
@@ -107,5 +111,45 @@ export function handleFeeCollections(event: feecollection): void {
         collections.feeCollected = event.params.collection.toBigDecimal();
         collections.timestamp = event.params.timestamp.toI32();
         collections.save();
+    }
+}
+
+export function handleMarginCollateral(event: collateral): void {
+    let collaterals = MarginCollateral.load(event.params.user.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(collaterals==null){
+        let user = event.params.user.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let collaterals = new MarginCollateral(user);
+        collaterals.action = event.params.action;
+        collaterals.user = event.params.user.toHexString();
+        collaterals.currency = event.params.currency;
+        collaterals.balance = event.params.balance.toBigDecimal();
+        collaterals.save();
+    }
+    else{
+        collaterals.action = event.params.action;
+        collaterals.user = event.params.user.toHexString();
+        collaterals.currency = event.params.currency;
+        collaterals.balance = event.params.balance.toBigDecimal();
+        collaterals.save();
+    }
+}
+
+export function handleMarginSettlements(event: PnLSettled): void {
+    let settlement = MarginTradePnL.load(event.params.user.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(settlement==null){
+        let user = event.params.user.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let settlement = new MarginTradePnL(user);        
+        settlement.user = event.params.user.toHexString();
+        settlement.currency = event.params.currency;
+        settlement.financing = event.params.financing.toBigDecimal();
+        settlement.dividends = event.params.dividends.toBigDecimal();
+        settlement.save();
+    }
+    else{
+        settlement.user = event.params.user.toHexString();
+        settlement.currency = event.params.currency;
+        settlement.financing = event.params.financing.toBigDecimal();
+        settlement.dividends = event.params.dividends.toBigDecimal();
+        settlement.save();
     }
 }
