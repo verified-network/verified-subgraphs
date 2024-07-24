@@ -49,16 +49,24 @@ export class PnLSettled__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get currency(): Address {
+  get security(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get financing(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+  get currency(): Address {
+    return this._event.parameters[2].value.toAddress();
   }
 
-  get dividends(): BigInt {
+  get financing(): BigInt {
     return this._event.parameters[3].value.toBigInt();
+  }
+
+  get dividend(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
+  get commission(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
   }
 }
 
@@ -757,16 +765,32 @@ export class OnSettleCall__Inputs {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get financing(): BigInt {
+  get financingBidPerSec(): BigInt {
     return this._call.inputValues[2].value.toBigInt();
   }
 
-  get dividends(): BigInt {
+  get financingOfferPerSec(): BigInt {
     return this._call.inputValues[3].value.toBigInt();
   }
 
-  get commissions(): BigInt {
+  get dividendBidPerSec(): BigInt {
     return this._call.inputValues[4].value.toBigInt();
+  }
+
+  get dividendOfferPerSec(): BigInt {
+    return this._call.inputValues[5].value.toBigInt();
+  }
+
+  get swapLong(): BigInt {
+    return this._call.inputValues[6].value.toBigInt();
+  }
+
+  get swapShort(): BigInt {
+    return this._call.inputValues[7].value.toBigInt();
+  }
+
+  get settlementTime(): BigInt {
+    return this._call.inputValues[8].value.toBigInt();
   }
 }
 

@@ -220,7 +220,7 @@ dataSources:
           handler: handleFeeCollections
         - event: collateral(bytes32,indexed address,address,int256)
           handler: handleMarginCollateral
-        - event: PnLSettled(indexed address,address,uint256,uint256)
+        - event: PnLSettled(indexed address,address,address,int256,int256,int256)
           handler:  handleMarginSettlements
   - kind: ethereum/contract
     name: Factory

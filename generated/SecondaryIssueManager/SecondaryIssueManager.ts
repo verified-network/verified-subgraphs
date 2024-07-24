@@ -138,24 +138,6 @@ export class subscribers__Params {
   }
 }
 
-export class test extends ethereum.Event {
-  get params(): test__Params {
-    return new test__Params(this);
-  }
-}
-
-export class test__Params {
-  _event: test;
-
-  constructor(event: test) {
-    this._event = event;
-  }
-
-  get okay(): boolean {
-    return this._event.parameters[0].value.toBoolean();
-  }
-}
-
 export class tradeSettled extends ethereum.Event {
   get params(): tradeSettled__Params {
     return new tradeSettled__Params(this);
@@ -538,6 +520,36 @@ export class InitializeCall__Outputs {
   _call: InitializeCall;
 
   constructor(call: InitializeCall) {
+    this._call = call;
+  }
+}
+
+export class SetFeeCall extends ethereum.Call {
+  get inputs(): SetFeeCall__Inputs {
+    return new SetFeeCall__Inputs(this);
+  }
+
+  get outputs(): SetFeeCall__Outputs {
+    return new SetFeeCall__Outputs(this);
+  }
+}
+
+export class SetFeeCall__Inputs {
+  _call: SetFeeCall;
+
+  constructor(call: SetFeeCall) {
+    this._call = call;
+  }
+
+  get _fee(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+}
+
+export class SetFeeCall__Outputs {
+  _call: SetFeeCall;
+
+  constructor(call: SetFeeCall) {
     this._call = call;
   }
 }

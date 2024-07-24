@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: sepolia
+    network: gnosis
     source:
-      address: '0x3279b50c98F3A78b6FAEacaBcC0e4746a4c69760'
+      address: '0x82122a5b6f509114E7e723242489B44e817254C5'
       abi: SecuritiesFactory
-      startBlock: 5499405
+      startBlock: 34475578
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -30,11 +30,11 @@ dataSources:
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: sepolia
+    network: gnosis
     source:
-      address: '0xeEa4F0C03fAb166Aa20f38A2747469084cB769d0'
+      address: '0xfc22B0dC7a8dAC021F8f1216b2E9E43c42FA0b40'
       abi: Client
-      startBlock: 5499402
+      startBlock: 34475572
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -55,11 +55,11 @@ dataSources:
           handler: handleUserCreated
   - kind: ethereum/contract
     name: Liquidity
-    network: sepolia
+    network: gnosis
     source:
-      address: '0x27006b68b3594EF5Ae04C5457c24F0c7CF1E5553'
+      address: '0x36A6efC3276e2d2d015c9e96af3957aB5293b662'
       abi: Liquidity
-      startBlock: 5497049
+      startBlock: 34473710
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -98,11 +98,11 @@ dataSources:
           handler: handlePlatformManagers
   - kind: ethereum/contract
     name: Distribution
-    network: sepolia
+    network: gnosis
     source:
-      address: '0x5c3171AFEC854f8B6FD138ee9533629ABd8A5365'
+      address: '0x812cD96Bd1D9C35EaCD3F09Dc504B2d30e63EFe5'
       abi: Distribution
-      startBlock: 5499367
+      startBlock: 34476039
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -119,11 +119,11 @@ dataSources:
           handler: handleDistribution
   - kind: ethereum/contract
     name: PrimaryIssueManager
-    network: sepolia
+    network: gnosis
     source:
-      address: '0x5209fc3f8f5A28E9a77bfd18056d8B8429397600'
+      address: '0xd4965981f70f1CCFe3491b8123A62aC063fe5cff'
       abi: PrimaryIssueManager
-      startBlock: 6308267
+      startBlock: 35094777
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -160,11 +160,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: sepolia
+    network: gnosis
     source:
-      address: '0x32464AC66668824E6d1261472F085045354B2CBa'
+      address: '0x36046Ec61d2A02CE5BDaA7f3168051E1e93804d1'
       abi: SecondaryIssueManager
-      startBlock: 5637324
+      startBlock: 35094784
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -189,11 +189,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: MarginIssueManager
-    network: sepolia
+    network: gnosis
     source:
-      address: '0x13c9C292d99fD6fA3e68741B574EBD5aCb4772B6'
+      address: '0x608202FF58F91353f08e5881ddB18Ade29f10685'
       abi: MarginIssueManager
-      startBlock: 6308271
+      startBlock: 35094791
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -220,15 +220,15 @@ dataSources:
           handler: handleFeeCollections
         - event: collateral(bytes32,indexed address,address,int256)
           handler: handleMarginCollateral
-        - event: PnLSettled(indexed address,address,uint256,uint256)
+        - event: PnLSettled(indexed address,address,address,int256,int256,int256)
           handler:  handleMarginSettlements
   - kind: ethereum/contract
     name: Factory
-    network: sepolia
+    network: gnosis
     source:
-      address: '0x2C437D88B749F304804d9E9441DA0884c96D8299'
+      address: '0xED47a71d2617b1a1F9A9aeb33b85bE5A722EA79B'
       abi: Factory
-      startBlock: 5498773
+      startBlock: 34475888
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -246,38 +246,38 @@ dataSources:
           handler: handleBondCreated
         - event: TokenCreated(indexed address,bytes32,bytes32)
           handler: handleBondTokenCreated
-  - kind: ethereum/contract
-    name: VerifiedMarkets
-    network: sepolia
-    source:
-      address: '0xf8287e8D37863Db0Cabd25B55f77652d5d6aEb83'
-      abi: VerifiedMarkets
-      startBlock: 9484074
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      file: ./src/mappings/collateralizedloans.ts
-      entities:
-        - RWA
-        - Collateral
-        - CompoundLoans
-      abis:
-        - name: VerifiedMarkets
-          file: ./abis/VerifiedMarkets.json
-      eventHandlers:
-        - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
-          handler: handleNewRWA
-        - event: PostedCollateral(indexed address,indexed address,address,uint256)
-          handler: handleCollateral
-        - event: Borrowed(indexed address,indexed address,uint256)
-          handler: handleBorrowing
-        - event: Repaid(indexed address,indexed address,uint256)
-          handler: handleRepayment
+  #- kind: ethereum/contract
+  #  name: VerifiedMarkets
+  #  network: gnosis
+  #  source:
+  #    address: ''
+  #    abi: VerifiedMarkets
+  #    startBlock: 9484074
+  #  mapping:
+  #    kind: ethereum/events
+  #    apiVersion: 0.0.5
+  #    language: wasm/assemblyscript
+  #    file: ./src/mappings/collateralizedloans.ts
+  #    entities:
+  #      - RWA
+  #      - Collateral
+  #      - CompoundLoans
+  #    abis:
+  #      - name: VerifiedMarkets
+  #        file: ./abis/VerifiedMarkets.json
+  #    eventHandlers:
+  #      - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
+  #        handler: handleNewRWA
+  #      - event: PostedCollateral(indexed address,indexed address,address,uint256)
+  #        handler: handleCollateral
+  #      - event: Borrowed(indexed address,indexed address,uint256)
+  #        handler: handleBorrowing
+  #      - event: Repaid(indexed address,indexed address,uint256)
+  #        handler: handleRepayment
 templates:
   - kind: ethereum/contract
     name: Security
-    network: sepolia
+    network: gnosis
     source:
       abi: Security
     mapping:
@@ -309,7 +309,7 @@ templates:
       file: ./src/mappings/security.ts
   - kind: ethereum/contract
     name: Cash
-    network: sepolia
+    network: gnosis
     source:
       abi: Cash
     mapping:
@@ -338,7 +338,7 @@ templates:
       file: ./src/mappings/cash.ts  
   - kind: ethereum/contract
     name: Bond
-    network: sepolia
+    network: gnosis
     source:
       abi: Bond
     mapping:

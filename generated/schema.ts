@@ -3698,9 +3698,11 @@ export class MarginTradePnL extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
+    this.set("security", Value.fromString(""));
     this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("financing", Value.fromBigDecimal(BigDecimal.zero()));
-    this.set("dividends", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("dividend", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("commission", Value.fromBigDecimal(BigDecimal.zero()));
   }
 
   save(): void {
@@ -3746,6 +3748,15 @@ export class MarginTradePnL extends Entity {
     }
   }
 
+  get security(): string {
+    let value = this.get("security");
+    return value!.toString();
+  }
+
+  set security(value: string) {
+    this.set("security", Value.fromString(value));
+  }
+
   get currency(): Bytes {
     let value = this.get("currency");
     return value!.toBytes();
@@ -3764,13 +3775,22 @@ export class MarginTradePnL extends Entity {
     this.set("financing", Value.fromBigDecimal(value));
   }
 
-  get dividends(): BigDecimal {
-    let value = this.get("dividends");
+  get dividend(): BigDecimal {
+    let value = this.get("dividend");
     return value!.toBigDecimal();
   }
 
-  set dividends(value: BigDecimal) {
-    this.set("dividends", Value.fromBigDecimal(value));
+  set dividend(value: BigDecimal) {
+    this.set("dividend", Value.fromBigDecimal(value));
+  }
+
+  get commission(): BigDecimal {
+    let value = this.get("commission");
+    return value!.toBigDecimal();
+  }
+
+  set commission(value: BigDecimal) {
+    this.set("commission", Value.fromBigDecimal(value));
   }
 }
 

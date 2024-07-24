@@ -30,20 +30,32 @@
       {
         "indexed": false,
         "internalType": "address",
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
         "name": "currency",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "int256",
         "name": "financing",
-        "type": "uint256"
+        "type": "int256"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "dividends",
-        "type": "uint256"
+        "internalType": "int256",
+        "name": "dividend",
+        "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int256",
+        "name": "commission",
+        "type": "int256"
       }
     ],
     "name": "PnLSettled",
@@ -574,18 +586,38 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "financing",
-        "type": "uint256"
+        "internalType": "int256",
+        "name": "financingBidPerSec",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "financingOfferPerSec",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "dividendBidPerSec",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "dividendOfferPerSec",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "swapLong",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "swapShort",
+        "type": "int256"
       },
       {
         "internalType": "uint256",
-        "name": "dividends",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "commissions",
+        "name": "settlementTime",
         "type": "uint256"
       }
     ],

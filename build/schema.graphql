@@ -295,9 +295,11 @@ type MarginCollateral @entity{
 type MarginTradePnL @entity{
   id: ID!
   user: User
+  security: Security!
   currency: Bytes!
   financing: BigDecimal!
-  dividends: BigDecimal!
+  dividend: BigDecimal!
+  commission: BigDecimal!
 }
 type Snapshots @entity{
   id: ID!
