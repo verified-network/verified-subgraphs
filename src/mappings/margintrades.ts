@@ -123,6 +123,7 @@ export function handleMarginCollateral(event: collateral): void {
         collaterals.user = event.params.user.toHexString();
         collaterals.currency = event.params.currency;
         collaterals.balance = event.params.balance.toBigDecimal();
+        collaterals.time = event.params.offerTime.toI32();
         collaterals.save();
     }
     else{
@@ -130,6 +131,7 @@ export function handleMarginCollateral(event: collateral): void {
         collaterals.user = event.params.user.toHexString();
         collaterals.currency = event.params.currency;
         collaterals.balance = event.params.balance.toBigDecimal();
+        collaterals.time = event.params.offerTime.toI32();
         collaterals.save();
     }
 }
@@ -145,6 +147,7 @@ export function handleMarginSettlements(event: PnLSettled): void {
         settlement.financing = event.params.financing.toBigDecimal();
         settlement.dividend = event.params.dividend.toBigDecimal();
         settlement.commission = event.params.commission.toBigDecimal();
+        settlement.settlementTime = event.params.settlementTime.toI32();
         settlement.save();
     }
     else{
@@ -154,6 +157,7 @@ export function handleMarginSettlements(event: PnLSettled): void {
         settlement.financing = event.params.financing.toBigDecimal();
         settlement.dividend = event.params.dividend.toBigDecimal();
         settlement.commission = event.params.commission.toBigDecimal();
+        settlement.settlementTime = event.params.settlementTime.toI32();
         settlement.save();
     }
 }

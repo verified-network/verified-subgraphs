@@ -3618,6 +3618,7 @@ export class MarginCollateral extends Entity {
     this.set("action", Value.fromBytes(Bytes.empty()));
     this.set("currency", Value.fromBytes(Bytes.empty()));
     this.set("balance", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("time", Value.fromI32(0));
   }
 
   save(): void {
@@ -3691,6 +3692,15 @@ export class MarginCollateral extends Entity {
   set balance(value: BigDecimal) {
     this.set("balance", Value.fromBigDecimal(value));
   }
+
+  get time(): i32 {
+    let value = this.get("time");
+    return value!.toI32();
+  }
+
+  set time(value: i32) {
+    this.set("time", Value.fromI32(value));
+  }
 }
 
 export class MarginTradePnL extends Entity {
@@ -3703,6 +3713,7 @@ export class MarginTradePnL extends Entity {
     this.set("financing", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("dividend", Value.fromBigDecimal(BigDecimal.zero()));
     this.set("commission", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("settlementTime", Value.fromI32(0));
   }
 
   save(): void {
@@ -3791,6 +3802,15 @@ export class MarginTradePnL extends Entity {
 
   set commission(value: BigDecimal) {
     this.set("commission", Value.fromBigDecimal(value));
+  }
+
+  get settlementTime(): i32 {
+    let value = this.get("settlementTime");
+    return value!.toI32();
+  }
+
+  set settlementTime(value: i32) {
+    this.set("settlementTime", Value.fromI32(value));
   }
 }
 

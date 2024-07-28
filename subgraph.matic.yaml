@@ -218,9 +218,9 @@ dataSources:
           handler: handleClosures
         - event: feecollection(indexed address,uint256,uint256)
           handler: handleFeeCollections
-        - event: collateral(bytes32,indexed address,address,int256)
+        - event: collateral(bytes32,indexed address,address,int256,uint256)
           handler: handleMarginCollateral
-        - event: PnLSettled(indexed address,address,address,int256,int256,int256)
+        - event: PnLSettled(indexed address,address,address,int256,int256,int256,uint256)
           handler:  handleMarginSettlements
   - kind: ethereum/contract
     name: Factory

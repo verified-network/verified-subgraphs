@@ -68,6 +68,10 @@ export class PnLSettled__Params {
   get commission(): BigInt {
     return this._event.parameters[5].value.toBigInt();
   }
+
+  get settlementTime(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
+  }
 }
 
 export class closures extends ethereum.Event {
@@ -123,6 +127,36 @@ export class collateral__Params {
 
   get balance(): BigInt {
     return this._event.parameters[3].value.toBigInt();
+  }
+
+  get offerTime(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
+export class feeTest extends ethereum.Event {
+  get params(): feeTest__Params {
+    return new feeTest__Params(this);
+  }
+}
+
+export class feeTest__Params {
+  _event: feeTest;
+
+  constructor(event: feeTest) {
+    this._event = event;
+  }
+
+  get feeFromPool(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get feeScaled(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get feeToPay(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 

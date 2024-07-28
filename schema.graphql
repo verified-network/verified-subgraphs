@@ -291,6 +291,7 @@ type MarginCollateral @entity{
   user: User
   currency: Bytes!
   balance: BigDecimal!
+  time: Int
 }
 type MarginTradePnL @entity{
   id: ID!
@@ -300,6 +301,7 @@ type MarginTradePnL @entity{
   financing: BigDecimal!
   dividend: BigDecimal!
   commission: BigDecimal!
+  settlementTime : Int
 }
 type Snapshots @entity{
   id: ID!

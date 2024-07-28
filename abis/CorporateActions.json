@@ -512,7 +512,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.7+commit.6da8b019\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"withdrawnFundsOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"spender\",\"type\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"sender\",\"type\":\"address\"},{\"name\":\"recipient\",\"type\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdrawFunds\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"spender\",\"type\":\"address\"},{\"name\":\"addedValue\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"getDistribution\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"withdrawableFundsOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"accumulativeFundsOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"snapshotTotalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"snapshotBalanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"spender\",\"type\":\"address\"},{\"name\":\"subtractedValue\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"},{\"name\":\"ballot\",\"type\":\"bool\"}],\"name\":\"vote\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"getResolution\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"},{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"owner\",\"type\":\"address\"},{\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getNextSnapshots\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"security\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"recordDate\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"resolution\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"voting\",\"type\":\"bool\"}],\"name\":\"Resolution\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"security\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"oldTime\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"newTime\",\"type\":\"uint256\"}],\"name\":\"SnapshotSchedule\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"security\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"SnapshotUnschedule\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"by\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"fundsDistributed\",\"type\":\"uint256\"}],\"name\":\"FundsDistributed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"by\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"fundsWithdrawn\",\"type\":\"uint256\"}],\"name\":\"FundsWithdrawn\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{\"accumulativeFundsOf(address)\":{\"details\":\"accumulativeFundsOf(_owner) = withdrawableFundsOf(_owner) + withdrawnFundsOf(_owner)\\r = (pointsPerShare * balanceOf(_owner) + pointsCorrection[_owner]) / pointsMultiplier\\r\",\"params\":{\"_owner\":\"The address of a token holder.\\r\"},\"return\":\"The amount of funds that `_owner` has earned in total.\\r\"},\"allowance(address,address)\":{\"details\":\"See {IERC20-allowance}.\"},\"approve(address,uint256)\":{\"details\":\"See {IERC20-approve}.     * Requirements:     * - `spender` cannot be the zero address.\"},\"balanceOf(address)\":{\"details\":\"See {IERC20-balanceOf}.\"},\"decreaseAllowance(address,uint256)\":{\"details\":\"Atomically decreases the allowance granted to `spender` by the caller.     * This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}.     * Emits an {Approval} event indicating the updated allowance.     * Requirements:     * - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.\"},\"increaseAllowance(address,uint256)\":{\"details\":\"Atomically increases the allowance granted to `spender` by the caller.     * This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}.     * Emits an {Approval} event indicating the updated allowance.     * Requirements:     * - `spender` cannot be the zero address.\"},\"totalSupply()\":{\"details\":\"See {IERC20-totalSupply}.\"},\"transfer(address,uint256)\":{\"details\":\"See {IERC20-transfer}.     * Requirements:     * - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.\"},\"transferFrom(address,address,uint256)\":{\"details\":\"See {IERC20-transferFrom}.     * Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20};     * Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for `sender`'s tokens of at least `amount`.\"},\"withdrawFunds()\":{\"details\":\"Withdraws all available funds for a FundsDistributionToken holder.\\r\"},\"withdrawableFundsOf(address)\":{\"params\":{\"_owner\":\"The address of a token holder.\\r\"},\"return\":\"The amount funds that `_owner` can withdraw.\\r\"},\"withdrawnFundsOf(address)\":{\"params\":{\"_owner\":\"The address of a token holder.\\r\"},\"return\":\"The amount of funds that `_owner` has withdrawn.\\r\"}}},\"userdoc\":{\"methods\":{\"accumulativeFundsOf(address)\":{\"notice\":\"prev. accumulativeDividendOf\\rView the amount of funds that an address has earned in total.\\r\"},\"withdrawableFundsOf(address)\":{\"notice\":\"prev. withdrawableDividendOf\\rView the amount of funds that an address can withdraw.\\r\"},\"withdrawnFundsOf(address)\":{\"notice\":\"prev. withdrawnDividendOf\\rView the amount of funds that an address has withdrawn.\\r\"}}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/CorporateActions.sol\":\"CorporateActions\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol\":{\"keccak256\":\"0x3491510fa4862af1a43f6c860d9cf7392240196540cd3c0eea79d374d419c5a1\",\"urls\":[\"bzzr://5cddbf3b74b775a8670757a6b8e108dac17dac20253f35f4c729e9cb6bea4ed3\"]},\"@openzeppelin/contracts-ethereum-package/contracts/math/Math.sol\":{\"keccak256\":\"0x4b5aa451e4e8801478708f94b118a7821c0500d676255eaf89fc78c14856ce4e\",\"urls\":[\"bzzr://200d5728b32858918810d8d7a8db1406ee9b157ad5026f050e6d864a696b9080\"]},\"@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x2a474399663812668bb8e9c9e7d011d54fd09de386bd6e9fcb2407a677ebd1aa\",\"urls\":[\"bzzr://3d70561b32ba1494d2b2df362e92dff5ab869d27e2fe35cf9bf3a8ae137cffd3\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzzr://cf2d583b8dce38d0617fdcd65f2fd9f126fe17b7f683b5a515ea9d2762d8b062\"]},\"@openzeppelin/contracts-ethereum-package/contracts/utils/Arrays.sol\":{\"keccak256\":\"0x2745c69d2609b4cb8015e3e515985fdabb8425259252d670e9479757e84d8244\",\"urls\":[\"bzzr://1654fcaa2b59231739b840bc33be738aaf827f67f15527803eba1d86e5a830bd\"]},\"@openzeppelin/upgrades/contracts/Initializable.sol\":{\"keccak256\":\"0x9bfec92e36234ecc99b5d37230acb6cd1f99560233753162204104a4897e8721\",\"urls\":[\"bzzr://f75d88b16fe25a9e19b3512691c496e2bb6d8451bc9a636196c4e17ca9b40201\"]},\"project:/contracts/CorporateActions.sol\":{\"keccak256\":\"0x600dd30f41eb35a0b18fb96d9afe42c1379f0474cda6aa68c03a49ced0b6b216\",\"urls\":[\"bzzr://80aeeaaa519c8f8a9d9a2b236fa2c9aa2a56730838502a4ea633e79e187dc217\"]},\"project:/contracts/FundsDistributionToken.sol\":{\"keccak256\":\"0xc703a2ba1407881c6b0daac191e055aba5b35ce36be8c84d364283ae149d5ff4\",\"urls\":[\"bzzr://8c272cfd3349c1b41567ac64bd7e3699ae8840ee6b67abd2cad10561f572cc03\"]},\"project:/contracts/Snapshot.sol\":{\"keccak256\":\"0x92ea391e68e089947e37b11002b951a7224937e38df5d8fcb8d1aa6141cafa34\",\"urls\":[\"bzzr://205565c1d01a2c41266c2814c2979223271fad685577c523ac0711f198d1a24b\"]},\"project:/contracts/interfaces/IFundsDistributionToken.sol\":{\"keccak256\":\"0x3d5d99cbc132660388ed8e577655612307a51e013b832d2ac4ec86ba99e6202b\",\"urls\":[\"bzzr://f87d371129394c1145044d0ca8efe3bbba000c564305626129bd9f3eee3cea10\"]},\"project:/contracts/math/FixedPoint.sol\":{\"keccak256\":\"0x727dac57e0f66f42425bc44ba7ad617c77f9a3266c54fdd6c424fcd8e45d931d\",\"urls\":[\"bzzr://f805da569c4689e4805c24cdc6d5d6406de87fa73e195d68304a874839decae5\"]},\"project:/contracts/math/LogExpMath.sol\":{\"keccak256\":\"0xe8078460aae016460645c05a09602a8021473127853de5e0910138b885b53471\",\"urls\":[\"bzzr://edec9b90a5f598c7fa82fca8c96de4619e95eb3229b8ca3ecc28cc3bed8f204a\"]},\"project:/contracts/math/SafeConversion.sol\":{\"keccak256\":\"0x6997f2aa2e79eb526b8fa9cf5f6edf238a22ae532d23cd098cdd404e28ea4833\",\"urls\":[\"bzzr://441c98d0bf502e0261fb4df8a5fe6f9cbf6a7657a830d3b0dfecc212b23dd32a\"]},\"project:/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0x6a33fe72dd7d006c45dd259e00f4cc0ee9ef7256ca27b20435e2eb0f67ce335b\",\"urls\":[\"bzzr://317b1bb5c085ea41a97c23ba0a1c7f7329928aba25c8353f76e6431a9665f776\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.7+commit.6da8b019\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"withdrawnFundsOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"spender\",\"type\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"sender\",\"type\":\"address\"},{\"name\":\"recipient\",\"type\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdrawFunds\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"spender\",\"type\":\"address\"},{\"name\":\"addedValue\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"getDistribution\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"withdrawableFundsOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"accumulativeFundsOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"snapshotTotalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"snapshotBalanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"spender\",\"type\":\"address\"},{\"name\":\"subtractedValue\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"recipient\",\"type\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"},{\"name\":\"ballot\",\"type\":\"bool\"}],\"name\":\"vote\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"getResolution\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"},{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"owner\",\"type\":\"address\"},{\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getNextSnapshots\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"security\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"recordDate\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"resolution\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"voting\",\"type\":\"bool\"}],\"name\":\"Resolution\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"security\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"oldTime\",\"type\":\"uint256\"},{\"indexed\":false,\"name\":\"newTime\",\"type\":\"uint256\"}],\"name\":\"SnapshotSchedule\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"security\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"time\",\"type\":\"uint256\"}],\"name\":\"SnapshotUnschedule\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"by\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"fundsDistributed\",\"type\":\"uint256\"}],\"name\":\"FundsDistributed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"by\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"fundsWithdrawn\",\"type\":\"uint256\"}],\"name\":\"FundsWithdrawn\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{\"accumulativeFundsOf(address)\":{\"details\":\"accumulativeFundsOf(_owner) = withdrawableFundsOf(_owner) + withdrawnFundsOf(_owner)\\r = (pointsPerShare * balanceOf(_owner) + pointsCorrection[_owner]) / pointsMultiplier\\r\",\"params\":{\"_owner\":\"The address of a token holder.\\r\"},\"return\":\"The amount of funds that `_owner` has earned in total.\\r\"},\"allowance(address,address)\":{\"details\":\"See {IERC20-allowance}.\"},\"approve(address,uint256)\":{\"details\":\"See {IERC20-approve}.     * Requirements:     * - `spender` cannot be the zero address.\"},\"balanceOf(address)\":{\"details\":\"See {IERC20-balanceOf}.\"},\"decreaseAllowance(address,uint256)\":{\"details\":\"Atomically decreases the allowance granted to `spender` by the caller.     * This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}.     * Emits an {Approval} event indicating the updated allowance.     * Requirements:     * - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.\"},\"increaseAllowance(address,uint256)\":{\"details\":\"Atomically increases the allowance granted to `spender` by the caller.     * This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}.     * Emits an {Approval} event indicating the updated allowance.     * Requirements:     * - `spender` cannot be the zero address.\"},\"totalSupply()\":{\"details\":\"See {IERC20-totalSupply}.\"},\"transfer(address,uint256)\":{\"details\":\"See {IERC20-transfer}.     * Requirements:     * - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`.\"},\"transferFrom(address,address,uint256)\":{\"details\":\"See {IERC20-transferFrom}.     * Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20};     * Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `amount`. - the caller must have allowance for `sender`'s tokens of at least `amount`.\"},\"withdrawFunds()\":{\"details\":\"Withdraws all available funds for a FundsDistributionToken holder.\\r\"},\"withdrawableFundsOf(address)\":{\"params\":{\"_owner\":\"The address of a token holder.\\r\"},\"return\":\"The amount funds that `_owner` can withdraw.\\r\"},\"withdrawnFundsOf(address)\":{\"params\":{\"_owner\":\"The address of a token holder.\\r\"},\"return\":\"The amount of funds that `_owner` has withdrawn.\\r\"}}},\"userdoc\":{\"methods\":{\"accumulativeFundsOf(address)\":{\"notice\":\"prev. accumulativeDividendOf\\rView the amount of funds that an address has earned in total.\\r\"},\"withdrawableFundsOf(address)\":{\"notice\":\"prev. withdrawableDividendOf\\rView the amount of funds that an address can withdraw.\\r\"},\"withdrawnFundsOf(address)\":{\"notice\":\"prev. withdrawnDividendOf\\rView the amount of funds that an address has withdrawn.\\r\"}}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/CorporateActions.sol\":\"CorporateActions\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol\":{\"keccak256\":\"0x3491510fa4862af1a43f6c860d9cf7392240196540cd3c0eea79d374d419c5a1\",\"urls\":[\"bzzr://5cddbf3b74b775a8670757a6b8e108dac17dac20253f35f4c729e9cb6bea4ed3\"]},\"@openzeppelin/contracts-ethereum-package/contracts/math/Math.sol\":{\"keccak256\":\"0x4b5aa451e4e8801478708f94b118a7821c0500d676255eaf89fc78c14856ce4e\",\"urls\":[\"bzzr://200d5728b32858918810d8d7a8db1406ee9b157ad5026f050e6d864a696b9080\"]},\"@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x2a474399663812668bb8e9c9e7d011d54fd09de386bd6e9fcb2407a677ebd1aa\",\"urls\":[\"bzzr://3d70561b32ba1494d2b2df362e92dff5ab869d27e2fe35cf9bf3a8ae137cffd3\"]},\"@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzzr://cf2d583b8dce38d0617fdcd65f2fd9f126fe17b7f683b5a515ea9d2762d8b062\"]},\"@openzeppelin/contracts-ethereum-package/contracts/utils/Arrays.sol\":{\"keccak256\":\"0x2745c69d2609b4cb8015e3e515985fdabb8425259252d670e9479757e84d8244\",\"urls\":[\"bzzr://1654fcaa2b59231739b840bc33be738aaf827f67f15527803eba1d86e5a830bd\"]},\"@openzeppelin/upgrades/contracts/Initializable.sol\":{\"keccak256\":\"0x9bfec92e36234ecc99b5d37230acb6cd1f99560233753162204104a4897e8721\",\"urls\":[\"bzzr://f75d88b16fe25a9e19b3512691c496e2bb6d8451bc9a636196c4e17ca9b40201\"]},\"project:/contracts/CorporateActions.sol\":{\"keccak256\":\"0x600dd30f41eb35a0b18fb96d9afe42c1379f0474cda6aa68c03a49ced0b6b216\",\"urls\":[\"bzzr://80aeeaaa519c8f8a9d9a2b236fa2c9aa2a56730838502a4ea633e79e187dc217\"]},\"project:/contracts/FundsDistributionToken.sol\":{\"keccak256\":\"0xc703a2ba1407881c6b0daac191e055aba5b35ce36be8c84d364283ae149d5ff4\",\"urls\":[\"bzzr://8c272cfd3349c1b41567ac64bd7e3699ae8840ee6b67abd2cad10561f572cc03\"]},\"project:/contracts/Snapshot.sol\":{\"keccak256\":\"0x92ea391e68e089947e37b11002b951a7224937e38df5d8fcb8d1aa6141cafa34\",\"urls\":[\"bzzr://205565c1d01a2c41266c2814c2979223271fad685577c523ac0711f198d1a24b\"]},\"project:/contracts/interfaces/IFundsDistributionToken.sol\":{\"keccak256\":\"0x3d5d99cbc132660388ed8e577655612307a51e013b832d2ac4ec86ba99e6202b\",\"urls\":[\"bzzr://f87d371129394c1145044d0ca8efe3bbba000c564305626129bd9f3eee3cea10\"]},\"project:/contracts/math/FixedPoint.sol\":{\"keccak256\":\"0x727dac57e0f66f42425bc44ba7ad617c77f9a3266c54fdd6c424fcd8e45d931d\",\"urls\":[\"bzzr://f805da569c4689e4805c24cdc6d5d6406de87fa73e195d68304a874839decae5\"]},\"project:/contracts/math/LogExpMath.sol\":{\"keccak256\":\"0xe8078460aae016460645c05a09602a8021473127853de5e0910138b885b53471\",\"urls\":[\"bzzr://edec9b90a5f598c7fa82fca8c96de4619e95eb3229b8ca3ecc28cc3bed8f204a\"]},\"project:/contracts/math/SafeConversion.sol\":{\"keccak256\":\"0x6997f2aa2e79eb526b8fa9cf5f6edf238a22ae532d23cd098cdd404e28ea4833\",\"urls\":[\"bzzr://441c98d0bf502e0261fb4df8a5fe6f9cbf6a7657a830d3b0dfecc212b23dd32a\"]},\"project:/contracts/math/SignedSafeMath.sol\":{\"keccak256\":\"0x87968fe9e4ead7ac74b16df7a03fe8073580bb22f8b6ef6598420e13e1257ab3\",\"urls\":[\"bzzr://d4d30c2b54a1ea9dd1b44cfe1c626c0c76e8a7071aa6833d811b42e7b11f5217\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
@@ -545,7 +545,7 @@
         "id": 3283,
         "nodeType": "ImportDirective",
         "scope": 3571,
-        "sourceUnit": 6418,
+        "sourceUnit": 6416,
         "src": "129:24:18",
         "symbolAliases": [],
         "unitAlias": ""
@@ -570,10 +570,10 @@
               "id": 3285,
               "name": "Snapshot",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 6417,
+              "referencedDeclaration": 6415,
               "src": "267:8:18",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Snapshot_$6417",
+                "typeIdentifier": "t_contract$_Snapshot_$6415",
                 "typeString": "contract Snapshot"
               }
             },
@@ -588,8 +588,8 @@
           890,
           1042,
           3849,
-          6417,
-          6564
+          6415,
+          6562
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -597,13 +597,13 @@
         "id": 3570,
         "linearizedBaseContracts": [
           3570,
-          6417,
+          6415,
           3849,
           821,
           890,
           29,
           1042,
-          6564
+          6562
         ],
         "name": "CorporateActions",
         "nodeType": "ContractDefinition",
@@ -1175,7 +1175,7 @@
                       "name": "getNextSnapshots",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 6020,
+                      "referencedDeclaration": 6018,
                       "src": "1339:16:18",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_view$__$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
@@ -1446,7 +1446,7 @@
                                         "name": "this",
                                         "nodeType": "Identifier",
                                         "overloadedDeclarations": [],
-                                        "referencedDeclaration": 9401,
+                                        "referencedDeclaration": 9399,
                                         "src": "1596:4:18",
                                         "typeDescriptions": {
                                           "typeIdentifier": "t_contract$_CorporateActions_$3570",
@@ -1918,7 +1918,7 @@
                               "name": "abi",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 9322,
+                              "referencedDeclaration": 9320,
                               "src": "1808:3:18",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_abi",
@@ -1965,7 +1965,7 @@
                         "name": "keccak256",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 9329,
+                        "referencedDeclaration": 9327,
                         "src": "1798:9:18",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -2026,7 +2026,7 @@
                               "name": "abi",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 9322,
+                              "referencedDeclaration": 9320,
                               "src": "1858:3:18",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_abi",
@@ -2073,7 +2073,7 @@
                         "name": "keccak256",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 9329,
+                        "referencedDeclaration": 9327,
                         "src": "1848:9:18",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -2394,7 +2394,7 @@
                                 "name": "msg",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 9335,
+                                "referencedDeclaration": 9333,
                                 "src": "2127:3:18",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_message",
@@ -2431,7 +2431,7 @@
                             "name": "snapshotBalanceOf",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 6048,
+                            "referencedDeclaration": 6046,
                             "src": "2103:17:18",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_view$_t_uint256_$_t_address_$returns$_t_uint256_$",
@@ -2512,10 +2512,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9338,
-                        9339
+                        9336,
+                        9337
                       ],
-                      "referencedDeclaration": 9339,
+                      "referencedDeclaration": 9337,
                       "src": "2095:7:18",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -2603,7 +2603,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 9335,
+                          "referencedDeclaration": 9333,
                           "src": "2191:3:18",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -2765,7 +2765,7 @@
                                     "name": "abi",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 9322,
+                                    "referencedDeclaration": 9320,
                                     "src": "2238:3:18",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_magic_abi",
@@ -2812,7 +2812,7 @@
                               "name": "keccak256",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 9329,
+                              "referencedDeclaration": 9327,
                               "src": "2228:9:18",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -2873,7 +2873,7 @@
                                     "name": "abi",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 9322,
+                                    "referencedDeclaration": 9320,
                                     "src": "2288:3:18",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_magic_abi",
@@ -2920,7 +2920,7 @@
                               "name": "keccak256",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 9329,
+                              "referencedDeclaration": 9327,
                               "src": "2278:9:18",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -3156,7 +3156,7 @@
                                             "name": "msg",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [],
-                                            "referencedDeclaration": 9335,
+                                            "referencedDeclaration": 9333,
                                             "src": "2402:3:18",
                                             "typeDescriptions": {
                                               "typeIdentifier": "t_magic_message",
@@ -3282,7 +3282,7 @@
                                                   "name": "msg",
                                                   "nodeType": "Identifier",
                                                   "overloadedDeclarations": [],
-                                                  "referencedDeclaration": 9335,
+                                                  "referencedDeclaration": 9333,
                                                   "src": "2460:3:18",
                                                   "typeDescriptions": {
                                                     "typeIdentifier": "t_magic_message",
@@ -3398,7 +3398,7 @@
                                                   "name": "msg",
                                                   "nodeType": "Identifier",
                                                   "overloadedDeclarations": [],
-                                                  "referencedDeclaration": 9335,
+                                                  "referencedDeclaration": 9333,
                                                   "src": "2521:3:18",
                                                   "typeDescriptions": {
                                                     "typeIdentifier": "t_magic_message",
@@ -3645,7 +3645,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 9335,
+                            "referencedDeclaration": 9333,
                             "src": "3012:3:18",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -3682,7 +3682,7 @@
                         "name": "snapshotBalanceOf",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 6048,
+                        "referencedDeclaration": 6046,
                         "src": "2988:17:18",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_view$_t_uint256_$_t_address_$returns$_t_uint256_$",
@@ -3810,7 +3810,7 @@
                                     "name": "abi",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 9322,
+                                    "referencedDeclaration": 9320,
                                     "src": "3098:3:18",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_magic_abi",
@@ -3857,7 +3857,7 @@
                               "name": "keccak256",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 9329,
+                              "referencedDeclaration": 9327,
                               "src": "3088:9:18",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -3918,7 +3918,7 @@
                                     "name": "abi",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 9322,
+                                    "referencedDeclaration": 9320,
                                     "src": "3148:3:18",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_magic_abi",
@@ -3965,7 +3965,7 @@
                               "name": "keccak256",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 9329,
+                              "referencedDeclaration": 9327,
                               "src": "3138:9:18",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -4058,7 +4058,7 @@
                                           "name": "msg",
                                           "nodeType": "Identifier",
                                           "overloadedDeclarations": [],
-                                          "referencedDeclaration": 9335,
+                                          "referencedDeclaration": 9333,
                                           "src": "3217:3:18",
                                           "typeDescriptions": {
                                             "typeIdentifier": "t_magic_message",
@@ -4157,7 +4157,7 @@
                                           "name": "msg",
                                           "nodeType": "Identifier",
                                           "overloadedDeclarations": [],
-                                          "referencedDeclaration": 9335,
+                                          "referencedDeclaration": 9333,
                                           "src": "3256:3:18",
                                           "typeDescriptions": {
                                             "typeIdentifier": "t_magic_message",
@@ -4367,7 +4367,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 6418,
+          "SourceUnit": 6416,
           "absolutePath": "project:/contracts/Snapshot.sol",
           "file": "./Snapshot.sol",
           "scope": 3571,
@@ -4403,21 +4403,21 @@
             890,
             1042,
             3849,
-            6417,
-            6564
+            6415,
+            6562
           ],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
             3570,
-            6417,
+            6415,
             3849,
             821,
             890,
             29,
             1042,
-            6564
+            6562
           ],
           "name": "CorporateActions",
           "scope": 3571
@@ -4432,7 +4432,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "Snapshot",
-                  "referencedDeclaration": 6417,
+                  "referencedDeclaration": 6415,
                   "type": "contract Snapshot"
                 },
                 "id": 3285,
@@ -5144,7 +5144,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 6020,
+                              "referencedDeclaration": 6018,
                               "type": "function () view returns (uint256[] memory)",
                               "value": "getNextSnapshots"
                             },
@@ -5656,7 +5656,7 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 9401,
+                                                  "referencedDeclaration": 9399,
                                                   "type": "contract CorporateActions",
                                                   "value": "this"
                                                 },
@@ -5907,7 +5907,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 9329,
+                                  "referencedDeclaration": 9327,
                                   "type": "function (bytes memory) pure returns (bytes32)",
                                   "value": "keccak256"
                                 },
@@ -5953,7 +5953,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 9322,
+                                          "referencedDeclaration": 9320,
                                           "type": "abi",
                                           "value": "abi"
                                         },
@@ -6045,7 +6045,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 9329,
+                                  "referencedDeclaration": 9327,
                                   "type": "function (bytes memory) pure returns (bytes32)",
                                   "value": "keccak256"
                                 },
@@ -6091,7 +6091,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 9322,
+                                          "referencedDeclaration": 9320,
                                           "type": "abi",
                                           "value": "abi"
                                         },
@@ -6439,10 +6439,10 @@
                                 }
                               ],
                               "overloadedDeclarations": [
-                                9338,
-                                9339
+                                9336,
+                                9337
                               ],
-                              "referencedDeclaration": 9339,
+                              "referencedDeclaration": 9337,
                               "type": "function (bool,string memory) pure",
                               "value": "require"
                             },
@@ -6495,7 +6495,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 6048,
+                                      "referencedDeclaration": 6046,
                                       "type": "function (uint256,address) view returns (uint256)",
                                       "value": "snapshotBalanceOf"
                                     },
@@ -6535,7 +6535,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 9335,
+                                          "referencedDeclaration": 9333,
                                           "type": "msg",
                                           "value": "msg"
                                         },
@@ -6690,7 +6690,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 9335,
+                                      "referencedDeclaration": 9333,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -6778,7 +6778,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 9329,
+                                          "referencedDeclaration": 9327,
                                           "type": "function (bytes memory) pure returns (bytes32)",
                                           "value": "keccak256"
                                         },
@@ -6824,7 +6824,7 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 9322,
+                                                  "referencedDeclaration": 9320,
                                                   "type": "abi",
                                                   "value": "abi"
                                                 },
@@ -6916,7 +6916,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 9329,
+                                          "referencedDeclaration": 9327,
                                           "type": "function (bytes memory) pure returns (bytes32)",
                                           "value": "keccak256"
                                         },
@@ -6962,7 +6962,7 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 9322,
+                                                  "referencedDeclaration": 9320,
                                                   "type": "abi",
                                                   "value": "abi"
                                                 },
@@ -7213,7 +7213,7 @@
                                                               "overloadedDeclarations": [
                                                                 null
                                                               ],
-                                                              "referencedDeclaration": 9335,
+                                                              "referencedDeclaration": 9333,
                                                               "type": "msg",
                                                               "value": "msg"
                                                             },
@@ -7339,7 +7339,7 @@
                                                                       "overloadedDeclarations": [
                                                                         null
                                                                       ],
-                                                                      "referencedDeclaration": 9335,
+                                                                      "referencedDeclaration": 9333,
                                                                       "type": "msg",
                                                                       "value": "msg"
                                                                     },
@@ -7465,7 +7465,7 @@
                                                                       "overloadedDeclarations": [
                                                                         null
                                                                       ],
-                                                                      "referencedDeclaration": 9335,
+                                                                      "referencedDeclaration": 9333,
                                                                       "type": "msg",
                                                                       "value": "msg"
                                                                     },
@@ -7802,7 +7802,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 6048,
+                                  "referencedDeclaration": 6046,
                                   "type": "function (uint256,address) view returns (uint256)",
                                   "value": "snapshotBalanceOf"
                                 },
@@ -7842,7 +7842,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 9335,
+                                      "referencedDeclaration": 9333,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -7930,7 +7930,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 9329,
+                                          "referencedDeclaration": 9327,
                                           "type": "function (bytes memory) pure returns (bytes32)",
                                           "value": "keccak256"
                                         },
@@ -7976,7 +7976,7 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 9322,
+                                                  "referencedDeclaration": 9320,
                                                   "type": "abi",
                                                   "value": "abi"
                                                 },
@@ -8068,7 +8068,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 9329,
+                                          "referencedDeclaration": 9327,
                                           "type": "function (bytes memory) pure returns (bytes32)",
                                           "value": "keccak256"
                                         },
@@ -8114,7 +8114,7 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 9322,
+                                                  "referencedDeclaration": 9320,
                                                   "type": "abi",
                                                   "value": "abi"
                                                 },
@@ -8260,7 +8260,7 @@
                                                           "overloadedDeclarations": [
                                                             null
                                                           ],
-                                                          "referencedDeclaration": 9335,
+                                                          "referencedDeclaration": 9333,
                                                           "type": "msg",
                                                           "value": "msg"
                                                         },
@@ -8366,7 +8366,7 @@
                                                           "overloadedDeclarations": [
                                                             null
                                                           ],
-                                                          "referencedDeclaration": 9335,
+                                                          "referencedDeclaration": 9333,
                                                           "type": "msg",
                                                           "value": "msg"
                                                         },
@@ -8445,7 +8445,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2024-03-16T18:28:47.037Z",
+  "updatedAt": "2024-07-28T07:43:30.153Z",
   "devdoc": {
     "methods": {
       "accumulativeFundsOf(address)": {

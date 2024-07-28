@@ -480,6 +480,38 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
+  getIssuingFee(security: Address, currency: Address): BigInt {
+    let result = super.call(
+      "getIssuingFee",
+      "getIssuingFee(address,address):(uint256)",
+      [
+        ethereum.Value.fromAddress(security),
+        ethereum.Value.fromAddress(currency)
+      ]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_getIssuingFee(
+    security: Address,
+    currency: Address
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getIssuingFee",
+      "getIssuingFee(address,address):(uint256)",
+      [
+        ethereum.Value.fromAddress(security),
+        ethereum.Value.fromAddress(currency)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   getOffered(
     offered: Address
   ): Array<PrimaryIssueManager__getOfferedResultValue0Struct> {

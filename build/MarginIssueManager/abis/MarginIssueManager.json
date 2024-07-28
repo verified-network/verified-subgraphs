@@ -56,6 +56,12 @@
         "internalType": "int256",
         "name": "commission",
         "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "settlementTime",
+        "type": "uint256"
       }
     ],
     "name": "PnLSettled",
@@ -112,9 +118,40 @@
         "internalType": "int256",
         "name": "balance",
         "type": "int256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "offerTime",
+        "type": "uint256"
       }
     ],
     "name": "collateral",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "feeFromPool",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "feeScaled",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "feeToPay",
+        "type": "uint256"
+      }
+    ],
+    "name": "feeTest",
     "type": "event"
   },
   {
