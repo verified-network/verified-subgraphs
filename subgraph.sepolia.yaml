@@ -162,9 +162,9 @@ dataSources:
     name: SecondaryIssueManager
     network: sepolia
     source:
-      address: '0x32464AC66668824E6d1261472F085045354B2CBa'
+      address: '0xC0872152A98eF535aD6BA4Ad4b865B69d3F87176'
       abi: SecondaryIssueManager
-      startBlock: 5637324
+      startBlock: 6449384
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

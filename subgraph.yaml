@@ -6,60 +6,60 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: gnosis
+    network: base
     source:
-      address: '0x9cd9719f897C09D8287A97679f516f6323a54E7d'
+      address: '0x4746DD1D30F76a16866EcE1774fd2eE025988D4b'
       abi: SecuritiesFactory
-      startBlock: 35333821
+      startBlock: 17681678
     mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      file: ./src/mappings/factory.ts
-      entities:
-        - Issuer
-        - Token
-        - Security
-      abis:
-        - name: SecuritiesFactory
-          file: ./abis/SecuritiesFactory.json
-        - name: Security
-          file: ./abis/Security.json
-      eventHandlers:
-        - event: securitiesAdded(indexed address,bytes32,address,bytes32,address,bool,address,bytes32[],bytes32)
-          handler: handleSecurityCreated
+     kind: ethereum/events
+     apiVersion: 0.0.5
+     language: wasm/assemblyscript
+     file: ./src/mappings/factory.ts
+     entities:
+       - Issuer
+       - Token
+       - Security
+     abis:
+       - name: SecuritiesFactory
+         file: ./abis/SecuritiesFactory.json
+       - name: Security
+         file: ./abis/Security.json
+     eventHandlers:
+       - event: securitiesAdded(indexed address,bytes32,address,bytes32,address,bool,address,bytes32[],bytes32)
+         handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: gnosis
+    network: base
     source:
-      address: '0x312C59864CbCB34bBB4401185d634ead05650fBF'
-      abi: Client
-      startBlock: 35333817
+     address: '0x06abba52d38C75D40Ae677a4aA30500c52A89063'
+     abi: Client
+     startBlock: 17681668
     mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      file: ./src/mappings/client.ts
-      entities:
-        - Manager
-        - User
-      abis:
-        - name: Client
-          file: ./abis/Client.json
-      eventHandlers:
-        - event: ManagerAdded(address,indexed address,bytes32,bytes32,bytes32)
-          handler: handleManagerCreated
-        - event: ManagerRemoved(address,indexed address,bytes32,bytes32)
-          handler: handleManagerRemoved
-        - event: UserAdded(address,bytes32,bytes32,bytes32,uint256)
-          handler: handleUserCreated
+     kind: ethereum/events
+     apiVersion: 0.0.5
+     language: wasm/assemblyscript
+     file: ./src/mappings/client.ts
+     entities:
+       - Manager
+       - User
+     abis:
+       - name: Client
+         file: ./abis/Client.json
+     eventHandlers:
+       - event: ManagerAdded(address,indexed address,bytes32,bytes32,bytes32)
+         handler: handleManagerCreated
+       - event: ManagerRemoved(address,indexed address,bytes32,bytes32)
+         handler: handleManagerRemoved
+       - event: UserAdded(address,bytes32,bytes32,bytes32,uint256)
+         handler: handleUserCreated
   - kind: ethereum/contract
     name: Liquidity
-    network: gnosis
+    network: base
     source:
-      address: '0x36A6efC3276e2d2d015c9e96af3957aB5293b662'
+      address: '0x5d85E0aDBa6E9E388D0641D7C8d925756316e99D'
       abi: Liquidity
-      startBlock: 34473710
+      startBlock: 17659792
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -98,11 +98,11 @@ dataSources:
           handler: handlePlatformManagers
   - kind: ethereum/contract
     name: Distribution
-    network: gnosis
+    network: base
     source:
-      address: '0x812cD96Bd1D9C35EaCD3F09Dc504B2d30e63EFe5'
+      address: '0x3C0Da71292F095182b06e2f3c1527E2DF6aEa583'
       abi: Distribution
-      startBlock: 34476039
+      startBlock: 17684654
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -117,54 +117,54 @@ dataSources:
       eventHandlers:
         - event: RevenueShare(bytes32,indexed address,address,uint256,uint256)
           handler: handleDistribution
-  - kind: ethereum/contract
-    name: PrimaryIssueManager
-    network: gnosis
-    source:
-      address: '0xf9CA2Ea876CB561610b89Cf3c009B723579f60C9'
-      abi: PrimaryIssueManager
-      startBlock: 35334115
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      file: ./src/mappings/primaries.ts
-      entities:
-        - Subscribers
-        - LiquidityProviders
-        - Offers
-        - Closures
-        - Refunds
-        - Allotments
-        - Settlements
-        - FeeCollections
-      abis:
-        - name: PrimaryIssueManager
-          file: ./abis/PrimaryIssueManager.json
-      eventHandlers:
-        - event: marketmakers(indexed address,address,address,address,uint256,uint256,uint256)
-          handler: handleMarketmakers
-        - event: subscribers(indexed address,bytes32,address,address,uint256,uint256,uint256,bool)
-          handler: handlePrimaryInvestors
-        - event: offers(address,indexed address,uint256,address,uint256,uint256,bytes32,uint256,string)
-          handler: handleOffers
-        - event: closures(indexed bytes32,address,uint256)
-          handler: handleClosures
-        - event: allotments(indexed bytes32,address,address,uint256,address,uint256,uint256)
-          handler: handleAllotments
-        - event: refunds(indexed bytes32,address,address,uint256,address,uint256,uint256)
-          handler: handleRefunds
-        - event: settlements(indexed bytes32,address,address,address,uint256,address,uint256)
-          handler: handleSettlements
-        - event: feecollection(indexed address,uint256,uint256)
-          handler: handleFeeCollections
+  #- kind: ethereum/contract
+  #  name: PrimaryIssueManager
+  #  network: base
+  #  source:
+  #    address: '0xa1582D9848cd72cfd001b32Ae7872A9de4E8f695'
+  #    abi: PrimaryIssueManager
+  #    startBlock: 9984656
+  #  mapping:
+  #    kind: ethereum/events
+  #    apiVersion: 0.0.5
+  #    language: wasm/assemblyscript
+  #    file: ./src/mappings/primaries.ts
+  #    entities:
+  #      - Subscribers
+  #      - LiquidityProviders
+  #      - Offers
+  #      - Closures
+  #      - Refunds
+  #      - Allotments
+  #      - Settlements
+  #      - FeeCollections
+  #    abis:
+  #      - name: PrimaryIssueManager
+  #        file: ./abis/PrimaryIssueManager.json
+  #    eventHandlers:
+  #      - event: marketmakers(indexed address,address,address,address,uint256,uint256,uint256)
+  #        handler: handleMarketmakers
+  #      - event: subscribers(indexed address,bytes32,address,address,uint256,uint256,uint256,bool)
+  #        handler: handlePrimaryInvestors
+  #      - event: offers(address,indexed address,uint256,address,uint256,uint256,bytes32,uint256,string)
+  #        handler: handleOffers
+  #      - event: closures(indexed bytes32,address,uint256)
+  #        handler: handleClosures
+  #      - event: allotments(indexed bytes32,address,address,uint256,address,uint256,uint256)
+  #        handler: handleAllotments
+  #      - event: refunds(indexed bytes32,address,address,uint256,address,uint256,uint256)
+  #        handler: handleRefunds
+  #      - event: settlements(indexed bytes32,address,address,address,uint256,address,uint256)
+  #        handler: handleSettlements
+  #      - event: feecollection(indexed address,uint256,uint256)
+  #        handler: handleFeeCollections
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: gnosis
+    network: base
     source:
-      address: '0x95b73422B232710953F8454e39E72672a48D88ED'
+      address: '0x532629896968b80386998865202ed36178eE6e01'
       abi: SecondaryIssueManager
-      startBlock: 35334121
+      startBlock: 18077751
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -187,97 +187,98 @@ dataSources:
           handler: handleClosures
         - event: feecollection(indexed address,uint256,uint256)
           handler: handleFeeCollections
-  - kind: ethereum/contract
-    name: MarginIssueManager
-    network: gnosis
-    source:
-      address: '0x0F248837AAd71e08A2AE43d8e148A6AbE891Daa6'
-      abi: MarginIssueManager
-      startBlock: 35334128
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      file: ./src/mappings/margintrades.ts
-      entities:
-        - Trades
-        - Investors
-        - Closures
-        - FeeCollections
-        - MarginCollateral
-        - MarginTradePnL
-      abis:
-        - name: MarginIssueManager
-          file: ./abis/MarginIssueManager.json
-      eventHandlers:
-        - event: tradeSettled(indexed bytes32,address,address,uint256,address,address,uint256,bytes32,bytes32,uint256,uint256)
-          handler: handleTrades
-        - event: subscribers(address,address,indexed address,uint256,address,uint256,bytes32,uint256)
-          handler: handleTraders
-        - event: closures(indexed bytes32,address,uint256)
-          handler: handleClosures
-        - event: feecollection(indexed address,uint256,uint256)
-          handler: handleFeeCollections
-        - event: collateral(bytes32,indexed address,address,int256,uint256)
-          handler: handleMarginCollateral
-        - event: PnLSettled(indexed address,address,address,int256,int256,int256,uint256)
-          handler:  handleMarginSettlements
-  - kind: ethereum/contract
-    name: Factory
-    network: gnosis
-    source:
-      address: '0xED47a71d2617b1a1F9A9aeb33b85bE5A722EA79B'
-      abi: Factory
-      startBlock: 34475888
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      file: ./src/mappings/factory.ts
-      entities:
-        - Token
-      abis:
-        - name: Factory
-          file: ./abis/Factory.json
-      eventHandlers:
-        - event: CashIssuerCreated(indexed address,bytes32,bytes32)
-          handler: handleCashCreated
-        - event: BondIssuerCreated(indexed address,bytes32,bytes32)
-          handler: handleBondCreated
-        - event: TokenCreated(indexed address,bytes32,bytes32)
-          handler: handleBondTokenCreated
   #- kind: ethereum/contract
-  #  name: VerifiedMarkets
-  #  network: gnosis
+  #  name: MarginIssueManager
+  #  network: base
   #  source:
-  #    address: ''
-  #    abi: VerifiedMarkets
-  #    startBlock: 9484074
+  #    address: '0x7eBA7816b2c28c475f7205DCcdcaFFB30f6A71f2'
+  #    abi: MarginIssueManager
+  #    startBlock: 10447278
   #  mapping:
   #    kind: ethereum/events
   #    apiVersion: 0.0.5
   #    language: wasm/assemblyscript
-  #    file: ./src/mappings/collateralizedloans.ts
+  #    file: ./src/mappings/margintrades.ts
   #    entities:
-  #      - RWA
-  #      - Collateral
-  #      - CompoundLoans
+  #      - Trades
+  #      - Investors
+  #      - Closures
+  #      - FeeCollections
+  #      - MarginCollateral
+  #      - MarginTradePnL
   #    abis:
-  #      - name: VerifiedMarkets
-  #        file: ./abis/VerifiedMarkets.json
+  #      - name: MarginIssueManager
+  #        file: ./abis/MarginIssueManager.json
   #    eventHandlers:
-  #      - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
-  #        handler: handleNewRWA
-  #      - event: PostedCollateral(indexed address,indexed address,address,uint256)
-  #        handler: handleCollateral
-  #      - event: Borrowed(indexed address,indexed address,uint256)
-  #        handler: handleBorrowing
-  #      - event: Repaid(indexed address,indexed address,uint256)
-  #        handler: handleRepayment
+  #      - event: tradeSettled(indexed bytes32,address,address,uint256,address,address,uint256,bytes32,bytes32,uint256,uint256)
+  #        handler: handleTrades
+  #      - event: subscribers(address,address,indexed address,uint256,address,uint256,bytes32,uint256)
+  #        handler: handleTraders
+  #      - event: closures(indexed bytes32,address,uint256)
+  #        handler: handleClosures
+  #      - event: feecollection(indexed address,uint256,uint256)
+  #        handler: handleFeeCollections
+  #      - event: collateral(bytes32,indexed address,address,int256,uint256)
+  #        handler: handleMarginCollateral
+  #      - event: PnLSettled(indexed address,address,address,int256,int256,int256,uint256)
+  #        handler:  handleMarginSettlements   
+  #- kind: ethereum/contract
+  #  name: Factory
+  #  network: base
+  #  source:
+  #    address: '0x1021A1474dC1630E5781B1676Def04fF7f11Cc0b'
+  #    abi: Factory
+  #    startBlock: 10810847
+  #  mapping:
+  #    kind: ethereum/events
+  #    apiVersion: 0.0.5
+  #    language: wasm/assemblyscript
+  #    file: ./src/mappings/factory.ts
+  #    entities:
+  #      - Token
+  #    abis:
+  #      - name: Factory
+  #        file: ./abis/Factory.json
+  #    eventHandlers:
+  #      - event: CashIssuerCreated(indexed address,bytes32,bytes32)
+  #        handler: handleCashCreated
+  #      - event: BondIssuerCreated(indexed address,bytes32,bytes32)
+  #        handler: handleBondCreated
+  #      - event: TokenCreated(indexed address,bytes32,bytes32)
+  #        handler: handleBondTokenCreated
+#  - kind: ethereum/contract
+#    name: VerifiedMarkets
+#    network: base
+#    source:
+#     address: '0x7fB634f4C3530a35899c2238673342A8af707cD4'
+#     abi: VerifiedMarkets
+#     startBlock: 11179559
+#    mapping:
+#     kind: ethereum/events
+#     apiVersion: 0.0.5
+#     language: wasm/assemblyscript
+#     file: ./src/mappings/collateralizedloans.ts
+#     entities:
+#       - RWA
+#       - Collateral
+#       - CollaterizedLoan
+#       - CollaterizedLoanRepayment
+#     abis:
+#       - name: VerifiedMarkets
+#         file: ./abis/VerifiedMarkets.json
+#     eventHandlers:
+#       - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
+#         handler: handleNewRWA
+#       - event: PostedCollateral(indexed address,indexed address,address,uint256)
+#         handler: handleCollateral
+#       - event: Borrowed(indexed address,indexed address,uint256)
+#         handler: handleBorrowing
+#       - event: Repaid(indexed address,indexed address,uint256)
+#         handler: handleRepayment
 templates:
   - kind: ethereum/contract
     name: Security
-    network: gnosis
+    network: base
     source:
       abi: Security
     mapping:
@@ -309,7 +310,7 @@ templates:
       file: ./src/mappings/security.ts
   - kind: ethereum/contract
     name: Cash
-    network: gnosis
+    network: base
     source:
       abi: Cash
     mapping:
@@ -338,7 +339,7 @@ templates:
       file: ./src/mappings/cash.ts  
   - kind: ethereum/contract
     name: Bond
-    network: gnosis
+    network: base
     source:
       abi: Bond
     mapping:
