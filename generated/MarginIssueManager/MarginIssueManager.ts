@@ -310,6 +310,25 @@ export class MarginIssueManager extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
+  getPool(poolId: Bytes): boolean {
+    let result = super.call("getPool", "getPool(bytes32):(bool)", [
+      ethereum.Value.fromFixedBytes(poolId)
+    ]);
+
+    return result[0].toBoolean();
+  }
+
+  try_getPool(poolId: Bytes): ethereum.CallResult<boolean> {
+    let result = super.tryCall("getPool", "getPool(bytes32):(bool)", [
+      ethereum.Value.fromFixedBytes(poolId)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
   getCollateral(poolId: Bytes, currency: Address): BigInt {
     let result = super.call(
       "getCollateral",
