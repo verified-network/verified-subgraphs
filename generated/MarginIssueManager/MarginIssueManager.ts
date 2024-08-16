@@ -134,32 +134,6 @@ export class collateral__Params {
   }
 }
 
-export class feeTest extends ethereum.Event {
-  get params(): feeTest__Params {
-    return new feeTest__Params(this);
-  }
-}
-
-export class feeTest__Params {
-  _event: feeTest;
-
-  constructor(event: feeTest) {
-    this._event = event;
-  }
-
-  get feeFromPool(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
-  get feeScaled(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-
-  get feeToPay(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-}
-
 export class feecollection extends ethereum.Event {
   get params(): feecollection__Params {
     return new feecollection__Params(this);
