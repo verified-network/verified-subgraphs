@@ -250,9 +250,9 @@ dataSources:
     name: VerifiedMarkets
     network: sepolia
     source:
-      address: '0xf8287e8D37863Db0Cabd25B55f77652d5d6aEb83'
+      address: '0x569cb45EB0836b8595cC4269c4D1e91c8668D266'
       abi: VerifiedMarkets
-      startBlock: 9484074
+      startBlock: 6630945
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

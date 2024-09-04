@@ -117,54 +117,54 @@ dataSources:
       eventHandlers:
         - event: RevenueShare(bytes32,indexed address,address,uint256,uint256)
           handler: handleDistribution
-  #- kind: ethereum/contract
-  #  name: PrimaryIssueManager
-  #  network: base
-  #  source:
-  #    address: '0xa1582D9848cd72cfd001b32Ae7872A9de4E8f695'
-  #    abi: PrimaryIssueManager
-  #    startBlock: 9984656
-  #  mapping:
-  #    kind: ethereum/events
-  #    apiVersion: 0.0.5
-  #    language: wasm/assemblyscript
-  #    file: ./src/mappings/primaries.ts
-  #    entities:
-  #      - Subscribers
-  #      - LiquidityProviders
-  #      - Offers
-  #      - Closures
-  #      - Refunds
-  #      - Allotments
-  #      - Settlements
-  #      - FeeCollections
-  #    abis:
-  #      - name: PrimaryIssueManager
-  #        file: ./abis/PrimaryIssueManager.json
-  #    eventHandlers:
-  #      - event: marketmakers(indexed address,address,address,address,uint256,uint256,uint256)
-  #        handler: handleMarketmakers
-  #      - event: subscribers(indexed address,bytes32,address,address,uint256,uint256,uint256,bool)
-  #        handler: handlePrimaryInvestors
-  #      - event: offers(address,indexed address,uint256,address,uint256,uint256,bytes32,uint256,string)
-  #        handler: handleOffers
-  #      - event: closures(indexed bytes32,address,uint256)
-  #        handler: handleClosures
-  #      - event: allotments(indexed bytes32,address,address,uint256,address,uint256,uint256)
-  #        handler: handleAllotments
-  #      - event: refunds(indexed bytes32,address,address,uint256,address,uint256,uint256)
-  #        handler: handleRefunds
-  #      - event: settlements(indexed bytes32,address,address,address,uint256,address,uint256)
-  #        handler: handleSettlements
-  #      - event: feecollection(indexed address,uint256,uint256)
-  #        handler: handleFeeCollections
+  - kind: ethereum/contract
+    name: PrimaryIssueManager
+    network: base
+    source:
+      address: '0xa4b9F21B92A7630a628C2B9EFbA1c844fCE7306E'
+      abi: PrimaryIssueManager
+      startBlock: 19160783
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/primaries.ts
+      entities:
+        - Subscribers
+        - LiquidityProviders
+        - Offers
+        - Closures
+        - Refunds
+        - Allotments
+        - Settlements
+        - FeeCollections
+      abis:
+        - name: PrimaryIssueManager
+          file: ./abis/PrimaryIssueManager.json
+      eventHandlers:
+        - event: marketmakers(indexed address,address,address,address,uint256,uint256,uint256)
+          handler: handleMarketmakers
+        - event: subscribers(indexed address,bytes32,address,address,uint256,uint256,uint256,bool)
+          handler: handlePrimaryInvestors
+        - event: offers(address,indexed address,uint256,address,uint256,uint256,bytes32,uint256,string)
+          handler: handleOffers
+        - event: closures(indexed bytes32,address,uint256)
+          handler: handleClosures
+        - event: allotments(indexed bytes32,address,address,uint256,address,uint256,uint256)
+          handler: handleAllotments
+        - event: refunds(indexed bytes32,address,address,uint256,address,uint256,uint256)
+          handler: handleRefunds
+        - event: settlements(indexed bytes32,address,address,address,uint256,address,uint256)
+          handler: handleSettlements
+        - event: feecollection(indexed address,uint256,uint256)
+          handler: handleFeeCollections
   - kind: ethereum/contract
     name: SecondaryIssueManager
     network: base
     source:
-      address: '0x532629896968b80386998865202ed36178eE6e01'
+      address: '0xfaC72D7080aB10Edd5BFf6325117710dBAAc7174'
       abi: SecondaryIssueManager
-      startBlock: 18077751
+      startBlock: 19160792
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

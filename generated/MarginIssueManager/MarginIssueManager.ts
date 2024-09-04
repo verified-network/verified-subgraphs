@@ -335,6 +335,32 @@ export class MarginIssueManager extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
+  getUserCollateral(party: Address, currency: Address): BigInt {
+    let result = super.call(
+      "getUserCollateral",
+      "getUserCollateral(address,address):(int256)",
+      [ethereum.Value.fromAddress(party), ethereum.Value.fromAddress(currency)]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_getUserCollateral(
+    party: Address,
+    currency: Address
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getUserCollateral",
+      "getUserCollateral(address,address):(int256)",
+      [ethereum.Value.fromAddress(party), ethereum.Value.fromAddress(currency)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   getTradingFeeCollected(_token: Address): BigInt {
     let result = super.call(
       "getTradingFeeCollected",
