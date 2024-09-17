@@ -4,9 +4,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy-mainnet": "graph deploy verified-wallet",
+    "deploy-mainnet": "graph deploy wallet-mainnet",
     "deploy-base": "graph deploy wallet-base",
     "deploy-sepolia": "graph deploy test-wallet",
+    "deploy-base-sepolia": "graph deploy wallet-arbitrum",
     "deploy-arbitrum": "graph deploy wallet-arbitrum",
     "deploy-gnosis": "graph deploy wallet-gnosis",
     "create-local": "graph create --node http://localhost:8020/ verified-network/wallet",
