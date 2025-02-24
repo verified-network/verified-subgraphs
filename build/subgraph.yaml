@@ -164,7 +164,7 @@ dataSources:
     name: SecondaryIssueManager
     network: sepolia
     source:
-      address: "0x955706f85511cc1133529191227B5ad2D55D0280"
+      address: "0xFc61fB705599d59B1F7A2ad7cc35D2aBe862b1ca"
       abi: SecondaryIssueManager
       startBlock: 6595448
     mapping:
@@ -195,7 +195,7 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0x5592FAE805138ea75c67363eD9609E6529d1Ed9A"
+      address: "0x6391Cd93045634b5f47a2D15f886dFf81b731319"
       abi: MarginIssueManager
       startBlock: 6563846
     mapping:

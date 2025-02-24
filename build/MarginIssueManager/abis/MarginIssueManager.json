@@ -441,6 +441,11 @@
         "internalType": "address",
         "name": "security",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "currency",
+        "type": "address"
       }
     ],
     "name": "close",
