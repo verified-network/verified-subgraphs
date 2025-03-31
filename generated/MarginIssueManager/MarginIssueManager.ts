@@ -599,6 +599,10 @@ export class CloseCall__Inputs {
   get security(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
+
+  get currency(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
 }
 
 export class CloseCall__Outputs {
