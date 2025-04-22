@@ -1,4 +1,4 @@
-specVersion: 0.0.2
+specVersion: 0.0.4
 description: The Verified Wallet is for issuers and investors of tokenized securities. 
 repository: https://github.com/verified-network/verified-graph
 schema:
@@ -13,7 +13,7 @@ dataSources:
       startBlock: 7797796
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
@@ -37,7 +37,7 @@ dataSources:
       startBlock: 7797792
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/client.ts
       entities:
@@ -62,7 +62,7 @@ dataSources:
       startBlock: 5497049
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/liquidity.ts
       entities:
@@ -105,7 +105,7 @@ dataSources:
       startBlock: 5499367
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/distribution.ts
       entities:
@@ -126,7 +126,7 @@ dataSources:
       startBlock: 8022457
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/primaries.ts
       entities:
@@ -167,7 +167,7 @@ dataSources:
       startBlock: 7824767
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/secondaries.ts
       entities:
@@ -191,12 +191,12 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: '0xe1eA3F8c5951C6EDF5e892CCCa854e07d8ec8dA0'
+      address: '0x96E90554cD3895b29d68Be37c518F5f22cba1A36'
       abi: MarginIssueManager
-      startBlock: 8022461
+      startBlock: 8173149
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/margintrades.ts
       entities:
@@ -231,7 +231,7 @@ dataSources:
       startBlock: 6710080
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
@@ -255,7 +255,7 @@ dataSources:
       startBlock: 6744708
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/collateralizedloans.ts
       entities:
@@ -282,7 +282,7 @@ templates:
       abi: Security
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Security
@@ -314,7 +314,7 @@ templates:
       abi: Cash
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - User
@@ -343,7 +343,7 @@ templates:
       abi: Bond
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - User

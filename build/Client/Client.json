@@ -1,0 +1,637 @@
+[
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "isOwner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "submanager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "country",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "managerId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "ManagerAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "submanager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "country",
+        "type": "bytes32"
+      }
+    ],
+    "name": "ManagerRemoved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "accountid",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "country",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "status",
+        "type": "uint256"
+      }
+    ],
+    "name": "UserAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_signer",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_signer",
+        "type": "address"
+      }
+    ],
+    "name": "setSigner",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_manager",
+        "type": "address"
+      },
+      {
+        "name": "_submanager",
+        "type": "address"
+      },
+      {
+        "name": "_country",
+        "type": "bytes32"
+      },
+      {
+        "name": "_role",
+        "type": "bytes32"
+      },
+      {
+        "name": "_id",
+        "type": "bytes32"
+      },
+      {
+        "name": "_hashedMessage",
+        "type": "bytes32"
+      },
+      {
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "name": "_s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "addRole",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "getRole",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_manager",
+        "type": "address"
+      },
+      {
+        "name": "_submanager",
+        "type": "address"
+      },
+      {
+        "name": "_country",
+        "type": "bytes32"
+      },
+      {
+        "name": "_role",
+        "type": "bytes32"
+      },
+      {
+        "name": "_hashedMessage",
+        "type": "bytes32"
+      },
+      {
+        "name": "_v",
+        "type": "uint8"
+      },
+      {
+        "name": "_r",
+        "type": "bytes32"
+      },
+      {
+        "name": "_s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "removeRole",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "name": "score",
+        "type": "uint256"
+      }
+    ],
+    "name": "setAmlScore",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_score",
+        "type": "uint256"
+      }
+    ],
+    "name": "setAmlPassScore",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      }
+    ],
+    "name": "getAMLStatus",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "name": "score",
+        "type": "uint256"
+      }
+    ],
+    "name": "setCreditScore",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "name": "name",
+        "type": "bytes32"
+      },
+      {
+        "name": "accountid",
+        "type": "bytes32"
+      },
+      {
+        "name": "country",
+        "type": "bytes32"
+      },
+      {
+        "name": "contact",
+        "type": "bytes32"
+      },
+      {
+        "name": "status",
+        "type": "uint256"
+      }
+    ],
+    "name": "KycUpdate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      }
+    ],
+    "name": "getClientKYC",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "name": "identity",
+        "type": "string"
+      },
+      {
+        "name": "videokyc",
+        "type": "string"
+      },
+      {
+        "name": "docs",
+        "type": "string"
+      }
+    ],
+    "name": "fullKycUpdate",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "client",
+        "type": "address"
+      }
+    ],
+    "name": "getFullClientKYC",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "party",
+        "type": "address"
+      }
+    ],
+    "name": "getTransferAgent",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_country",
+        "type": "bytes32"
+      },
+      {
+        "name": "_role",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getManagers",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_submanager",
+        "type": "address"
+      },
+      {
+        "name": "_currency",
+        "type": "bytes32"
+      },
+      {
+        "name": "_accountId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setCustodyAccount",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_submanager",
+        "type": "address"
+      }
+    ],
+    "name": "getCustodyAccount",
+    "outputs": [
+      {
+        "components": [
+          {
+            "name": "currency",
+            "type": "bytes32"
+          },
+          {
+            "name": "account",
+            "type": "bytes32"
+          }
+        ],
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "userAddress",
+        "type": "address"
+      },
+      {
+        "name": "accountId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setCustody",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "userAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getCustody",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

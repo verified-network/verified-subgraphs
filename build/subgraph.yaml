@@ -1,4 +1,4 @@
-specVersion: 0.0.2
+specVersion: 0.0.4
 description: The Verified Wallet is for issuers and investors of tokenized securities.
 repository: https://github.com/verified-network/verified-graph
 schema:
@@ -13,7 +13,7 @@ dataSources:
       startBlock: 7797796
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: SecuritiesFactory\SecuritiesFactory.wasm
       entities:
@@ -22,9 +22,9 @@ dataSources:
         - Security
       abis:
         - name: SecuritiesFactory
-          file: SecuritiesFactory\abis\SecuritiesFactory.json
+          file: SecuritiesFactory\SecuritiesFactory.json
         - name: Security
-          file: SecuritiesFactory\abis\Security.json
+          file: SecuritiesFactory\Security.json
       eventHandlers:
         - event: securitiesAdded(indexed
             address,bytes32,address,bytes32,address,bool,address,bytes32[],bytes32)
@@ -38,7 +38,7 @@ dataSources:
       startBlock: 7797792
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: Client\Client.wasm
       entities:
@@ -46,7 +46,7 @@ dataSources:
         - User
       abis:
         - name: Client
-          file: Client\abis\Client.json
+          file: Client\Client.json
       eventHandlers:
         - event: ManagerAdded(address,indexed address,bytes32,bytes32,bytes32)
           handler: handleManagerCreated
@@ -63,7 +63,7 @@ dataSources:
       startBlock: 5497049
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: Liquidity\Liquidity.wasm
       entities:
@@ -77,7 +77,7 @@ dataSources:
         - InvestorRoI
       abis:
         - name: Liquidity
-          file: Liquidity\abis\Liquidity.json
+          file: Liquidity\Liquidity.json
       eventHandlers:
         - event: SupportToken(indexed address,string)
           handler: handleSupportedToken
@@ -106,7 +106,7 @@ dataSources:
       startBlock: 5499367
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: Distribution\Distribution.wasm
       entities:
@@ -114,7 +114,7 @@ dataSources:
         - Token
       abis:
         - name: Distribution
-          file: Distribution\abis\Distribution.json
+          file: Distribution\Distribution.json
       eventHandlers:
         - event: RevenueShare(bytes32,indexed address,address,uint256,uint256)
           handler: handleDistribution
@@ -127,7 +127,7 @@ dataSources:
       startBlock: 8022457
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: PrimaryIssueManager\PrimaryIssueManager.wasm
       entities:
@@ -141,7 +141,7 @@ dataSources:
         - FeeCollections
       abis:
         - name: PrimaryIssueManager
-          file: PrimaryIssueManager\abis\PrimaryIssueManager.json
+          file: PrimaryIssueManager\PrimaryIssueManager.json
       eventHandlers:
         - event: marketmakers(indexed address,address,address,address,uint256,uint256,uint256)
           handler: handleMarketmakers
@@ -169,7 +169,7 @@ dataSources:
       startBlock: 7824767
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: SecondaryIssueManager\SecondaryIssueManager.wasm
       entities:
@@ -179,7 +179,7 @@ dataSources:
         - FeeCollections
       abis:
         - name: SecondaryIssueManager
-          file: SecondaryIssueManager\abis\SecondaryIssueManager.json
+          file: SecondaryIssueManager\SecondaryIssueManager.json
       eventHandlers:
         - event: tradeSettled(indexed
             bytes32,address,address,uint256,address,uint256,address,bytes32,bytes32,uint256,uint256)
@@ -195,12 +195,12 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0xe1eA3F8c5951C6EDF5e892CCCa854e07d8ec8dA0"
+      address: "0x96E90554cD3895b29d68Be37c518F5f22cba1A36"
       abi: MarginIssueManager
-      startBlock: 8022461
+      startBlock: 8173149
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: MarginIssueManager\MarginIssueManager.wasm
       entities:
@@ -212,7 +212,7 @@ dataSources:
         - MarginTradePnL
       abis:
         - name: MarginIssueManager
-          file: MarginIssueManager\abis\MarginIssueManager.json
+          file: MarginIssueManager\MarginIssueManager.json
       eventHandlers:
         - event: tradeSettled(indexed
             bytes32,address,address,uint256,address,address,uint256,bytes32,bytes32,uint256,uint256)
@@ -237,14 +237,14 @@ dataSources:
       startBlock: 6710080
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: SecuritiesFactory\SecuritiesFactory.wasm
       entities:
         - Token
       abis:
         - name: Factory
-          file: Factory\abis\Factory.json
+          file: Factory\Factory.json
       eventHandlers:
         - event: CashIssuerCreated(indexed address,bytes32,bytes32)
           handler: handleCashCreated
@@ -261,7 +261,7 @@ dataSources:
       startBlock: 6744708
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: VerifiedMarkets\VerifiedMarkets.wasm
       entities:
@@ -270,7 +270,7 @@ dataSources:
         - CompoundLoans
       abis:
         - name: VerifiedMarkets
-          file: VerifiedMarkets\abis\VerifiedMarkets.json
+          file: VerifiedMarkets\VerifiedMarkets.json
       eventHandlers:
         - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
           handler: handleNewRWA
@@ -288,7 +288,7 @@ templates:
       abi: Security
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Security
@@ -296,11 +296,11 @@ templates:
         - Snapshots
       abis:
         - name: Security
-          file: Security\abis\Security.json
+          file: Security\Security.json
         - name: Snapshot
-          file: Security\abis\Snapshot.json
+          file: Security\Snapshot.json
         - name: CorporateActions
-          file: Security\abis\CorporateActions.json
+          file: Security\CorporateActions.json
       eventHandlers:
         - event: Resolution(indexed address,uint256,string,bool)
           handler: handleResolutions
@@ -316,7 +316,7 @@ templates:
       abi: Cash
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - User
@@ -327,7 +327,7 @@ templates:
         - Currency
       abis:
         - name: Cash
-          file: Cash\abis\Cash.json
+          file: Cash\Cash.json
       eventHandlers:
         - event: CashIssued(indexed address,bytes32,uint256,uint256)
           handler: handleCashIssued
@@ -345,7 +345,7 @@ templates:
       abi: Bond
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - User
@@ -356,7 +356,7 @@ templates:
         - Currency
       abis:
         - name: Bond
-          file: Bond\abis\Bond.json
+          file: Bond\Bond.json
       eventHandlers:
         - event: BondIssued(indexed address,address,bytes32,uint256,bytes32,uint256,uint256)
           handler: handleBondIssued
