@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class OwnershipTransferred extends ethereum.Event {
@@ -486,8 +486,8 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
       "getIssuingFee(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(security),
-        ethereum.Value.fromAddress(currency)
-      ]
+        ethereum.Value.fromAddress(currency),
+      ],
     );
 
     return result[0].toBigInt();
@@ -495,15 +495,15 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
 
   try_getIssuingFee(
     security: Address,
-    currency: Address
+    currency: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getIssuingFee",
       "getIssuingFee(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(security),
-        ethereum.Value.fromAddress(currency)
-      ]
+        ethereum.Value.fromAddress(currency),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -513,107 +513,103 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
   }
 
   getOffered(
-    offered: Address
+    offered: Address,
   ): Array<PrimaryIssueManager__getOfferedResultValue0Struct> {
     let result = super.call(
       "getOffered",
       "getOffered(address):((address,address,uint256,uint256,uint256,bytes32,uint256,string)[])",
-      [ethereum.Value.fromAddress(offered)]
+      [ethereum.Value.fromAddress(offered)],
     );
 
-    return result[0].toTupleArray<
-      PrimaryIssueManager__getOfferedResultValue0Struct
-    >();
+    return result[0].toTupleArray<PrimaryIssueManager__getOfferedResultValue0Struct>();
   }
 
   try_getOffered(
-    offered: Address
+    offered: Address,
   ): ethereum.CallResult<
     Array<PrimaryIssueManager__getOfferedResultValue0Struct>
   > {
     let result = super.tryCall(
       "getOffered",
       "getOffered(address):((address,address,uint256,uint256,uint256,bytes32,uint256,string)[])",
-      [ethereum.Value.fromAddress(offered)]
+      [ethereum.Value.fromAddress(offered)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<PrimaryIssueManager__getOfferedResultValue0Struct>()
+      value[0].toTupleArray<PrimaryIssueManager__getOfferedResultValue0Struct>(),
     );
   }
 
   getOfferMade(
     _owned: Address,
-    _tomatch: Address
+    _tomatch: Address,
   ): Array<PrimaryIssueManager__getOfferMadeResultValue0Struct> {
     let result = super.call(
       "getOfferMade",
       "getOfferMade(address,address):((address,address,uint256,uint256,uint256,bytes32,uint256,string)[])",
-      [ethereum.Value.fromAddress(_owned), ethereum.Value.fromAddress(_tomatch)]
+      [
+        ethereum.Value.fromAddress(_owned),
+        ethereum.Value.fromAddress(_tomatch),
+      ],
     );
 
-    return result[0].toTupleArray<
-      PrimaryIssueManager__getOfferMadeResultValue0Struct
-    >();
+    return result[0].toTupleArray<PrimaryIssueManager__getOfferMadeResultValue0Struct>();
   }
 
   try_getOfferMade(
     _owned: Address,
-    _tomatch: Address
+    _tomatch: Address,
   ): ethereum.CallResult<
     Array<PrimaryIssueManager__getOfferMadeResultValue0Struct>
   > {
     let result = super.tryCall(
       "getOfferMade",
       "getOfferMade(address,address):((address,address,uint256,uint256,uint256,bytes32,uint256,string)[])",
-      [ethereum.Value.fromAddress(_owned), ethereum.Value.fromAddress(_tomatch)]
+      [
+        ethereum.Value.fromAddress(_owned),
+        ethereum.Value.fromAddress(_tomatch),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<
-        PrimaryIssueManager__getOfferMadeResultValue0Struct
-      >()
+      value[0].toTupleArray<PrimaryIssueManager__getOfferMadeResultValue0Struct>(),
     );
   }
 
   getLiquidityProviders(
-    _security: Address
+    _security: Address,
   ): Array<PrimaryIssueManager__getLiquidityProvidersResultValue0Struct> {
     let result = super.call(
       "getLiquidityProviders",
       "getLiquidityProviders(address):((address,address,uint256,uint256,uint256)[])",
-      [ethereum.Value.fromAddress(_security)]
+      [ethereum.Value.fromAddress(_security)],
     );
 
-    return result[0].toTupleArray<
-      PrimaryIssueManager__getLiquidityProvidersResultValue0Struct
-    >();
+    return result[0].toTupleArray<PrimaryIssueManager__getLiquidityProvidersResultValue0Struct>();
   }
 
   try_getLiquidityProviders(
-    _security: Address
+    _security: Address,
   ): ethereum.CallResult<
     Array<PrimaryIssueManager__getLiquidityProvidersResultValue0Struct>
   > {
     let result = super.tryCall(
       "getLiquidityProviders",
       "getLiquidityProviders(address):((address,address,uint256,uint256,uint256)[])",
-      [ethereum.Value.fromAddress(_security)]
+      [ethereum.Value.fromAddress(_security)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<
-        PrimaryIssueManager__getLiquidityProvidersResultValue0Struct
-      >()
+      value[0].toTupleArray<PrimaryIssueManager__getLiquidityProvidersResultValue0Struct>(),
     );
   }
 
@@ -621,7 +617,7 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
     let result = super.call(
       "getAllotedStake",
       "getAllotedStake(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
 
     return result[0].toBigInt();
@@ -631,7 +627,7 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
     let result = super.tryCall(
       "getAllotedStake",
       "getAllotedStake(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -641,37 +637,33 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
   }
 
   getSubscribers(
-    poolId: Bytes
+    poolId: Bytes,
   ): Array<PrimaryIssueManager__getSubscribersResultValue0Struct> {
     let result = super.call(
       "getSubscribers",
       "getSubscribers(bytes32):((address,address,string,uint256,uint256)[])",
-      [ethereum.Value.fromFixedBytes(poolId)]
+      [ethereum.Value.fromFixedBytes(poolId)],
     );
 
-    return result[0].toTupleArray<
-      PrimaryIssueManager__getSubscribersResultValue0Struct
-    >();
+    return result[0].toTupleArray<PrimaryIssueManager__getSubscribersResultValue0Struct>();
   }
 
   try_getSubscribers(
-    poolId: Bytes
+    poolId: Bytes,
   ): ethereum.CallResult<
     Array<PrimaryIssueManager__getSubscribersResultValue0Struct>
   > {
     let result = super.tryCall(
       "getSubscribers",
       "getSubscribers(bytes32):((address,address,string,uint256,uint256)[])",
-      [ethereum.Value.fromFixedBytes(poolId)]
+      [ethereum.Value.fromFixedBytes(poolId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<
-        PrimaryIssueManager__getSubscribersResultValue0Struct
-      >()
+      value[0].toTupleArray<PrimaryIssueManager__getSubscribersResultValue0Struct>(),
     );
   }
 
@@ -679,7 +671,7 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
     let result = super.call(
       "getIssuingFeeCollected",
       "getIssuingFeeCollected(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
 
     return result[0].toBigInt();
@@ -689,7 +681,7 @@ export class PrimaryIssueManager extends ethereum.SmartContract {
     let result = super.tryCall(
       "getIssuingFeeCollected",
       "getIssuingFeeCollected(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();

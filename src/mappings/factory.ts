@@ -8,7 +8,7 @@ import {
         TokenCreated
       } from "../../generated/Factory/Factory";
 import { 
-        Cash,
+        Currency,
         Security,
         Token
       } from "../../generated/schema";
@@ -52,16 +52,18 @@ export function handleSecurityCreated(event: securitiesAdded): void {
 
 export function handleCashCreated(event: CashIssuerCreated): void {
   let currencyAddress: Address = event.params.issuer; 
-  let currencies = Cash.load(event.params.issuer.toHexString());
+  let currencies = Currency.load(event.params.issuer.toHexString());
   if(currencies==null){
     let currency = event.params.issuer.toHexString();
-    let currencies = new Cash(currency);
-    currencies.name = event.params.tokenName;
+    let currencies = new Currency(currency);
+    currencies.name = event.params.tokenName.toString();
+    currencies.token = event.params.issuer;
     currencies.save();
     CashTemplate.create(currencyAddress);
   }
   else{
-    currencies.name = event.params.tokenName;
+    currencies.name = event.params.tokenName.toString();
+    currencies.token = event.params.issuer;
     currencies.save();
     CashTemplate.create(currencyAddress);
   }

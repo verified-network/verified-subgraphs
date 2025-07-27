@@ -3,7 +3,7 @@
 import {
   Address,
   DataSourceTemplate,
-  DataSourceContext
+  DataSourceContext,
 } from "@graphprotocol/graph-ts";
 
 export class Security extends DataSourceTemplate {
@@ -15,7 +15,7 @@ export class Security extends DataSourceTemplate {
     DataSourceTemplate.createWithContext(
       "Security",
       [address.toHex()],
-      context
+      context,
     );
   }
 }

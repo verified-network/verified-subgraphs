@@ -1,15 +1,15 @@
-type Cash @entity {
-  id: ID!
-  name: Bytes
-  cashIssues: [CashIssues!] @derivedFrom(field: "currency")
-  cashDeposits: [CashDeposited!] @derivedFrom(field: "currency")
-  cashRedemptions: [CashRedemptions!] @derivedFrom(field: "currency")
-  cashTransfers: [CashTransfers!] @derivedFrom(field: "currency")  
+#type Cash @entity {
+  #id: ID!
+  #name: Bytes
+  #cashIssues: [CashIssues!] @derivedFrom(field: "currency")
+  #cashDeposits: [CashDeposited!] @derivedFrom(field: "currency")
+  #cashRedemptions: [CashRedemptions!] @derivedFrom(field: "currency")
+  #cashTransfers: [CashTransfers!] @derivedFrom(field: "currency")  
   #bondIssues: [BondIssues!] @derivedFrom(field: "collateralCurrency")
   #bondPurchases: [BondPurchases!] @derivedFrom(field: "paidInCurrency")
   #bondRedemptions: [BondRedemptions!] @derivedFrom(field: "redemptionCurrency")
   #BondLiquidations: [BondLiquidations!] @derivedFrom(field: "liquidationCurrency")
-}
+#}
 type User @entity {
   id: ID!
   client: Bytes
@@ -70,8 +70,12 @@ type Platform @entity {
 }
 type Currency @entity {
   id: ID!
-  token: Bytes!
-  name: String!
+  token: Bytes
+  name: String
+  cashIssues: [CashIssues!] @derivedFrom(field: "currency")
+  cashDeposits: [CashDeposited!] @derivedFrom(field: "currency")
+  cashRedemptions: [CashRedemptions!] @derivedFrom(field: "currency")
+  cashTransfers: [CashTransfers!] @derivedFrom(field: "currency")  
   liquidityTokenRequests: [LiquidityTokenRequests!] @derivedFrom(field: "token")
   liquidityTokenIssues: [LiquidityTokenIssues!] @derivedFrom(field: "token")
   liquidityOnPlatform: [LiquidityOnPlatform!] @derivedFrom(field: "token")
@@ -104,20 +108,20 @@ type Security @entity {
 type CashDeposited @entity {
   id: ID!
   party: User!
-  currency: Cash!
+  currency: Currency!
   amount : BigDecimal!  
 }
 type CashIssues @entity {
   id: ID!
   party: User! 
-  currency: Cash!
+  currency: Currency!
   amount : BigDecimal!
   balance: BigDecimal!
 }
 type CashRedemptions @entity {
   id: ID!
-  party: User!
-  currency: Cash!
+  party: User
+  currency: Currency!
   amount : BigDecimal!
   redeemedFor: BigDecimal!
   balance: BigDecimal!
@@ -126,7 +130,7 @@ type CashTransfers @entity {
   id: ID!
   transferor: User!
   transferee: User!
-  currency: Cash!
+  currency: Currency!
   amount : BigDecimal!
   deposit: BigDecimal!
 }
@@ -195,12 +199,12 @@ type Trades @entity {
   transferee: User
   unitsToTransfer: BigInt!
   security: Security!
-  price: BigDecimal!
+  price: BigDecimal
   currency: Bytes!
   settlementStatus: Bytes
   amountPaid: BigDecimal
   tradeRef: Bytes!
-  orderRef: Bytes!
+  orderRef: Bytes
   tradingCommission: BigDecimal!
   timestamp: Int!
 }

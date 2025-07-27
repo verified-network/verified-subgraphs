@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class InvestorReturns extends ethereum.Event {
@@ -385,6 +385,14 @@ export class Liquidity__getPlatformPerformanceResult {
     map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
     return map;
   }
+
+  getPlatformLiquidityProvided(): BigInt {
+    return this.value0;
+  }
+
+  getPlatformCommissionsEarned(): BigInt {
+    return this.value1;
+  }
 }
 
 export class Liquidity__getManagerPerformanceResult {
@@ -401,6 +409,14 @@ export class Liquidity__getManagerPerformanceResult {
     map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
     map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
     return map;
+  }
+
+  getManagerLiquidityProvided(): BigInt {
+    return this.value0;
+  }
+
+  getManagerCommissionsEarned(): BigInt {
+    return this.value1;
   }
 }
 
@@ -443,7 +459,7 @@ export class Liquidity extends ethereum.SmartContract {
     let result = super.call(
       "checkSupportForToken",
       "checkSupportForToken(address):(bool)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
 
     return result[0].toBoolean();
@@ -453,7 +469,7 @@ export class Liquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "checkSupportForToken",
       "checkSupportForToken(address):(bool)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -466,12 +482,10 @@ export class Liquidity extends ethereum.SmartContract {
     let result = super.call(
       "getSupportedTokens",
       "getSupportedTokens():((string,address)[])",
-      []
+      [],
     );
 
-    return result[0].toTupleArray<
-      Liquidity__getSupportedTokensResultValue0Struct
-    >();
+    return result[0].toTupleArray<Liquidity__getSupportedTokensResultValue0Struct>();
   }
 
   try_getSupportedTokens(): ethereum.CallResult<
@@ -480,14 +494,14 @@ export class Liquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "getSupportedTokens",
       "getSupportedTokens():((string,address)[])",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<Liquidity__getSupportedTokensResultValue0Struct>()
+      value[0].toTupleArray<Liquidity__getSupportedTokensResultValue0Struct>(),
     );
   }
 
@@ -495,7 +509,7 @@ export class Liquidity extends ethereum.SmartContract {
     let result = super.call(
       "getPlatforms",
       "getPlatforms():((bytes32,address)[])",
-      []
+      [],
     );
 
     return result[0].toTupleArray<Liquidity__getPlatformsResultValue0Struct>();
@@ -507,20 +521,20 @@ export class Liquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "getPlatforms",
       "getPlatforms():((bytes32,address)[])",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<Liquidity__getPlatformsResultValue0Struct>()
+      value[0].toTupleArray<Liquidity__getPlatformsResultValue0Struct>(),
     );
   }
 
   getManagers(_platform: Address): Array<Address> {
     let result = super.call("getManagers", "getManagers(address):(address[])", [
-      ethereum.Value.fromAddress(_platform)
+      ethereum.Value.fromAddress(_platform),
     ]);
 
     return result[0].toAddressArray();
@@ -530,7 +544,7 @@ export class Liquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "getManagers",
       "getManagers(address):(address[])",
-      [ethereum.Value.fromAddress(_platform)]
+      [ethereum.Value.fromAddress(_platform)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -543,7 +557,7 @@ export class Liquidity extends ethereum.SmartContract {
     let result = super.call(
       "getInvestors",
       "getInvestors():((string,address)[])",
-      []
+      [],
     );
 
     return result[0].toTupleArray<Liquidity__getInvestorsResultValue0Struct>();
@@ -555,14 +569,14 @@ export class Liquidity extends ethereum.SmartContract {
     let result = super.tryCall(
       "getInvestors",
       "getInvestors():((string,address)[])",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<Liquidity__getInvestorsResultValue0Struct>()
+      value[0].toTupleArray<Liquidity__getInvestorsResultValue0Struct>(),
     );
   }
 
@@ -572,8 +586,8 @@ export class Liquidity extends ethereum.SmartContract {
       "getInvestment(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(_investor),
-        ethereum.Value.fromAddress(_token)
-      ]
+        ethereum.Value.fromAddress(_token),
+      ],
     );
 
     return result[0].toBigInt();
@@ -581,15 +595,15 @@ export class Liquidity extends ethereum.SmartContract {
 
   try_getInvestment(
     _investor: Address,
-    _token: Address
+    _token: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getInvestment",
       "getInvestment(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(_investor),
-        ethereum.Value.fromAddress(_token)
-      ]
+        ethereum.Value.fromAddress(_token),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -599,27 +613,27 @@ export class Liquidity extends ethereum.SmartContract {
   }
 
   getPlatformPerformance(
-    _platform: Address
+    _platform: Address,
   ): Liquidity__getPlatformPerformanceResult {
     let result = super.call(
       "getPlatformPerformance",
       "getPlatformPerformance(address):(uint256,uint256)",
-      [ethereum.Value.fromAddress(_platform)]
+      [ethereum.Value.fromAddress(_platform)],
     );
 
     return new Liquidity__getPlatformPerformanceResult(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
   try_getPlatformPerformance(
-    _platform: Address
+    _platform: Address,
   ): ethereum.CallResult<Liquidity__getPlatformPerformanceResult> {
     let result = super.tryCall(
       "getPlatformPerformance",
       "getPlatformPerformance(address):(uint256,uint256)",
-      [ethereum.Value.fromAddress(_platform)]
+      [ethereum.Value.fromAddress(_platform)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -628,15 +642,15 @@ export class Liquidity extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(
       new Liquidity__getPlatformPerformanceResult(
         value[0].toBigInt(),
-        value[1].toBigInt()
-      )
+        value[1].toBigInt(),
+      ),
     );
   }
 
   getManagerPerformance(
     _platform: Address,
     _token: Address,
-    _manager: Address
+    _manager: Address,
   ): Liquidity__getManagerPerformanceResult {
     let result = super.call(
       "getManagerPerformance",
@@ -644,20 +658,20 @@ export class Liquidity extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(_platform),
         ethereum.Value.fromAddress(_token),
-        ethereum.Value.fromAddress(_manager)
-      ]
+        ethereum.Value.fromAddress(_manager),
+      ],
     );
 
     return new Liquidity__getManagerPerformanceResult(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
   try_getManagerPerformance(
     _platform: Address,
     _token: Address,
-    _manager: Address
+    _manager: Address,
   ): ethereum.CallResult<Liquidity__getManagerPerformanceResult> {
     let result = super.tryCall(
       "getManagerPerformance",
@@ -665,8 +679,8 @@ export class Liquidity extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(_platform),
         ethereum.Value.fromAddress(_token),
-        ethereum.Value.fromAddress(_manager)
-      ]
+        ethereum.Value.fromAddress(_manager),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -675,14 +689,14 @@ export class Liquidity extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(
       new Liquidity__getManagerPerformanceResult(
         value[0].toBigInt(),
-        value[1].toBigInt()
-      )
+        value[1].toBigInt(),
+      ),
     );
   }
 
   balance(investor: Address): BigInt {
     let result = super.call("balance", "balance(address):(uint256)", [
-      ethereum.Value.fromAddress(investor)
+      ethereum.Value.fromAddress(investor),
     ]);
 
     return result[0].toBigInt();
@@ -690,7 +704,7 @@ export class Liquidity extends ethereum.SmartContract {
 
   try_balance(investor: Address): ethereum.CallResult<BigInt> {
     let result = super.tryCall("balance", "balance(address):(uint256)", [
-      ethereum.Value.fromAddress(investor)
+      ethereum.Value.fromAddress(investor),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();

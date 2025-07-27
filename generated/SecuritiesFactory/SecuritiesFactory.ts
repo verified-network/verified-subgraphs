@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class securitiesAdded extends ethereum.Event {
@@ -112,7 +112,7 @@ export class SecuritiesFactory__getSecurityTokenResult {
     value1: Bytes,
     value2: Bytes,
     value3: Address,
-    value4: boolean
+    value4: boolean,
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -130,6 +130,26 @@ export class SecuritiesFactory__getSecurityTokenResult {
     map.set("value4", ethereum.Value.fromBoolean(this.value4));
     return map;
   }
+
+  getValue0(): Address {
+    return this.value0;
+  }
+
+  getValue1(): Bytes {
+    return this.value1;
+  }
+
+  getValue2(): Bytes {
+    return this.value2;
+  }
+
+  getValue3(): Address {
+    return this.value3;
+  }
+
+  getValue4(): boolean {
+    return this.value4;
+  }
 }
 
 export class SecuritiesFactory extends ethereum.SmartContract {
@@ -142,7 +162,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     _logic: Address,
     _admin: Address,
     _data: Bytes,
-    _signature: Bytes
+    _signature: Bytes,
   ): Address {
     let result = super.call(
       "getSigner",
@@ -152,8 +172,8 @@ export class SecuritiesFactory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature)
-      ]
+        ethereum.Value.fromBytes(_signature),
+      ],
     );
 
     return result[0].toAddress();
@@ -164,7 +184,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     _logic: Address,
     _admin: Address,
     _data: Bytes,
-    _signature: Bytes
+    _signature: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "getSigner",
@@ -174,8 +194,8 @@ export class SecuritiesFactory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature)
-      ]
+        ethereum.Value.fromBytes(_signature),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -189,7 +209,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     _logic: Address,
     _admin: Address,
     _data: Bytes,
-    _signature: Bytes
+    _signature: Bytes,
   ): Address {
     let result = super.call(
       "deploySigned",
@@ -199,8 +219,8 @@ export class SecuritiesFactory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature)
-      ]
+        ethereum.Value.fromBytes(_signature),
+      ],
     );
 
     return result[0].toAddress();
@@ -211,7 +231,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     _logic: Address,
     _admin: Address,
     _data: Bytes,
-    _signature: Bytes
+    _signature: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "deploySigned",
@@ -221,8 +241,8 @@ export class SecuritiesFactory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature)
-      ]
+        ethereum.Value.fromBytes(_signature),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -235,7 +255,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     _salt: BigInt,
     _logic: Address,
     _admin: Address,
-    _data: Bytes
+    _data: Bytes,
   ): Address {
     let result = super.call(
       "deploy",
@@ -244,8 +264,8 @@ export class SecuritiesFactory extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(_salt),
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data)
-      ]
+        ethereum.Value.fromBytes(_data),
+      ],
     );
 
     return result[0].toAddress();
@@ -255,7 +275,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     _salt: BigInt,
     _logic: Address,
     _admin: Address,
-    _data: Bytes
+    _data: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "deploy",
@@ -264,8 +284,8 @@ export class SecuritiesFactory extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(_salt),
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data)
-      ]
+        ethereum.Value.fromBytes(_data),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -280,8 +300,8 @@ export class SecuritiesFactory extends ethereum.SmartContract {
       "getDeploymentAddress(uint256,address):(address)",
       [
         ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_sender)
-      ]
+        ethereum.Value.fromAddress(_sender),
+      ],
     );
 
     return result[0].toAddress();
@@ -289,15 +309,15 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   try_getDeploymentAddress(
     _salt: BigInt,
-    _sender: Address
+    _sender: Address,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "getDeploymentAddress",
       "getDeploymentAddress(uint256,address):(address)",
       [
         ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_sender)
-      ]
+        ethereum.Value.fromAddress(_sender),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -340,7 +360,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     let result = super.call(
       "deployMinimal",
       "deployMinimal(address,bytes):(address)",
-      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)]
+      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)],
     );
 
     return result[0].toAddress();
@@ -348,12 +368,12 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   try_deployMinimal(
     _logic: Address,
-    _data: Bytes
+    _data: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "deployMinimal",
       "deployMinimal(address,bytes):(address)",
-      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)]
+      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -379,7 +399,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   getHolder(_securityToken: Address): Address {
     let result = super.call("getHolder", "getHolder(address):(address)", [
-      ethereum.Value.fromAddress(_securityToken)
+      ethereum.Value.fromAddress(_securityToken),
     ]);
 
     return result[0].toAddress();
@@ -387,7 +407,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   try_getHolder(_securityToken: Address): ethereum.CallResult<Address> {
     let result = super.tryCall("getHolder", "getHolder(address):(address)", [
-      ethereum.Value.fromAddress(_securityToken)
+      ethereum.Value.fromAddress(_securityToken),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -398,7 +418,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   getSecurity(_securityToken: Address): Address {
     let result = super.call("getSecurity", "getSecurity(address):(address)", [
-      ethereum.Value.fromAddress(_securityToken)
+      ethereum.Value.fromAddress(_securityToken),
     ]);
 
     return result[0].toAddress();
@@ -408,7 +428,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     let result = super.tryCall(
       "getSecurity",
       "getSecurity(address):(address)",
-      [ethereum.Value.fromAddress(_securityToken)]
+      [ethereum.Value.fromAddress(_securityToken)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -419,15 +439,15 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   getSecurityToken(
     _securityToken: Address,
-    _issuer: Address
+    _issuer: Address,
   ): SecuritiesFactory__getSecurityTokenResult {
     let result = super.call(
       "getSecurityToken",
       "getSecurityToken(address,address):(address,bytes32,bytes32,address,bool)",
       [
         ethereum.Value.fromAddress(_securityToken),
-        ethereum.Value.fromAddress(_issuer)
-      ]
+        ethereum.Value.fromAddress(_issuer),
+      ],
     );
 
     return new SecuritiesFactory__getSecurityTokenResult(
@@ -435,21 +455,21 @@ export class SecuritiesFactory extends ethereum.SmartContract {
       result[1].toBytes(),
       result[2].toBytes(),
       result[3].toAddress(),
-      result[4].toBoolean()
+      result[4].toBoolean(),
     );
   }
 
   try_getSecurityToken(
     _securityToken: Address,
-    _issuer: Address
+    _issuer: Address,
   ): ethereum.CallResult<SecuritiesFactory__getSecurityTokenResult> {
     let result = super.tryCall(
       "getSecurityToken",
       "getSecurityToken(address,address):(address,bytes32,bytes32,address,bool)",
       [
         ethereum.Value.fromAddress(_securityToken),
-        ethereum.Value.fromAddress(_issuer)
-      ]
+        ethereum.Value.fromAddress(_issuer),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -461,14 +481,14 @@ export class SecuritiesFactory extends ethereum.SmartContract {
         value[1].toBytes(),
         value[2].toBytes(),
         value[3].toAddress(),
-        value[4].toBoolean()
-      )
+        value[4].toBoolean(),
+      ),
     );
   }
 
   checkProduct(issue: Address): boolean {
     let result = super.call("checkProduct", "checkProduct(address):(bool)", [
-      ethereum.Value.fromAddress(issue)
+      ethereum.Value.fromAddress(issue),
     ]);
 
     return result[0].toBoolean();
@@ -476,7 +496,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   try_checkProduct(issue: Address): ethereum.CallResult<boolean> {
     let result = super.tryCall("checkProduct", "checkProduct(address):(bool)", [
-      ethereum.Value.fromAddress(issue)
+      ethereum.Value.fromAddress(issue),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -491,8 +511,8 @@ export class SecuritiesFactory extends ethereum.SmartContract {
       "getCustodian(address,address):(address)",
       [
         ethereum.Value.fromAddress(_securityToken),
-        ethereum.Value.fromAddress(_issuer)
-      ]
+        ethereum.Value.fromAddress(_issuer),
+      ],
     );
 
     return result[0].toAddress();
@@ -500,15 +520,15 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   try_getCustodian(
     _securityToken: Address,
-    _issuer: Address
+    _issuer: Address,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "getCustodian",
       "getCustodian(address,address):(address)",
       [
         ethereum.Value.fromAddress(_securityToken),
-        ethereum.Value.fromAddress(_issuer)
-      ]
+        ethereum.Value.fromAddress(_issuer),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -521,19 +541,19 @@ export class SecuritiesFactory extends ethereum.SmartContract {
     let result = super.call(
       "getRestrictedCountries",
       "getRestrictedCountries(address):(bytes32[])",
-      [ethereum.Value.fromAddress(_security)]
+      [ethereum.Value.fromAddress(_security)],
     );
 
     return result[0].toBytesArray();
   }
 
   try_getRestrictedCountries(
-    _security: Address
+    _security: Address,
   ): ethereum.CallResult<Array<Bytes>> {
     let result = super.tryCall(
       "getRestrictedCountries",
       "getRestrictedCountries(address):(bytes32[])",
-      [ethereum.Value.fromAddress(_security)]
+      [ethereum.Value.fromAddress(_security)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -544,7 +564,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   getDP(_securityToken: Address): Address {
     let result = super.call("getDP", "getDP(address):(address)", [
-      ethereum.Value.fromAddress(_securityToken)
+      ethereum.Value.fromAddress(_securityToken),
     ]);
 
     return result[0].toAddress();
@@ -552,7 +572,7 @@ export class SecuritiesFactory extends ethereum.SmartContract {
 
   try_getDP(_securityToken: Address): ethereum.CallResult<Address> {
     let result = super.tryCall("getDP", "getDP(address):(address)", [
-      ethereum.Value.fromAddress(_securityToken)
+      ethereum.Value.fromAddress(_securityToken),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();

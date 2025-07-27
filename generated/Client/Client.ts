@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class ManagerAdded extends ethereum.Event {
@@ -148,6 +148,18 @@ export class Client__getRoleResult {
     map.set("value2", ethereum.Value.fromFixedBytes(this.value2));
     return map;
   }
+
+  getValue0(): Bytes {
+    return this.value0;
+  }
+
+  getValue1(): Bytes {
+    return this.value1;
+  }
+
+  getValue2(): Bytes {
+    return this.value2;
+  }
 }
 
 export class Client__getClientKYCResult {
@@ -166,7 +178,7 @@ export class Client__getClientKYCResult {
     value3: BigInt,
     value4: Bytes,
     value5: BigInt,
-    value6: BigInt
+    value6: BigInt,
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -187,6 +199,34 @@ export class Client__getClientKYCResult {
     map.set("value5", ethereum.Value.fromUnsignedBigInt(this.value5));
     map.set("value6", ethereum.Value.fromUnsignedBigInt(this.value6));
     return map;
+  }
+
+  getValue0(): Bytes {
+    return this.value0;
+  }
+
+  getValue1(): Bytes {
+    return this.value1;
+  }
+
+  getValue2(): Bytes {
+    return this.value2;
+  }
+
+  getValue3(): BigInt {
+    return this.value3;
+  }
+
+  getValue4(): Bytes {
+    return this.value4;
+  }
+
+  getValue5(): BigInt {
+    return this.value5;
+  }
+
+  getValue6(): BigInt {
+    return this.value6;
   }
 }
 
@@ -210,6 +250,22 @@ export class Client__getFullClientKYCResult {
     map.set("value2", ethereum.Value.fromString(this.value2));
     map.set("value3", ethereum.Value.fromString(this.value3));
     return map;
+  }
+
+  getValue0(): Bytes {
+    return this.value0;
+  }
+
+  getValue1(): string {
+    return this.value1;
+  }
+
+  getValue2(): string {
+    return this.value2;
+  }
+
+  getValue3(): string {
+    return this.value3;
   }
 }
 
@@ -262,13 +318,13 @@ export class Client extends ethereum.SmartContract {
     let result = super.call(
       "getRole",
       "getRole(address):(bytes32,bytes32,bytes32)",
-      [ethereum.Value.fromAddress(_user)]
+      [ethereum.Value.fromAddress(_user)],
     );
 
     return new Client__getRoleResult(
       result[0].toBytes(),
       result[1].toBytes(),
-      result[2].toBytes()
+      result[2].toBytes(),
     );
   }
 
@@ -276,7 +332,7 @@ export class Client extends ethereum.SmartContract {
     let result = super.tryCall(
       "getRole",
       "getRole(address):(bytes32,bytes32,bytes32)",
-      [ethereum.Value.fromAddress(_user)]
+      [ethereum.Value.fromAddress(_user)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -286,14 +342,14 @@ export class Client extends ethereum.SmartContract {
       new Client__getRoleResult(
         value[0].toBytes(),
         value[1].toBytes(),
-        value[2].toBytes()
-      )
+        value[2].toBytes(),
+      ),
     );
   }
 
   getAMLStatus(client: Address): boolean {
     let result = super.call("getAMLStatus", "getAMLStatus(address):(bool)", [
-      ethereum.Value.fromAddress(client)
+      ethereum.Value.fromAddress(client),
     ]);
 
     return result[0].toBoolean();
@@ -301,7 +357,7 @@ export class Client extends ethereum.SmartContract {
 
   try_getAMLStatus(client: Address): ethereum.CallResult<boolean> {
     let result = super.tryCall("getAMLStatus", "getAMLStatus(address):(bool)", [
-      ethereum.Value.fromAddress(client)
+      ethereum.Value.fromAddress(client),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -314,7 +370,7 @@ export class Client extends ethereum.SmartContract {
     let result = super.call(
       "getClientKYC",
       "getClientKYC(address):(bytes32,bytes32,bytes32,uint256,bytes32,uint256,uint256)",
-      [ethereum.Value.fromAddress(client)]
+      [ethereum.Value.fromAddress(client)],
     );
 
     return new Client__getClientKYCResult(
@@ -324,17 +380,17 @@ export class Client extends ethereum.SmartContract {
       result[3].toBigInt(),
       result[4].toBytes(),
       result[5].toBigInt(),
-      result[6].toBigInt()
+      result[6].toBigInt(),
     );
   }
 
   try_getClientKYC(
-    client: Address
+    client: Address,
   ): ethereum.CallResult<Client__getClientKYCResult> {
     let result = super.tryCall(
       "getClientKYC",
       "getClientKYC(address):(bytes32,bytes32,bytes32,uint256,bytes32,uint256,uint256)",
-      [ethereum.Value.fromAddress(client)]
+      [ethereum.Value.fromAddress(client)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -348,8 +404,8 @@ export class Client extends ethereum.SmartContract {
         value[3].toBigInt(),
         value[4].toBytes(),
         value[5].toBigInt(),
-        value[6].toBigInt()
-      )
+        value[6].toBigInt(),
+      ),
     );
   }
 
@@ -357,24 +413,24 @@ export class Client extends ethereum.SmartContract {
     let result = super.call(
       "getFullClientKYC",
       "getFullClientKYC(address):(bytes32,string,string,string)",
-      [ethereum.Value.fromAddress(client)]
+      [ethereum.Value.fromAddress(client)],
     );
 
     return new Client__getFullClientKYCResult(
       result[0].toBytes(),
       result[1].toString(),
       result[2].toString(),
-      result[3].toString()
+      result[3].toString(),
     );
   }
 
   try_getFullClientKYC(
-    client: Address
+    client: Address,
   ): ethereum.CallResult<Client__getFullClientKYCResult> {
     let result = super.tryCall(
       "getFullClientKYC",
       "getFullClientKYC(address):(bytes32,string,string,string)",
-      [ethereum.Value.fromAddress(client)]
+      [ethereum.Value.fromAddress(client)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -385,8 +441,8 @@ export class Client extends ethereum.SmartContract {
         value[0].toBytes(),
         value[1].toString(),
         value[2].toString(),
-        value[3].toString()
-      )
+        value[3].toString(),
+      ),
     );
   }
 
@@ -394,7 +450,7 @@ export class Client extends ethereum.SmartContract {
     let result = super.call(
       "getTransferAgent",
       "getTransferAgent(address):(bytes32)",
-      [ethereum.Value.fromAddress(party)]
+      [ethereum.Value.fromAddress(party)],
     );
 
     return result[0].toBytes();
@@ -404,7 +460,7 @@ export class Client extends ethereum.SmartContract {
     let result = super.tryCall(
       "getTransferAgent",
       "getTransferAgent(address):(bytes32)",
-      [ethereum.Value.fromAddress(party)]
+      [ethereum.Value.fromAddress(party)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -419,8 +475,8 @@ export class Client extends ethereum.SmartContract {
       "getManagers(bytes32,bytes32):(address[])",
       [
         ethereum.Value.fromFixedBytes(_country),
-        ethereum.Value.fromFixedBytes(_role)
-      ]
+        ethereum.Value.fromFixedBytes(_role),
+      ],
     );
 
     return result[0].toAddressArray();
@@ -428,15 +484,15 @@ export class Client extends ethereum.SmartContract {
 
   try_getManagers(
     _country: Bytes,
-    _role: Bytes
+    _role: Bytes,
   ): ethereum.CallResult<Array<Address>> {
     let result = super.tryCall(
       "getManagers",
       "getManagers(bytes32,bytes32):(address[])",
       [
         ethereum.Value.fromFixedBytes(_country),
-        ethereum.Value.fromFixedBytes(_role)
-      ]
+        ethereum.Value.fromFixedBytes(_role),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -446,39 +502,37 @@ export class Client extends ethereum.SmartContract {
   }
 
   getCustodyAccount(
-    _submanager: Address
+    _submanager: Address,
   ): Array<Client__getCustodyAccountResultValue0Struct> {
     let result = super.call(
       "getCustodyAccount",
       "getCustodyAccount(address):((bytes32,bytes32)[])",
-      [ethereum.Value.fromAddress(_submanager)]
+      [ethereum.Value.fromAddress(_submanager)],
     );
 
-    return result[0].toTupleArray<
-      Client__getCustodyAccountResultValue0Struct
-    >();
+    return result[0].toTupleArray<Client__getCustodyAccountResultValue0Struct>();
   }
 
   try_getCustodyAccount(
-    _submanager: Address
+    _submanager: Address,
   ): ethereum.CallResult<Array<Client__getCustodyAccountResultValue0Struct>> {
     let result = super.tryCall(
       "getCustodyAccount",
       "getCustodyAccount(address):((bytes32,bytes32)[])",
-      [ethereum.Value.fromAddress(_submanager)]
+      [ethereum.Value.fromAddress(_submanager)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<Client__getCustodyAccountResultValue0Struct>()
+      value[0].toTupleArray<Client__getCustodyAccountResultValue0Struct>(),
     );
   }
 
   getCustody(userAddress: Address): Bytes {
     let result = super.call("getCustody", "getCustody(address):(bytes32)", [
-      ethereum.Value.fromAddress(userAddress)
+      ethereum.Value.fromAddress(userAddress),
     ]);
 
     return result[0].toBytes();
@@ -486,7 +540,7 @@ export class Client extends ethereum.SmartContract {
 
   try_getCustody(userAddress: Address): ethereum.CallResult<Bytes> {
     let result = super.tryCall("getCustody", "getCustody(address):(bytes32)", [
-      ethereum.Value.fromAddress(userAddress)
+      ethereum.Value.fromAddress(userAddress),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();

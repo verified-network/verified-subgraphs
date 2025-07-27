@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class OwnershipTransferred extends ethereum.Event {
@@ -123,6 +123,22 @@ export class Distribution__getRevenueSharesResult {
     map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
     return map;
   }
+
+  getValue0(): BigInt {
+    return this.value0;
+  }
+
+  getValue1(): BigInt {
+    return this.value1;
+  }
+
+  getValue2(): BigInt {
+    return this.value2;
+  }
+
+  getValue3(): BigInt {
+    return this.value3;
+  }
 }
 
 export class Distribution extends ethereum.SmartContract {
@@ -164,24 +180,22 @@ export class Distribution extends ethereum.SmartContract {
     let result = super.call(
       "getRevenueShares",
       "getRevenueShares():(uint256,uint256,uint256,uint256)",
-      []
+      [],
     );
 
     return new Distribution__getRevenueSharesResult(
       result[0].toBigInt(),
       result[1].toBigInt(),
       result[2].toBigInt(),
-      result[3].toBigInt()
+      result[3].toBigInt(),
     );
   }
 
-  try_getRevenueShares(): ethereum.CallResult<
-    Distribution__getRevenueSharesResult
-  > {
+  try_getRevenueShares(): ethereum.CallResult<Distribution__getRevenueSharesResult> {
     let result = super.tryCall(
       "getRevenueShares",
       "getRevenueShares():(uint256,uint256,uint256,uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -192,8 +206,8 @@ export class Distribution extends ethereum.SmartContract {
         value[0].toBigInt(),
         value[1].toBigInt(),
         value[2].toBigInt(),
-        value[3].toBigInt()
-      )
+        value[3].toBigInt(),
+      ),
     );
   }
 
@@ -203,8 +217,8 @@ export class Distribution extends ethereum.SmartContract {
       "getRevenueShareholders(bytes32,address):(address[])",
       [
         ethereum.Value.fromFixedBytes(_type),
-        ethereum.Value.fromAddress(_currency)
-      ]
+        ethereum.Value.fromAddress(_currency),
+      ],
     );
 
     return result[0].toAddressArray();
@@ -212,15 +226,15 @@ export class Distribution extends ethereum.SmartContract {
 
   try_getRevenueShareholders(
     _type: Bytes,
-    _currency: Address
+    _currency: Address,
   ): ethereum.CallResult<Array<Address>> {
     let result = super.tryCall(
       "getRevenueShareholders",
       "getRevenueShareholders(bytes32,address):(address[])",
       [
         ethereum.Value.fromFixedBytes(_type),
-        ethereum.Value.fromAddress(_currency)
-      ]
+        ethereum.Value.fromAddress(_currency),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -233,7 +247,7 @@ export class Distribution extends ethereum.SmartContract {
     let result = super.call(
       "getPaymentFeeCollected",
       "getPaymentFeeCollected(bytes32):(uint256)",
-      [ethereum.Value.fromFixedBytes(_currency)]
+      [ethereum.Value.fromFixedBytes(_currency)],
     );
 
     return result[0].toBigInt();
@@ -243,7 +257,7 @@ export class Distribution extends ethereum.SmartContract {
     let result = super.tryCall(
       "getPaymentFeeCollected",
       "getPaymentFeeCollected(bytes32):(uint256)",
-      [ethereum.Value.fromFixedBytes(_currency)]
+      [ethereum.Value.fromFixedBytes(_currency)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -256,7 +270,7 @@ export class Distribution extends ethereum.SmartContract {
     let result = super.call(
       "getLoanFeeCollected",
       "getLoanFeeCollected(bytes32):(uint256)",
-      [ethereum.Value.fromFixedBytes(_currency)]
+      [ethereum.Value.fromFixedBytes(_currency)],
     );
 
     return result[0].toBigInt();
@@ -266,7 +280,7 @@ export class Distribution extends ethereum.SmartContract {
     let result = super.tryCall(
       "getLoanFeeCollected",
       "getLoanFeeCollected(bytes32):(uint256)",
-      [ethereum.Value.fromFixedBytes(_currency)]
+      [ethereum.Value.fromFixedBytes(_currency)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -281,8 +295,8 @@ export class Distribution extends ethereum.SmartContract {
       "getIssuingFeeCollected(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(_platform),
-        ethereum.Value.fromAddress(_token)
-      ]
+        ethereum.Value.fromAddress(_token),
+      ],
     );
 
     return result[0].toBigInt();
@@ -290,15 +304,15 @@ export class Distribution extends ethereum.SmartContract {
 
   try_getIssuingFeeCollected(
     _platform: Address,
-    _token: Address
+    _token: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getIssuingFeeCollected",
       "getIssuingFeeCollected(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(_platform),
-        ethereum.Value.fromAddress(_token)
-      ]
+        ethereum.Value.fromAddress(_token),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -313,8 +327,8 @@ export class Distribution extends ethereum.SmartContract {
       "getTradingFeeCollected(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(_platform),
-        ethereum.Value.fromAddress(_token)
-      ]
+        ethereum.Value.fromAddress(_token),
+      ],
     );
 
     return result[0].toBigInt();
@@ -322,15 +336,15 @@ export class Distribution extends ethereum.SmartContract {
 
   try_getTradingFeeCollected(
     _platform: Address,
-    _token: Address
+    _token: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getTradingFeeCollected",
       "getTradingFeeCollected(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(_platform),
-        ethereum.Value.fromAddress(_token)
-      ]
+        ethereum.Value.fromAddress(_token),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();

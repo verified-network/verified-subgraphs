@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class OwnershipTransferred extends ethereum.Event {
@@ -298,8 +298,8 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
       "getIssuingFee(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(security),
-        ethereum.Value.fromAddress(currency)
-      ]
+        ethereum.Value.fromAddress(currency),
+      ],
     );
 
     return result[0].toBigInt();
@@ -307,15 +307,15 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
 
   try_getIssuingFee(
     security: Address,
-    currency: Address
+    currency: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getIssuingFee",
       "getIssuingFee(address,address):(uint256)",
       [
         ethereum.Value.fromAddress(security),
-        ethereum.Value.fromAddress(currency)
-      ]
+        ethereum.Value.fromAddress(currency),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -330,8 +330,8 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
       "getSettlementRequests(bytes32,bytes32):(bytes32[])",
       [
         ethereum.Value.fromFixedBytes(dpid),
-        ethereum.Value.fromFixedBytes(poolId)
-      ]
+        ethereum.Value.fromFixedBytes(poolId),
+      ],
     );
 
     return result[0].toBytesArray();
@@ -339,15 +339,15 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
 
   try_getSettlementRequests(
     dpid: Bytes,
-    poolId: Bytes
+    poolId: Bytes,
   ): ethereum.CallResult<Array<Bytes>> {
     let result = super.tryCall(
       "getSettlementRequests",
       "getSettlementRequests(bytes32,bytes32):(bytes32[])",
       [
         ethereum.Value.fromFixedBytes(dpid),
-        ethereum.Value.fromFixedBytes(poolId)
-      ]
+        ethereum.Value.fromFixedBytes(poolId),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -357,28 +357,26 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
   }
 
   getSettlementRequest(
-    ref: Bytes
+    ref: Bytes,
   ): SecondaryIssueManager__getSettlementRequestResultValue0Struct {
     let result = super.call(
       "getSettlementRequest",
       "getSettlementRequest(bytes32):((address,address,address,address,address,bytes32,bytes32,uint256,uint256,uint256,uint256,bytes32,bytes32))",
-      [ethereum.Value.fromFixedBytes(ref)]
+      [ethereum.Value.fromFixedBytes(ref)],
     );
 
-    return changetype<
-      SecondaryIssueManager__getSettlementRequestResultValue0Struct
-    >(result[0].toTuple());
+    return changetype<SecondaryIssueManager__getSettlementRequestResultValue0Struct>(
+      result[0].toTuple(),
+    );
   }
 
   try_getSettlementRequest(
-    ref: Bytes
-  ): ethereum.CallResult<
-    SecondaryIssueManager__getSettlementRequestResultValue0Struct
-  > {
+    ref: Bytes,
+  ): ethereum.CallResult<SecondaryIssueManager__getSettlementRequestResultValue0Struct> {
     let result = super.tryCall(
       "getSettlementRequest",
       "getSettlementRequest(bytes32):((address,address,address,address,address,bytes32,bytes32,uint256,uint256,uint256,uint256,bytes32,bytes32))",
-      [ethereum.Value.fromFixedBytes(ref)]
+      [ethereum.Value.fromFixedBytes(ref)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -386,43 +384,39 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(
       changetype<SecondaryIssueManager__getSettlementRequestResultValue0Struct>(
-        value[0].toTuple()
-      )
+        value[0].toTuple(),
+      ),
     );
   }
 
   getSubscribers(
-    poolId: Bytes
+    poolId: Bytes,
   ): Array<SecondaryIssueManager__getSubscribersResultValue0Struct> {
     let result = super.call(
       "getSubscribers",
       "getSubscribers(bytes32):((address,address,address,uint256,uint256)[])",
-      [ethereum.Value.fromFixedBytes(poolId)]
+      [ethereum.Value.fromFixedBytes(poolId)],
     );
 
-    return result[0].toTupleArray<
-      SecondaryIssueManager__getSubscribersResultValue0Struct
-    >();
+    return result[0].toTupleArray<SecondaryIssueManager__getSubscribersResultValue0Struct>();
   }
 
   try_getSubscribers(
-    poolId: Bytes
+    poolId: Bytes,
   ): ethereum.CallResult<
     Array<SecondaryIssueManager__getSubscribersResultValue0Struct>
   > {
     let result = super.tryCall(
       "getSubscribers",
       "getSubscribers(bytes32):((address,address,address,uint256,uint256)[])",
-      [ethereum.Value.fromFixedBytes(poolId)]
+      [ethereum.Value.fromFixedBytes(poolId)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<
-        SecondaryIssueManager__getSubscribersResultValue0Struct
-      >()
+      value[0].toTupleArray<SecondaryIssueManager__getSubscribersResultValue0Struct>(),
     );
   }
 
@@ -430,7 +424,7 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
     let result = super.call(
       "getTradingFeeCollected",
       "getTradingFeeCollected(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
 
     return result[0].toBigInt();
@@ -440,7 +434,7 @@ export class SecondaryIssueManager extends ethereum.SmartContract {
     let result = super.tryCall(
       "getTradingFeeCollected",
       "getTradingFeeCollected(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -693,7 +687,7 @@ export class RequestSettlementCall__Inputs {
 
   get tradeToReport(): RequestSettlementCallTradeToReportStruct {
     return changetype<RequestSettlementCallTradeToReportStruct>(
-      this._call.inputValues[0].value.toTuple()
+      this._call.inputValues[0].value.toTuple(),
     );
   }
 

@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class CashIssuerCreated extends ethereum.Event {
@@ -143,6 +143,14 @@ export class Factory__tokenResult {
     map.set("value1", ethereum.Value.fromFixedBytes(this.value1));
     return map;
   }
+
+  getTokenType(): Bytes {
+    return this.value0;
+  }
+
+  getName(): Bytes {
+    return this.value1;
+  }
 }
 
 export class Factory__getNameAndTypeResult {
@@ -159,6 +167,14 @@ export class Factory__getNameAndTypeResult {
     map.set("value0", ethereum.Value.fromFixedBytes(this.value0));
     map.set("value1", ethereum.Value.fromFixedBytes(this.value1));
     return map;
+  }
+
+  getValue0(): Bytes {
+    return this.value0;
+  }
+
+  getValue1(): Bytes {
+    return this.value1;
   }
 }
 
@@ -177,6 +193,14 @@ export class Factory__getAddressAndTypeResult {
     map.set("value1", ethereum.Value.fromFixedBytes(this.value1));
     return map;
   }
+
+  getValue0(): Address {
+    return this.value0;
+  }
+
+  getValue1(): Bytes {
+    return this.value1;
+  }
 }
 
 export class Factory extends ethereum.SmartContract {
@@ -189,7 +213,7 @@ export class Factory extends ethereum.SmartContract {
     _logic: Address,
     _admin: Address,
     _data: Bytes,
-    _signature: Bytes
+    _signature: Bytes,
   ): Address {
     let result = super.call(
       "getSigner",
@@ -199,8 +223,8 @@ export class Factory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature)
-      ]
+        ethereum.Value.fromBytes(_signature),
+      ],
     );
 
     return result[0].toAddress();
@@ -211,7 +235,7 @@ export class Factory extends ethereum.SmartContract {
     _logic: Address,
     _admin: Address,
     _data: Bytes,
-    _signature: Bytes
+    _signature: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "getSigner",
@@ -221,8 +245,8 @@ export class Factory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature)
-      ]
+        ethereum.Value.fromBytes(_signature),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -236,7 +260,7 @@ export class Factory extends ethereum.SmartContract {
     _logic: Address,
     _admin: Address,
     _data: Bytes,
-    _signature: Bytes
+    _signature: Bytes,
   ): Address {
     let result = super.call(
       "deploySigned",
@@ -246,8 +270,8 @@ export class Factory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature)
-      ]
+        ethereum.Value.fromBytes(_signature),
+      ],
     );
 
     return result[0].toAddress();
@@ -258,7 +282,7 @@ export class Factory extends ethereum.SmartContract {
     _logic: Address,
     _admin: Address,
     _data: Bytes,
-    _signature: Bytes
+    _signature: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "deploySigned",
@@ -268,8 +292,8 @@ export class Factory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
         ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature)
-      ]
+        ethereum.Value.fromBytes(_signature),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -280,7 +304,7 @@ export class Factory extends ethereum.SmartContract {
 
   tokens(param0: BigInt): Address {
     let result = super.call("tokens", "tokens(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
+      ethereum.Value.fromUnsignedBigInt(param0),
     ]);
 
     return result[0].toAddress();
@@ -288,7 +312,7 @@ export class Factory extends ethereum.SmartContract {
 
   try_tokens(param0: BigInt): ethereum.CallResult<Address> {
     let result = super.tryCall("tokens", "tokens(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
+      ethereum.Value.fromUnsignedBigInt(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -301,7 +325,7 @@ export class Factory extends ethereum.SmartContract {
     _salt: BigInt,
     _logic: Address,
     _admin: Address,
-    _data: Bytes
+    _data: Bytes,
   ): Address {
     let result = super.call(
       "deploy",
@@ -310,8 +334,8 @@ export class Factory extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(_salt),
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data)
-      ]
+        ethereum.Value.fromBytes(_data),
+      ],
     );
 
     return result[0].toAddress();
@@ -321,7 +345,7 @@ export class Factory extends ethereum.SmartContract {
     _salt: BigInt,
     _logic: Address,
     _admin: Address,
-    _data: Bytes
+    _data: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "deploy",
@@ -330,8 +354,8 @@ export class Factory extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(_salt),
         ethereum.Value.fromAddress(_logic),
         ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data)
-      ]
+        ethereum.Value.fromBytes(_data),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -342,7 +366,7 @@ export class Factory extends ethereum.SmartContract {
 
   token(param0: Address): Factory__tokenResult {
     let result = super.call("token", "token(address):(bytes32,bytes32)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
 
     return new Factory__tokenResult(result[0].toBytes(), result[1].toBytes());
@@ -350,14 +374,14 @@ export class Factory extends ethereum.SmartContract {
 
   try_token(param0: Address): ethereum.CallResult<Factory__tokenResult> {
     let result = super.tryCall("token", "token(address):(bytes32,bytes32)", [
-      ethereum.Value.fromAddress(param0)
+      ethereum.Value.fromAddress(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Factory__tokenResult(value[0].toBytes(), value[1].toBytes())
+      new Factory__tokenResult(value[0].toBytes(), value[1].toBytes()),
     );
   }
 
@@ -367,8 +391,8 @@ export class Factory extends ethereum.SmartContract {
       "getDeploymentAddress(uint256,address):(address)",
       [
         ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_sender)
-      ]
+        ethereum.Value.fromAddress(_sender),
+      ],
     );
 
     return result[0].toAddress();
@@ -376,15 +400,15 @@ export class Factory extends ethereum.SmartContract {
 
   try_getDeploymentAddress(
     _salt: BigInt,
-    _sender: Address
+    _sender: Address,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "getDeploymentAddress",
       "getDeploymentAddress(uint256,address):(address)",
       [
         ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_sender)
-      ]
+        ethereum.Value.fromAddress(_sender),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -427,7 +451,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.call(
       "deployMinimal",
       "deployMinimal(address,bytes):(address)",
-      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)]
+      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)],
     );
 
     return result[0].toAddress();
@@ -435,12 +459,12 @@ export class Factory extends ethereum.SmartContract {
 
   try_deployMinimal(
     _logic: Address,
-    _data: Bytes
+    _data: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "deployMinimal",
       "deployMinimal(address,bytes):(address)",
-      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)]
+      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -451,7 +475,7 @@ export class Factory extends ethereum.SmartContract {
 
   currencies(param0: BigInt): Bytes {
     let result = super.call("currencies", "currencies(uint256):(bytes32)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
+      ethereum.Value.fromUnsignedBigInt(param0),
     ]);
 
     return result[0].toBytes();
@@ -459,7 +483,7 @@ export class Factory extends ethereum.SmartContract {
 
   try_currencies(param0: BigInt): ethereum.CallResult<Bytes> {
     let result = super.tryCall("currencies", "currencies(uint256):(bytes32)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
+      ethereum.Value.fromUnsignedBigInt(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -478,7 +502,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.tryCall(
       "getTokenCount",
       "getTokenCount():(uint256)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -489,7 +513,7 @@ export class Factory extends ethereum.SmartContract {
 
   getToken(n: BigInt): Address {
     let result = super.call("getToken", "getToken(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(n)
+      ethereum.Value.fromUnsignedBigInt(n),
     ]);
 
     return result[0].toAddress();
@@ -497,7 +521,7 @@ export class Factory extends ethereum.SmartContract {
 
   try_getToken(n: BigInt): ethereum.CallResult<Address> {
     let result = super.tryCall("getToken", "getToken(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(n)
+      ethereum.Value.fromUnsignedBigInt(n),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -508,7 +532,7 @@ export class Factory extends ethereum.SmartContract {
 
   getName(viaAddress: Address): Bytes {
     let result = super.call("getName", "getName(address):(bytes32)", [
-      ethereum.Value.fromAddress(viaAddress)
+      ethereum.Value.fromAddress(viaAddress),
     ]);
 
     return result[0].toBytes();
@@ -516,7 +540,7 @@ export class Factory extends ethereum.SmartContract {
 
   try_getName(viaAddress: Address): ethereum.CallResult<Bytes> {
     let result = super.tryCall("getName", "getName(address):(bytes32)", [
-      ethereum.Value.fromAddress(viaAddress)
+      ethereum.Value.fromAddress(viaAddress),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -527,7 +551,7 @@ export class Factory extends ethereum.SmartContract {
 
   getType(viaAddress: Address): Bytes {
     let result = super.call("getType", "getType(address):(bytes32)", [
-      ethereum.Value.fromAddress(viaAddress)
+      ethereum.Value.fromAddress(viaAddress),
     ]);
 
     return result[0].toBytes();
@@ -535,7 +559,7 @@ export class Factory extends ethereum.SmartContract {
 
   try_getType(viaAddress: Address): ethereum.CallResult<Bytes> {
     let result = super.tryCall("getType", "getType(address):(bytes32)", [
-      ethereum.Value.fromAddress(viaAddress)
+      ethereum.Value.fromAddress(viaAddress),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -548,29 +572,29 @@ export class Factory extends ethereum.SmartContract {
     let result = super.call(
       "getNameAndType",
       "getNameAndType(address):(bytes32,bytes32)",
-      [ethereum.Value.fromAddress(viaAddress)]
+      [ethereum.Value.fromAddress(viaAddress)],
     );
 
     return new Factory__getNameAndTypeResult(
       result[0].toBytes(),
-      result[1].toBytes()
+      result[1].toBytes(),
     );
   }
 
   try_getNameAndType(
-    viaAddress: Address
+    viaAddress: Address,
   ): ethereum.CallResult<Factory__getNameAndTypeResult> {
     let result = super.tryCall(
       "getNameAndType",
       "getNameAndType(address):(bytes32,bytes32)",
-      [ethereum.Value.fromAddress(viaAddress)]
+      [ethereum.Value.fromAddress(viaAddress)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new Factory__getNameAndTypeResult(value[0].toBytes(), value[1].toBytes())
+      new Factory__getNameAndTypeResult(value[0].toBytes(), value[1].toBytes()),
     );
   }
 
@@ -580,8 +604,8 @@ export class Factory extends ethereum.SmartContract {
       "getTokenByNameType(bytes32,bytes32):(address)",
       [
         ethereum.Value.fromFixedBytes(tokenName),
-        ethereum.Value.fromFixedBytes(tokenType)
-      ]
+        ethereum.Value.fromFixedBytes(tokenType),
+      ],
     );
 
     return result[0].toAddress();
@@ -589,15 +613,15 @@ export class Factory extends ethereum.SmartContract {
 
   try_getTokenByNameType(
     tokenName: Bytes,
-    tokenType: Bytes
+    tokenType: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "getTokenByNameType",
       "getTokenByNameType(bytes32,bytes32):(address)",
       [
         ethereum.Value.fromFixedBytes(tokenName),
-        ethereum.Value.fromFixedBytes(tokenType)
-      ]
+        ethereum.Value.fromFixedBytes(tokenType),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -612,8 +636,8 @@ export class Factory extends ethereum.SmartContract {
       "getIssuer(bytes32,bytes32):(address)",
       [
         ethereum.Value.fromFixedBytes(tokenType),
-        ethereum.Value.fromFixedBytes(tokenName)
-      ]
+        ethereum.Value.fromFixedBytes(tokenName),
+      ],
     );
 
     return result[0].toAddress();
@@ -621,15 +645,15 @@ export class Factory extends ethereum.SmartContract {
 
   try_getIssuer(
     tokenType: Bytes,
-    tokenName: Bytes
+    tokenName: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "getIssuer",
       "getIssuer(bytes32,bytes32):(address)",
       [
         ethereum.Value.fromFixedBytes(tokenType),
-        ethereum.Value.fromFixedBytes(tokenName)
-      ]
+        ethereum.Value.fromFixedBytes(tokenName),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -642,22 +666,22 @@ export class Factory extends ethereum.SmartContract {
     let result = super.call(
       "getAddressAndType",
       "getAddressAndType(bytes32):(address,bytes32)",
-      [ethereum.Value.fromFixedBytes(tokenName)]
+      [ethereum.Value.fromFixedBytes(tokenName)],
     );
 
     return new Factory__getAddressAndTypeResult(
       result[0].toAddress(),
-      result[1].toBytes()
+      result[1].toBytes(),
     );
   }
 
   try_getAddressAndType(
-    tokenName: Bytes
+    tokenName: Bytes,
   ): ethereum.CallResult<Factory__getAddressAndTypeResult> {
     let result = super.tryCall(
       "getAddressAndType",
       "getAddressAndType(bytes32):(address,bytes32)",
-      [ethereum.Value.fromFixedBytes(tokenName)]
+      [ethereum.Value.fromFixedBytes(tokenName)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -666,8 +690,8 @@ export class Factory extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(
       new Factory__getAddressAndTypeResult(
         value[0].toAddress(),
-        value[1].toBytes()
-      )
+        value[1].toBytes(),
+      ),
     );
   }
 
@@ -675,7 +699,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.call(
       "getViaOracleUrl",
       "getViaOracleUrl():(string)",
-      []
+      [],
     );
 
     return result[0].toString();
@@ -685,7 +709,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.tryCall(
       "getViaOracleUrl",
       "getViaOracleUrl():(string)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -698,7 +722,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.call(
       "getFiatPayoutUrl",
       "getFiatPayoutUrl():(string)",
-      []
+      [],
     );
 
     return result[0].toString();
@@ -708,7 +732,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.tryCall(
       "getFiatPayoutUrl",
       "getFiatPayoutUrl():(string)",
-      []
+      [],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -723,8 +747,8 @@ export class Factory extends ethereum.SmartContract {
       "getCryptoDataUrl(bytes32,bytes32):(string)",
       [
         ethereum.Value.fromFixedBytes(fromCurrency),
-        ethereum.Value.fromFixedBytes(toCurrency)
-      ]
+        ethereum.Value.fromFixedBytes(toCurrency),
+      ],
     );
 
     return result[0].toString();
@@ -732,15 +756,15 @@ export class Factory extends ethereum.SmartContract {
 
   try_getCryptoDataUrl(
     fromCurrency: Bytes,
-    toCurrency: Bytes
+    toCurrency: Bytes,
   ): ethereum.CallResult<string> {
     let result = super.tryCall(
       "getCryptoDataUrl",
       "getCryptoDataUrl(bytes32,bytes32):(string)",
       [
         ethereum.Value.fromFixedBytes(fromCurrency),
-        ethereum.Value.fromFixedBytes(toCurrency)
-      ]
+        ethereum.Value.fromFixedBytes(toCurrency),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -781,7 +805,7 @@ export class Factory extends ethereum.SmartContract {
 
   getBondTerm(_bondToken: Address): BigInt {
     let result = super.call("getBondTerm", "getBondTerm(address):(uint256)", [
-      ethereum.Value.fromAddress(_bondToken)
+      ethereum.Value.fromAddress(_bondToken),
     ]);
 
     return result[0].toBigInt();
@@ -791,7 +815,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.tryCall(
       "getBondTerm",
       "getBondTerm(address):(uint256)",
-      [ethereum.Value.fromAddress(_bondToken)]
+      [ethereum.Value.fromAddress(_bondToken)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -804,7 +828,7 @@ export class Factory extends ethereum.SmartContract {
     _target: Address,
     issuer: Address,
     tokenName: Bytes,
-    tokenSymbol: Bytes
+    tokenSymbol: Bytes,
   ): Address {
     let result = super.call(
       "createToken",
@@ -813,8 +837,8 @@ export class Factory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_target),
         ethereum.Value.fromAddress(issuer),
         ethereum.Value.fromFixedBytes(tokenName),
-        ethereum.Value.fromFixedBytes(tokenSymbol)
-      ]
+        ethereum.Value.fromFixedBytes(tokenSymbol),
+      ],
     );
 
     return result[0].toAddress();
@@ -824,7 +848,7 @@ export class Factory extends ethereum.SmartContract {
     _target: Address,
     issuer: Address,
     tokenName: Bytes,
-    tokenSymbol: Bytes
+    tokenSymbol: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "createToken",
@@ -833,8 +857,8 @@ export class Factory extends ethereum.SmartContract {
         ethereum.Value.fromAddress(_target),
         ethereum.Value.fromAddress(issuer),
         ethereum.Value.fromFixedBytes(tokenName),
-        ethereum.Value.fromFixedBytes(tokenSymbol)
-      ]
+        ethereum.Value.fromFixedBytes(tokenSymbol),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -847,7 +871,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.call(
       "checkSupportForToken",
       "checkSupportForToken(bytes32):(bool)",
-      [ethereum.Value.fromFixedBytes(_currency)]
+      [ethereum.Value.fromFixedBytes(_currency)],
     );
 
     return result[0].toBoolean();
@@ -857,7 +881,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.tryCall(
       "checkSupportForToken",
       "checkSupportForToken(bytes32):(bool)",
-      [ethereum.Value.fromFixedBytes(_currency)]
+      [ethereum.Value.fromFixedBytes(_currency)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -870,7 +894,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.call(
       "getCurrencyToken",
       "getCurrencyToken(bytes32):(address)",
-      [ethereum.Value.fromFixedBytes(_currency)]
+      [ethereum.Value.fromFixedBytes(_currency)],
     );
 
     return result[0].toAddress();
@@ -880,7 +904,7 @@ export class Factory extends ethereum.SmartContract {
     let result = super.tryCall(
       "getCurrencyToken",
       "getCurrencyToken(bytes32):(address)",
-      [ethereum.Value.fromFixedBytes(_currency)]
+      [ethereum.Value.fromFixedBytes(_currency)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();

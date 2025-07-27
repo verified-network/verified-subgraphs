@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class OwnershipTransferred extends ethereum.Event {
@@ -286,7 +286,7 @@ export class MarginIssueManager extends ethereum.SmartContract {
 
   getPool(poolId: Bytes): boolean {
     let result = super.call("getPool", "getPool(bytes32):(bool)", [
-      ethereum.Value.fromFixedBytes(poolId)
+      ethereum.Value.fromFixedBytes(poolId),
     ]);
 
     return result[0].toBoolean();
@@ -294,7 +294,7 @@ export class MarginIssueManager extends ethereum.SmartContract {
 
   try_getPool(poolId: Bytes): ethereum.CallResult<boolean> {
     let result = super.tryCall("getPool", "getPool(bytes32):(bool)", [
-      ethereum.Value.fromFixedBytes(poolId)
+      ethereum.Value.fromFixedBytes(poolId),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -309,8 +309,8 @@ export class MarginIssueManager extends ethereum.SmartContract {
       "getCollateral(bytes32,address):(uint256)",
       [
         ethereum.Value.fromFixedBytes(poolId),
-        ethereum.Value.fromAddress(currency)
-      ]
+        ethereum.Value.fromAddress(currency),
+      ],
     );
 
     return result[0].toBigInt();
@@ -318,15 +318,15 @@ export class MarginIssueManager extends ethereum.SmartContract {
 
   try_getCollateral(
     poolId: Bytes,
-    currency: Address
+    currency: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getCollateral",
       "getCollateral(bytes32,address):(uint256)",
       [
         ethereum.Value.fromFixedBytes(poolId),
-        ethereum.Value.fromAddress(currency)
-      ]
+        ethereum.Value.fromAddress(currency),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -339,7 +339,7 @@ export class MarginIssueManager extends ethereum.SmartContract {
     let result = super.call(
       "getUserCollateral",
       "getUserCollateral(address,address):(int256)",
-      [ethereum.Value.fromAddress(party), ethereum.Value.fromAddress(currency)]
+      [ethereum.Value.fromAddress(party), ethereum.Value.fromAddress(currency)],
     );
 
     return result[0].toBigInt();
@@ -347,12 +347,12 @@ export class MarginIssueManager extends ethereum.SmartContract {
 
   try_getUserCollateral(
     party: Address,
-    currency: Address
+    currency: Address,
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "getUserCollateral",
       "getUserCollateral(address,address):(int256)",
-      [ethereum.Value.fromAddress(party), ethereum.Value.fromAddress(currency)]
+      [ethereum.Value.fromAddress(party), ethereum.Value.fromAddress(currency)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -365,7 +365,7 @@ export class MarginIssueManager extends ethereum.SmartContract {
     let result = super.call(
       "getTradingFeeCollected",
       "getTradingFeeCollected(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
 
     return result[0].toBigInt();
@@ -375,7 +375,7 @@ export class MarginIssueManager extends ethereum.SmartContract {
     let result = super.tryCall(
       "getTradingFeeCollected",
       "getTradingFeeCollected(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
