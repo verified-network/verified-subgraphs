@@ -17,7 +17,7 @@ export function handleCashIssued(event: CashIssued): void {
     let issue = event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString());
     let issues = new CashIssues(issue);
     issues.party = event.params.party.toHexString(); 
-    issues.currency = event.params.currency.toString();   
+    issues.currency = event.address.toHexString();   
     //issues.currency = event.params.currency.toHexString();
     issues.amount = event.params.amount.toBigDecimal();
     issues.balance = event.params.balance.toBigDecimal();
@@ -25,7 +25,7 @@ export function handleCashIssued(event: CashIssued): void {
   }
   else{
     issues.party = event.params.party.toHexString();    
-    issues.currency = event.params.currency.toString();   
+    issues.currency = event.address.toHexString();   
     //issues.currency = event.params.currency.toHexString();
     issues.amount = event.params.amount.toBigDecimal();
     issues.balance = event.params.balance.toBigDecimal();
@@ -38,9 +38,9 @@ export function handleCashRedeemed(event: CashRedeemed): void {
   if(redemptions==null){
     let redemption = event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString());
     let redemptions = new CashRedemptions(redemption);
-    //redemptions.party = event.params.party.toHexString();    
-  redemptions.currency = event.params.currency.toString();
-    redemptions.currency = event.params.currency.toHexString();
+    redemptions.party = event.params.party.toHexString();    
+    redemptions.currency = event.address.toHexString();
+    //redemptions.currency = event.params.currency.toHexString();
     redemptions.amount = event.params.amount.toBigDecimal();
     redemptions.redeemedFor = event.params.redeemedFor.toBigDecimal();
     redemptions.balance = event.params.balance.toBigDecimal();
@@ -48,7 +48,7 @@ export function handleCashRedeemed(event: CashRedeemed): void {
   }
   else{
     redemptions.party = event.params.party.toHexString();  
-    redemptions.currency = event.params.currency.toString();  
+    redemptions.currency = event.address.toHexString();  
     //redemptions.currency = event.params.currency.toHexString();
     redemptions.amount = event.params.amount.toBigDecimal();
     redemptions.redeemedFor = event.params.redeemedFor.toBigDecimal();
@@ -64,14 +64,14 @@ export function handleCashDeposits(event: CashDeposits): void {
     let deposits = new CashDeposited(deposit);
     deposits.party = event.params.party.toHexString();
     deposits.amount = event.params.amount.toBigDecimal();
-    deposits.currency = event.params.currency.toString();
+    deposits.currency = event.address.toHexString();
     //deposits.currency = event.params.currency.toHexString();
     deposits.save();
   }
   else{
     deposits.party = event.params.party.toHexString();
     deposits.amount = event.params.amount.toBigDecimal();
-    deposits.currency = event.params.currency.toString();
+    deposits.currency = event.address.toHexString();
     //deposits.currency = event.params.currency.toHexString();
     deposits.save();
   }  
@@ -83,18 +83,18 @@ export function handleCashTransfer(event: CashTransfer): void {
     let transfer = event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString());
     let transfers = new CashTransfers(transfer);
     transfers.transferor = event.params.party.toHexString();
-    //transfers.transferee = event.params.counterparty.toHexString();
-    transfers.currency = event.params.currency.toString();
-    transfers.currency = event.params.currency.toHexString();
+    transfers.transferee = event.params.counterparty.toHexString();
+    transfers.currency = event.address.toHexString();
+    //transfers.currency = event.params.currency.toHexString();
     transfers.amount = event.params.amount.toBigDecimal();
     transfers.deposit = event.params.deposit.toBigDecimal();
     transfers.save();
   }
   else{
     transfers.transferor = event.params.party.toHexString();
-    //transfers.transferee = event.params.counterparty.toHexString();
-    transfers.currency = event.params.currency.toString();
-    transfers.currency = event.params.currency.toHexString();
+    transfers.transferee = event.params.counterparty.toHexString();
+    transfers.currency = event.address.toHexString();
+    //transfers.currency = event.params.currency.toHexString();
     transfers.amount = event.params.amount.toBigDecimal();
     transfers.deposit = event.params.deposit.toBigDecimal();
     transfers.save();

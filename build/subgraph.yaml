@@ -195,9 +195,9 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0x095a3075De6950530F6053C97dB06cc74E78E11e"
+      address: "0xcC52ce78a8fF2198FBD37D85D1686E7C80604cd3"
       abi: MarginIssueManager
-      startBlock: 8259194
+      startBlock: 8882584
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -256,9 +256,9 @@ dataSources:
     name: VerifiedMarkets
     network: sepolia
     source:
-      address: "0x8c364b06741C9fE045E0e510A39BCbAf7445D8fD"
+      address: "0x27278EBC6Bc1d08f1d09fec7d9583d5Dcd71c638"
       abi: VerifiedMarkets
-      startBlock: 6744708
+      startBlock: 9347700
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -272,11 +272,11 @@ dataSources:
         - name: VerifiedMarkets
           file: VerifiedMarkets\VerifiedMarkets.json
       eventHandlers:
-        - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
+        - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256,uint256)
           handler: handleNewRWA
         - event: PostedCollateral(indexed address,indexed address,address,uint256)
           handler: handleCollateral
-        - event: Borrowed(indexed address,indexed address,uint256)
+        - event: Borrowed(indexed address,indexed address,uint256,address)
           handler: handleBorrowing
         - event: Repaid(indexed address,indexed address,uint256)
           handler: handleRepayment
