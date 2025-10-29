@@ -1,5 +1,5 @@
 specVersion: 0.0.2
-description: The Verified Wallet is for issuers and investors of tokenized securities. 
+description: The Verified Wallet is for issuers and investors of tokenized securities.
 repository: https://github.com/verified-network/verified-graph
 schema:
   file: ./schema.graphql
@@ -8,7 +8,7 @@ dataSources:
     name: SecuritiesFactory
     network: mainnet
     source:
-      address: '0xEeDDB589f8EA16f1bCFA1F54F9A20389Ee815884'
+      address: "0xEeDDB589f8EA16f1bCFA1F54F9A20389Ee815884"
       abi: SecuritiesFactory
       startBlock: 20679233
     mapping:
@@ -32,7 +32,7 @@ dataSources:
     name: Client
     network: mainnet
     source:
-      address: '0x2f8cF8F87a200f7803975c4e5496Ac2F471AbECB'
+      address: "0x2f8cF8F87a200f7803975c4e5496Ac2F471AbECB"
       abi: Client
       startBlock: 20679230
     mapping:
@@ -57,7 +57,7 @@ dataSources:
     name: Liquidity
     network: mainnet
     source:
-      address: '0x80F3EFa6abd34ad123e5064C4F42c4aC84d25b84'
+      address: "0x80F3EFa6abd34ad123e5064C4F42c4aC84d25b84"
       abi: Liquidity
       startBlock: 20677616
     mapping:
@@ -100,7 +100,7 @@ dataSources:
     name: Distribution
     network: mainnet
     source:
-      address: '0xd5f976F6C2339203A72b87B5bfb9b22d278cF5cE'
+      address: "0xd5f976F6C2339203A72b87B5bfb9b22d278cF5cE"
       abi: Distribution
       startBlock: 20679359
     mapping:
@@ -121,7 +121,7 @@ dataSources:
     name: PrimaryIssueManager
     network: mainnet
     source:
-      address: '0x385C84e3012BB0221Fcf2D666B854BAA0969F021'
+      address: "0x385C84e3012BB0221Fcf2D666B854BAA0969F021"
       abi: PrimaryIssueManager
       startBlock: 20682005
     mapping:
@@ -162,7 +162,7 @@ dataSources:
     name: SecondaryIssueManager
     network: mainnet
     source:
-      address: '0xeE261Ef7b60D0eBBc682dFaA8d8b87ff65FC955e'
+      address: "0xeE261Ef7b60D0eBBc682dFaA8d8b87ff65FC955e"
       abi: SecondaryIssueManager
       startBlock: 20682054
     mapping:
@@ -266,7 +266,7 @@ dataSources:
   #      - name: VerifiedMarkets
   #        file: ./abis/VerifiedMarkets.json
   #    eventHandlers:
-  #      - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256)
+  #      - event: NewRWA(indexed address,indexed address,address,address,uint256,string,uint256,uint256,uint256)
   #        handler: handleNewRWA
   #      - event: PostedCollateral(indexed address,indexed address,address,uint256)
   #        handler: handleCollateral
@@ -335,7 +335,7 @@ templates:
           handler: handleCashDeposits
         - event: CashTransfer(indexed address,indexed address,bytes32,uint256,uint256)
           handler: handleCashTransfer
-      file: ./src/mappings/cash.ts  
+      file: ./src/mappings/cash.ts
   - kind: ethereum/contract
     name: Bond
     network: mainnet

@@ -1,5 +1,5 @@
 specVersion: 0.0.4
-description: The Verified Wallet is for issuers and investors of tokenized securities. 
+description: The Verified Wallet is for issuers and investors of tokenized securities.
 repository: https://github.com/verified-network/verified-graph
 schema:
   file: ./schema.graphql
@@ -8,7 +8,7 @@ dataSources:
     name: SecuritiesFactory
     network: sepolia
     source:
-      address: '0x7CaB6AA90fD672F6ddBd0B92c0a5428b53ebA414'
+      address: "0x7CaB6AA90fD672F6ddBd0B92c0a5428b53ebA414"
       abi: SecuritiesFactory
       startBlock: 7797796
     mapping:
@@ -32,7 +32,7 @@ dataSources:
     name: Client
     network: sepolia
     source:
-      address: '0xB72629Bb4d031F1C755AFfA123AAA28E81EfdA9A'
+      address: "0xB72629Bb4d031F1C755AFfA123AAA28E81EfdA9A"
       abi: Client
       startBlock: 7797792
     mapping:
@@ -57,7 +57,7 @@ dataSources:
     name: Liquidity
     network: sepolia
     source:
-      address: '0x27006b68b3594EF5Ae04C5457c24F0c7CF1E5553'
+      address: "0x27006b68b3594EF5Ae04C5457c24F0c7CF1E5553"
       abi: Liquidity
       startBlock: 5497049
     mapping:
@@ -100,7 +100,7 @@ dataSources:
     name: Distribution
     network: sepolia
     source:
-      address: '0x5c3171AFEC854f8B6FD138ee9533629ABd8A5365'
+      address: "0x5c3171AFEC854f8B6FD138ee9533629ABd8A5365"
       abi: Distribution
       startBlock: 5499367
     mapping:
@@ -121,7 +121,7 @@ dataSources:
     name: PrimaryIssueManager
     network: sepolia
     source:
-      address: '0x56B802f315e97c2BDDb0dA5F13EE8e11cBa3846B'
+      address: "0x56B802f315e97c2BDDb0dA5F13EE8e11cBa3846B"
       abi: PrimaryIssueManager
       startBlock: 8022457
     mapping:
@@ -162,7 +162,7 @@ dataSources:
     name: SecondaryIssueManager
     network: sepolia
     source:
-      address: '0xE3e3e9b8c0c292eD3756C7A1037322738de6B7FC'
+      address: "0xE3e3e9b8c0c292eD3756C7A1037322738de6B7FC"
       abi: SecondaryIssueManager
       startBlock: 7824767
     mapping:
@@ -191,7 +191,7 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: '0xcC52ce78a8fF2198FBD37D85D1686E7C80604cd3'
+      address: "0xcC52ce78a8fF2198FBD37D85D1686E7C80604cd3"
       abi: MarginIssueManager
       startBlock: 8882584
     mapping:
@@ -221,12 +221,12 @@ dataSources:
         - event: collateral(bytes32,indexed address,address,int256,uint256)
           handler: handleMarginCollateral
         - event: PnLSettled(indexed address,address,address,int256,int256,int256,uint256)
-          handler:  handleMarginSettlements
+          handler: handleMarginSettlements
   - kind: ethereum/contract
     name: Factory
     network: sepolia
     source:
-      address: '0x88FA907b0366e64c8a47745084b119E4b5cc2865'
+      address: "0x88FA907b0366e64c8a47745084b119E4b5cc2865"
       abi: Factory
       startBlock: 9348092
     mapping:
@@ -250,7 +250,7 @@ dataSources:
     name: VerifiedMarkets
     network: sepolia
     source:
-      address: '0x27278EBC6Bc1d08f1d09fec7d9583d5Dcd71c638'
+      address: "0x27278EBC6Bc1d08f1d09fec7d9583d5Dcd71c638"
       abi: VerifiedMarkets
       startBlock: 9347700
     mapping:
@@ -266,7 +266,7 @@ dataSources:
         - name: VerifiedMarkets
           file: ./abis/VerifiedMarkets.json
       eventHandlers:
-        - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256,uint256)
+        - event: NewRWA(indexed address,indexed address,address,address,uint256,string,uint256,uint256,uint256)
           handler: handleNewRWA
         - event: PostedCollateral(indexed address,indexed address,address,uint256)
           handler: handleCollateral
@@ -335,7 +335,7 @@ templates:
           handler: handleCashDeposits
         - event: CashTransfer(indexed address,indexed address,bytes32,uint256,uint256)
           handler: handleCashTransfer
-      file: ./src/mappings/cash.ts  
+      file: ./src/mappings/cash.ts
   - kind: ethereum/contract
     name: Bond
     network: sepolia
