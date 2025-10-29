@@ -7,9 +7,29 @@
         "type": "address"
       }
     ],
-    "stateMutability": "payable",
-    "type": "constructor",
-    "payable": true
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "ReentrancyGuardReentrantCall",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "bits",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "SafeCastOverflowedUintDowncast",
+    "type": "error"
   },
   {
     "anonymous": false,
@@ -31,6 +51,12 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "bond",
+        "type": "address"
       }
     ],
     "name": "Borrowed",
@@ -54,6 +80,12 @@
       {
         "indexed": false,
         "internalType": "address",
+        "name": "collateral",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
         "name": "bond",
         "type": "address"
       },
@@ -72,7 +104,19 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "couponFrequency",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "faceValue",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tenure",
         "type": "uint256"
       }
     ],
@@ -91,7 +135,7 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "asset",
+        "name": "bond",
         "type": "address"
       },
       {
@@ -130,10 +174,29 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "bond",
+        "type": "address"
       }
     ],
     "name": "Repaid",
     "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "bond",
+        "type": "address"
+      }
+    ],
+    "name": "borrowBase",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [],
@@ -146,14 +209,77 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "bond",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "issuer",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "factory",
+        "type": "address"
+      }
+    ],
+    "name": "postCollateral",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "bond",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "repayBase",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [
       {
         "internalType": "address",
         "name": "asset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "collateral",
+        "type": "address"
+      }
+    ],
+    "name": "repayLenders",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "asset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "collateral",
         "type": "address"
       },
       {
@@ -173,8 +299,18 @@
       },
       {
         "internalType": "uint256",
+        "name": "frequency",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
         "name": "faceValue",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "factory",
+        "type": "address"
       }
     ],
     "name": "submitNewRWA",
@@ -186,67 +322,21 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "asset",
+        "name": "bond",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "collateral",
+        "name": "issuer",
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "factory",
+        "type": "address"
       }
     ],
-    "name": "postCollateral",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "asset",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "base",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "borrowBase",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "asset",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "base",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "repayBase",
+    "name": "withdrawCollateral",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

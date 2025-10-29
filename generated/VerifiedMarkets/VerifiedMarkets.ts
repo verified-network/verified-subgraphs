@@ -34,6 +34,10 @@ export class Borrowed__Params {
   get amount(): BigInt {
     return this._event.parameters[2].value.toBigInt();
   }
+
+   get bond(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
 }
 
 export class NewRWA extends ethereum.Event {
@@ -57,20 +61,32 @@ export class NewRWA__Params {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get bond(): Address {
+  get collateral(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 
+  get bond(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
   get apy(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
+    return this._event.parameters[4].value.toBigInt();
   }
 
   get issuingDocs(): string {
-    return this._event.parameters[4].value.toString();
+    return this._event.parameters[5].value.toString();
+  }
+
+  get couponFrequency(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
   }
 
   get faceValue(): BigInt {
-    return this._event.parameters[5].value.toBigInt();
+    return this._event.parameters[7].value.toBigInt();
+  }
+
+  get tenure(): BigInt {
+    return this._event.parameters[8].value.toBigInt();
   }
 }
 
@@ -91,7 +107,7 @@ export class PostedCollateral__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get asset(): Address {
+  get bond(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
@@ -127,6 +143,10 @@ export class Repaid__Params {
 
   get amount(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+
+  get bond(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
@@ -202,20 +222,32 @@ export class SubmitNewRWACall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get bond(): Address {
+  get collateral(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
+  get bond(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
   get apy(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
+    return this._call.inputValues[3].value.toBigInt();
   }
 
   get issuingDocs(): string {
-    return this._call.inputValues[3].value.toString();
+    return this._call.inputValues[4].value.toString();
+  }
+
+  get frequency(): BigInt {
+    return this._call.inputValues[5].value.toBigInt();
   }
 
   get faceValue(): BigInt {
-    return this._call.inputValues[4].value.toBigInt();
+    return this._call.inputValues[6].value.toBigInt();
+  }
+
+  get factory(): Address {
+    return this._call.inputValues[7].value.toBigInt();
   }
 }
 
@@ -244,15 +276,15 @@ export class PostCollateralCall__Inputs {
     this._call = call;
   }
 
-  get asset(): Address {
+  get bond(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get collateral(): Address {
+  get issuer(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get amount(): BigInt {
+  get factory(): Address {
     return this._call.inputValues[2].value.toBigInt();
   }
 }
@@ -282,16 +314,8 @@ export class BorrowBaseCall__Inputs {
     this._call = call;
   }
 
-  get asset(): Address {
+  get bond(): Address {
     return this._call.inputValues[0].value.toAddress();
-  }
-
-  get base(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
   }
 }
 
@@ -312,7 +336,6 @@ export class RepayBaseCall extends ethereum.Call {
     return new RepayBaseCall__Outputs(this);
   }
 }
-
 export class RepayBaseCall__Inputs {
   _call: RepayBaseCall;
 
@@ -320,12 +343,8 @@ export class RepayBaseCall__Inputs {
     this._call = call;
   }
 
-  get asset(): Address {
+  get bond(): Address {
     return this._call.inputValues[0].value.toAddress();
-  }
-
-  get base(): Address {
-    return this._call.inputValues[1].value.toAddress();
   }
 
   get amount(): BigInt {

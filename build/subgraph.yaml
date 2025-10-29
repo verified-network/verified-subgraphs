@@ -272,7 +272,7 @@ dataSources:
         - name: VerifiedMarkets
           file: VerifiedMarkets\VerifiedMarkets.json
       eventHandlers:
-        - event: NewRWA(indexed address,indexed address,address,uint256,string,uint256,uint256)
+        - event: NewRWA(indexed address,indexed address,address,address,uint256,string,uint256,uint256,uint256)
           handler: handleNewRWA
         - event: PostedCollateral(indexed address,indexed address,address,uint256)
           handler: handleCollateral
