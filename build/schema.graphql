@@ -386,8 +386,11 @@ type RWA @entity{
   id: ID!
   issuer: User!
   asset: Security!
+  collateral:Bytes!
   bond: Token!
   apy: BigDecimal!
+  couponFrequency:BigDecimal!
+  tenure:BigDecimal!
   issuingDocs:String!
   faceValue: BigDecimal!
 }
@@ -403,10 +406,12 @@ type CollaterizedLoan @entity{
   borrower: User!
   base: Bytes! 
   amount: BigDecimal!
+  bond: Token!
 }
 type CollaterizedLoanRepayment @entity{
   id: ID!
   borrower: User!
   base: Bytes! 
   amount: BigDecimal!
+  bond: Token!
 }

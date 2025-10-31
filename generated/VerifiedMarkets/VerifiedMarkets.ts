@@ -35,8 +35,8 @@ export class Borrowed__Params {
     return this._event.parameters[2].value.toBigInt();
   }
 
-   get bond(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
+  get bond(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 }
 
@@ -145,8 +145,8 @@ export class Repaid__Params {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get bond(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
+  get bond(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 }
 
@@ -201,6 +201,142 @@ export class ConstructorCall__Outputs {
   }
 }
 
+export class BorrowBaseCall extends ethereum.Call {
+  get inputs(): BorrowBaseCall__Inputs {
+    return new BorrowBaseCall__Inputs(this);
+  }
+
+  get outputs(): BorrowBaseCall__Outputs {
+    return new BorrowBaseCall__Outputs(this);
+  }
+}
+
+export class BorrowBaseCall__Inputs {
+  _call: BorrowBaseCall;
+
+  constructor(call: BorrowBaseCall) {
+    this._call = call;
+  }
+
+  get bond(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class BorrowBaseCall__Outputs {
+  _call: BorrowBaseCall;
+
+  constructor(call: BorrowBaseCall) {
+    this._call = call;
+  }
+}
+
+export class PostCollateralCall extends ethereum.Call {
+  get inputs(): PostCollateralCall__Inputs {
+    return new PostCollateralCall__Inputs(this);
+  }
+
+  get outputs(): PostCollateralCall__Outputs {
+    return new PostCollateralCall__Outputs(this);
+  }
+}
+
+export class PostCollateralCall__Inputs {
+  _call: PostCollateralCall;
+
+  constructor(call: PostCollateralCall) {
+    this._call = call;
+  }
+
+  get bond(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get issuer(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get factory(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+}
+
+export class PostCollateralCall__Outputs {
+  _call: PostCollateralCall;
+
+  constructor(call: PostCollateralCall) {
+    this._call = call;
+  }
+}
+
+export class RepayBaseCall extends ethereum.Call {
+  get inputs(): RepayBaseCall__Inputs {
+    return new RepayBaseCall__Inputs(this);
+  }
+
+  get outputs(): RepayBaseCall__Outputs {
+    return new RepayBaseCall__Outputs(this);
+  }
+}
+
+export class RepayBaseCall__Inputs {
+  _call: RepayBaseCall;
+
+  constructor(call: RepayBaseCall) {
+    this._call = call;
+  }
+
+  get bond(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class RepayBaseCall__Outputs {
+  _call: RepayBaseCall;
+
+  constructor(call: RepayBaseCall) {
+    this._call = call;
+  }
+}
+
+export class RepayLendersCall extends ethereum.Call {
+  get inputs(): RepayLendersCall__Inputs {
+    return new RepayLendersCall__Inputs(this);
+  }
+
+  get outputs(): RepayLendersCall__Outputs {
+    return new RepayLendersCall__Outputs(this);
+  }
+}
+
+export class RepayLendersCall__Inputs {
+  _call: RepayLendersCall;
+
+  constructor(call: RepayLendersCall) {
+    this._call = call;
+  }
+
+  get asset(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get collateral(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class RepayLendersCall__Outputs {
+  _call: RepayLendersCall;
+
+  constructor(call: RepayLendersCall) {
+    this._call = call;
+  }
+}
+
 export class SubmitNewRWACall extends ethereum.Call {
   get inputs(): SubmitNewRWACall__Inputs {
     return new SubmitNewRWACall__Inputs(this);
@@ -247,7 +383,7 @@ export class SubmitNewRWACall__Inputs {
   }
 
   get factory(): Address {
-    return this._call.inputValues[7].value.toBigInt();
+    return this._call.inputValues[7].value.toAddress();
   }
 }
 
@@ -259,20 +395,20 @@ export class SubmitNewRWACall__Outputs {
   }
 }
 
-export class PostCollateralCall extends ethereum.Call {
-  get inputs(): PostCollateralCall__Inputs {
-    return new PostCollateralCall__Inputs(this);
+export class WithdrawCollateralCall extends ethereum.Call {
+  get inputs(): WithdrawCollateralCall__Inputs {
+    return new WithdrawCollateralCall__Inputs(this);
   }
 
-  get outputs(): PostCollateralCall__Outputs {
-    return new PostCollateralCall__Outputs(this);
+  get outputs(): WithdrawCollateralCall__Outputs {
+    return new WithdrawCollateralCall__Outputs(this);
   }
 }
 
-export class PostCollateralCall__Inputs {
-  _call: PostCollateralCall;
+export class WithdrawCollateralCall__Inputs {
+  _call: WithdrawCollateralCall;
 
-  constructor(call: PostCollateralCall) {
+  constructor(call: WithdrawCollateralCall) {
     this._call = call;
   }
 
@@ -285,77 +421,14 @@ export class PostCollateralCall__Inputs {
   }
 
   get factory(): Address {
-    return this._call.inputValues[2].value.toBigInt();
+    return this._call.inputValues[2].value.toAddress();
   }
 }
 
-export class PostCollateralCall__Outputs {
-  _call: PostCollateralCall;
+export class WithdrawCollateralCall__Outputs {
+  _call: WithdrawCollateralCall;
 
-  constructor(call: PostCollateralCall) {
-    this._call = call;
-  }
-}
-
-export class BorrowBaseCall extends ethereum.Call {
-  get inputs(): BorrowBaseCall__Inputs {
-    return new BorrowBaseCall__Inputs(this);
-  }
-
-  get outputs(): BorrowBaseCall__Outputs {
-    return new BorrowBaseCall__Outputs(this);
-  }
-}
-
-export class BorrowBaseCall__Inputs {
-  _call: BorrowBaseCall;
-
-  constructor(call: BorrowBaseCall) {
-    this._call = call;
-  }
-
-  get bond(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-}
-
-export class BorrowBaseCall__Outputs {
-  _call: BorrowBaseCall;
-
-  constructor(call: BorrowBaseCall) {
-    this._call = call;
-  }
-}
-
-export class RepayBaseCall extends ethereum.Call {
-  get inputs(): RepayBaseCall__Inputs {
-    return new RepayBaseCall__Inputs(this);
-  }
-
-  get outputs(): RepayBaseCall__Outputs {
-    return new RepayBaseCall__Outputs(this);
-  }
-}
-export class RepayBaseCall__Inputs {
-  _call: RepayBaseCall;
-
-  constructor(call: RepayBaseCall) {
-    this._call = call;
-  }
-
-  get bond(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-}
-
-export class RepayBaseCall__Outputs {
-  _call: RepayBaseCall;
-
-  constructor(call: RepayBaseCall) {
+  constructor(call: WithdrawCollateralCall) {
     this._call = call;
   }
 }

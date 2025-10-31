@@ -232,9 +232,9 @@ dataSources:
     name: Factory
     network: sepolia
     source:
-      address: "0x88FA907b0366e64c8a47745084b119E4b5cc2865"
+      address: "0xf4E7c068125F7937FCA1B1ed37ddd69Fc8Be40d2"
       abi: Factory
-      startBlock: 9348092
+      startBlock: 9529693
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -256,7 +256,7 @@ dataSources:
     name: VerifiedMarkets
     network: sepolia
     source:
-      address: "0x27278EBC6Bc1d08f1d09fec7d9583d5Dcd71c638"
+      address: "0x7FEC71327A33d59F293f4Db6dcDc4E6De2d407d6"
       abi: VerifiedMarkets
       startBlock: 9347700
     mapping:
@@ -272,13 +272,14 @@ dataSources:
         - name: VerifiedMarkets
           file: VerifiedMarkets\VerifiedMarkets.json
       eventHandlers:
-        - event: NewRWA(indexed address,indexed address,address,address,uint256,string,uint256,uint256,uint256)
+        - event: NewRWA(indexed address,indexed
+            address,address,address,uint256,string,uint256,uint256,uint256)
           handler: handleNewRWA
         - event: PostedCollateral(indexed address,indexed address,address,uint256)
           handler: handleCollateral
         - event: Borrowed(indexed address,indexed address,uint256,address)
           handler: handleBorrowing
-        - event: Repaid(indexed address,indexed address,uint256)
+        - event: Repaid(indexed address,indexed address,uint256,address)
           handler: handleRepayment
 templates:
   - kind: ethereum/contract

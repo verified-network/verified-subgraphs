@@ -18,7 +18,7 @@ export function handleNewRWA(event: NewRWA): void {
     let rwa = new RWA(bondId);
     rwa.issuer = event.params.issuer.toHexString();
     rwa.asset = event.params.asset.toHexString();
-    rwa.collateral = event.params.collateral.toHexString();
+    rwa.collateral = event.params.collateral;
     rwa.bond = event.params.bond.toHexString();
     rwa.apy = event.params.apy.toBigDecimal();
     rwa.issuingDocs = event.params.issuingDocs;
@@ -29,7 +29,7 @@ export function handleNewRWA(event: NewRWA): void {
   } else {
     rwa.issuer = event.params.issuer.toHexString();
     rwa.asset = event.params.asset.toHexString();
-    rwa.collateral = event.params.collateral.toHexString();
+    rwa.collateral = event.params.collateral;
     rwa.bond = event.params.bond.toHexString();
     rwa.apy = event.params.apy.toBigDecimal();
     rwa.issuingDocs = event.params.issuingDocs;
@@ -46,13 +46,13 @@ export function handleCollateral(event: PostedCollateral): void {
     let bond = event.params.bond.toHexString();
     let collateral = new Collateral(bond);
     collateral.issuer = event.params.issuer.toHexString();
-    collateral.bond = event.params.bond.toHexString();
+    collateral.asset = event.params.bond.toHexString();
     collateral.collateral = event.params.collateral;
     collateral.amount = event.params.amount.toBigDecimal();
     collateral.save();
   } else {
     collateral.issuer = event.params.issuer.toHexString();
-    collateral.bond = event.params.bond.toHexString();
+    collateral.asset = event.params.bond.toHexString();
     collateral.collateral = event.params.collateral;
     collateral.amount = event.params.amount.toBigDecimal();
     collateral.save();

@@ -55,7 +55,7 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "asset",
+        "name": "bond",
         "type": "address"
       }
     ],
@@ -75,6 +75,12 @@
         "indexed": true,
         "internalType": "address",
         "name": "asset",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "collateral",
         "type": "address"
       },
       {
@@ -104,6 +110,12 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "faceValue",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "tenure",
         "type": "uint256"
       }
@@ -123,7 +135,7 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "asset",
+        "name": "bond",
         "type": "address"
       },
       {
@@ -162,6 +174,12 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "bond",
+        "type": "address"
       }
     ],
     "name": "Repaid",
@@ -171,7 +189,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "asset",
+        "name": "bond",
         "type": "address"
       }
     ],
@@ -220,7 +238,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "asset",
+        "name": "bond",
         "type": "address"
       },
       {
@@ -261,6 +279,11 @@
       },
       {
         "internalType": "address",
+        "name": "collateral",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
         "name": "bond",
         "type": "address"
       },
@@ -277,6 +300,11 @@
       {
         "internalType": "uint256",
         "name": "frequency",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "faceValue",
         "type": "uint256"
       },
       {
