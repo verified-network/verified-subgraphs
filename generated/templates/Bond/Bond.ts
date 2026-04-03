@@ -897,15 +897,17 @@ export class Bond extends ethereum.SmartContract {
   requestIssue(
     amount: BigInt,
     payer: Address,
+    payee: Address,
     currency: Bytes,
     cashContract: Address,
   ): boolean {
     let result = super.call(
       "requestIssue",
-      "requestIssue(uint256,address,bytes32,address):(bool)",
+      "requestIssue(uint256,address,address,bytes32,address):(bool)",
       [
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(payer),
+        ethereum.Value.fromAddress(payee),
         ethereum.Value.fromFixedBytes(currency),
         ethereum.Value.fromAddress(cashContract),
       ],
@@ -917,15 +919,17 @@ export class Bond extends ethereum.SmartContract {
   try_requestIssue(
     amount: BigInt,
     payer: Address,
+    payee: Address,
     currency: Bytes,
     cashContract: Address,
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall(
       "requestIssue",
-      "requestIssue(uint256,address,bytes32,address):(bool)",
+      "requestIssue(uint256,address,address,bytes32,address):(bool)",
       [
         ethereum.Value.fromUnsignedBigInt(amount),
         ethereum.Value.fromAddress(payer),
+        ethereum.Value.fromAddress(payee),
         ethereum.Value.fromFixedBytes(currency),
         ethereum.Value.fromAddress(cashContract),
       ],
@@ -1444,30 +1448,6 @@ export class InitializeCall__Inputs {
   constructor(call: InitializeCall) {
     this._call = call;
   }
-
-  get _name(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
-  }
-
-  get _currency(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
-  }
-
-  get _owner(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
-
-  get _oracle(): Address {
-    return this._call.inputValues[3].value.toAddress();
-  }
-
-  get _token(): Address {
-    return this._call.inputValues[4].value.toAddress();
-  }
-
-  get _fee(): Address {
-    return this._call.inputValues[5].value.toAddress();
-  }
 }
 
 export class InitializeCall__Outputs {
@@ -1495,8 +1475,28 @@ export class Initialize1Call__Inputs {
     this._call = call;
   }
 
-  get sender(): Address {
-    return this._call.inputValues[0].value.toAddress();
+  get _name(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+
+  get _currency(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+  }
+
+  get _owner(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get _oracle(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+
+  get _token(): Address {
+    return this._call.inputValues[4].value.toAddress();
+  }
+
+  get _fee(): Address {
+    return this._call.inputValues[5].value.toAddress();
   }
 }
 
@@ -1504,6 +1504,36 @@ export class Initialize1Call__Outputs {
   _call: Initialize1Call;
 
   constructor(call: Initialize1Call) {
+    this._call = call;
+  }
+}
+
+export class Initialize2Call extends ethereum.Call {
+  get inputs(): Initialize2Call__Inputs {
+    return new Initialize2Call__Inputs(this);
+  }
+
+  get outputs(): Initialize2Call__Outputs {
+    return new Initialize2Call__Outputs(this);
+  }
+}
+
+export class Initialize2Call__Inputs {
+  _call: Initialize2Call;
+
+  constructor(call: Initialize2Call) {
+    this._call = call;
+  }
+
+  get sender(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class Initialize2Call__Outputs {
+  _call: Initialize2Call;
+
+  constructor(call: Initialize2Call) {
     this._call = call;
   }
 }
@@ -1533,12 +1563,16 @@ export class RequestIssueCall__Inputs {
     return this._call.inputValues[1].value.toAddress();
   }
 
+  get payee(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
   get currency(): Bytes {
-    return this._call.inputValues[2].value.toBytes();
+    return this._call.inputValues[3].value.toBytes();
   }
 
   get cashContract(): Address {
-    return this._call.inputValues[3].value.toAddress();
+    return this._call.inputValues[4].value.toAddress();
   }
 }
 

@@ -1006,30 +1006,6 @@ export class InitializeCall__Inputs {
   constructor(call: InitializeCall) {
     this._call = call;
   }
-
-  get name(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
-  }
-
-  get currency(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
-  }
-
-  get owner(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
-
-  get oracle(): Address {
-    return this._call.inputValues[3].value.toAddress();
-  }
-
-  get token(): Address {
-    return this._call.inputValues[4].value.toAddress();
-  }
-
-  get fee(): Address {
-    return this._call.inputValues[5].value.toAddress();
-  }
 }
 
 export class InitializeCall__Outputs {
@@ -1057,8 +1033,28 @@ export class Initialize1Call__Inputs {
     this._call = call;
   }
 
-  get sender(): Address {
-    return this._call.inputValues[0].value.toAddress();
+  get name(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
+  }
+
+  get currency(): Bytes {
+    return this._call.inputValues[1].value.toBytes();
+  }
+
+  get owner(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
+  get oracle(): Address {
+    return this._call.inputValues[3].value.toAddress();
+  }
+
+  get token(): Address {
+    return this._call.inputValues[4].value.toAddress();
+  }
+
+  get fee(): Address {
+    return this._call.inputValues[5].value.toAddress();
   }
 }
 
@@ -1066,6 +1062,36 @@ export class Initialize1Call__Outputs {
   _call: Initialize1Call;
 
   constructor(call: Initialize1Call) {
+    this._call = call;
+  }
+}
+
+export class Initialize2Call extends ethereum.Call {
+  get inputs(): Initialize2Call__Inputs {
+    return new Initialize2Call__Inputs(this);
+  }
+
+  get outputs(): Initialize2Call__Outputs {
+    return new Initialize2Call__Outputs(this);
+  }
+}
+
+export class Initialize2Call__Inputs {
+  _call: Initialize2Call;
+
+  constructor(call: Initialize2Call) {
+    this._call = call;
+  }
+
+  get sender(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class Initialize2Call__Outputs {
+  _call: Initialize2Call;
+
+  constructor(call: Initialize2Call) {
     this._call = call;
   }
 }

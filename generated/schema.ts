@@ -9,6 +9,7 @@ import {
   Bytes,
   BigInt,
   BigDecimal,
+  Int8,
 } from "@graphprotocol/graph-ts";
 
 export class User extends Entity {
@@ -118,17 +119,21 @@ export class User extends Entity {
     }
   }
 
-  get status(): i32 {
+  get status(): BigInt | null {
     let value = this.get("status");
     if (!value || value.kind == ValueKind.NULL) {
-      return 0;
+      return null;
     } else {
-      return value.toI32();
+      return value.toBigInt();
     }
   }
 
-  set status(value: i32) {
-    this.set("status", Value.fromI32(value));
+  set status(value: BigInt | null) {
+    if (!value) {
+      this.unset("status");
+    } else {
+      this.set("status", Value.fromBigInt(<BigInt>value));
+    }
   }
 
   get cashIssues(): CashIssuesLoader {
@@ -291,21 +296,8 @@ export class User extends Entity {
     );
   }
 
-  get manager(): Array<string> | null {
-    let value = this.get("manager");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set manager(value: Array<string> | null) {
-    if (!value) {
-      this.unset("manager");
-    } else {
-      this.set("manager", Value.fromStringArray(<Array<string>>value));
-    }
+  get manager(): ManagerLoader {
+    return new ManagerLoader("User", this.get("id")!.toString(), "manager");
   }
 
   get submanager(): ManagerLoader {
@@ -1501,17 +1493,17 @@ export class BondIssues extends Entity {
     this.set("collateralAmount", Value.fromBigDecimal(value));
   }
 
-  get issueTime(): i32 {
+  get issueTime(): i64 {
     let value = this.get("issueTime");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set issueTime(value: i32) {
-    this.set("issueTime", Value.fromI32(value));
+  set issueTime(value: i64) {
+    this.set("issueTime", Value.fromTimestamp(value));
   }
 }
 
@@ -1634,17 +1626,17 @@ export class BondPurchases extends Entity {
     this.set("purchasedAmount", Value.fromBigDecimal(value));
   }
 
-  get purchaseTime(): i32 {
+  get purchaseTime(): i64 {
     let value = this.get("purchaseTime");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set purchaseTime(value: i32) {
-    this.set("purchaseTime", Value.fromI32(value));
+  set purchaseTime(value: i64) {
+    this.set("purchaseTime", Value.fromTimestamp(value));
   }
 }
 
@@ -2391,17 +2383,17 @@ export class Trades extends Entity {
     this.set("tradingCommission", Value.fromBigDecimal(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 
@@ -2528,17 +2520,17 @@ export class Subscribers extends Entity {
     this.set("securitySwapped", Value.fromBigDecimal(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 
   get bought(): boolean {
@@ -2719,17 +2711,17 @@ export class Investors extends Entity {
     this.set("DPID", Value.fromBytes(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 
@@ -2871,17 +2863,17 @@ export class Traders extends Entity {
     this.set("orderRef", Value.fromBytes(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 
@@ -3097,17 +3089,17 @@ export class Closures extends Entity {
     this.set("security", Value.fromString(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 
@@ -3232,17 +3224,17 @@ export class Allotments extends Entity {
     this.set("allotedAmount", Value.fromBigDecimal(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 
@@ -3367,17 +3359,17 @@ export class Refunds extends Entity {
     this.set("refundAmount", Value.fromBigDecimal(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 
@@ -3621,17 +3613,17 @@ export class MarginCollateral extends Entity {
     this.set("balance", Value.fromBigDecimal(value));
   }
 
-  get time(): i32 {
+  get time(): i64 {
     let value = this.get("time");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set time(value: i32) {
-    this.set("time", Value.fromI32(value));
+  set time(value: i64) {
+    this.set("time", Value.fromTimestamp(value));
   }
 }
 
@@ -3758,17 +3750,17 @@ export class MarginTradePnL extends Entity {
     this.set("commission", Value.fromBigDecimal(value));
   }
 
-  get settlementTime(): i32 {
+  get settlementTime(): i64 {
     let value = this.get("settlementTime");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set settlementTime(value: i32) {
-    this.set("settlementTime", Value.fromI32(value));
+  set settlementTime(value: i64) {
+    this.set("settlementTime", Value.fromTimestamp(value));
   }
 }
 
@@ -3824,30 +3816,30 @@ export class Snapshots extends Entity {
     this.set("security", Value.fromString(value));
   }
 
-  get oldTime(): i32 {
+  get oldTime(): i64 {
     let value = this.get("oldTime");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set oldTime(value: i32) {
-    this.set("oldTime", Value.fromI32(value));
+  set oldTime(value: i64) {
+    this.set("oldTime", Value.fromTimestamp(value));
   }
 
-  get newTime(): i32 {
+  get newTime(): i64 {
     let value = this.get("newTime");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set newTime(value: i32) {
-    this.set("newTime", Value.fromI32(value));
+  set newTime(value: i64) {
+    this.set("newTime", Value.fromTimestamp(value));
   }
 }
 
@@ -3905,17 +3897,17 @@ export class Resolutions extends Entity {
     this.set("security", Value.fromString(value));
   }
 
-  get recordDate(): i32 {
+  get recordDate(): i64 {
     let value = this.get("recordDate");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set recordDate(value: i32) {
-    this.set("recordDate", Value.fromI32(value));
+  set recordDate(value: i64) {
+    this.set("recordDate", Value.fromTimestamp(value));
   }
 
   get resolution(): string {
@@ -4038,17 +4030,17 @@ export class RevenueShares extends Entity {
     this.set("amount", Value.fromBigDecimal(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 
@@ -4137,17 +4129,17 @@ export class LiquidityTokenRequests extends Entity {
     this.set("tokenAmount", Value.fromBigDecimal(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 
@@ -4622,17 +4614,17 @@ export class InvestorRoI extends Entity {
     this.set("prorataStake", Value.fromBigDecimal(value));
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 
@@ -4707,17 +4699,17 @@ export class FeeCollections extends Entity {
     }
   }
 
-  get timestamp(): i32 {
+  get timestamp(): i64 {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
-      return value.toI32();
+      return value.toTimestamp();
     }
   }
 
-  set timestamp(value: i32) {
-    this.set("timestamp", Value.fromI32(value));
+  set timestamp(value: i64) {
+    this.set("timestamp", Value.fromTimestamp(value));
   }
 }
 

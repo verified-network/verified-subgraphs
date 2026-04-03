@@ -450,6 +450,11 @@
         "internalType": "address",
         "name": "_distribution",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
       }
     ],
     "name": "initialize",

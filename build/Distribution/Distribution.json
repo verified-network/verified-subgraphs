@@ -109,6 +109,20 @@
   },
   {
     "inputs": [],
+    "name": "PRECISION",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
     "name": "owner",
     "outputs": [
       {
@@ -205,6 +219,11 @@
         "internalType": "address",
         "name": "_liquidity",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
       }
     ],
     "name": "initialize",
@@ -215,9 +234,9 @@
   {
     "inputs": [
       {
-        "internalType": "bytes32",
-        "name": "_type",
-        "type": "bytes32"
+        "internalType": "enum Distribution.ShareType",
+        "name": "t",
+        "type": "uint8"
       },
       {
         "internalType": "address",
@@ -238,9 +257,9 @@
   {
     "inputs": [
       {
-        "internalType": "bytes32",
-        "name": "_type",
-        "type": "bytes32"
+        "internalType": "enum Distribution.ShareType",
+        "name": "t",
+        "type": "uint8"
       },
       {
         "internalType": "address",
@@ -358,6 +377,20 @@
   {
     "inputs": [],
     "name": "shareFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unpause",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

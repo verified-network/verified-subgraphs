@@ -320,7 +320,7 @@ export class RepayLendersCall__Inputs {
     this._call = call;
   }
 
-  get asset(): Address {
+  get bond(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 
@@ -418,10 +418,6 @@ export class WithdrawCollateralCall__Inputs {
 
   get issuer(): Address {
     return this._call.inputValues[1].value.toAddress();
-  }
-
-  get factory(): Address {
-    return this._call.inputValues[2].value.toAddress();
   }
 }
 

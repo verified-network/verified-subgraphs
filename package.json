@@ -1,6 +1,6 @@
 {
   "name": "verified-subgraphs",
-  "version": "2.1.8",
+  "version": "2.2.9",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
@@ -16,7 +16,9 @@
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 verified-network/wallet"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.89.0",
-    "@graphprotocol/graph-ts": "0.26.0"
+    "@graphprotocol/graph-ts": "^0.38.2"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.98.1"
   }
 }

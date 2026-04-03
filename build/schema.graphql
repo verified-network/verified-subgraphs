@@ -10,13 +10,13 @@
   #bondRedemptions: [BondRedemptions!] @derivedFrom(field: "redemptionCurrency")
   #BondLiquidations: [BondLiquidations!] @derivedFrom(field: "liquidationCurrency")
 #}
-type User @entity {
+type User @entity(immutable: false) {
   id: ID!
   client: Bytes
   name: Bytes
   accountid: Bytes
   country: Bytes
-  status: Int
+  status: BigInt
   cashIssues: [CashIssues!] @derivedFrom(field:"party")
   cashDeposits: [CashDeposited!] @derivedFrom(field: "party")
   cashRedemptions: [CashRedemptions!] @derivedFrom(field: "party")
@@ -38,7 +38,7 @@ type User @entity {
   refundedTo: [Refunds!] @derivedFrom(field: "investor")
   liquidityProviderSettled: [Settlements!] @derivedFrom(field: "liquidityProvider")
   issuerSettled: [Settlements!] @derivedFrom(field: "issuer")
-  manager: [Manager!] @derived(field: "manager")
+  manager: [Manager!] @derivedFrom(field: "manager")
   submanager: [Manager!] @derivedFrom(field: "submanager")
   shareholder: [RevenueShares!] @derivedFrom(field: "shareholder")
   liquidityRequestor: [LiquidityTokenRequests!] @derivedFrom(field: "investor")
@@ -48,7 +48,7 @@ type User @entity {
   earnedByInvestor: [InvestorRoI!] @derivedFrom(field: "investor") 
   issuer: [Security!] @derivedFrom(field: "issuer")
 }
-type Token @entity {
+type Token @entity(immutable: false) {
   id: ID!
   token: Bytes
   tokenName: Bytes 
@@ -58,7 +58,7 @@ type Token @entity {
   bondRedemptions: [BondRedemptions!]! @derivedFrom(field: "token")
   bondLiquidations: [BondLiquidations!] @derivedFrom(field: "token")
 }
-type Platform @entity {
+type Platform @entity(immutable: false) {
   id: ID!
   platform: Bytes!
   name: Bytes!
@@ -68,7 +68,7 @@ type Platform @entity {
   platformReturns: [PlatformRoI!] @derivedFrom(field: "platform")
   platformLiquidity: [LiquidityOnPlatform!] @derivedFrom(field: "platform")
 }
-type Currency @entity {
+type Currency @entity(immutable: false) {
   id: ID!
   token: Bytes
   name: String
@@ -81,7 +81,7 @@ type Currency @entity {
   liquidityOnPlatform: [LiquidityOnPlatform!] @derivedFrom(field: "token")
   liquidityEarningsByManager: [ManagerRoI!] @derivedFrom(field: "token")
 }
-type Security @entity {
+type Security @entity(immutable: false) {
   id: ID!
   security: Bytes!
   productCategory: Bytes!
@@ -105,20 +105,20 @@ type Security @entity {
   resolutions: [Resolutions!] @derivedFrom(field: "security")
   snapshots : [Snapshots!] @derivedFrom(field: "security")
 }
-type CashDeposited @entity {
+type CashDeposited @entity(immutable: false) {
   id: ID!
   party: User!
   currency: Currency!
   amount : BigDecimal!  
 }
-type CashIssues @entity {
+type CashIssues @entity(immutable: false) {
   id: ID!
   party: User! 
   currency: Currency!
   amount : BigDecimal!
   balance: BigDecimal!
 }
-type CashRedemptions @entity {
+type CashRedemptions @entity(immutable: false) {
   id: ID!
   party: User
   currency: Currency!
@@ -126,7 +126,7 @@ type CashRedemptions @entity {
   redeemedFor: BigDecimal!
   balance: BigDecimal!
 }
-type CashTransfers @entity {
+type CashTransfers @entity(immutable: false) {
   id: ID!
   transferor: User!
   transferee: User!
@@ -134,7 +134,7 @@ type CashTransfers @entity {
   amount : BigDecimal!
   deposit: BigDecimal!
 }
-type BondIssues @entity {
+type BondIssues @entity(immutable: true) {
   id: ID!
   issuer: User!
   token: Token!
@@ -142,9 +142,9 @@ type BondIssues @entity {
   issuedAmount: BigDecimal!  
   collateralCurrency: Bytes!
   collateralAmount : BigDecimal!
-  issueTime: Int!     
+  issueTime: Timestamp!     
 }
-type BondPurchases @entity {
+type BondPurchases @entity(immutable: true) {
   id: ID!
   purchaser: User!
   token: Token!
@@ -152,9 +152,9 @@ type BondPurchases @entity {
   purchaseValue: BigDecimal!
   paidInCurrency: Bytes!
   purchasedAmount : BigDecimal!
-  purchaseTime: Int!
+  purchaseTime: Timestamp!
 }
-type BondRedemptions @entity {
+type BondRedemptions @entity(immutable: false) {
   id: ID!
   redeemer: User!
   token: Token!
@@ -163,7 +163,7 @@ type BondRedemptions @entity {
   redemptionCurrency: Bytes!
   redemptionAmount : BigDecimal!
 }
-type BondLiquidations @entity {
+type BondLiquidations @entity(immutable: false) {
   id: ID!
   liquidator: User!
   token: Token!
@@ -172,7 +172,7 @@ type BondLiquidations @entity {
   liquidationCurrency: Bytes!
   liquidatedAmount : BigDecimal! 
 }
-type Manager @entity {
+type Manager @entity(immutable: false) {
   id: ID!
   manager: User
   submanager: User
@@ -180,7 +180,7 @@ type Manager @entity {
   country: Bytes
   managerId: Bytes
 }
-type Offers @entity {
+type Offers @entity(immutable: true) {
   id: ID!
   offeredBy: User
   offered: Bytes!
@@ -192,7 +192,7 @@ type Offers @entity {
   orderSize: BigInt!
   offeringDocs: String!
 }
-type Trades @entity {
+type Trades @entity(immutable: true) {
   id: ID!
   poolid: Bytes!
   transferor: User
@@ -206,9 +206,9 @@ type Trades @entity {
   tradeRef: Bytes!
   orderRef: Bytes
   tradingCommission: BigDecimal!
-  timestamp: Int!
+  timestamp: Timestamp!
 }
-type Subscribers @entity {
+type Subscribers @entity(immutable: true) {
   id: ID!
   security: Security!
   pool: Bytes!
@@ -216,10 +216,10 @@ type Subscribers @entity {
   currency: Bytes!
   cashSwapped: BigDecimal!   
   securitySwapped: BigDecimal! 
-  timestamp: Int!
+  timestamp: Timestamp!
   bought: Boolean!
 }
-type Investors @entity {
+type Investors @entity(immutable: true) {
   id: ID!
   pool: Bytes!
   security: Security!
@@ -230,9 +230,9 @@ type Investors @entity {
   price: BigDecimal! 
   tradeRef : Bytes!
   DPID : Bytes!
-  timestamp: Int!
+  timestamp: Timestamp!
 }
-type Traders @entity {
+type Traders @entity(immutable: true) {
   id: ID!
   transferor: User
   transferee: User
@@ -241,9 +241,9 @@ type Traders @entity {
   currency: Bytes!
   cashTraded: BigDecimal!
   orderRef: Bytes!
-  timestamp: Int!
+  timestamp: Timestamp!
 }
-type LiquidityProviders @entity {
+type LiquidityProviders @entity(immutable: false) {
   id: ID!
   platform: Bytes!
   owner: User
@@ -253,13 +253,13 @@ type LiquidityProviders @entity {
   underwritten: BigDecimal
   earned: BigDecimal
 }
-type Closures @entity{
+type Closures @entity(immutable: true){
   id: ID!
   poolid: Bytes!
   security: Security!
-  timestamp: Int! 
+  timestamp: Timestamp! 
 }
-type Allotments @entity{
+type Allotments @entity(immutable: true){
   id: ID!
   poolid: Bytes!
   investor: User
@@ -267,9 +267,9 @@ type Allotments @entity{
   securitySubscribed: BigDecimal!
   currency: Bytes!
   allotedAmount: BigDecimal!
-  timestamp: Int!
+  timestamp: Timestamp!
 }
-type Refunds @entity{
+type Refunds @entity(immutable: true){
   id: ID!
   poolid: Bytes!
   investor: User
@@ -277,9 +277,9 @@ type Refunds @entity{
   securitySubscribed: BigDecimal!
   currency: Bytes!
   refundAmount: BigDecimal!
-  timestamp: Int!
+  timestamp: Timestamp!
 }
-type Settlements @entity{
+type Settlements @entity(immutable: false){
   id: ID!
   poolid: Bytes!
   security: Security!
@@ -289,15 +289,15 @@ type Settlements @entity{
   issuer: User
   subscription: BigDecimal!  
 }
-type MarginCollateral @entity{
+type MarginCollateral @entity(immutable: true){
   id: ID!
   action: Bytes!
   user: User
   currency: Bytes!
   balance: BigDecimal!
-  time: Int
+  time: Timestamp!
 }
-type MarginTradePnL @entity{
+type MarginTradePnL @entity(immutable: true){
   id: ID!
   user: User
   security: Security!
@@ -305,44 +305,44 @@ type MarginTradePnL @entity{
   financing: BigDecimal!
   dividend: BigDecimal!
   commission: BigDecimal!
-  settlementTime : Int
+  settlementTime : Timestamp!
 }
-type Snapshots @entity{
+type Snapshots @entity(immutable: true){
   id: ID!
   security: Security!
-  oldTime: Int
-  newTime: Int
+  oldTime: Timestamp
+  newTime: Timestamp
 }
-type Resolutions @entity{
+type Resolutions @entity(immutable: true){
   id: ID!
   security: Security!
-  recordDate: Int!
+  recordDate: Timestamp!
   resolution: String!
   voting: Boolean
 }
-type RevenueShares @entity{
+type RevenueShares @entity(immutable: true){
   id: ID!
   shareholder: User!
   shareholderType: Bytes!
   token: Bytes!
   amount: BigDecimal!
-  timestamp: Int!
+  timestamp: Timestamp!
 }
-type LiquidityTokenRequests @entity{
+type LiquidityTokenRequests @entity(immutable: true){
   id: ID!
   investor: User!
   token: Currency!
   tokenAmount: BigDecimal!
-  timestamp: Int!
+  timestamp: Timestamp!
 }
-type LiquidityTokenIssues @entity{
+type LiquidityTokenIssues @entity(immutable: false){
   id: ID!
   investor: User!
   token: Currency!
   tokenAmount: BigDecimal!
   LPToIssue: BigDecimal!
 }
-type LiquidityOnPlatform @entity{
+type LiquidityOnPlatform @entity(immutable: false){
   id: ID!
   platform: Platform!
   manager: User!
@@ -350,39 +350,39 @@ type LiquidityOnPlatform @entity{
   token: Currency!
   tokenAmount: BigDecimal!
 }
-type ManagerRoI @entity{
+type ManagerRoI @entity(immutable: false){
   id: ID!
   platform: Platform!
   manager: User!
   token: Currency!
   distribution: BigDecimal!
 }
-type PlatformRoI @entity{
+type PlatformRoI @entity(immutable: false){
   id: ID!
   platform: Platform!
   vitta: Bytes!
   distribution: BigDecimal!
 }
-type InvestorRoI @entity{
+type InvestorRoI @entity(immutable: true){
   id: ID!
   platform: Platform!
   investor: User!
   vitta: Bytes!
   prorataStake: BigDecimal!
-  timestamp: Int!
+  timestamp: Timestamp!
 }
-type FeeCollections @entity{
+type FeeCollections @entity(immutable: true){
   id: ID!
   platform: Platform!
   feeCollected: BigDecimal
-  timestamp: Int
+  timestamp: Timestamp
 }
-type ManagersOnPlatform @entity{
+type ManagersOnPlatform @entity(immutable: false){
   id: ID!
   platform: Platform!
   manager: User!
 }
-type RWA @entity{
+type RWA @entity(immutable: false){
   id: ID!
   issuer: User!
   asset: Security!
@@ -394,21 +394,21 @@ type RWA @entity{
   issuingDocs:String!
   faceValue: BigDecimal!
 }
-type Collateral @entity{
+type Collateral @entity(immutable: false){
   id: ID!
   issuer: User!
   asset: Security!
   collateral: Bytes!
   amount: BigDecimal!
 }
-type CollaterizedLoan @entity{
+type CollaterizedLoan @entity(immutable: false){
   id: ID!
   borrower: User!
   base: Bytes! 
   amount: BigDecimal!
   bond: Token!
 }
-type CollaterizedLoanRepayment @entity{
+type CollaterizedLoanRepayment @entity(immutable: false){
   id: ID!
   borrower: User!
   base: Bytes! 

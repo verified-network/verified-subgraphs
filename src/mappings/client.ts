@@ -52,7 +52,7 @@ export function handleUserCreated(event: UserAdded): void {
     users.name = event.params.name;
     users.accountid = event.params.accountid;
     users.country = event.params.country;
-    users.status = event.params.status.toI32();
+    users.status = event.params.status;
     users.save();
   }
   else{
@@ -60,7 +60,7 @@ export function handleUserCreated(event: UserAdded): void {
     users.name = event.params.name;
     users.accountid = event.params.accountid;
     users.country = event.params.country;
-    users.status = event.params.status.toI32();
+    users.status = event.params.status;
     users.save();
   }
 }

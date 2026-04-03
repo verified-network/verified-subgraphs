@@ -273,6 +273,11 @@
         "internalType": "address",
         "name": "_products",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
       }
     ],
     "name": "initialize",

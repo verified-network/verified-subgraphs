@@ -256,7 +256,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "asset",
+        "name": "bond",
         "type": "address"
       },
       {
@@ -328,11 +328,6 @@
       {
         "internalType": "address",
         "name": "issuer",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "factory",
         "type": "address"
       }
     ],

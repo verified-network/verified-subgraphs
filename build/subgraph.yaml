@@ -1,4 +1,4 @@
-specVersion: 0.0.4
+specVersion: 1.3.0
 description: The Verified Wallet is for issuers and investors of tokenized securities.
 repository: https://github.com/verified-network/verified-graph
 schema:
@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: sepolia
     source:
-      address: "0x7CaB6AA90fD672F6ddBd0B92c0a5428b53ebA414"
+      address: "0xA09DA305362ba450439E9f33C12E67dB0c722c85"
       abi: SecuritiesFactory
-      startBlock: 7797796
+      startBlock: 10581345
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -33,9 +33,9 @@ dataSources:
     name: Client
     network: sepolia
     source:
-      address: "0xB72629Bb4d031F1C755AFfA123AAA28E81EfdA9A"
+      address: "0x05d2c759aBb063751FCFd308de02Ea37626817A3"
       abi: Client
-      startBlock: 7797792
+      startBlock: 10581341
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -58,9 +58,9 @@ dataSources:
     name: Liquidity
     network: sepolia
     source:
-      address: "0x27006b68b3594EF5Ae04C5457c24F0c7CF1E5553"
+      address: "0xDFCaBCDD54e8E17f93261868DD24a2829148FF90"
       abi: Liquidity
-      startBlock: 5497049
+      startBlock: 10570477
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -79,7 +79,7 @@ dataSources:
         - name: Liquidity
           file: Liquidity\Liquidity.json
       eventHandlers:
-        - event: SupportToken(indexed address,string)
+        - event: SupportToken(indexed address,string,address)
           handler: handleSupportedToken
         - event: RegisterPlatform(indexed address,bytes32)
           handler: handlePlatformRegistration
@@ -101,9 +101,9 @@ dataSources:
     name: Distribution
     network: sepolia
     source:
-      address: "0x5c3171AFEC854f8B6FD138ee9533629ABd8A5365"
+      address: "0x9b164eD1dF8Ca8eC5b7753eA945347e0871E53Af"
       abi: Distribution
-      startBlock: 5499367
+      startBlock: 10577210
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -122,9 +122,9 @@ dataSources:
     name: PrimaryIssueManager
     network: sepolia
     source:
-      address: "0x56B802f315e97c2BDDb0dA5F13EE8e11cBa3846B"
+      address: "0xA51cf7FC5Fa9A84DA54f6674E1643Bf96a79b81e"
       abi: PrimaryIssueManager
-      startBlock: 8022457
+      startBlock: 10581427
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -164,9 +164,9 @@ dataSources:
     name: SecondaryIssueManager
     network: sepolia
     source:
-      address: "0xE3e3e9b8c0c292eD3756C7A1037322738de6B7FC"
+      address: "0xBBd3107a728Ade702AFE074C15A23c73b225CEC9"
       abi: SecondaryIssueManager
-      startBlock: 7824767
+      startBlock: 10581464
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -195,9 +195,9 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0xcC52ce78a8fF2198FBD37D85D1686E7C80604cd3"
+      address: "0xe4cA01876ea412A97a26bCaB1f6a4526A529D689"
       abi: MarginIssueManager
-      startBlock: 8882584
+      startBlock: 10581468
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -232,9 +232,9 @@ dataSources:
     name: Factory
     network: sepolia
     source:
-      address: "0xf4E7c068125F7937FCA1B1ed37ddd69Fc8Be40d2"
+      address: "0x01245b4498753D18684c6016949314b36c5Ad1d7"
       abi: Factory
-      startBlock: 9529693
+      startBlock: 10577034
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

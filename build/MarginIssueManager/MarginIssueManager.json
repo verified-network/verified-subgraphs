@@ -337,6 +337,11 @@
         "internalType": "address",
         "name": "distribution",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
       }
     ],
     "name": "initialize",

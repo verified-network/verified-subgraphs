@@ -280,6 +280,15 @@
   },
   {
     "constant": false,
+    "inputs": [],
+    "name": "initialize",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
     "inputs": [
       {
         "name": "_security",
@@ -287,6 +296,10 @@
       },
       {
         "name": "_client",
+        "type": "address"
+      },
+      {
+        "name": "_owner",
         "type": "address"
       }
     ],
