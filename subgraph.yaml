@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: sepolia
     source:
-      address: "0xA09DA305362ba450439E9f33C12E67dB0c722c85"
+      address: "0xA6220cDbE81a8BA3BF4eb8b2648A7557cD2b2Ff4"
       abi: SecuritiesFactory
-      startBlock: 10581345
+      startBlock: 10603284
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -32,9 +32,9 @@ dataSources:
     name: Client
     network: sepolia
     source:
-      address: "0x05d2c759aBb063751FCFd308de02Ea37626817A3"
+      address: "0x20346E44d8600Ad5e2cad81E9c2c559B0C6511c9"
       abi: Client
-      startBlock: 10581341
+      startBlock: 10603278
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -121,9 +121,9 @@ dataSources:
     name: PrimaryIssueManager
     network: sepolia
     source:
-      address: "0xA51cf7FC5Fa9A84DA54f6674E1643Bf96a79b81e"
+      address: "0xE6d09634D76a2F2B0f227F674fc4F3F5B3d185ce"
       abi: PrimaryIssueManager
-      startBlock: 10581427
+      startBlock: 10651465
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -162,9 +162,9 @@ dataSources:
     name: SecondaryIssueManager
     network: sepolia
     source:
-      address: "0xBBd3107a728Ade702AFE074C15A23c73b225CEC9"
+      address: "0x1471001e27193Ec0F955AA3AD8f5e6EC8713d754"
       abi: SecondaryIssueManager
-      startBlock: 10581464
+      startBlock: 10651472
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -191,9 +191,9 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0xe4cA01876ea412A97a26bCaB1f6a4526A529D689"
+      address: "0x005D31099e06a0BB944a1c021A440dF7A46b662d"
       abi: MarginIssueManager
-      startBlock: 10581468
+      startBlock: 10651479
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -226,9 +226,9 @@ dataSources:
     name: Factory
     network: sepolia
     source:
-      address: "0x01245b4498753D18684c6016949314b36c5Ad1d7"
+      address: "0xdbf07a74a4c413d7B07b6ccFD6B28Fe564123ebb"
       abi: Factory
-      startBlock: 10577034
+      startBlock: 10651444
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -250,7 +250,7 @@ dataSources:
     name: VerifiedMarkets
     network: sepolia
     source:
-      address: "0x7FEC71327A33d59F293f4Db6dcDc4E6De2d407d6"
+      address: "0x862E8B2DdC8E00b6BAfAec419c58E6A3FBcA3921"
       abi: VerifiedMarkets
       startBlock: 9347700
     mapping:

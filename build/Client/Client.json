@@ -226,22 +226,6 @@
       {
         "name": "_id",
         "type": "bytes32"
-      },
-      {
-        "name": "_hashedMessage",
-        "type": "bytes32"
-      },
-      {
-        "name": "_v",
-        "type": "uint8"
-      },
-      {
-        "name": "_r",
-        "type": "bytes32"
-      },
-      {
-        "name": "_s",
-        "type": "bytes32"
       }
     ],
     "name": "addRole",
@@ -294,22 +278,6 @@
       },
       {
         "name": "_role",
-        "type": "bytes32"
-      },
-      {
-        "name": "_hashedMessage",
-        "type": "bytes32"
-      },
-      {
-        "name": "_v",
-        "type": "uint8"
-      },
-      {
-        "name": "_r",
-        "type": "bytes32"
-      },
-      {
-        "name": "_s",
         "type": "bytes32"
       }
     ],
@@ -520,6 +488,38 @@
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "unassignManagerFromUser",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_submanager",
+        "type": "address"
+      },
+      {
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "assignManagerToUser",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
