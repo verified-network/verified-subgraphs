@@ -122,9 +122,9 @@ dataSources:
     name: PrimaryIssueManager
     network: sepolia
     source:
-      address: "0xE6d09634D76a2F2B0f227F674fc4F3F5B3d185ce"
+      address: "0xbC2F6922e4498BB0acaAf5a856AC3D96f1fC3bB7"
       abi: PrimaryIssueManager
-      startBlock: 10651465
+      startBlock: 10659189
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -164,9 +164,9 @@ dataSources:
     name: SecondaryIssueManager
     network: sepolia
     source:
-      address: "0x1471001e27193Ec0F955AA3AD8f5e6EC8713d754"
+      address: "0x4D922A55Eee9A7E94aB495a03605705B99101Aca"
       abi: SecondaryIssueManager
-      startBlock: 10651472
+      startBlock: 10659195
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -195,9 +195,9 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0x005D31099e06a0BB944a1c021A440dF7A46b662d"
+      address: "0x7f7aE11FD62De079E2bB7B684400290657F570F5"
       abi: MarginIssueManager
-      startBlock: 10651479
+      startBlock: 10659202
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
