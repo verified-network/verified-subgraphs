@@ -462,6 +462,19 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "trader",
+        "type": "address"
+      }
+    ],
+    "name": "removeTrader",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "cashToken",
         "type": "address"
       },
@@ -643,6 +656,11 @@
   {
     "inputs": [
       {
+        "internalType": "bytes32",
+        "name": "ref",
+        "type": "bytes32"
+      },
+      {
         "internalType": "address",
         "name": "security",
         "type": "address"
@@ -695,6 +713,11 @@
   },
   {
     "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "ref",
+        "type": "bytes32"
+      },
       {
         "internalType": "address",
         "name": "security",

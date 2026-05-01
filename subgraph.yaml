@@ -191,9 +191,9 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0x7f7aE11FD62De079E2bB7B684400290657F570F5"
+      address: "0xA7Bf49cF2C0f011719953297Ab027da0C88A559a"
       abi: MarginIssueManager
-      startBlock: 10659202
+      startBlock: 10766798
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -250,7 +250,7 @@ dataSources:
     name: VerifiedMarkets
     network: sepolia
     source:
-      address: "0x862E8B2DdC8E00b6BAfAec419c58E6A3FBcA3921"
+      address: "0x4b3CBDB8FBe5fcdDF796cd42d3749f8AcD53DA73"
       abi: VerifiedMarkets
       startBlock: 9347700
     mapping:
