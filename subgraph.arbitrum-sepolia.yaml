@@ -1,4 +1,4 @@
-specVersion: 0.0.4
+specVersion: 0.0.2
 description: The Verified Wallet is for issuers and investors of tokenized securities.
 repository: https://github.com/verified-network/verified-graph
 schema:
@@ -6,14 +6,14 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: base
+    network: arbitrum-sepolia
     source:
-      address: "0xCeC02CB2e1c40FEc8D70289827bE24658A581706"
+      address: "0x9cd9719f897C09D8287A97679f516f6323a54E7d"
       abi: SecuritiesFactory
-      startBlock: 45039596
+      startBlock: 35333821
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
@@ -30,14 +30,14 @@ dataSources:
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: base
+    network: arbitrum-sepolia
     source:
-      address: "0x9606706e98D18ee243F44cEce8540f002721f996"
+      address: "0x312C59864CbCB34bBB4401185d634ead05650fBF"
       abi: Client
-      startBlock: 45039593
+      startBlock: 35333817
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/mappings/client.ts
       entities:
@@ -55,14 +55,14 @@ dataSources:
           handler: handleUserCreated
   - kind: ethereum/contract
     name: Liquidity
-    network: base
+    network: arbitrum-sepolia
     source:
-      address: "0x5E6dc0d84E9B66B9814637394345F4975903345D"
+      address: "0x36A6efC3276e2d2d015c9e96af3957aB5293b662"
       abi: Liquidity
-      startBlock: 45001458
+      startBlock: 34473710
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/mappings/liquidity.ts
       entities:
@@ -98,14 +98,14 @@ dataSources:
           handler: handlePlatformManagers
   - kind: ethereum/contract
     name: Distribution
-    network: base
+    network: arbitrum-sepolia
     source:
-      address: "0x3C0Da71292F095182b06e2f3c1527E2DF6aEa583"
+      address: "0x812cD96Bd1D9C35EaCD3F09Dc504B2d30e63EFe5"
       abi: Distribution
-      startBlock: 17684654
+      startBlock: 34476039
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/mappings/distribution.ts
       entities:
@@ -119,14 +119,14 @@ dataSources:
           handler: handleDistribution
   - kind: ethereum/contract
     name: PrimaryIssueManager
-    network: base
+    network: arbitrum-sepolia
     source:
-      address: "0xa4b9F21B92A7630a628C2B9EFbA1c844fCE7306E"
+      address: "0xf9CA2Ea876CB561610b89Cf3c009B723579f60C9"
       abi: PrimaryIssueManager
-      startBlock: 19160783
+      startBlock: 35334115
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/mappings/primaries.ts
       entities:
@@ -160,14 +160,14 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: base
+    network: arbitrum-sepolia
     source:
-      address: "0x775979123aD2e6DA3074bB38116430FEAE26974f"
+      address: "0x95b73422B232710953F8454e39E72672a48D88ED"
       abi: SecondaryIssueManager
-      startBlock: 31871553
+      startBlock: 35334121
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/mappings/secondaries.ts
       entities:
@@ -189,14 +189,14 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: MarginIssueManager
-    network: base
+    network: arbitrum-sepolia
     source:
-      address: "0x099EC82868A1636C9DE6C7E7014692382B3a793E"
+      address: "0x0F248837AAd71e08A2AE43d8e148A6AbE891Daa6"
       abi: MarginIssueManager
-      startBlock: 31871559
+      startBlock: 35334128
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/mappings/margintrades.ts
       entities:
@@ -224,14 +224,14 @@ dataSources:
           handler: handleMarginSettlements
   - kind: ethereum/contract
     name: Factory
-    network: base
+    network: arbitrum-sepolia
     source:
-      address: '0xCeC02CB2e1c40FEc8D70289827bE24658A581706'
+      address: "0xF387D694B2ac3847F118778f16fdC11B58c0a859"
       abi: Factory
-      startBlock: 45039596
+      startBlock: 264748383
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
@@ -246,44 +246,43 @@ dataSources:
           handler: handleBondCreated
         - event: TokenCreated(indexed address,bytes32,bytes32)
           handler: handleBondTokenCreated
-  - kind: ethereum/contract
-    name: VerifiedMarkets
-    network: base
-    source:
-     address: '0x7fB634f4C3530a35899c2238673342A8af707cD4'
-     abi: VerifiedMarkets
-     startBlock: 11179559
-    mapping:
-     kind: ethereum/events
-     apiVersion: 0.0.6
-     language: wasm/assemblyscript
-     file: ./src/mappings/collateralizedloans.ts
-     entities:
-       - RWA
-       - Collateral
-       - CollaterizedLoan
-       - CollaterizedLoanRepayment
-     abis:
-       - name: VerifiedMarkets
-         file: ./abis/VerifiedMarkets.json
-     eventHandlers:
-       - event: NewRWA(indexed address,indexed address,address,address,uint256,string,uint256,uint256,uint256)
-         handler: handleNewRWA
-       - event: PostedCollateral(indexed address,indexed address,address,uint256)
-         handler: handleCollateral
-       - event: Borrowed(indexed address,indexed address,uint256)
-         handler: handleBorrowing
-       - event: Repaid(indexed address,indexed address,uint256)
-         handler: handleRepayment
+  #- kind: ethereum/contract
+  #  name: VerifiedMarkets
+  #  network: arbitrum-sepolia
+  #  source:
+  #    address: ''
+  #    abi: VerifiedMarkets
+  #    startBlock: 9484074
+  #  mapping:
+  #    kind: ethereum/events
+  #    apiVersion: 0.0.5
+  #    language: wasm/assemblyscript
+  #    file: ./src/mappings/collateralizedloans.ts
+  #    entities:
+  #      - RWA
+  #      - Collateral
+  #      - CompoundLoans
+  #    abis:
+  #      - name: VerifiedMarkets
+  #        file: ./abis/VerifiedMarkets.json
+  #    eventHandlers:
+  #      - event: NewRWA(indexed address,indexed address,address,address,uint256,string,uint256,uint256,uint256)
+  #        handler: handleNewRWA
+  #      - event: PostedCollateral(indexed address,indexed address,address,uint256)
+  #        handler: handleCollateral
+  #      - event: Borrowed(indexed address,indexed address,uint256)
+  #        handler: handleBorrowing
+  #      - event: Repaid(indexed address,indexed address,uint256)
+  #        handler: handleRepayment
 templates:
   - kind: ethereum/contract
     name: Security
-    network: base
+    network: arbitrum-sepolia
     source:
       abi: Security
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Security
@@ -310,12 +309,12 @@ templates:
       file: ./src/mappings/security.ts
   - kind: ethereum/contract
     name: Cash
-    network: base
+    network: arbitrum-sepolia
     source:
       abi: Cash
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - User
@@ -339,12 +338,12 @@ templates:
       file: ./src/mappings/cash.ts
   - kind: ethereum/contract
     name: Bond
-    network: base
+    network: arbitrum-sepolia
     source:
       abi: Bond
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - User
