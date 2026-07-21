@@ -8,9 +8,9 @@ dataSources:
     name: SecuritiesFactory
     network: sepolia
     source:
-      address: "0xA6220cDbE81a8BA3BF4eb8b2648A7557cD2b2Ff4"
+      address: "0x729Debf1D50330a8AB71671F2cAeB4e6b248621D"
       abi: SecuritiesFactory
-      startBlock: 10603284
+      startBlock: 11319839
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -58,9 +58,9 @@ dataSources:
     name: Liquidity
     network: sepolia
     source:
-      address: "0xd2e8e54De4F7AaB8E6F72207A037cF6A92bC8876"
+      address: "0xdAac4948E4a9C441229E09d07e4b7D0c2e9ff95d"
       abi: Liquidity
-      startBlock: 10897068
+      startBlock: 10949552
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -101,9 +101,9 @@ dataSources:
     name: Distribution
     network: sepolia
     source:
-      address: "0x38A7Ff5cE8f7d5C1B32A38e534504f374720C578"
+      address: "0xC52bFCe4D5021914dAB43f3fA2dB45471aD27696"
       abi: Distribution
-      startBlock: 10897072
+      startBlock: 10949555
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -122,9 +122,9 @@ dataSources:
     name: PrimaryIssueManager
     network: sepolia
     source:
-      address: "0xf79C89f9e71A8131089E5B0bfB9162A2661DE7C7"
+      address: "0x1De161D44665F028c38216FA1D2bBbDAC6f24470"
       abi: PrimaryIssueManager
-      startBlock: 10897167
+      startBlock: 10949578
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -164,9 +164,9 @@ dataSources:
     name: SecondaryIssueManager
     network: sepolia
     source:
-      address: "0xf79C89f9e71A8131089E5B0bfB9162A2661DE7C7"
+      address: "0xE2B16c9d8Cf0F7A05eBBaD2f47cAEE42c3041873"
       abi: SecondaryIssueManager
-      startBlock: 10897167
+      startBlock: 10949582
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -232,9 +232,9 @@ dataSources:
     name: Factory
     network: sepolia
     source:
-      address: "0x1b8DD2183680D26c8fB0f43A1826935799766dd9"
+      address: "0x2Fd96F538FfdD0e0CD32F6628547A9AE9fB274Dc"
       abi: Factory
-      startBlock: 10896434
+      startBlock: 10943109
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -303,6 +303,8 @@ templates:
         - name: CorporateActions
           file: Security\CorporateActions.json
       eventHandlers:
+        - event: Vote(indexed address,address,uint256,bool)
+          handler: handleBallot
         - event: Resolution(indexed address,uint256,string,bool)
           handler: handleResolutions
         - event: SnapshotSchedule(indexed address,uint256,uint256)

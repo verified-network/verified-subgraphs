@@ -626,12 +626,46 @@ export class InitializeCall__Inputs {
   get _signer(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
+
+  get _owner(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
 }
 
 export class InitializeCall__Outputs {
   _call: InitializeCall;
 
   constructor(call: InitializeCall) {
+    this._call = call;
+  }
+}
+
+export class Initialize1Call extends ethereum.Call {
+  get inputs(): Initialize1Call__Inputs {
+    return new Initialize1Call__Inputs(this);
+  }
+
+  get outputs(): Initialize1Call__Outputs {
+    return new Initialize1Call__Outputs(this);
+  }
+}
+
+export class Initialize1Call__Inputs {
+  _call: Initialize1Call;
+
+  constructor(call: Initialize1Call) {
+    this._call = call;
+  }
+
+  get sender(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class Initialize1Call__Outputs {
+  _call: Initialize1Call;
+
+  constructor(call: Initialize1Call) {
     this._call = call;
   }
 }
@@ -702,22 +736,6 @@ export class AddRoleCall__Inputs {
   get _id(): Bytes {
     return this._call.inputValues[4].value.toBytes();
   }
-
-  get _hashedMessage(): Bytes {
-    return this._call.inputValues[5].value.toBytes();
-  }
-
-  get _v(): i32 {
-    return this._call.inputValues[6].value.toI32();
-  }
-
-  get _r(): Bytes {
-    return this._call.inputValues[7].value.toBytes();
-  }
-
-  get _s(): Bytes {
-    return this._call.inputValues[8].value.toBytes();
-  }
 }
 
 export class AddRoleCall__Outputs {
@@ -759,22 +777,6 @@ export class RemoveRoleCall__Inputs {
 
   get _role(): Bytes {
     return this._call.inputValues[3].value.toBytes();
-  }
-
-  get _hashedMessage(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-
-  get _v(): i32 {
-    return this._call.inputValues[5].value.toI32();
-  }
-
-  get _r(): Bytes {
-    return this._call.inputValues[6].value.toBytes();
-  }
-
-  get _s(): Bytes {
-    return this._call.inputValues[7].value.toBytes();
   }
 }
 
@@ -972,6 +974,70 @@ export class FullKycUpdateCall__Outputs {
   _call: FullKycUpdateCall;
 
   constructor(call: FullKycUpdateCall) {
+    this._call = call;
+  }
+}
+
+export class UnassignManagerFromUserCall extends ethereum.Call {
+  get inputs(): UnassignManagerFromUserCall__Inputs {
+    return new UnassignManagerFromUserCall__Inputs(this);
+  }
+
+  get outputs(): UnassignManagerFromUserCall__Outputs {
+    return new UnassignManagerFromUserCall__Outputs(this);
+  }
+}
+
+export class UnassignManagerFromUserCall__Inputs {
+  _call: UnassignManagerFromUserCall;
+
+  constructor(call: UnassignManagerFromUserCall) {
+    this._call = call;
+  }
+
+  get _user(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class UnassignManagerFromUserCall__Outputs {
+  _call: UnassignManagerFromUserCall;
+
+  constructor(call: UnassignManagerFromUserCall) {
+    this._call = call;
+  }
+}
+
+export class AssignManagerToUserCall extends ethereum.Call {
+  get inputs(): AssignManagerToUserCall__Inputs {
+    return new AssignManagerToUserCall__Inputs(this);
+  }
+
+  get outputs(): AssignManagerToUserCall__Outputs {
+    return new AssignManagerToUserCall__Outputs(this);
+  }
+}
+
+export class AssignManagerToUserCall__Inputs {
+  _call: AssignManagerToUserCall;
+
+  constructor(call: AssignManagerToUserCall) {
+    this._call = call;
+  }
+
+  get _submanager(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get _user(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class AssignManagerToUserCall__Outputs {
+  _call: AssignManagerToUserCall;
+
+  constructor(call: AssignManagerToUserCall) {
     this._call = call;
   }
 }

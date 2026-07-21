@@ -1,6 +1,6 @@
 {
   "name": "verified-subgraphs",
-  "version": "2.4.0",
+  "version": "2.4.2",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",

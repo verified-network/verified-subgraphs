@@ -40,6 +40,36 @@ export class Resolution__Params {
   }
 }
 
+export class Vote extends ethereum.Event {
+  get params(): Vote__Params {
+    return new Vote__Params(this);
+  }
+}
+
+export class Vote__Params {
+  _event: Vote;
+
+  constructor(event: Vote) {
+    this._event = event;
+  }
+
+  get security(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get holder(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get time(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get ballot(): boolean {
+    return this._event.parameters[3].value.toBoolean();
+  }
+}
+
 export class SnapshotSchedule extends ethereum.Event {
   get params(): SnapshotSchedule__Params {
     return new SnapshotSchedule__Params(this);

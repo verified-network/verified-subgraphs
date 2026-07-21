@@ -806,6 +806,10 @@ export class InitializeCall__Inputs {
   get _distribution(): Address {
     return this._call.inputValues[6].value.toAddress();
   }
+
+  get newOwner(): Address {
+    return this._call.inputValues[7].value.toAddress();
+  }
 }
 
 export class InitializeCall__Outputs {
@@ -1022,6 +1026,40 @@ export class StakeCall__Outputs {
   _call: StakeCall;
 
   constructor(call: StakeCall) {
+    this._call = call;
+  }
+}
+
+export class ReturnStakeCall extends ethereum.Call {
+  get inputs(): ReturnStakeCall__Inputs {
+    return new ReturnStakeCall__Inputs(this);
+  }
+
+  get outputs(): ReturnStakeCall__Outputs {
+    return new ReturnStakeCall__Outputs(this);
+  }
+}
+
+export class ReturnStakeCall__Inputs {
+  _call: ReturnStakeCall;
+
+  constructor(call: ReturnStakeCall) {
+    this._call = call;
+  }
+
+  get _amount(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get _token(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class ReturnStakeCall__Outputs {
+  _call: ReturnStakeCall;
+
+  constructor(call: ReturnStakeCall) {
     this._call = call;
   }
 }

@@ -10,32 +10,6 @@ import {
   BigInt,
 } from "@graphprotocol/graph-ts";
 
-export class CashIssuerCreated extends ethereum.Event {
-  get params(): CashIssuerCreated__Params {
-    return new CashIssuerCreated__Params(this);
-  }
-}
-
-export class CashIssuerCreated__Params {
-  _event: CashIssuerCreated;
-
-  constructor(event: CashIssuerCreated) {
-    this._event = event;
-  }
-
-  get issuer(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get tokenName(): Bytes {
-    return this._event.parameters[1].value.toBytes();
-  }
-
-  get tokenType(): Bytes {
-    return this._event.parameters[2].value.toBytes();
-  }
-}
-
 export class BondIssuerCreated extends ethereum.Event {
   get params(): BondIssuerCreated__Params {
     return new BondIssuerCreated__Params(this);
@@ -62,20 +36,20 @@ export class BondIssuerCreated__Params {
   }
 }
 
-export class TokenCreated extends ethereum.Event {
-  get params(): TokenCreated__Params {
-    return new TokenCreated__Params(this);
+export class CashIssuerCreated extends ethereum.Event {
+  get params(): CashIssuerCreated__Params {
+    return new CashIssuerCreated__Params(this);
   }
 }
 
-export class TokenCreated__Params {
-  _event: TokenCreated;
+export class CashIssuerCreated__Params {
+  _event: CashIssuerCreated;
 
-  constructor(event: TokenCreated) {
+  constructor(event: CashIssuerCreated) {
     this._event = event;
   }
 
-  get token(): Address {
+  get issuer(): Address {
     return this._event.parameters[0].value.toAddress();
   }
 
@@ -85,6 +59,24 @@ export class TokenCreated__Params {
 
   get tokenType(): Bytes {
     return this._event.parameters[2].value.toBytes();
+  }
+}
+
+export class Initialized extends ethereum.Event {
+  get params(): Initialized__Params {
+    return new Initialized__Params(this);
+  }
+}
+
+export class Initialized__Params {
+  _event: Initialized;
+
+  constructor(event: Initialized) {
+    this._event = event;
+  }
+
+  get version(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 }
 
@@ -110,21 +102,29 @@ export class OwnershipTransferred__Params {
   }
 }
 
-export class ProxyCreated extends ethereum.Event {
-  get params(): ProxyCreated__Params {
-    return new ProxyCreated__Params(this);
+export class TokenCreated extends ethereum.Event {
+  get params(): TokenCreated__Params {
+    return new TokenCreated__Params(this);
   }
 }
 
-export class ProxyCreated__Params {
-  _event: ProxyCreated;
+export class TokenCreated__Params {
+  _event: TokenCreated;
 
-  constructor(event: ProxyCreated) {
+  constructor(event: TokenCreated) {
     this._event = event;
   }
 
-  get proxy(): Address {
+  get token(): Address {
     return this._event.parameters[0].value.toAddress();
+  }
+
+  get tokenName(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+
+  get tokenType(): Bytes {
+    return this._event.parameters[2].value.toBytes();
   }
 }
 
@@ -208,155 +208,33 @@ export class Factory extends ethereum.SmartContract {
     return new Factory("Factory", address);
   }
 
-  getSigner(
-    _salt: BigInt,
-    _logic: Address,
-    _admin: Address,
-    _data: Bytes,
-    _signature: Bytes,
-  ): Address {
-    let result = super.call(
-      "getSigner",
-      "getSigner(uint256,address,address,bytes,bytes):(address)",
-      [
-        ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_logic),
-        ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature),
-      ],
-    );
-
-    return result[0].toAddress();
-  }
-
-  try_getSigner(
-    _salt: BigInt,
-    _logic: Address,
-    _admin: Address,
-    _data: Bytes,
-    _signature: Bytes,
-  ): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "getSigner",
-      "getSigner(uint256,address,address,bytes,bytes):(address)",
-      [
-        ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_logic),
-        ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature),
-      ],
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  deploySigned(
-    _salt: BigInt,
-    _logic: Address,
-    _admin: Address,
-    _data: Bytes,
-    _signature: Bytes,
-  ): Address {
-    let result = super.call(
-      "deploySigned",
-      "deploySigned(uint256,address,address,bytes,bytes):(address)",
-      [
-        ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_logic),
-        ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature),
-      ],
-    );
-
-    return result[0].toAddress();
-  }
-
-  try_deploySigned(
-    _salt: BigInt,
-    _logic: Address,
-    _admin: Address,
-    _data: Bytes,
-    _signature: Bytes,
-  ): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "deploySigned",
-      "deploySigned(uint256,address,address,bytes,bytes):(address)",
-      [
-        ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_logic),
-        ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data),
-        ethereum.Value.fromBytes(_signature),
-      ],
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  tokens(param0: BigInt): Address {
-    let result = super.call("tokens", "tokens(uint256):(address)", [
+  currencies(param0: BigInt): Bytes {
+    let result = super.call("currencies", "currencies(uint256):(bytes32)", [
       ethereum.Value.fromUnsignedBigInt(param0),
     ]);
 
-    return result[0].toAddress();
+    return result[0].toBytes();
   }
 
-  try_tokens(param0: BigInt): ethereum.CallResult<Address> {
-    let result = super.tryCall("tokens", "tokens(uint256):(address)", [
+  try_currencies(param0: BigInt): ethereum.CallResult<Bytes> {
+    let result = super.tryCall("currencies", "currencies(uint256):(bytes32)", [
       ethereum.Value.fromUnsignedBigInt(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
+    return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
-  deploy(
-    _salt: BigInt,
-    _logic: Address,
-    _admin: Address,
-    _data: Bytes,
-  ): Address {
-    let result = super.call(
-      "deploy",
-      "deploy(uint256,address,address,bytes):(address)",
-      [
-        ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_logic),
-        ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data),
-      ],
-    );
+  owner(): Address {
+    let result = super.call("owner", "owner():(address)", []);
 
     return result[0].toAddress();
   }
 
-  try_deploy(
-    _salt: BigInt,
-    _logic: Address,
-    _admin: Address,
-    _data: Bytes,
-  ): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "deploy",
-      "deploy(uint256,address,address,bytes):(address)",
-      [
-        ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_logic),
-        ethereum.Value.fromAddress(_admin),
-        ethereum.Value.fromBytes(_data),
-      ],
-    );
+  try_owner(): ethereum.CallResult<Address> {
+    let result = super.tryCall("owner", "owner():(address)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -385,111 +263,23 @@ export class Factory extends ethereum.SmartContract {
     );
   }
 
-  getDeploymentAddress(_salt: BigInt, _sender: Address): Address {
-    let result = super.call(
-      "getDeploymentAddress",
-      "getDeploymentAddress(uint256,address):(address)",
-      [
-        ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_sender),
-      ],
-    );
-
-    return result[0].toAddress();
-  }
-
-  try_getDeploymentAddress(
-    _salt: BigInt,
-    _sender: Address,
-  ): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "getDeploymentAddress",
-      "getDeploymentAddress(uint256,address):(address)",
-      [
-        ethereum.Value.fromUnsignedBigInt(_salt),
-        ethereum.Value.fromAddress(_sender),
-      ],
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  owner(): Address {
-    let result = super.call("owner", "owner():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_owner(): ethereum.CallResult<Address> {
-    let result = super.tryCall("owner", "owner():(address)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  isOwner(): boolean {
-    let result = super.call("isOwner", "isOwner():(bool)", []);
-
-    return result[0].toBoolean();
-  }
-
-  try_isOwner(): ethereum.CallResult<boolean> {
-    let result = super.tryCall("isOwner", "isOwner():(bool)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  deployMinimal(_logic: Address, _data: Bytes): Address {
-    let result = super.call(
-      "deployMinimal",
-      "deployMinimal(address,bytes):(address)",
-      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)],
-    );
-
-    return result[0].toAddress();
-  }
-
-  try_deployMinimal(
-    _logic: Address,
-    _data: Bytes,
-  ): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "deployMinimal",
-      "deployMinimal(address,bytes):(address)",
-      [ethereum.Value.fromAddress(_logic), ethereum.Value.fromBytes(_data)],
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  currencies(param0: BigInt): Bytes {
-    let result = super.call("currencies", "currencies(uint256):(bytes32)", [
+  tokens(param0: BigInt): Address {
+    let result = super.call("tokens", "tokens(uint256):(address)", [
       ethereum.Value.fromUnsignedBigInt(param0),
     ]);
 
-    return result[0].toBytes();
+    return result[0].toAddress();
   }
 
-  try_currencies(param0: BigInt): ethereum.CallResult<Bytes> {
-    let result = super.tryCall("currencies", "currencies(uint256):(bytes32)", [
+  try_tokens(param0: BigInt): ethereum.CallResult<Address> {
+    let result = super.tryCall("tokens", "tokens(uint256):(address)", [
       ethereum.Value.fromUnsignedBigInt(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBytes());
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
   getTokenCount(): BigInt {
@@ -695,27 +485,72 @@ export class Factory extends ethereum.SmartContract {
     );
   }
 
-  getViaOracleUrl(): string {
+  getCryptoDataUrl(fromCurrency: Bytes, toCurrency: Bytes): Address {
     let result = super.call(
-      "getViaOracleUrl",
-      "getViaOracleUrl():(string)",
-      [],
+      "getCryptoDataUrl",
+      "getCryptoDataUrl(bytes32,bytes32):(address)",
+      [
+        ethereum.Value.fromFixedBytes(fromCurrency),
+        ethereum.Value.fromFixedBytes(toCurrency),
+      ],
     );
 
-    return result[0].toString();
+    return result[0].toAddress();
   }
 
-  try_getViaOracleUrl(): ethereum.CallResult<string> {
+  try_getCryptoDataUrl(
+    fromCurrency: Bytes,
+    toCurrency: Bytes,
+  ): ethereum.CallResult<Address> {
     let result = super.tryCall(
-      "getViaOracleUrl",
-      "getViaOracleUrl():(string)",
-      [],
+      "getCryptoDataUrl",
+      "getCryptoDataUrl(bytes32,bytes32):(address)",
+      [
+        ethereum.Value.fromFixedBytes(fromCurrency),
+        ethereum.Value.fromFixedBytes(toCurrency),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toString());
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  getClient(): Address {
+    let result = super.call("getClient", "getClient():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_getClient(): ethereum.CallResult<Address> {
+    let result = super.tryCall("getClient", "getClient():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  getBondTerm(_bondToken: Address): BigInt {
+    let result = super.call("getBondTerm", "getBondTerm(address):(uint256)", [
+      ethereum.Value.fromAddress(_bondToken),
+    ]);
+
+    return result[0].toBigInt();
+  }
+
+  try_getBondTerm(_bondToken: Address): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "getBondTerm",
+      "getBondTerm(address):(uint256)",
+      [ethereum.Value.fromAddress(_bondToken)],
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   getFiatPayoutUrl(): string {
@@ -741,101 +576,20 @@ export class Factory extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toString());
   }
 
-  getCryptoDataUrl(fromCurrency: Bytes, toCurrency: Bytes): string {
-    let result = super.call(
-      "getCryptoDataUrl",
-      "getCryptoDataUrl(bytes32,bytes32):(string)",
-      [
-        ethereum.Value.fromFixedBytes(fromCurrency),
-        ethereum.Value.fromFixedBytes(toCurrency),
-      ],
-    );
-
-    return result[0].toString();
-  }
-
-  try_getCryptoDataUrl(
-    fromCurrency: Bytes,
-    toCurrency: Bytes,
-  ): ethereum.CallResult<string> {
-    let result = super.tryCall(
-      "getCryptoDataUrl",
-      "getCryptoDataUrl(bytes32,bytes32):(string)",
-      [
-        ethereum.Value.fromFixedBytes(fromCurrency),
-        ethereum.Value.fromFixedBytes(toCurrency),
-      ],
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toString());
-  }
-
-  getClient(): Address {
-    let result = super.call("getClient", "getClient():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_getClient(): ethereum.CallResult<Address> {
-    let result = super.tryCall("getClient", "getClient():(address)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  getOracles(): Array<Address> {
-    let result = super.call("getOracles", "getOracles():(address[])", []);
-
-    return result[0].toAddressArray();
-  }
-
-  try_getOracles(): ethereum.CallResult<Array<Address>> {
-    let result = super.tryCall("getOracles", "getOracles():(address[])", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddressArray());
-  }
-
-  getBondTerm(_bondToken: Address): BigInt {
-    let result = super.call("getBondTerm", "getBondTerm(address):(uint256)", [
-      ethereum.Value.fromAddress(_bondToken),
-    ]);
-
-    return result[0].toBigInt();
-  }
-
-  try_getBondTerm(_bondToken: Address): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "getBondTerm",
-      "getBondTerm(address):(uint256)",
-      [ethereum.Value.fromAddress(_bondToken)],
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
   createToken(
     _target: Address,
     issuer: Address,
+    payee: Address,
     tokenName: Bytes,
     tokenSymbol: Bytes,
   ): Address {
     let result = super.call(
       "createToken",
-      "createToken(address,address,bytes32,bytes32):(address)",
+      "createToken(address,address,address,bytes32,bytes32):(address)",
       [
         ethereum.Value.fromAddress(_target),
         ethereum.Value.fromAddress(issuer),
+        ethereum.Value.fromAddress(payee),
         ethereum.Value.fromFixedBytes(tokenName),
         ethereum.Value.fromFixedBytes(tokenSymbol),
       ],
@@ -847,15 +601,17 @@ export class Factory extends ethereum.SmartContract {
   try_createToken(
     _target: Address,
     issuer: Address,
+    payee: Address,
     tokenName: Bytes,
     tokenSymbol: Bytes,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "createToken",
-      "createToken(address,address,bytes32,bytes32):(address)",
+      "createToken(address,address,address,bytes32,bytes32):(address)",
       [
         ethereum.Value.fromAddress(_target),
         ethereum.Value.fromAddress(issuer),
+        ethereum.Value.fromAddress(payee),
         ethereum.Value.fromFixedBytes(tokenName),
         ethereum.Value.fromFixedBytes(tokenSymbol),
       ],
@@ -914,102 +670,6 @@ export class Factory extends ethereum.SmartContract {
   }
 }
 
-export class DeploySignedCall extends ethereum.Call {
-  get inputs(): DeploySignedCall__Inputs {
-    return new DeploySignedCall__Inputs(this);
-  }
-
-  get outputs(): DeploySignedCall__Outputs {
-    return new DeploySignedCall__Outputs(this);
-  }
-}
-
-export class DeploySignedCall__Inputs {
-  _call: DeploySignedCall;
-
-  constructor(call: DeploySignedCall) {
-    this._call = call;
-  }
-
-  get _salt(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get _logic(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get _admin(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
-
-  get _data(): Bytes {
-    return this._call.inputValues[3].value.toBytes();
-  }
-
-  get _signature(): Bytes {
-    return this._call.inputValues[4].value.toBytes();
-  }
-}
-
-export class DeploySignedCall__Outputs {
-  _call: DeploySignedCall;
-
-  constructor(call: DeploySignedCall) {
-    this._call = call;
-  }
-
-  get value0(): Address {
-    return this._call.outputValues[0].value.toAddress();
-  }
-}
-
-export class DeployCall extends ethereum.Call {
-  get inputs(): DeployCall__Inputs {
-    return new DeployCall__Inputs(this);
-  }
-
-  get outputs(): DeployCall__Outputs {
-    return new DeployCall__Outputs(this);
-  }
-}
-
-export class DeployCall__Inputs {
-  _call: DeployCall;
-
-  constructor(call: DeployCall) {
-    this._call = call;
-  }
-
-  get _salt(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get _logic(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get _admin(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
-
-  get _data(): Bytes {
-    return this._call.inputValues[3].value.toBytes();
-  }
-}
-
-export class DeployCall__Outputs {
-  _call: DeployCall;
-
-  constructor(call: DeployCall) {
-    this._call = call;
-  }
-
-  get value0(): Address {
-    return this._call.outputValues[0].value.toAddress();
-  }
-}
-
 export class RenounceOwnershipCall extends ethereum.Call {
   get inputs(): RenounceOwnershipCall__Inputs {
     return new RenounceOwnershipCall__Inputs(this);
@@ -1033,44 +693,6 @@ export class RenounceOwnershipCall__Outputs {
 
   constructor(call: RenounceOwnershipCall) {
     this._call = call;
-  }
-}
-
-export class DeployMinimalCall extends ethereum.Call {
-  get inputs(): DeployMinimalCall__Inputs {
-    return new DeployMinimalCall__Inputs(this);
-  }
-
-  get outputs(): DeployMinimalCall__Outputs {
-    return new DeployMinimalCall__Outputs(this);
-  }
-}
-
-export class DeployMinimalCall__Inputs {
-  _call: DeployMinimalCall;
-
-  constructor(call: DeployMinimalCall) {
-    this._call = call;
-  }
-
-  get _logic(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get _data(): Bytes {
-    return this._call.inputValues[1].value.toBytes();
-  }
-}
-
-export class DeployMinimalCall__Outputs {
-  _call: DeployMinimalCall;
-
-  constructor(call: DeployMinimalCall) {
-    this._call = call;
-  }
-
-  get proxy(): Address {
-    return this._call.outputValues[0].value.toAddress();
   }
 }
 
@@ -1120,6 +742,10 @@ export class InitializeCall__Inputs {
   constructor(call: InitializeCall) {
     this._call = call;
   }
+
+  get _owner(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
 }
 
 export class InitializeCall__Outputs {
@@ -1130,32 +756,32 @@ export class InitializeCall__Outputs {
   }
 }
 
-export class Initialize1Call extends ethereum.Call {
-  get inputs(): Initialize1Call__Inputs {
-    return new Initialize1Call__Inputs(this);
+export class SetOwnerCall extends ethereum.Call {
+  get inputs(): SetOwnerCall__Inputs {
+    return new SetOwnerCall__Inputs(this);
   }
 
-  get outputs(): Initialize1Call__Outputs {
-    return new Initialize1Call__Outputs(this);
+  get outputs(): SetOwnerCall__Outputs {
+    return new SetOwnerCall__Outputs(this);
   }
 }
 
-export class Initialize1Call__Inputs {
-  _call: Initialize1Call;
+export class SetOwnerCall__Inputs {
+  _call: SetOwnerCall;
 
-  constructor(call: Initialize1Call) {
+  constructor(call: SetOwnerCall) {
     this._call = call;
   }
 
-  get sender(): Address {
+  get newOwner(): Address {
     return this._call.inputValues[0].value.toAddress();
   }
 }
 
-export class Initialize1Call__Outputs {
-  _call: Initialize1Call;
+export class SetOwnerCall__Outputs {
+  _call: SetOwnerCall;
 
-  constructor(call: Initialize1Call) {
+  constructor(call: SetOwnerCall) {
     this._call = call;
   }
 }
@@ -1239,12 +865,16 @@ export class CreateTokenCall__Inputs {
     return this._call.inputValues[1].value.toAddress();
   }
 
+  get payee(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
   get tokenName(): Bytes {
-    return this._call.inputValues[2].value.toBytes();
+    return this._call.inputValues[3].value.toBytes();
   }
 
   get tokenSymbol(): Bytes {
-    return this._call.inputValues[3].value.toBytes();
+    return this._call.inputValues[4].value.toBytes();
   }
 }
 
@@ -1257,66 +887,6 @@ export class CreateTokenCall__Outputs {
 
   get value0(): Address {
     return this._call.outputValues[0].value.toAddress();
-  }
-}
-
-export class SetViaOracleUrlCall extends ethereum.Call {
-  get inputs(): SetViaOracleUrlCall__Inputs {
-    return new SetViaOracleUrlCall__Inputs(this);
-  }
-
-  get outputs(): SetViaOracleUrlCall__Outputs {
-    return new SetViaOracleUrlCall__Outputs(this);
-  }
-}
-
-export class SetViaOracleUrlCall__Inputs {
-  _call: SetViaOracleUrlCall;
-
-  constructor(call: SetViaOracleUrlCall) {
-    this._call = call;
-  }
-
-  get _url(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-}
-
-export class SetViaOracleUrlCall__Outputs {
-  _call: SetViaOracleUrlCall;
-
-  constructor(call: SetViaOracleUrlCall) {
-    this._call = call;
-  }
-}
-
-export class SetFiatPayoutUrlCall extends ethereum.Call {
-  get inputs(): SetFiatPayoutUrlCall__Inputs {
-    return new SetFiatPayoutUrlCall__Inputs(this);
-  }
-
-  get outputs(): SetFiatPayoutUrlCall__Outputs {
-    return new SetFiatPayoutUrlCall__Outputs(this);
-  }
-}
-
-export class SetFiatPayoutUrlCall__Inputs {
-  _call: SetFiatPayoutUrlCall;
-
-  constructor(call: SetFiatPayoutUrlCall) {
-    this._call = call;
-  }
-
-  get _url(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-}
-
-export class SetFiatPayoutUrlCall__Outputs {
-  _call: SetFiatPayoutUrlCall;
-
-  constructor(call: SetFiatPayoutUrlCall) {
-    this._call = call;
   }
 }
 
@@ -1337,8 +907,8 @@ export class SetCryptoDataURLCall__Inputs {
     this._call = call;
   }
 
-  get _url(): string {
-    return this._call.inputValues[0].value.toString();
+  get _feed(): Address {
+    return this._call.inputValues[0].value.toAddress();
   }
 
   get _fromCurrency(): Bytes {
@@ -1354,36 +924,6 @@ export class SetCryptoDataURLCall__Outputs {
   _call: SetCryptoDataURLCall;
 
   constructor(call: SetCryptoDataURLCall) {
-    this._call = call;
-  }
-}
-
-export class SetOraclesCall extends ethereum.Call {
-  get inputs(): SetOraclesCall__Inputs {
-    return new SetOraclesCall__Inputs(this);
-  }
-
-  get outputs(): SetOraclesCall__Outputs {
-    return new SetOraclesCall__Outputs(this);
-  }
-}
-
-export class SetOraclesCall__Inputs {
-  _call: SetOraclesCall;
-
-  constructor(call: SetOraclesCall) {
-    this._call = call;
-  }
-
-  get _oracles(): Array<Address> {
-    return this._call.inputValues[0].value.toAddressArray();
-  }
-}
-
-export class SetOraclesCall__Outputs {
-  _call: SetOraclesCall;
-
-  constructor(call: SetOraclesCall) {
     this._call = call;
   }
 }
@@ -1448,6 +988,36 @@ export class SetClientAddressCall__Outputs {
   _call: SetClientAddressCall;
 
   constructor(call: SetClientAddressCall) {
+    this._call = call;
+  }
+}
+
+export class SetFiatPayoutUrlCall extends ethereum.Call {
+  get inputs(): SetFiatPayoutUrlCall__Inputs {
+    return new SetFiatPayoutUrlCall__Inputs(this);
+  }
+
+  get outputs(): SetFiatPayoutUrlCall__Outputs {
+    return new SetFiatPayoutUrlCall__Outputs(this);
+  }
+}
+
+export class SetFiatPayoutUrlCall__Inputs {
+  _call: SetFiatPayoutUrlCall;
+
+  constructor(call: SetFiatPayoutUrlCall) {
+    this._call = call;
+  }
+
+  get _url(): string {
+    return this._call.inputValues[0].value.toString();
+  }
+}
+
+export class SetFiatPayoutUrlCall__Outputs {
+  _call: SetFiatPayoutUrlCall;
+
+  constructor(call: SetFiatPayoutUrlCall) {
     this._call = call;
   }
 }

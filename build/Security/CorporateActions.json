@@ -333,6 +333,33 @@
       },
       {
         "indexed": false,
+        "name": "holder",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "time",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "ballot",
+        "type": "bool"
+      }
+    ],
+    "name": "Vote",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "security",
+        "type": "address"
+      },
+      {
+        "indexed": false,
         "name": "oldTime",
         "type": "uint256"
       },

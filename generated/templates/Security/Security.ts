@@ -128,6 +128,36 @@ export class Resolution__Params {
   }
 }
 
+export class Vote extends ethereum.Event {
+  get params(): Vote__Params {
+    return new Vote__Params(this);
+  }
+}
+
+export class Vote__Params {
+  _event: Vote;
+
+  constructor(event: Vote) {
+    this._event = event;
+  }
+
+  get security(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get holder(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get time(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get ballot(): boolean {
+    return this._event.parameters[3].value.toBoolean();
+  }
+}
+
 export class SnapshotSchedule extends ethereum.Event {
   get params(): SnapshotSchedule__Params {
     return new SnapshotSchedule__Params(this);
@@ -1587,32 +1617,6 @@ export class BurnCall__Outputs {
   }
 }
 
-export class BurnAllCall extends ethereum.Call {
-  get inputs(): BurnAllCall__Inputs {
-    return new BurnAllCall__Inputs(this);
-  }
-
-  get outputs(): BurnAllCall__Outputs {
-    return new BurnAllCall__Outputs(this);
-  }
-}
-
-export class BurnAllCall__Inputs {
-  _call: BurnAllCall;
-
-  constructor(call: BurnAllCall) {
-    this._call = call;
-  }
-}
-
-export class BurnAllCall__Outputs {
-  _call: BurnAllCall;
-
-  constructor(call: BurnAllCall) {
-    this._call = call;
-  }
-}
-
 export class ScheduleSnapshotCall extends ethereum.Call {
   get inputs(): ScheduleSnapshotCall__Inputs {
     return new ScheduleSnapshotCall__Inputs(this);
@@ -1741,48 +1745,6 @@ export class CreateResolutionCall__Outputs {
   _call: CreateResolutionCall;
 
   constructor(call: CreateResolutionCall) {
-    this._call = call;
-  }
-}
-
-export class PayoutProrataCall extends ethereum.Call {
-  get inputs(): PayoutProrataCall__Inputs {
-    return new PayoutProrataCall__Inputs(this);
-  }
-
-  get outputs(): PayoutProrataCall__Outputs {
-    return new PayoutProrataCall__Outputs(this);
-  }
-}
-
-export class PayoutProrataCall__Inputs {
-  _call: PayoutProrataCall;
-
-  constructor(call: PayoutProrataCall) {
-    this._call = call;
-  }
-
-  get time(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get wallet(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get token(): Address {
-    return this._call.inputValues[2].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[3].value.toBigInt();
-  }
-}
-
-export class PayoutProrataCall__Outputs {
-  _call: PayoutProrataCall;
-
-  constructor(call: PayoutProrataCall) {
     this._call = call;
   }
 }

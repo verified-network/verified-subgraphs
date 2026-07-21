@@ -3937,6 +3937,98 @@ export class Resolutions extends Entity {
   }
 }
 
+export class Ballots extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Ballots entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Ballots must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
+      );
+      store.set("Ballots", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): Ballots | null {
+    return changetype<Ballots | null>(store.get_in_block("Ballots", id));
+  }
+
+  static load(id: string): Ballots | null {
+    return changetype<Ballots | null>(store.get("Ballots", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get security(): string {
+    let value = this.get("security");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set security(value: string) {
+    this.set("security", Value.fromString(value));
+  }
+
+  get voter(): string {
+    let value = this.get("voter");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set voter(value: string) {
+    this.set("voter", Value.fromString(value));
+  }
+
+  get recordDate(): i64 {
+    let value = this.get("recordDate");
+    if (!value || value.kind == ValueKind.NULL) {
+      return 0;
+    } else {
+      return value.toTimestamp();
+    }
+  }
+
+  set recordDate(value: i64) {
+    this.set("recordDate", Value.fromTimestamp(value));
+  }
+
+  get voting(): boolean {
+    let value = this.get("voting");
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
+  }
+
+  set voting(value: boolean) {
+    this.set("voting", Value.fromBoolean(value));
+  }
+}
+
 export class RevenueShares extends Entity {
   constructor(id: string) {
     super();

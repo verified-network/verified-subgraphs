@@ -320,6 +320,13 @@ type Resolutions @entity(immutable: true){
   resolution: String!
   voting: Boolean
 }
+type Ballots @entity(immutable: true){
+  id: ID!
+  security: Security!
+  voter: User!
+  recordDate: Timestamp!
+  voting: Boolean
+}
 type RevenueShares @entity(immutable: true){
   id: ID!
   shareholder: User!

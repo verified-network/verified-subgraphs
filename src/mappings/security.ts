@@ -1,4 +1,5 @@
 import { 
+    Vote,
     Resolution,
     SnapshotSchedule,
     SnapshotUnschedule
@@ -6,7 +7,8 @@ import {
 
 import { 
     Snapshots,
-    Resolutions 
+    Resolutions,
+    Ballots
 } from "../../generated/schema";
 
 export function handleResolutions(event: Resolution): void {
@@ -26,6 +28,26 @@ export function handleResolutions(event: Resolution): void {
         resolutions.resolution = event.params.resolution;
         resolutions.voting = event.params.voting;
         resolutions.save();
+    }
+}
+
+export function handleBallots(event: Vote): void {
+    let ballots = Ballots.load(event.params.security.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    if(ballots==null){
+        let ballot = event.params.security.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let ballots = new Ballots(ballot);
+        ballots.security = event.params.security.toHexString();
+        ballots.voter = event.params.holder.toHexString();
+        ballots.recordDate = event.params.time.toI32();
+        ballots.voting = event.params.ballot;
+        ballots.save();
+    }
+    else{
+        ballots.security = event.params.security.toHexString();
+        ballots.voter = event.params.holder.toHexString();
+        ballots.recordDate = event.params.time.toI32();
+        ballots.voting = event.params.ballot;
+        ballots.save();
     }
 }
 

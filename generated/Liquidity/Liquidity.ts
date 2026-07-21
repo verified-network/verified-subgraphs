@@ -278,28 +278,6 @@ export class RequestIssue__Params {
   }
 }
 
-export class RequestRate extends ethereum.Event {
-  get params(): RequestRate__Params {
-    return new RequestRate__Params(this);
-  }
-}
-
-export class RequestRate__Params {
-  _event: RequestRate;
-
-  constructor(event: RequestRate) {
-    this._event = event;
-  }
-
-  get token(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
-  }
-}
-
 export class SupportToken extends ethereum.Event {
   get params(): SupportToken__Params {
     return new SupportToken__Params(this);
@@ -319,6 +297,10 @@ export class SupportToken__Params {
 
   get tokenName(): string {
     return this._event.parameters[1].value.toString();
+  }
+
+  get oracle(): Address {
+    return this._event.parameters[2].value.toAddress();
   }
 }
 
@@ -347,6 +329,10 @@ export class Liquidity__getSupportedTokensResultValue0Struct extends ethereum.Tu
 
   get tokenAddress(): Address {
     return this[1].toAddress();
+  }
+
+  get priceFeed(): Address {
+    return this[2].toAddress();
   }
 }
 
@@ -425,6 +411,51 @@ export class Liquidity extends ethereum.SmartContract {
     return new Liquidity("Liquidity", address);
   }
 
+  PRECISION(): BigInt {
+    let result = super.call("PRECISION", "PRECISION():(uint256)", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_PRECISION(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall("PRECISION", "PRECISION():(uint256)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  STALE_TIME(): BigInt {
+    let result = super.call("STALE_TIME", "STALE_TIME():(uint256)", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_STALE_TIME(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall("STALE_TIME", "STALE_TIME():(uint256)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
+  distribution(): Address {
+    let result = super.call("distribution", "distribution():(address)", []);
+
+    return result[0].toAddress();
+  }
+
+  try_distribution(): ethereum.CallResult<Address> {
+    let result = super.tryCall("distribution", "distribution():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
   owner(): Address {
     let result = super.call("owner", "owner():(address)", []);
 
@@ -455,6 +486,25 @@ export class Liquidity extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
+  totalAssetsUSD(): BigInt {
+    let result = super.call("totalAssetsUSD", "totalAssetsUSD():(uint256)", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_totalAssetsUSD(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "totalAssetsUSD",
+      "totalAssetsUSD():(uint256)",
+      [],
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   checkSupportForToken(_token: Address): boolean {
     let result = super.call(
       "checkSupportForToken",
@@ -481,7 +531,7 @@ export class Liquidity extends ethereum.SmartContract {
   getSupportedTokens(): Array<Liquidity__getSupportedTokensResultValue0Struct> {
     let result = super.call(
       "getSupportedTokens",
-      "getSupportedTokens():((string,address)[])",
+      "getSupportedTokens():((string,address,address)[])",
       [],
     );
 
@@ -493,7 +543,7 @@ export class Liquidity extends ethereum.SmartContract {
   > {
     let result = super.tryCall(
       "getSupportedTokens",
-      "getSupportedTokens():((string,address)[])",
+      "getSupportedTokens():((string,address,address)[])",
       [],
     );
     if (result.reverted) {
@@ -694,18 +744,14 @@ export class Liquidity extends ethereum.SmartContract {
     );
   }
 
-  balance(investor: Address): BigInt {
-    let result = super.call("balance", "balance(address):(uint256)", [
-      ethereum.Value.fromAddress(investor),
-    ]);
+  getNAVPrice(): BigInt {
+    let result = super.call("getNAVPrice", "getNAVPrice():(uint256)", []);
 
     return result[0].toBigInt();
   }
 
-  try_balance(investor: Address): ethereum.CallResult<BigInt> {
-    let result = super.tryCall("balance", "balance(address):(uint256)", [
-      ethereum.Value.fromAddress(investor),
-    ]);
+  try_getNAVPrice(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall("getNAVPrice", "getNAVPrice():(uint256)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -731,20 +777,16 @@ export class ConstructorCall__Inputs {
     this._call = call;
   }
 
-  get _cap(): BigInt {
+  get _share(): BigInt {
     return this._call.inputValues[0].value.toBigInt();
   }
 
-  get _limit(): BigInt {
-    return this._call.inputValues[1].value.toBigInt();
-  }
-
-  get _share(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
   get _vitta(): Address {
-    return this._call.inputValues[3].value.toAddress();
+    return this._call.inputValues[1].value.toAddress();
+  }
+
+  get _owner(): Address {
+    return this._call.inputValues[2].value.toAddress();
   }
 }
 
@@ -812,36 +854,32 @@ export class TransferOwnershipCall__Outputs {
   }
 }
 
-export class CreateSupplyCall extends ethereum.Call {
-  get inputs(): CreateSupplyCall__Inputs {
-    return new CreateSupplyCall__Inputs(this);
+export class SetDistributionCall extends ethereum.Call {
+  get inputs(): SetDistributionCall__Inputs {
+    return new SetDistributionCall__Inputs(this);
   }
 
-  get outputs(): CreateSupplyCall__Outputs {
-    return new CreateSupplyCall__Outputs(this);
+  get outputs(): SetDistributionCall__Outputs {
+    return new SetDistributionCall__Outputs(this);
   }
 }
 
-export class CreateSupplyCall__Inputs {
-  _call: CreateSupplyCall;
+export class SetDistributionCall__Inputs {
+  _call: SetDistributionCall;
 
-  constructor(call: CreateSupplyCall) {
+  constructor(call: SetDistributionCall) {
     this._call = call;
   }
 
-  get _cap(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get _limit(): BigInt {
-    return this._call.inputValues[1].value.toBigInt();
+  get _distribution(): Address {
+    return this._call.inputValues[0].value.toAddress();
   }
 }
 
-export class CreateSupplyCall__Outputs {
-  _call: CreateSupplyCall;
+export class SetDistributionCall__Outputs {
+  _call: SetDistributionCall;
 
-  constructor(call: CreateSupplyCall) {
+  constructor(call: SetDistributionCall) {
     this._call = call;
   }
 }
@@ -869,6 +907,10 @@ export class SupportTokensCall__Inputs {
 
   get _name(): string {
     return this._call.inputValues[1].value.toString();
+  }
+
+  get _feed(): Address {
+    return this._call.inputValues[2].value.toAddress();
   }
 }
 
@@ -1046,48 +1088,6 @@ export class BuyCall__Outputs {
   }
 }
 
-export class IssueCall extends ethereum.Call {
-  get inputs(): IssueCall__Inputs {
-    return new IssueCall__Inputs(this);
-  }
-
-  get outputs(): IssueCall__Outputs {
-    return new IssueCall__Outputs(this);
-  }
-}
-
-export class IssueCall__Inputs {
-  _call: IssueCall;
-
-  constructor(call: IssueCall) {
-    this._call = call;
-  }
-
-  get _investor(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get _token(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get _tokenAmount(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-
-  get _LPToIssue(): BigInt {
-    return this._call.inputValues[3].value.toBigInt();
-  }
-}
-
-export class IssueCall__Outputs {
-  _call: IssueCall;
-
-  constructor(call: IssueCall) {
-    this._call = call;
-  }
-}
-
 export class ProvideLiquidityCall extends ethereum.Call {
   get inputs(): ProvideLiquidityCall__Inputs {
     return new ProvideLiquidityCall__Inputs(this);
@@ -1119,10 +1119,6 @@ export class ProvideLiquidityCall__Inputs {
 
   get _token(): Address {
     return this._call.inputValues[3].value.toAddress();
-  }
-
-  get _tokenAmount(): BigInt {
-    return this._call.inputValues[4].value.toBigInt();
   }
 }
 
@@ -1168,78 +1164,6 @@ export class DistributeCall__Outputs {
   _call: DistributeCall;
 
   constructor(call: DistributeCall) {
-    this._call = call;
-  }
-}
-
-export class PayOutCall extends ethereum.Call {
-  get inputs(): PayOutCall__Inputs {
-    return new PayOutCall__Inputs(this);
-  }
-
-  get outputs(): PayOutCall__Outputs {
-    return new PayOutCall__Outputs(this);
-  }
-}
-
-export class PayOutCall__Inputs {
-  _call: PayOutCall;
-
-  constructor(call: PayOutCall) {
-    this._call = call;
-  }
-
-  get _distribution(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-
-  get _platform(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-}
-
-export class PayOutCall__Outputs {
-  _call: PayOutCall;
-
-  constructor(call: PayOutCall) {
-    this._call = call;
-  }
-}
-
-export class TransferCall extends ethereum.Call {
-  get inputs(): TransferCall__Inputs {
-    return new TransferCall__Inputs(this);
-  }
-
-  get outputs(): TransferCall__Outputs {
-    return new TransferCall__Outputs(this);
-  }
-}
-
-export class TransferCall__Inputs {
-  _call: TransferCall;
-
-  constructor(call: TransferCall) {
-    this._call = call;
-  }
-
-  get sender(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get recipient(): Address {
-    return this._call.inputValues[1].value.toAddress();
-  }
-
-  get amount(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
-  }
-}
-
-export class TransferCall__Outputs {
-  _call: TransferCall;
-
-  constructor(call: TransferCall) {
     this._call = call;
   }
 }
@@ -1292,70 +1216,6 @@ export class UnpauseCall__Outputs {
   _call: UnpauseCall;
 
   constructor(call: UnpauseCall) {
-    this._call = call;
-  }
-}
-
-export class SetOracleCall extends ethereum.Call {
-  get inputs(): SetOracleCall__Inputs {
-    return new SetOracleCall__Inputs(this);
-  }
-
-  get outputs(): SetOracleCall__Outputs {
-    return new SetOracleCall__Outputs(this);
-  }
-}
-
-export class SetOracleCall__Inputs {
-  _call: SetOracleCall;
-
-  constructor(call: SetOracleCall) {
-    this._call = call;
-  }
-
-  get _oracle(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-}
-
-export class SetOracleCall__Outputs {
-  _call: SetOracleCall;
-
-  constructor(call: SetOracleCall) {
-    this._call = call;
-  }
-}
-
-export class SetExchangeRateCall extends ethereum.Call {
-  get inputs(): SetExchangeRateCall__Inputs {
-    return new SetExchangeRateCall__Inputs(this);
-  }
-
-  get outputs(): SetExchangeRateCall__Outputs {
-    return new SetExchangeRateCall__Outputs(this);
-  }
-}
-
-export class SetExchangeRateCall__Inputs {
-  _call: SetExchangeRateCall;
-
-  constructor(call: SetExchangeRateCall) {
-    this._call = call;
-  }
-
-  get token(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get rate(): BigInt {
-    return this._call.inputValues[1].value.toBigInt();
-  }
-}
-
-export class SetExchangeRateCall__Outputs {
-  _call: SetExchangeRateCall;
-
-  constructor(call: SetExchangeRateCall) {
     this._call = call;
   }
 }
@@ -1416,6 +1276,40 @@ export class SetLiquidityShareCall__Outputs {
   _call: SetLiquidityShareCall;
 
   constructor(call: SetLiquidityShareCall) {
+    this._call = call;
+  }
+}
+
+export class ReceiveFeesCall extends ethereum.Call {
+  get inputs(): ReceiveFeesCall__Inputs {
+    return new ReceiveFeesCall__Inputs(this);
+  }
+
+  get outputs(): ReceiveFeesCall__Outputs {
+    return new ReceiveFeesCall__Outputs(this);
+  }
+}
+
+export class ReceiveFeesCall__Inputs {
+  _call: ReceiveFeesCall;
+
+  constructor(call: ReceiveFeesCall) {
+    this._call = call;
+  }
+
+  get token(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+
+  get amount(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+}
+
+export class ReceiveFeesCall__Outputs {
+  _call: ReceiveFeesCall;
+
+  constructor(call: ReceiveFeesCall) {
     this._call = call;
   }
 }

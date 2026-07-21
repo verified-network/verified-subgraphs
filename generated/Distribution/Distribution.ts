@@ -146,6 +146,21 @@ export class Distribution extends ethereum.SmartContract {
     return new Distribution("Distribution", address);
   }
 
+  PRECISION(): BigInt {
+    let result = super.call("PRECISION", "PRECISION():(uint256)", []);
+
+    return result[0].toBigInt();
+  }
+
+  try_PRECISION(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall("PRECISION", "PRECISION():(uint256)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
+  }
+
   owner(): Address {
     let result = super.call("owner", "owner():(address)", []);
 
@@ -211,12 +226,12 @@ export class Distribution extends ethereum.SmartContract {
     );
   }
 
-  getRevenueShareholders(_type: Bytes, _currency: Address): Array<Address> {
+  getRevenueShareholders(t: i32, _currency: Address): Array<Address> {
     let result = super.call(
       "getRevenueShareholders",
-      "getRevenueShareholders(bytes32,address):(address[])",
+      "getRevenueShareholders(uint8,address):(address[])",
       [
-        ethereum.Value.fromFixedBytes(_type),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(t)),
         ethereum.Value.fromAddress(_currency),
       ],
     );
@@ -225,14 +240,14 @@ export class Distribution extends ethereum.SmartContract {
   }
 
   try_getRevenueShareholders(
-    _type: Bytes,
+    t: i32,
     _currency: Address,
   ): ethereum.CallResult<Array<Address>> {
     let result = super.tryCall(
       "getRevenueShareholders",
-      "getRevenueShareholders(bytes32,address):(address[])",
+      "getRevenueShareholders(uint8,address):(address[])",
       [
-        ethereum.Value.fromFixedBytes(_type),
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(t)),
         ethereum.Value.fromAddress(_currency),
       ],
     );
@@ -484,6 +499,10 @@ export class InitializeCall__Inputs {
   get _liquidity(): Address {
     return this._call.inputValues[3].value.toAddress();
   }
+
+  get newOwner(): Address {
+    return this._call.inputValues[4].value.toAddress();
+  }
 }
 
 export class InitializeCall__Outputs {
@@ -511,8 +530,8 @@ export class AddRevenueShareholderCall__Inputs {
     this._call = call;
   }
 
-  get _type(): Bytes {
-    return this._call.inputValues[0].value.toBytes();
+  get t(): i32 {
+    return this._call.inputValues[0].value.toI32();
   }
 
   get _shareholder(): Address {
@@ -656,6 +675,58 @@ export class ShareFeeCall__Outputs {
   _call: ShareFeeCall;
 
   constructor(call: ShareFeeCall) {
+    this._call = call;
+  }
+}
+
+export class PauseCall extends ethereum.Call {
+  get inputs(): PauseCall__Inputs {
+    return new PauseCall__Inputs(this);
+  }
+
+  get outputs(): PauseCall__Outputs {
+    return new PauseCall__Outputs(this);
+  }
+}
+
+export class PauseCall__Inputs {
+  _call: PauseCall;
+
+  constructor(call: PauseCall) {
+    this._call = call;
+  }
+}
+
+export class PauseCall__Outputs {
+  _call: PauseCall;
+
+  constructor(call: PauseCall) {
+    this._call = call;
+  }
+}
+
+export class UnpauseCall extends ethereum.Call {
+  get inputs(): UnpauseCall__Inputs {
+    return new UnpauseCall__Inputs(this);
+  }
+
+  get outputs(): UnpauseCall__Outputs {
+    return new UnpauseCall__Outputs(this);
+  }
+}
+
+export class UnpauseCall__Inputs {
+  _call: UnpauseCall;
+
+  constructor(call: UnpauseCall) {
+    this._call = call;
+  }
+}
+
+export class UnpauseCall__Outputs {
+  _call: UnpauseCall;
+
+  constructor(call: UnpauseCall) {
     this._call = call;
   }
 }

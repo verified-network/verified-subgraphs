@@ -540,6 +540,10 @@ export class InitializeCall__Inputs {
   get _products(): Address {
     return this._call.inputValues[5].value.toAddress();
   }
+
+  get newOwner(): Address {
+    return this._call.inputValues[6].value.toAddress();
+  }
 }
 
 export class InitializeCall__Outputs {

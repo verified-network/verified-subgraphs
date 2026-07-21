@@ -473,6 +473,10 @@ export class InitializeCall__Inputs {
   get distribution(): Address {
     return this._call.inputValues[3].value.toAddress();
   }
+
+  get newOwner(): Address {
+    return this._call.inputValues[4].value.toAddress();
+  }
 }
 
 export class InitializeCall__Outputs {
@@ -609,6 +613,36 @@ export class CloseCall__Outputs {
   _call: CloseCall;
 
   constructor(call: CloseCall) {
+    this._call = call;
+  }
+}
+
+export class RemoveTraderCall extends ethereum.Call {
+  get inputs(): RemoveTraderCall__Inputs {
+    return new RemoveTraderCall__Inputs(this);
+  }
+
+  get outputs(): RemoveTraderCall__Outputs {
+    return new RemoveTraderCall__Outputs(this);
+  }
+}
+
+export class RemoveTraderCall__Inputs {
+  _call: RemoveTraderCall;
+
+  constructor(call: RemoveTraderCall) {
+    this._call = call;
+  }
+
+  get trader(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class RemoveTraderCall__Outputs {
+  _call: RemoveTraderCall;
+
+  constructor(call: RemoveTraderCall) {
     this._call = call;
   }
 }
@@ -814,40 +848,44 @@ export class OnSettleCall__Inputs {
     this._call = call;
   }
 
-  get security(): Address {
-    return this._call.inputValues[0].value.toAddress();
+  get ref(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
   }
 
-  get currency(): Address {
+  get security(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get financingBidPerSec(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
+  get currency(): Address {
+    return this._call.inputValues[2].value.toAddress();
   }
 
-  get financingOfferPerSec(): BigInt {
+  get financingBidPerSec(): BigInt {
     return this._call.inputValues[3].value.toBigInt();
   }
 
-  get dividendBidPerSec(): BigInt {
+  get financingOfferPerSec(): BigInt {
     return this._call.inputValues[4].value.toBigInt();
   }
 
-  get dividendOfferPerSec(): BigInt {
+  get dividendBidPerSec(): BigInt {
     return this._call.inputValues[5].value.toBigInt();
   }
 
-  get swapLong(): BigInt {
+  get dividendOfferPerSec(): BigInt {
     return this._call.inputValues[6].value.toBigInt();
   }
 
-  get swapShort(): BigInt {
+  get swapLong(): BigInt {
     return this._call.inputValues[7].value.toBigInt();
   }
 
-  get settlementTime(): BigInt {
+  get swapShort(): BigInt {
     return this._call.inputValues[8].value.toBigInt();
+  }
+
+  get settlementTime(): BigInt {
+    return this._call.inputValues[9].value.toBigInt();
   }
 }
 
@@ -876,16 +914,20 @@ export class WithdrawCall__Inputs {
     this._call = call;
   }
 
-  get security(): Address {
-    return this._call.inputValues[0].value.toAddress();
+  get ref(): Bytes {
+    return this._call.inputValues[0].value.toBytes();
   }
 
-  get currency(): Address {
+  get security(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 
+  get currency(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
+
   get amount(): BigInt {
-    return this._call.inputValues[2].value.toBigInt();
+    return this._call.inputValues[3].value.toBigInt();
   }
 }
 
