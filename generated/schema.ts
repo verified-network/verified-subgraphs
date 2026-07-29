@@ -586,6 +586,80 @@ export class Platform extends Entity {
   }
 }
 
+export class Assets extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Assets entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Assets must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`,
+      );
+      store.set("Assets", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): Assets | null {
+    return changetype<Assets | null>(store.get_in_block("Assets", id));
+  }
+
+  static load(id: string): Assets | null {
+    return changetype<Assets | null>(store.get("Assets", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get token(): Bytes | null {
+    let value = this.get("token");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set token(value: Bytes | null) {
+    if (!value) {
+      this.unset("token");
+    } else {
+      this.set("token", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get name(): Bytes | null {
+    let value = this.get("name");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set name(value: Bytes | null) {
+    if (!value) {
+      this.unset("name");
+    } else {
+      this.set("name", Value.fromBytes(<Bytes>value));
+    }
+  }
+}
+
 export class Currency extends Entity {
   constructor(id: string) {
     super();

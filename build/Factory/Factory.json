@@ -148,6 +148,25 @@
         "internalType": "bytes32",
         "name": "tokenName",
         "type": "bytes32"
+      }
+    ],
+    "name": "SupportToken",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "tokenName",
+        "type": "bytes32"
       },
       {
         "indexed": false,

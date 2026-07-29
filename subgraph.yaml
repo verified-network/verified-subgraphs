@@ -121,9 +121,9 @@ dataSources:
     name: PrimaryIssueManager
     network: sepolia
     source:
-      address: "0x1De161D44665F028c38216FA1D2bBbDAC6f24470"
+      address: "0x5b93FF1890bdb9A146733bEb9cA497acA4619D42"
       abi: PrimaryIssueManager
-      startBlock: 10949578
+      startBlock: 11361865
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -162,9 +162,9 @@ dataSources:
     name: SecondaryIssueManager
     network: sepolia
     source:
-      address: "0xE2B16c9d8Cf0F7A05eBBaD2f47cAEE42c3041873"
+      address: "0x5E1Add41C8AaD69063623d96A565Cc27eD119273"
       abi: SecondaryIssueManager
-      startBlock: 10949582
+      startBlock: 11363571
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -226,9 +226,9 @@ dataSources:
     name: Factory
     network: sepolia
     source:
-      address: "0x2Fd96F538FfdD0e0CD32F6628547A9AE9fB274Dc"
+      address: "0xE4c6BC97383a4a3D82bf8DB18e3AbEDbC70A3eB6"
       abi: Factory
-      startBlock: 10943109
+      startBlock: 11367862
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -246,13 +246,15 @@ dataSources:
           handler: handleBondCreated
         - event: TokenCreated(indexed address,bytes32,bytes32)
           handler: handleBondTokenCreated
+        - event: SupportToken(indexed address,bytes32)
+          handler: handleTokenSupported
   - kind: ethereum/contract
     name: VerifiedMarkets
     network: sepolia
     source:
-      address: "0x4b3CBDB8FBe5fcdDF796cd42d3749f8AcD53DA73"
+      address: "0x75Ca2c8714448AeCf7BF0B4AE77763C56EeD7066"
       abi: VerifiedMarkets
-      startBlock: 9347700
+      startBlock: 11376665
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

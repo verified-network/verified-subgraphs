@@ -5,9 +5,11 @@ import {
 import {
         CashIssuerCreated,
         BondIssuerCreated,
-        TokenCreated
+        TokenCreated,
+        SupportToken
       } from "../../generated/Factory/Factory";
 import { 
+  Assets,
         Currency,
         Security,
         Token
@@ -16,6 +18,17 @@ import {
 import {Security as SecurityTemplate } from '../../generated/templates';
 import {Cash as CashTemplate } from '../../generated/templates';
 import {Bond as BondTemplate } from '../../generated/templates';
+
+export function handleTokenSupported(event: SupportToken): void{
+    let asset = Assets.load(event.params.token.toHexString());
+    if(asset==null){
+        let token = event.params.token.toHexString();
+        let asset = new Assets(token);
+        asset.token = event.params.token;
+        asset.name = event.params.tokenName;
+        asset.save();
+    }
+}
 
 export function handleSecurityCreated(event: securitiesAdded): void {
   let securityAddress: Address = event.params.security;  

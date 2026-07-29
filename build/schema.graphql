@@ -68,6 +68,11 @@ type Platform @entity(immutable: false) {
   platformReturns: [PlatformRoI!] @derivedFrom(field: "platform")
   platformLiquidity: [LiquidityOnPlatform!] @derivedFrom(field: "platform")
 }
+type Assets @entity(immutable: false){
+  id: ID!
+  token: Bytes
+  name: Bytes
+}
 type Currency @entity(immutable: false) {
   id: ID!
   token: Bytes

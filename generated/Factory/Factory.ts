@@ -102,6 +102,28 @@ export class OwnershipTransferred__Params {
   }
 }
 
+export class SupportToken extends ethereum.Event {
+  get params(): SupportToken__Params {
+    return new SupportToken__Params(this);
+  }
+}
+
+export class SupportToken__Params {
+  _event: SupportToken;
+
+  constructor(event: SupportToken) {
+    this._event = event;
+  }
+
+  get token(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get tokenName(): Bytes {
+    return this._event.parameters[1].value.toBytes();
+  }
+}
+
 export class TokenCreated extends ethereum.Event {
   get params(): TokenCreated__Params {
     return new TokenCreated__Params(this);
