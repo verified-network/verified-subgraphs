@@ -191,9 +191,9 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0xA320125bfE0C7817191EF9C9C5191742610D601C"
+      address: "0xf1Ee00bB3B70FEa3ff1779c9066C5Fa4A6a129E5"
       abi: MarginIssueManager
-      startBlock: 10897174
+      startBlock: 11579432
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
