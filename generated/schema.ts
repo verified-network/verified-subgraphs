@@ -3742,6 +3742,19 @@ export class MarginTradePnL extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get orderRef(): Bytes {
+    let value = this.get("orderRef");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set orderRef(value: Bytes) {
+    this.set("orderRef", Value.fromBytes(value));
+  }
+
   get user(): string | null {
     let value = this.get("user");
     if (!value || value.kind == ValueKind.NULL) {
@@ -3811,8 +3824,8 @@ export class MarginTradePnL extends Entity {
     this.set("dividend", Value.fromBigDecimal(value));
   }
 
-  get commission(): BigDecimal {
-    let value = this.get("commission");
+  get pnl(): BigDecimal {
+    let value = this.get("pnl");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -3820,8 +3833,8 @@ export class MarginTradePnL extends Entity {
     }
   }
 
-  set commission(value: BigDecimal) {
-    this.set("commission", Value.fromBigDecimal(value));
+  set pnl(value: BigDecimal) {
+    this.set("pnl", Value.fromBigDecimal(value));
   }
 
   get settlementTime(): i64 {

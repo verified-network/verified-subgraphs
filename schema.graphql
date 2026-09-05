@@ -304,12 +304,13 @@ type MarginCollateral @entity(immutable: true){
 }
 type MarginTradePnL @entity(immutable: true){
   id: ID!
+  orderRef : Bytes!
   user: User
   security: Security!
   currency: Bytes!
   financing: BigDecimal!
   dividend: BigDecimal!
-  commission: BigDecimal!
+  pnl: BigDecimal!
   settlementTime : Timestamp!
 }
 type Snapshots @entity(immutable: true){

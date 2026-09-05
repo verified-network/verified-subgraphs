@@ -45,32 +45,36 @@ export class PnLSettled__Params {
     this._event = event;
   }
 
-  get user(): Address {
-    return this._event.parameters[0].value.toAddress();
+  get orderRef(): Bytes {
+    return this._event.parameters[0].value.toBytes();
   }
 
-  get security(): Address {
+  get user(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get currency(): Address {
+  get security(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 
-  get financing(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
+  get currency(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 
-  get dividend(): BigInt {
+  get financing(): BigInt {
     return this._event.parameters[4].value.toBigInt();
   }
 
-  get commission(): BigInt {
+  get dividend(): BigInt {
     return this._event.parameters[5].value.toBigInt();
   }
 
-  get settlementTime(): BigInt {
+  get pnl(): BigInt {
     return this._event.parameters[6].value.toBigInt();
+  }
+
+  get settlementTime(): BigInt {
+    return this._event.parameters[7].value.toBigInt();
   }
 }
 
@@ -876,16 +880,12 @@ export class OnSettleCall__Inputs {
     return this._call.inputValues[6].value.toBigInt();
   }
 
-  get swapLong(): BigInt {
+  get pnl(): BigInt {
     return this._call.inputValues[7].value.toBigInt();
   }
 
-  get swapShort(): BigInt {
-    return this._call.inputValues[8].value.toBigInt();
-  }
-
   get settlementTime(): BigInt {
-    return this._call.inputValues[9].value.toBigInt();
+    return this._call.inputValues[8].value.toBigInt();
   }
 }
 

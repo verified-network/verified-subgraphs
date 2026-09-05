@@ -140,23 +140,25 @@ export function handleMarginSettlements(event: PnLSettled): void {
     let settlement = MarginTradePnL.load(event.params.user.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(settlement==null){
         let user = event.params.user.toHexString().concat('-').concat(event.transaction.hash.toHexString());
-        let settlement = new MarginTradePnL(user);        
+        let settlement = new MarginTradePnL(user);    
+        settlement.orderRef = event.params.orderRef;    
         settlement.user = event.params.user.toHexString();
         settlement.security = event.params.security.toHexString();
         settlement.currency = event.params.currency;
         settlement.financing = event.params.financing.toBigDecimal();
         settlement.dividend = event.params.dividend.toBigDecimal();
-        settlement.commission = event.params.commission.toBigDecimal();
+        settlement.pnl = event.params.pnl.toBigDecimal();
         settlement.settlementTime = event.params.settlementTime.toI32();
         settlement.save();
     }
     else{
+        settlement.orderRef = event.params.orderRef; 
         settlement.user = event.params.user.toHexString();
         settlement.security = event.params.security.toHexString();
         settlement.currency = event.params.currency;
         settlement.financing = event.params.financing.toBigDecimal();
         settlement.dividend = event.params.dividend.toBigDecimal();
-        settlement.commission = event.params.commission.toBigDecimal();
+        settlement.pnl = event.params.pnl.toBigDecimal();
         settlement.settlementTime = event.params.settlementTime.toI32();
         settlement.save();
     }

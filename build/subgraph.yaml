@@ -195,9 +195,9 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0xA2a8D40326F192f3D6fe2C3b3BfcBD723bAf3bB8"
+      address: "0x5dcE0548b26d335228127efEE1cA6e71f1930141"
       abi: MarginIssueManager
-      startBlock: 11634240
+      startBlock: 11641550
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -226,7 +226,7 @@ dataSources:
           handler: handleFeeCollections
         - event: collateral(bytes32,indexed address,address,int256,uint256)
           handler: handleMarginCollateral
-        - event: PnLSettled(indexed address,address,address,int256,int256,int256,uint256)
+        - event: PnLSettled(bytes32,indexed address,address,address,int256,int256,int256,uint256)
           handler: handleMarginSettlements
   - kind: ethereum/contract
     name: Factory
