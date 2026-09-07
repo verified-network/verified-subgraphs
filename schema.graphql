@@ -311,6 +311,7 @@ type MarginTradePnL @entity(immutable: true){
   financing: BigDecimal!
   dividend: BigDecimal!
   pnl: BigDecimal!
+  balance: BigDecimal!
   settlementTime : Timestamp!
 }
 type Snapshots @entity(immutable: true){

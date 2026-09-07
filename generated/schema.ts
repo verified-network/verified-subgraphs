@@ -3837,6 +3837,19 @@ export class MarginTradePnL extends Entity {
     this.set("pnl", Value.fromBigDecimal(value));
   }
 
+  get balance(): BigDecimal {
+    let value = this.get("balance");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigDecimal();
+    }
+  }
+
+  set balance(value: BigDecimal) {
+    this.set("balance", Value.fromBigDecimal(value));
+  }
+
   get settlementTime(): i64 {
     let value = this.get("settlementTime");
     if (!value || value.kind == ValueKind.NULL) {

@@ -73,8 +73,12 @@ export class PnLSettled__Params {
     return this._event.parameters[6].value.toBigInt();
   }
 
-  get settlementTime(): BigInt {
+  get balance(): BigInt {
     return this._event.parameters[7].value.toBigInt();
+  }
+
+  get settlementTime(): BigInt {
+    return this._event.parameters[8].value.toBigInt();
   }
 }
 
@@ -770,6 +774,10 @@ export class OnMatchCall__Inputs {
 
   get cashTraded(): BigInt {
     return this._call.inputValues[6].value.toBigInt();
+  }
+
+  get fee(): BigInt {
+    return this._call.inputValues[7].value.toBigInt();
   }
 }
 

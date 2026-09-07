@@ -148,6 +148,7 @@ export function handleMarginSettlements(event: PnLSettled): void {
         settlement.financing = event.params.financing.toBigDecimal();
         settlement.dividend = event.params.dividend.toBigDecimal();
         settlement.pnl = event.params.pnl.toBigDecimal();
+        settlement.balance = event.params.balance.toBigDecimal();
         settlement.settlementTime = event.params.settlementTime.toI32();
         settlement.save();
     }
@@ -159,6 +160,7 @@ export function handleMarginSettlements(event: PnLSettled): void {
         settlement.financing = event.params.financing.toBigDecimal();
         settlement.dividend = event.params.dividend.toBigDecimal();
         settlement.pnl = event.params.pnl.toBigDecimal();
+        settlement.balance = event.params.balance.toBigDecimal();
         settlement.settlementTime = event.params.settlementTime.toI32();
         settlement.save();
     }
