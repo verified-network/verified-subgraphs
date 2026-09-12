@@ -51,16 +51,16 @@ export function handleTrades(event: tradeSettled): void {
 }
 
 export function handleTraders(event: subscribers): void {
-    let investors = Traders.load(event.params.counterparty.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
+    let investors = Traders.load(event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString()));
     if(investors==null){
-        let investorId = event.params.counterparty.toHexString().concat('-').concat(event.transaction.hash.toHexString());
+        let investorId = event.params.party.toHexString().concat('-').concat(event.transaction.hash.toHexString());
         let investors = new Traders(investorId);
         investors.security = event.params.securityTraded.toHexString();
         investors.transferor = event.params.party.toHexString();
-        investors.transferee = event.params.counterparty.toHexString();
         investors.currency = event.params.currencySettled;
         investors.securityTraded = event.params.securityAmount.toBigDecimal();
         investors.cashTraded = event.params.cashAmount.toBigDecimal();
+        investors.fee = event.params.fee.toBigDecimal();
         investors.orderRef = event.params.orderRef;
         investors.timestamp = event.params.timestamp.toI32();
         investors.save();
@@ -68,10 +68,10 @@ export function handleTraders(event: subscribers): void {
     else{
         investors.security = event.params.securityTraded.toHexString();
         investors.transferor = event.params.party.toHexString();
-        investors.transferee = event.params.counterparty.toHexString();
         investors.currency = event.params.currencySettled;
         investors.securityTraded = event.params.securityAmount.toBigDecimal();
         investors.cashTraded = event.params.cashAmount.toBigDecimal();
+        investors.fee = event.params.fee.toBigDecimal();
         investors.orderRef = event.params.orderRef;
         investors.timestamp = event.params.timestamp.toI32();
         investors.save();

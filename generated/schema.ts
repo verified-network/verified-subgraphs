@@ -252,14 +252,6 @@ export class User extends Entity {
     );
   }
 
-  get tradeTransferee(): TradersLoader {
-    return new TradersLoader(
-      "User",
-      this.get("id")!.toString(),
-      "tradeTransferee",
-    );
-  }
-
   get liquidityProviders(): LiquidityProvidersLoader {
     return new LiquidityProvidersLoader(
       "User",
@@ -2855,23 +2847,6 @@ export class Traders extends Entity {
     }
   }
 
-  get transferee(): string | null {
-    let value = this.get("transferee");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set transferee(value: string | null) {
-    if (!value) {
-      this.unset("transferee");
-    } else {
-      this.set("transferee", Value.fromString(<string>value));
-    }
-  }
-
   get security(): string {
     let value = this.get("security");
     if (!value || value.kind == ValueKind.NULL) {
@@ -2922,6 +2897,19 @@ export class Traders extends Entity {
 
   set cashTraded(value: BigDecimal) {
     this.set("cashTraded", Value.fromBigDecimal(value));
+  }
+
+  get fee(): BigDecimal {
+    let value = this.get("fee");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigDecimal();
+    }
+  }
+
+  set fee(value: BigDecimal) {
+    this.set("fee", Value.fromBigDecimal(value));
   }
 
   get orderRef(): Bytes {

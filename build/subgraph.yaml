@@ -195,9 +195,9 @@ dataSources:
     name: MarginIssueManager
     network: sepolia
     source:
-      address: "0xb8A81c2a247fbA07633C13fD2DeA250DbeDad92f"
+      address: "0x95BDB8E7E8B91DbBf98aE542ea6c3d8d1C68cb21"
       abi: MarginIssueManager
-      startBlock: 11656184
+      startBlock: 11690982
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -217,8 +217,8 @@ dataSources:
         - event: tradeSettled(indexed
             bytes32,address,address,uint256,address,address,uint256,bytes32,bytes32,uint256,uint256)
           handler: handleTrades
-        - event: subscribers(address,address,indexed
-            address,uint256,address,uint256,bytes32,uint256)
+        - event: subscribers(address,indexed
+            address,uint256,address,uint256,uint256,bytes32,uint256)
           handler: handleTraders
         - event: closures(indexed bytes32,address,uint256)
           handler: handleClosures

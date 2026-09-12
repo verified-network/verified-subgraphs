@@ -32,7 +32,6 @@ type User @entity(immutable: false) {
   secondaryIssuers: [Investors!] @derivedFrom(field: "issuer")
   secondaryInvestors: [Investors!] @derivedFrom(field: "investor")
   tradeTransferor: [Traders!] @derivedFrom(field: "transferor")
-  tradeTransferee: [Traders!] @derivedFrom(field: "transferee")
   liquidityProviders: [LiquidityProviders!] @derivedFrom(field: "owner")
   allotedTo: [Allotments!] @derivedFrom(field: "investor")
   refundedTo: [Refunds!] @derivedFrom(field: "investor")
@@ -240,11 +239,11 @@ type Investors @entity(immutable: true) {
 type Traders @entity(immutable: true) {
   id: ID!
   transferor: User
-  transferee: User
   security: Security!
   securityTraded: BigDecimal!
   currency: Bytes!
   cashTraded: BigDecimal!
+  fee: BigDecimal!
   orderRef: Bytes!
   timestamp: Timestamp!
 }
