@@ -1,4 +1,4 @@
-specVersion: 0.0.4
+specVersion: 1.3.0
 description: The Verified Wallet is for issuers and investors of tokenized securities.
 repository: https://github.com/verified-network/verified-graph
 schema:
@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: SecuritiesFactory
-    network: base
+    network: sepolia
     source:
-      address: "0xCeC02CB2e1c40FEc8D70289827bE24658A581706"
+      address: "0x729Debf1D50330a8AB71671F2cAeB4e6b248621D"
       abi: SecuritiesFactory
-      startBlock: 45039596
+      startBlock: 11319839
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -30,11 +30,11 @@ dataSources:
           handler: handleSecurityCreated
   - kind: ethereum/contract
     name: Client
-    network: base
+    network: sepolia
     source:
-      address: "0x9606706e98D18ee243F44cEce8540f002721f996"
+      address: "0x20346E44d8600Ad5e2cad81E9c2c559B0C6511c9"
       abi: Client
-      startBlock: 45039593
+      startBlock: 10603278
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -55,11 +55,11 @@ dataSources:
           handler: handleUserCreated
   - kind: ethereum/contract
     name: Liquidity
-    network: base
+    network: sepolia
     source:
-      address: "0x5E6dc0d84E9B66B9814637394345F4975903345D"
+      address: "0xdAac4948E4a9C441229E09d07e4b7D0c2e9ff95d"
       abi: Liquidity
-      startBlock: 45001458
+      startBlock: 10949552
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -98,11 +98,11 @@ dataSources:
           handler: handlePlatformManagers
   - kind: ethereum/contract
     name: Distribution
-    network: base
+    network: sepolia
     source:
-      address: "0x3C0Da71292F095182b06e2f3c1527E2DF6aEa583"
+      address: "0xC52bFCe4D5021914dAB43f3fA2dB45471aD27696"
       abi: Distribution
-      startBlock: 17684654
+      startBlock: 10949555
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -119,11 +119,11 @@ dataSources:
           handler: handleDistribution
   - kind: ethereum/contract
     name: PrimaryIssueManager
-    network: base
+    network: sepolia
     source:
-      address: "0xa4b9F21B92A7630a628C2B9EFbA1c844fCE7306E"
+      address: "0x5b93FF1890bdb9A146733bEb9cA497acA4619D42"
       abi: PrimaryIssueManager
-      startBlock: 19160783
+      startBlock: 11361865
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -160,11 +160,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: SecondaryIssueManager
-    network: base
+    network: sepolia
     source:
-      address: "0x775979123aD2e6DA3074bB38116430FEAE26974f"
+      address: "0x5E1Add41C8AaD69063623d96A565Cc27eD119273"
       abi: SecondaryIssueManager
-      startBlock: 31871553
+      startBlock: 11363571
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -189,11 +189,11 @@ dataSources:
           handler: handleFeeCollections
   - kind: ethereum/contract
     name: MarginIssueManager
-    network: base
+    network: sepolia
     source:
-      address: "0x099EC82868A1636C9DE6C7E7014692382B3a793E"
+      address: "0x95BDB8E7E8B91DbBf98aE542ea6c3d8d1C68cb21"
       abi: MarginIssueManager
-      startBlock: 31871559
+      startBlock: 11690982
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -212,7 +212,7 @@ dataSources:
       eventHandlers:
         - event: tradeSettled(indexed bytes32,address,address,uint256,address,address,uint256,bytes32,bytes32,uint256,uint256)
           handler: handleTrades
-        - event: subscribers(address,address,indexed address,uint256,address,uint256,bytes32,uint256)
+        - event: subscribers(address,indexed address,uint256,address,uint256,uint256,bytes32,uint256)
           handler: handleTraders
         - event: closures(indexed bytes32,address,uint256)
           handler: handleClosures
@@ -220,15 +220,15 @@ dataSources:
           handler: handleFeeCollections
         - event: collateral(bytes32,indexed address,address,int256,uint256)
           handler: handleMarginCollateral
-        - event: PnLSettled(indexed address,address,address,int256,int256,int256,uint256)
+        - event: PnLSettled(bytes32,indexed address,address,address,int256,int256,int256,int256,uint256)
           handler: handleMarginSettlements
   - kind: ethereum/contract
     name: Factory
-    network: base
+    network: sepolia
     source:
-      address: '0xCeC02CB2e1c40FEc8D70289827bE24658A581706'
+      address: "0xE4c6BC97383a4a3D82bf8DB18e3AbEDbC70A3eB6"
       abi: Factory
-      startBlock: 45039596
+      startBlock: 11367862
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -246,39 +246,40 @@ dataSources:
           handler: handleBondCreated
         - event: TokenCreated(indexed address,bytes32,bytes32)
           handler: handleBondTokenCreated
+        - event: SupportToken(indexed address,bytes32)
+          handler: handleTokenSupported
   - kind: ethereum/contract
     name: VerifiedMarkets
-    network: base
+    network: sepolia
     source:
-     address: '0x7fB634f4C3530a35899c2238673342A8af707cD4'
-     abi: VerifiedMarkets
-     startBlock: 11179559
+      address: "0x75Ca2c8714448AeCf7BF0B4AE77763C56EeD7066"
+      abi: VerifiedMarkets
+      startBlock: 11376665
     mapping:
-     kind: ethereum/events
-     apiVersion: 0.0.6
-     language: wasm/assemblyscript
-     file: ./src/mappings/collateralizedloans.ts
-     entities:
-       - RWA
-       - Collateral
-       - CollaterizedLoan
-       - CollaterizedLoanRepayment
-     abis:
-       - name: VerifiedMarkets
-         file: ./abis/VerifiedMarkets.json
-     eventHandlers:
-       - event: NewRWA(indexed address,indexed address,address,address,uint256,string,uint256,uint256,uint256)
-         handler: handleNewRWA
-       - event: PostedCollateral(indexed address,indexed address,address,uint256)
-         handler: handleCollateral
-       - event: Borrowed(indexed address,indexed address,uint256,address)
-         handler: handleBorrowing
-       - event: Repaid(indexed address,indexed address,uint256,address)
-         handler: handleRepayment
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/mappings/collateralizedloans.ts
+      entities:
+        - RWA
+        - Collateral
+        - CompoundLoans
+      abis:
+        - name: VerifiedMarkets
+          file: ./abis/VerifiedMarkets.json
+      eventHandlers:
+        - event: NewRWA(indexed address,indexed address,address,address,uint256,string,uint256,uint256,uint256)
+          handler: handleNewRWA
+        - event: PostedCollateral(indexed address,indexed address,address,uint256)
+          handler: handleCollateral
+        - event: Borrowed(indexed address,indexed address,uint256,address)
+          handler: handleBorrowing
+        - event: Repaid(indexed address,indexed address,uint256,address)
+          handler: handleRepayment
 templates:
   - kind: ethereum/contract
     name: Security
-    network: base
+    network: sepolia
     source:
       abi: Security
     mapping:
@@ -297,10 +298,8 @@ templates:
         - name: CorporateActions
           file: ./abis/CorporateActions.json
       eventHandlers:
-        #- event: Mint(indexed address,uint256)
-        #  handler: handleSecurityIssued
-        #- event: Burn(indexed address,uint256)
-        #  handler: handleSecurityExtinguished
+        - event: Vote(indexed address,address,uint256,bool)
+          handler: handleBallot
         - event: Resolution(indexed address,uint256,string,bool)
           handler: handleResolutions
         - event: SnapshotSchedule(indexed address,uint256,uint256)
@@ -310,7 +309,7 @@ templates:
       file: ./src/mappings/security.ts
   - kind: ethereum/contract
     name: Cash
-    network: base
+    network: sepolia
     source:
       abi: Cash
     mapping:
@@ -339,7 +338,7 @@ templates:
       file: ./src/mappings/cash.ts
   - kind: ethereum/contract
     name: Bond
-    network: base
+    network: sepolia
     source:
       abi: Bond
     mapping:
